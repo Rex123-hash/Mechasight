@@ -1,0 +1,6 @@
+fold,focal_parents,donor_parents,background_segments,F_intersect_D_empty,focal_is_all_segments_of_F,Bstar_excludes_F_and_D,no_focal_segment_in_ABSENT,no_donor_segment_in_PRESENT,focal_parents_absent_from_ABSENT,donor_parents_absent_from_PRESENT,no_duplicate_segment_ids,all_ids_from_official_training,PRESENT_segments,ABSENT_segments,segment_difference,PRESENT_windows,ABSENT_windows,window_difference,verdict
+1,12,13,1033,True,True,True,True,True,True,True,True,True,1405,1405,0,103970,103970,0,PASS
+2,12,15,1036,True,True,True,True,True,True,True,True,True,1410,1410,0,104340,104340,0,PASS
+3,12,12,1224,True,True,True,True,True,True,True,True,True,1507,1507,0,111518,111518,0,PASS
+4,12,13,1067,True,True,True,True,True,True,True,True,True,1430,1430,0,105820,105820,0,PASS
+5,12,12,1336,True,True,True,True,True,True,True,True,True,1564,1564,0,115736,115736,0,PASS

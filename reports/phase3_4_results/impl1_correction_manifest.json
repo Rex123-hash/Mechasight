@@ -1,0 +1,142 @@
+{
+  "branch": "phase3-fold1-technical-recovery",
+  "claims_added": 0,
+  "corrected_results": {
+    "bootstrap": {
+      "fold_stratified": true,
+      "interval": "percentile 95 percent",
+      "parents_per_fold": 12,
+      "replicates": 10000,
+      "seed": 27182
+    },
+    "five_fold_fold_specific_reference_SCIENTIFIC_RESULT": {
+      "artifact": "reports/phase3_4_results/phase3_4_impl1_corrected_5fold_analysis.json",
+      "artifact_sha256": "ecd431f61128d7ead8c2d7082cc266370c73226422d91554b06f663962af3349",
+      "ci95": [
+        -0.0006144101498358003,
+        0.017794458983305953
+      ],
+      "fold_level_deltas": {
+        "1": 0.007797105911330046,
+        "2": 0.030729166666666655,
+        "3": 0.007420378352490413,
+        "4": -0.009201388888888882,
+        "5": 0.0026234092775040967
+      },
+      "n_parents": 60,
+      "point_estimate": 0.007873734263820466,
+      "sign_counts": [
+        28,
+        10,
+        22
+      ]
+    },
+    "four_fold_fold_specific_reference": {
+      "artifact": "reports/phase3_4_results/phase3_4_impl1_corrected_4fold_analysis.json",
+      "artifact_sha256": "db9f31153e550bfb54f3457c528288bdc853e3798a08b3ebef512964da6f5066",
+      "ci95": [
+        -0.002553211164135203,
+        0.020493722632731252
+      ],
+      "fold_level_deltas": {
+        "2": 0.030729166666666655,
+        "3": 0.007420378352490413,
+        "4": -0.009201388888888882,
+        "5": 0.0026234092775040967
+      },
+      "n_parents": 48,
+      "point_estimate": 0.007892891351943071,
+      "sign_counts": [
+        18,
+        8,
+        22
+      ]
+    }
+  },
+  "generated_utc": "2026-09-12T10:11:01.976311+00:00",
+  "historical_results_SUPERSEDED_FOR_INTERPRETATION": {
+    "five_fold_pooled_reference": {
+      "artifact_sha256": "427b04cb96c97fe1dd218d515c1f0fb3378e65551d95c9a30d858f1347807188",
+      "ci95": [
+        9.225420771756938e-05,
+        0.017639275451559924
+      ],
+      "commit": "e19cffd",
+      "fold_level_deltas": {
+        "1": 0.007440818281335529,
+        "2": 0.0299878557744937,
+        "3": 0.002941810344827585,
+        "4": -0.0024916187739463594,
+        "5": 0.002557471264367811
+      },
+      "n_parents": 60,
+      "point_estimate": 0.008087267378215654,
+      "sign_counts": [
+        28,
+        6,
+        26
+      ]
+    },
+    "four_fold_pooled_reference": {
+      "artifact_sha256": "6441ed66b88074417ee0772e2618af0842050d2533d48029bb07a831ec1384bd",
+      "ci95": [
+        -0.0014088851686507907,
+        0.02038057407656849
+      ],
+      "commit": "a8b3d6c",
+      "fold_level_deltas": {
+        "2": 0.029648800971538044,
+        "3": 0.003220785440613031,
+        "4": -0.0020489104406130228,
+        "5": 0.002945723009031206
+      },
+      "n_parents": 48,
+      "point_estimate": 0.008441599745142315,
+      "sign_counts": [
+        17,
+        6,
+        25
+      ]
+    }
+  },
+  "impl1": {
+    "corrected_analysis": "src/experiment/focal_toggle_execution.analyse_corrected(folds)",
+    "corrected_estimator": "src/experiment/focal_concordance.parent_concordance_delta_by_fold (fold identity is an explicit matching key; audit of reference size/fold/arm returned per (fold, arm))",
+    "historical_estimator_and_analyses": "retained unchanged as historical code; their artifacts retained unchanged",
+    "root_cause": "analyse_from_persisted_scores / analyse_five_fold_recovered concatenated every fold's frame (focal normals + that fold's 232 anomaly-reference rows) and passed the pooled frame to parent_concordance_delta, which computes C_i(a) against ALL anomaly rows of arm a in the frame - i.e. 232 x n_folds rows produced by different fitted models - instead of the 232 rows scored by the segment's own fold model",
+    "why_wrong": "C_i is a within-model rank statistic; comparing a focal score from fold f's model against anomaly scores from other folds' models mixes score scales across independently trained networks, which is exactly what the rank-based definition was chosen to avoid; fold-level deltas then depend on which other folds are present"
+  },
+  "inputs": {
+    "all_ten_reverified": true,
+    "e1_artifacts": {
+      "p34d-2af84983abd170013b73": "ccee18db8732025aefb03f42dfc8a1315b7c24c14245eaf3b601a95233ed8a9d",
+      "p34d-406b59f08e154b284159": "1926f1cdca781afa3bcb54b5655fb881e03346b36c632b41495d47d75eae8ead",
+      "p34d-652bc1e3f9d29a51a460": "512b21dd51d22185da049c821d204f25bbc48e82720fe6802289eb2063e7c039",
+      "p34d-66656cf0901b180cf037": "fa6cf2154d989eb3f28a4707e2dc13db90971917b988f4ff1e9fa289e5a3cdb8",
+      "p34d-88b93ddbacbc5829f326": "ec8d9b513472038731315f17621694cd07ecd5ad496ec0017bc8ea8bfce98410",
+      "p34d-a4e8316f62fa982ec52d": "a23f672818a327da7ebe6e46be5fc44ed9fc03d89d1483df2655748a59c3cd01",
+      "p34d-ed8467570acf122c36cd": "4f1ad47cb93ebd3248198527296f92bb52461e6b88a97d83106b59a6361142b7",
+      "p34d-fd6e3bfd4c091e155d99": "9de21c5899870394fa600de1e45b830016a263e00641c562f764bad6ddaacf65"
+    },
+    "fold1_recovery_artifacts": {
+      "p34r-f1rec-78c8f486fdb7c822af87": "c5d51937608ca737b071611abf0bb20ff95e0ada89d50f9b320199f6c6ec182f",
+      "p34r-f1rec-e83624b2152b673c30c5": "e08e89b4b714397c91beb3922ada7f4274bf02bfdeadde8f65e9aac3c1fac1f5"
+    },
+    "raw_scores_modified": false
+  },
+  "ledger_entries": 40,
+  "ledger_sha256": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+  "protected_inference_during_correction": 0,
+  "schema_version": "phase3.4-impl1-correction-manifest-v1",
+  "secondary_metric_impact_audit": {
+    "S1_segment_weighted_focal_auroc_delta_by_fold": "UNAFFECTED (computed inside each fold's own sub-frame; values identical to historical artifacts)",
+    "S4_raw_focal_normal_score_shift_by_fold": "UNAFFECTED (identical)",
+    "S5_anomaly_reference_raw_shift_by_fold": "UNAFFECTED (identical)",
+    "fold_level_deltas_descriptive": "AFFECTED - corrected values reported",
+    "n_focal_parents_n_segments": "UNAFFECTED (48/158 and 60/203)",
+    "parent_deltas_and_sign_counts": "AFFECTED - corrected values reported",
+    "primary_ci95": "AFFECTED - corrected value reported",
+    "primary_point_estimate": "AFFECTED - corrected value reported"
+  },
+  "starting_head": "e19cffd"
+}

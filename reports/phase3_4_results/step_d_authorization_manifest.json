@@ -1,0 +1,106 @@
+{
+  "authorized_at_git_sha": "c10fdfcc890f97a595c132d87dc8b4bb04d7161e",
+  "authorized_looks": [
+    {
+      "checkpoint_sha256": "85386f2df404e5db49923b604e08676b9d6d934b49c5d3c633f785e5c676060e",
+      "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "4b4d848b74d860e5adef335d8c305bcc1338200faf195cca9c99e318c00276c1",
+      "experiment_id": "p34d-e56529a2f56f98fd4a7a",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "1a964dedde002faf9d43dfebaa8834c3ee4fe199b052fb62646cbbcc0937053f",
+      "experiment_id": "p34d-fd6e3bfd4c091e155d99",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "2c8029ad1a7bf0f56c02a5289eeb79a9cbb764c531093eeee9257bbcbaa820b7",
+      "experiment_id": "p34d-a4e8316f62fa982ec52d",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "c6b30ee064a0247efed9334bc31595da0d3eab90c4f39da3cf328add98695821",
+      "experiment_id": "p34d-88b93ddbacbc5829f326",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "0c0a46d234d23fd642c0ea817d2def582a0a9aa578ca3659a5ff8d824e2045f8",
+      "experiment_id": "p34d-2af84983abd170013b73",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "826035dccd5bff44f436f099908b570482b8b1abb09145d8ca45a76540b1c595",
+      "experiment_id": "p34d-652bc1e3f9d29a51a460",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "d756eac00a0368ca0def5739a66ea8dd2cc1fe8790f128bcee5b78d397d0b3f3",
+      "experiment_id": "p34d-406b59f08e154b284159",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "7a2b9911e264f08fb2a1fa05f975f00d3d09c688cb52a31323166c838fcdbf30",
+      "experiment_id": "p34d-66656cf0901b180cf037",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    },
+    {
+      "checkpoint_sha256": "5a49306aae728df77c193d92d3684a5162c1eb5079be9e2e101fb22c0a533257",
+      "experiment_id": "p34d-ed8467570acf122c36cd",
+      "timestamp_utc": "2026-09-11T19:49:04.480058+00:00"
+    }
+  ],
+  "config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+  "contains_test_performance": false,
+  "execution_environment_id": "p34c-env-b7a5de2af4c1d9614e49",
+  "files": {
+    "docs/phase34_step_d_test_look_authorization.md": "5827d83b8c87c8eb686a383394413b0a0cc6efb1ab3c520c9a71ea416eb40d39",
+    "reports/experiment_results/test_look_ledger.jsonl": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+    "reports/phase3_4_results/score_attempts/p34d-92fd40fc93c8c8d2e819.jsonl": "0392dc579838318cd06fc9fe9006cd9a23c99cdfea964ddc25af5a877614dca3",
+    "reports/phase3_4_results/score_claims/p34d-92fd40fc93c8c8d2e819.claim": "990d4bacfa74e7f00b3e885e4fe413a16726b6e53daf9c9abfeb447a8e63281b",
+    "reports/phase3_4_results/test_look_authorization.json": "eff9392ecd8b48d60ebd253bb56cdd3afefd7fd16ee8df507e369349d041a865",
+    "tests/conftest.py": "8ad212750a587938b125ab6e463a821d2e1dfd521f6f0c97cd59e028b3299d3b",
+    "tests/test_phase331_audit_closure.py": "944a8ce26d612f22497ee9c42e0a56c75e261a320168c64e5e52c68ff59514cc",
+    "tests/test_phase34_commit_a.py": "9a61f1f9a6199ecdf76f2a88c47b30f5099c22f7cf2f82b4a8136d622121e94c",
+    "tests/test_phase34a_design_freeze.py": "12854d0915af5782022447e9c3b74b41b3c1f422005ccf3b15ff7ba332719feb",
+    "tests/test_phase34b_focal_design_freeze.py": "5cd7ac2eb1b05199ea57ec7064b3f097c58abf3b4f58cddd01310b2010f01eb4",
+    "tests/test_phase34c_execution_freeze.py": "3ba1e4758330db3b1cf9168fe180dd9e510a0bf27dd1c1fb79fce8f06882e602",
+    "tests/test_phase34d_release_gate.py": "3f53d3b89db791b4f11d75ff6ee71d1fe0b707946b9e169bb17cf303956bb008",
+    "tests/test_protocol_a_reproduction.py": "683c656ecd9798b87a9567dca64a5c600ff40cc8226514661dbe66effc6a177e"
+  },
+  "generated_utc": "2026-09-11T20:00:06.502838+00:00",
+  "hash_form": "canonical LF (canonical_sha256); checkpoints raw file_sha256",
+  "incident": {
+    "arm": "PRESENT",
+    "attempt_history": [
+      "SCORE_STARTED"
+    ],
+    "cause": "tests/test_phase34_commit_a.py::test_score_refuses_before_any_claim_or_exposure (COMMIT B version) called score_experiment against the REAL results root, relying on the ledger gate; post-authorisation the gate legitimately passed.",
+    "claim_timestamp_utc": "2026-09-11T19:50:25.721473+00:00",
+    "evidence_no_forward": "_run_protected_inference was monkeypatched to a sentinel that raised AssertionError('forward ran') before touching data; no scores/ artifact; attempt history ends at SCORE_STARTED",
+    "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+    "fold": 1,
+    "harness_fix": "tests/conftest.py autouse guard refuses any claim/exposure/ledger write inside real repo paths; defective test now confined to tmp_path",
+    "id": "P34-STEP-D-INC-1",
+    "policy_applied": "claim and attempt record retained, not deleted, no stale-lock recovery, no re-score",
+    "protected_forward_ran": false,
+    "resolution": "PENDING independent review; not resolved unilaterally",
+    "scorer_behaviour": "exactly as frozen (F1/F3): claim acquired atomically, SCORE_STARTED durable before forward, later invocation refused",
+    "state": "CLAIMED + SCORE_STARTED, no SCORE_COMPLETED -> INCOMPLETE under frozen F1 policy"
+  },
+  "ledger_after": 40,
+  "ledger_before": 30,
+  "ledger_entries_appended": 10,
+  "ledger_prefix28_sha256": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+  "ledger_prefix30_sha256": "5cef2c4fe3ddd7d1a479147122a6285fc7ab6ab74da82b8bf48f751f55f297fd",
+  "ledger_sha256_after": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+  "ledger_sha256_before": "5cef2c4fe3ddd7d1a479147122a6285fc7ab6ab74da82b8bf48f751f55f297fd",
+  "protected_test_inference_run": false,
+  "schema_version": "phase3.4-step-d-authorization-manifest-v1",
+  "score_artifacts": 0,
+  "score_completed": 0,
+  "stage": "D of A-H: ten protected test looks authorised; NO scoring",
+  "test_scores_computed": false
+}

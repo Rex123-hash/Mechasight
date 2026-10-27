@@ -1,0 +1,343 @@
+{
+  "schema_version": "phase3.4B-focal-parent-toggle-v1",
+  "generated_utc": "2026-09-08T16:16:56.848645+00:00",
+  "config_identity": "p34b-ra-focal-2ab15394f78b560f1e8c0880",
+  "design_status": "PREEXECUTION_DESIGN_ONLY",
+  "scientific_classification": "POST-TEST CONTROLLED SENSITIVITY ANALYSIS",
+  "classification_note": "Designed after Phase-3.3 Protocol-A performance was observed. Not confirmatory, not preregistered-before-all-results, not independent validation, not causal proof of leakage inflation.",
+  "model_trained": false,
+  "test_score_computed": false,
+  "inference_run": false,
+  "contains_any_performance_value_from_this_experiment": false,
+  "review_verdict": "B - KEEP V1 AS SECONDARY, DESIGN E AS PRIMARY",
+  "supersedes_as_primary": "p34a-ra-overlap-13dbc49b2b983d72e957a320",
+  "v1_config_edited": false,
+  "research_question": "For normal test segments from a given physical parent recording, how does the anomaly score change when training siblings from that same parent are present versus absent, holding the rest of the training set identical?",
+  "v1_review": {
+    "reconstruction_verified": true,
+    "matching_claims_exact": [
+      "segments 214",
+      "windows 15836",
+      "parents 14",
+      "per-stratum counts"
+    ],
+    "parent_contribution_finding": {
+      "severity": "MATERIAL",
+      "disjoint_arm_effective_parents_kish": 6.83,
+      "overlap_arm_effective_parents_kish_range": [
+        8.35,
+        11.26
+      ],
+      "disjoint_contribution_vector": "48;36;36;36;12;12;9;8;8;3;2;2;1;1",
+      "statement": "V1 matches nominal parent count (14 = 14) but not parent contribution weight. The disjoint arm carries a Kish effective cluster count of 6.83 against 8.35-11.26 for the overlap replicates - roughly a third fewer effective independent clusters. Four parents supply 72.9 percent of the disjoint arm. Because windows within a parent are highly correlated, the arms differ in effective sample size as well as in overlap status."
+    },
+    "exact_contribution_matching_feasible": false,
+    "minimum_unavoidable_imbalance": "the disjoint arm's largest parent contributes 48 segments but no crossing parent can supply more than 47 within the 12 reachable strata, so exact profile matching fails by 1 segment; near-exact matching would require solving a constrained parent-by-stratum transportation problem",
+    "estimand_dependence_finding": {
+      "severity": "MATERIAL",
+      "problem": "15 overlap runs against 3 disjoint runs are not 15 independent matched experiments. They share three seeds and a single fixed comparator, so membership x seed cells are not independent replicates and must never be pooled as N=18.",
+      "recommended_two_stage_summary": "for each seed s compute Delta_s = mean_r AUROC_overlap(r,s) - AUROC_disjoint(s); report mean_s Delta_s as the point estimate, with membership spread, seed spread and the parent-cluster test-cohort bootstrap reported as three separate components",
+      "preferable_to_v1_definition": true
+    }
+  },
+  "focal_design": {
+    "focal_eligible_parents": 60,
+    "excluded_blocking_parents": [
+      "20240222_11_14_08_dataLog",
+      "20240405_13_09_52_dataLog"
+    ],
+    "why_excluded": "each holds 2 of the only 3 training segments in a target-domain stratum, so its contribution cannot be exactly replaced from non-focal parents - a shortfall of exactly 1 segment each. Excluding them buys exact donor matching on all 25 strata at the cost of 9 focal normal test segments.",
+    "normal_test_segments_covered": 203,
+    "normal_test_segments_total": 232,
+    "anomaly_reference_cohort": 232,
+    "folds": 5,
+    "fold_search_attempts": 25,
+    "fold_membership": {
+      "1": [
+        "20240221_12_15_01_dataLog",
+        "20240221_13_05_28_dataLog",
+        "20240221_13_13_43_dataLog",
+        "20240221_13_21_57_dataLog",
+        "20240221_15_18_40_dataLog",
+        "20240222_10_41_10_dataLog",
+        "20240222_14_02_57_dataLog",
+        "20240222_14_35_55_dataLog",
+        "20240405_10_45_40_dataLog",
+        "20240405_11_49_50_dataLog",
+        "20240418_10_08_20_dataLog",
+        "20240418_10_55_20_dataLog"
+      ],
+      "2": [
+        "20240221_11_10_55_dataLog",
+        "20240221_11_19_10_dataLog",
+        "20240221_14_11_25_dataLog",
+        "20240221_15_10_26_dataLog",
+        "20240221_15_27_06_dataLog",
+        "20240222_13_54_43_dataLog",
+        "20240405_11_10_50_dataLog",
+        "20240405_12_15_00_dataLog",
+        "20240416_13_27_14_dataLog",
+        "20240418_10_16_44_dataLog",
+        "20240418_14_01_48_dataLog",
+        "20240418_15_20_24_dataLog"
+      ],
+      "3": [
+        "20240221_11_42_02_dataLog",
+        "20240221_12_57_13_dataLog",
+        "20240221_13_54_56_dataLog",
+        "20240222_10_57_39_dataLog",
+        "20240222_15_08_53_dataLog",
+        "20240405_11_02_26_corr300_dataLog",
+        "20240405_12_23_24_dataLog",
+        "20240405_12_31_47_dataLog",
+        "20240405_12_53_04_dataLog",
+        "20240405_13_18_15_dataLog",
+        "20240405_14_54_41_dataLog",
+        "20240418_14_53_33_dataLog"
+      ],
+      "4": [
+        "20240221_11_58_31_dataLog",
+        "20240221_12_06_46_dataLog",
+        "20240221_12_40_44_dataLog",
+        "20240221_12_48_58_dataLog",
+        "20240221_13_38_27_dataLog",
+        "20240222_10_16_25_dataLog",
+        "20240222_14_19_26_dataLog",
+        "20240222_14_27_40_dataLog",
+        "20240222_14_44_09_dataLog",
+        "20240405_11_19_13_dataLog",
+        "20240416_16_45_47_dataLog",
+        "20240418_14_10_11_dataLog"
+      ],
+      "5": [
+        "20240221_11_50_16_dataLog",
+        "20240221_12_23_16_dataLog",
+        "20240221_13_46_42_dataLog",
+        "20240222_11_05_54_dataLog",
+        "20240222_11_56_37_dataLog",
+        "20240222_13_46_29_dataLog",
+        "20240222_14_52_24_dataLog",
+        "20240222_15_00_38_dataLog",
+        "20240405_11_27_37_corr318_dataLog",
+        "20240405_14_27_24_dataLog",
+        "20240416_13_35_37_corr_377_dataLog",
+        "20240416_16_54_10_dataLog"
+      ]
+    },
+    "arm_construction": {
+      "background_B": "official training minus the focal contribution minus the donor reserve; identical between arms within a fold",
+      "PRESENT": "B + focal-parent training segments",
+      "ABSENT": "B + donor replacement segments from non-focal parents",
+      "donor_rule": "per stratum, draw the focal count from non-focal candidates sorted by (parent, segment_id) under numpy default_rng(31415)",
+      "matching": "exact on segments, windows and all 25 strata in every fold"
+    },
+    "per_fold": [
+      {
+        "fold": 1,
+        "focal_parents": 12,
+        "focal_train_segments": 372,
+        "focal_train_windows": 27528,
+        "donor_train_segments": 372,
+        "donor_train_windows": 27528,
+        "size_match_exact": true,
+        "window_match_exact": true,
+        "strata_match_exact": true,
+        "donor_parents": 47,
+        "donor_parents_disjoint_from_focal": true,
+        "background_segments": 1095,
+        "arm_training_segments": 1467,
+        "arm_training_windows": 108558,
+        "pct_of_official_training_volume": 79.8,
+        "focal_normal_test_segments": 45,
+        "target_domain_focal_segments": 3,
+        "target_domain_donor_segments": 3,
+        "focal_parent_ids": "20240221_12_15_01_dataLog;20240221_13_05_28_dataLog;20240221_13_13_43_dataLog;20240221_13_21_57_dataLog;20240221_15_18_40_dataLog;20240222_10_41_10_dataLog;20240222_14_02_57_dataLog;20240222_14_35_55_dataLog;20240405_10_45_40_dataLog;20240405_11_49_50_dataLog;20240418_10_08_20_dataLog;20240418_10_55_20_dataLog"
+      },
+      {
+        "fold": 2,
+        "focal_parents": 12,
+        "focal_train_segments": 374,
+        "focal_train_windows": 27676,
+        "donor_train_segments": 374,
+        "donor_train_windows": 27676,
+        "size_match_exact": true,
+        "window_match_exact": true,
+        "strata_match_exact": true,
+        "donor_parents": 50,
+        "donor_parents_disjoint_from_focal": true,
+        "background_segments": 1091,
+        "arm_training_segments": 1465,
+        "arm_training_windows": 108410,
+        "pct_of_official_training_volume": 79.7,
+        "focal_normal_test_segments": 40,
+        "target_domain_focal_segments": 6,
+        "target_domain_donor_segments": 6,
+        "focal_parent_ids": "20240221_11_10_55_dataLog;20240221_11_19_10_dataLog;20240221_14_11_25_dataLog;20240221_15_10_26_dataLog;20240221_15_27_06_dataLog;20240222_13_54_43_dataLog;20240405_11_10_50_dataLog;20240405_12_15_00_dataLog;20240416_13_27_14_dataLog;20240418_10_16_44_dataLog;20240418_14_01_48_dataLog;20240418_15_20_24_dataLog"
+      },
+      {
+        "fold": 3,
+        "focal_parents": 12,
+        "focal_train_segments": 283,
+        "focal_train_windows": 20942,
+        "donor_train_segments": 283,
+        "donor_train_windows": 20942,
+        "size_match_exact": true,
+        "window_match_exact": true,
+        "strata_match_exact": true,
+        "donor_parents": 51,
+        "donor_parents_disjoint_from_focal": true,
+        "background_segments": 1273,
+        "arm_training_segments": 1556,
+        "arm_training_windows": 115144,
+        "pct_of_official_training_volume": 84.6,
+        "focal_normal_test_segments": 46,
+        "target_domain_focal_segments": 6,
+        "target_domain_donor_segments": 6,
+        "focal_parent_ids": "20240221_11_42_02_dataLog;20240221_12_57_13_dataLog;20240221_13_54_56_dataLog;20240222_10_57_39_dataLog;20240222_15_08_53_dataLog;20240405_11_02_26_corr300_dataLog;20240405_12_23_24_dataLog;20240405_12_31_47_dataLog;20240405_12_53_04_dataLog;20240405_13_18_15_dataLog;20240405_14_54_41_dataLog;20240418_14_53_33_dataLog"
+      },
+      {
+        "fold": 4,
+        "focal_parents": 12,
+        "focal_train_segments": 363,
+        "focal_train_windows": 26862,
+        "donor_train_segments": 363,
+        "donor_train_windows": 26862,
+        "size_match_exact": true,
+        "window_match_exact": true,
+        "strata_match_exact": true,
+        "donor_parents": 47,
+        "donor_parents_disjoint_from_focal": true,
+        "background_segments": 1113,
+        "arm_training_segments": 1476,
+        "arm_training_windows": 109224,
+        "pct_of_official_training_volume": 80.3,
+        "focal_normal_test_segments": 34,
+        "target_domain_focal_segments": 3,
+        "target_domain_donor_segments": 3,
+        "focal_parent_ids": "20240221_11_58_31_dataLog;20240221_12_06_46_dataLog;20240221_12_40_44_dataLog;20240221_12_48_58_dataLog;20240221_13_38_27_dataLog;20240222_10_16_25_dataLog;20240222_14_19_26_dataLog;20240222_14_27_40_dataLog;20240222_14_44_09_dataLog;20240405_11_19_13_dataLog;20240416_16_45_47_dataLog;20240418_14_10_11_dataLog"
+      },
+      {
+        "fold": 5,
+        "focal_parents": 12,
+        "focal_train_segments": 228,
+        "focal_train_windows": 16872,
+        "donor_train_segments": 228,
+        "donor_train_windows": 16872,
+        "size_match_exact": true,
+        "window_match_exact": true,
+        "strata_match_exact": true,
+        "donor_parents": 43,
+        "donor_parents_disjoint_from_focal": true,
+        "background_segments": 1383,
+        "arm_training_segments": 1611,
+        "arm_training_windows": 119214,
+        "pct_of_official_training_volume": 87.6,
+        "focal_normal_test_segments": 38,
+        "target_domain_focal_segments": 4,
+        "target_domain_donor_segments": 4,
+        "focal_parent_ids": "20240221_11_50_16_dataLog;20240221_12_23_16_dataLog;20240221_13_46_42_dataLog;20240222_11_05_54_dataLog;20240222_11_56_37_dataLog;20240222_13_46_29_dataLog;20240222_14_52_24_dataLog;20240222_15_00_38_dataLog;20240405_11_27_37_corr318_dataLog;20240405_14_27_24_dataLog;20240416_13_35_37_corr_377_dataLog;20240416_16_54_10_dataLog"
+      }
+    ],
+    "arm_training_segments_mean": 1515,
+    "pct_of_official_training_volume": 82.4
+  },
+  "primary_estimand": {
+    "name": "focal same-parent sibling-exposure score shift",
+    "definition": "for each focal normal test segment, d = score_PRESENT - score_ABSENT (segment-median reconstruction error, upstream scoring); aggregate to the parent by median, then summarise across focal parents",
+    "why_primary": "it is a within-segment paired difference - the same test segment scored under two models that differ only by the sibling toggle - so segment-level variance cancels and the contrast is the most identifiable available",
+    "sign_interpretation": "a negative shift means sibling exposure made focal normal segments reconstruct better, i.e. look more normal to the model"
+  },
+  "secondary_estimands": [
+    "focal AUROC against a fixed anomaly reference cohort of all 232 anomaly test segments, identical across arms: Delta_focal_AUROC = AUROC_PRESENT - AUROC_ABSENT",
+    "the same shift split by source versus target focal segments",
+    "anomaly-side score shift on the fixed reference cohort, as a specificity check: a large shift there would indicate the toggle moved the model globally rather than through same-parent familiarity"
+  ],
+  "uncertainty": {
+    "procedure": "paired parent-cluster bootstrap over focal parents, resampling parents with replacement and carrying all their focal normal segments together",
+    "rules": [
+      "the pairing is within segment, so PRESENT and ABSENT are never resampled independently",
+      "fold-level estimates are combined by averaging across the K folds, which are parent-disjoint by construction",
+      "windows are never resampled",
+      "seed variation, if a second seed is run, is reported separately and never pooled with parent resampling"
+    ]
+  },
+  "seeds": {
+    "primary": [
+      1995
+    ],
+    "optional_preregistered_second_seed": 20260908,
+    "policy": "within a fold, PRESENT and ABSENT use the identical seed, so the contrast is seed-controlled by construction. No seed may be chosen, discarded or reweighted on observed performance."
+  },
+  "compute": {
+    "runs": 10,
+    "hours_per_run_cpu_estimate": 3.07,
+    "total_hours_cpu_estimate": 30.7,
+    "v1_total_hours_cpu_estimate": 7.8,
+    "relative_cost": "substantially more expensive - roughly 4x V1",
+    "note": "cost was not allowed to select the design; it is reported so the trade-off is explicit"
+  },
+  "frozen_components": "identical to the Phase-3.3 Protocol-A pipeline and the V1 freeze: same dataset release, same official 464-segment test cohort, same preprocessing, same 5836-dimensional raw standardised input, same autoencoder and training schedule, same segment-median aggregation and strict pairwise AUC. No Protocol-B artifact may enter.",
+  "validation_split_policy": "retain upstream window-level validation identically in both arms; a parent-disjoint validation variant remains a separate secondary experiment",
+  "device_policy": "one environment frozen before execution, identical across arms; a CPU arm is never compared against a CUDA arm; default CPU torch 2.14.0+cpu",
+  "score_persistence_requirement": {
+    "binding": true,
+    "must_persist_per_test_segment": [
+      "experiment_id",
+      "machine",
+      "design_version",
+      "fold",
+      "arm",
+      "seed",
+      "segment_id",
+      "parent_id",
+      "parent_is_focal",
+      "split_label",
+      "anomaly_label",
+      "domain_shift_op",
+      "domain_shift_env",
+      "sibling_presence_status",
+      "total_loss",
+      "every primary anomaly-score column",
+      "score_provenance",
+      "checkpoint_identity"
+    ],
+    "timing": "written atomically with the evaluation output, before aggregates are finalised"
+  },
+  "ledger_policy": {
+    "new_protocol": "roboticarm_focal_parent_sibling_toggle_v1",
+    "must_not_reuse": [
+      "official_baseline_reproduction",
+      "roboticarm_parent_overlap_sensitivity_v1"
+    ],
+    "rule": "append a ledger entry before each first test look under the new protocol",
+    "existing_entries_untouched": 30,
+    "entries_appended_in_this_phase": 0
+  },
+  "claim_boundary": {
+    "permitted": [
+      "For focal normal RoboticArm parents, the presence of same-parent training siblings was associated with a change of Delta in anomaly scores under the frozen official-baseline pipeline.",
+      "...a Delta change in discrimination of focal normals against a fixed anomaly reference cohort."
+    ],
+    "forbidden": [
+      "the official AUC is inflated by Delta",
+      "this is the global split-leakage penalty",
+      "the published paper is invalid",
+      "Delta applies to BrushlessMotor",
+      "Delta applies to other model families",
+      "this is causal proof of leakage inflation"
+    ],
+    "measures": "SAME-PARENT FAMILIARITY FOR FOCAL TEST PARENTS, not GLOBAL SPLIT LEAKAGE"
+  },
+  "causal_language": {
+    "either_design_is_causal": false,
+    "ranking": "Design E isolates same-parent exposure better than V1 on every axis except compute: it holds parent identity fixed (each focal parent is its own comparison), holds training size and all 25 strata exact, preserves the target domain, and pairs within segment. V1 confounds overlap status with parent identity, an 88.4 percent volume cut, 13 missing strata and a materially different effective cluster count.",
+    "residual_in_design_E": "the donor segments are different physical material from the focal segments, so the toggle changes which recordings are seen as well as whether the focal parent's own siblings are seen; matching is on pre-test metadata only"
+  },
+  "residual_confounds": [
+    "donor material differs in underlying signal content from the focal material it replaces; matching is on metadata, not on signal",
+    "two crossing parents are excluded as focal because their target-domain contribution cannot be exactly replaced, so 9 normal test segments are outside the focal cohort",
+    "the estimand is same-parent familiarity for focal parents, which is narrower than global split leakage and must not be reported as the latter",
+    "background composition shifts slightly between folds because the donor reserve is removed from B; this is identical between arms within a fold but differs across folds"
+  ],
+  "design_verdict_for_v2": "GREEN for identifiability, with the compute cost and the narrowed estimand as the acknowledged prices"
+}

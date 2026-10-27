@@ -1,0 +1,31 @@
+{
+  "contains_any_score": false,
+  "contains_model_output": false,
+  "design_status": "PREEXECUTION_DESIGN_ONLY",
+  "files": {
+    "configs/phase3/roboticarm_parent_overlap_sensitivity_v2.json": "b518c1b77c1b7199498ae5938cf018c689bb52e4d574fc3138087a6cd237640d",
+    "docs/phase34b_focal_parent_toggle_design.md": "94169fd78eea3d734125cc2730981b986ec9d8fec28b051be627ea9b5cc18880",
+    "reports/phase3_4b_design/donor_matching_feasibility.csv": "951c4b31b97ba393982747528ce03ccab1571dceff7aad4d7823c8f50f411744",
+    "reports/phase3_4b_design/focal_fold_candidates.csv": "8b2b7bbd31cf3d3f874c1d388522c6e5eb64ac80da17be3cf2638b0603c7726a",
+    "reports/phase3_4b_design/focal_parent_design_decision.json": "68bfb1ffb45f6c05f7d7c00bdf3756877617066480f8eecbe8a776c74601601b",
+    "reports/phase3_4b_design/focal_parent_design_decision.md": "8e78de547986f3ecc19816eec65396f30d1370710a8962ea6fe11f1e809388c4",
+    "reports/phase3_4b_design/focal_parent_feasibility.csv": "e63b355b8554eceb777eb99c1e27aa0e8d7af37cc8b95382403513c740889f90",
+    "reports/phase3_4b_design/parent_contribution_balance.csv": "399438a6368e89392b302558b8bec19fedac7603cf7bab5ca5c82afcc9b8c308",
+    "reports/phase3_4b_design/proposed_focal_arm_memberships.csv": "7dcd684145addf6ede91e7950cd6194a79fe8830ac8dd5318ef9ce0ca55a776f",
+    "reports/phase3_4b_design/v1_vs_v2_design_comparison.csv": "0b64fe198252bf0d5b348f1490fc3d8b417f8e0ad76ac3feb964d09206fadea2",
+    "tests/test_phase34b_focal_design_freeze.py": "89cd7a07abe54a11cec75ab7a31d502a8245ed42ccbc966b70b11d1718db376d"
+  },
+  "generated_utc": "2026-09-08T16:19:23.699805+00:00",
+  "inference_run": false,
+  "ledger_entries_appended": 0,
+  "model_trained": false,
+  "phase": "3.4B",
+  "review_verdict": "B - KEEP V1 AS SECONDARY, DESIGN E AS PRIMARY",
+  "schema_version": "phase3.4B-design-artifacts-v1",
+  "self_reference": "excluded, following the repository manifest convention",
+  "starting_head": "6770750e3f19b9cabcfc0ae8d9ae8e8d31d59bd0",
+  "test_score_computed": false,
+  "v1_config_edited": false,
+  "v1_config_identity": "p34a-ra-overlap-13dbc49b2b983d72e957a320",
+  "v2_config_identity": "p34b-ra-focal-2ab15394f78b560f1e8c0880"
+}

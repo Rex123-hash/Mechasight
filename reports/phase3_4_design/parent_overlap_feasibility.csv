@@ -1,0 +1,30 @@
+quantity,value
+parent recordings (union),101.0
+parents appearing in official train,76.0
+parents appearing in official test,87.0
+parents crossing the official split,62.0
+train-only parents (disjoint pool),14.0
+test-only parents,25.0
+official train segments,1839.0
+official train windows,136086.0
+train segments from crossing parents,1625.0
+train windows from crossing parents,120250.0
+train segments from train-only parents,214.0
+train windows from train-only parents,15836.0
+segments removed by full parent-disjointness,1625.0
+windows removed by full parent-disjointness,120250.0
+percent of training removed by full disjointness,88.36
+windows per train segment (constant),74.0
+official test segments,464.0
+official test windows,34336.0
+normal test segments,232.0
+anomaly test segments,232.0
+normal test segments with a training sibling,212.0
+anomaly test segments with a normal-training sibling,0.0
+metadata strata in official training,25.0
+metadata strata reachable by the disjoint pool,12.0
+metadata strata unreachable without a crossing parent,13.0
+maximum matched arm size (segments),214.0
+maximum matched arm size (windows),15836.0
+median segments per train-only parent,8.5
+median segments per crossing parent,33.0

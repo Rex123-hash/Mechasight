@@ -1,0 +1,53 @@
+# ---- Data (never commit raw or derived dataset content) ----
+data/raw/*
+data/interim/*
+data/processed/*
+!data/**/.gitkeep
+*.7z
+*.parquet
+*.h5
+*.hdf5
+*.wav
+*.npy
+*.npz
+
+# ---- Model artifacts / experiment caches ----
+*.pt
+*.pth
+*.ckpt
+*.joblib
+*.pkl
+mlruns/
+checkpoints/
+outputs/
+.hydra/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---- Secrets / local config ----
+.env
+*.local.yaml
+secrets/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# ---- Third-party papers/PDFs (do not redistribute) ----
+docs/papers/
+*.pdf

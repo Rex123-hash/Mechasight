@@ -1,0 +1,12 @@
+{
+  "bundles_expected": 156,
+  "bundles_present": 156,
+  "code_git_sha": "85df48d819c25679b596286adda9df21720c93e9",
+  "ledger_count_after": 40,
+  "ledger_count_before": 40,
+  "proposed_batch_id": "p4-test-batch-f3fa02a57fc7adc6650e7522",
+  "run_rows": 15,
+  "schema_version": "phase4-single-modality-benchmark-v1",
+  "source_hash": "7296665253064b97b8b67c3b88714a29dc3b3df79d0b96a439f5eefc909fbc49",
+  "test_evaluated": false
+}

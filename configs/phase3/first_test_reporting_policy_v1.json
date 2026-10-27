@@ -1,0 +1,85 @@
+{
+  "schema_version": "phase3.1.1-first-common-test-reporting-v1",
+  "status": "PRETEST_FROZEN_NOT_YET_EXECUTED",
+  "scope": {
+    "machines": ["RoboticArm", "BrushlessMotor"],
+    "regimes": ["S", "T"],
+    "model_families": ["statistical_reference", "isolation_forest", "one_class_svm"],
+    "machine_separation_rule": "report and infer within each machine; never pool machines into a universal winner"
+  },
+  "primary_ranking_metrics": ["auroc", "average_precision"],
+  "secondary_ranking_metrics": ["standardized_pauroc_fpr_0_10"],
+  "threshold_dependent_metrics": [
+    "true_negative", "false_positive", "false_negative", "true_positive",
+    "false_positive_rate", "recall", "precision", "f1"
+  ],
+  "threshold_policy": {
+    "source": "each experiment's already-frozen source-normal validation cohort",
+    "quantile": 0.90,
+    "decision_rule": "anomaly if score > threshold",
+    "isolation_forest_rule": "each seed uses its own frozen q90 threshold; thresholds cannot be shared or reselected"
+  },
+  "reporting_slices": {
+    "primary_per_machine": "all authorized common-test samples for one machine, reported separately by regime",
+    "source_domain": "same ranking metrics when mathematically defined",
+    "target_domain": "same ranking metrics when mathematically defined",
+    "healthy_target_false_positive": ["healthy_target_sample_count", "false_positive", "false_positive_rate"],
+    "operating_condition": "SECONDARY_DESCRIPTIVE_ONLY_IF_LATER_PRODUCED"
+  },
+  "slice_class_policy": "metric reported when mathematically defined; no test manifest metadata was inspected in Phase 3.1.1",
+  "stochastic_seed_aggregation": {
+    "isolation_forest_seeds": [0, 1, 2, 3, 4],
+    "primary_model_family_value": "arithmetic mean of all five seed-level metric values",
+    "also_report": ["all_five_seed_values", "population_standard_deviation", "minimum", "maximum"],
+    "no_best_seed_rule": true,
+    "discard_valid_seed_rule": "forbidden"
+  },
+  "deterministic_seed_policy": {
+    "statistical_reference": [0],
+    "one_class_svm": [0],
+    "interpretation": "single deterministic run; seed 0 is a canonical record, not a stochastic replication"
+  },
+  "paired_bootstrap": {
+    "status": "FROZEN_NOT_RUN_IN_PHASE3_1_1",
+    "policy_version": "phase3.0.1-class-stratified-cluster-v1",
+    "replicates": 10000,
+    "seed": 1995,
+    "confidence": 0.95,
+    "interval": "percentile",
+    "strata": ["is_anomaly"],
+    "robotic_arm_cluster": "physical_parent_recording",
+    "brushless_motor_cluster": "released_recording_segment_one_to_one",
+    "inference_scope": "conditional_on_observed_evaluation_cohort",
+    "isolation_forest_within_replicate": "use one identical sampled-unit draw for all five seeds, compute five metrics, then arithmetic-mean them before paired differencing"
+  },
+  "regime_comparison": {
+    "contrast": "T_minus_S",
+    "metrics": ["auroc", "average_precision", "standardized_pauroc_fpr_0_10"],
+    "requires_identical_common_test_cohort_identity": true,
+    "inference": "paired bootstrap on identical sampled evaluation units",
+    "causal_interpretation": "forbidden beyond the frozen benchmark design"
+  },
+  "model_family_comparisons": {
+    "within_each_machine_and_regime": [
+      "statistical_reference_minus_isolation_forest",
+      "statistical_reference_minus_one_class_svm",
+      "isolation_forest_minus_one_class_svm"
+    ],
+    "paired": true,
+    "predetermined_winner": false,
+    "cross_machine_pooling": false
+  },
+  "multiple_comparison_interpretation": {
+    "emphasis": ["effect_sizes", "paired_differences", "confidence_intervals", "cross-setting_consistency"],
+    "p_values": "not_added",
+    "statistical_significance_language": "forbidden_without_a_separately_preregistered_valid_testing_procedure"
+  },
+  "no_post_test_primary_endpoint_change_rule": true,
+  "change_control": "after the first test look, any change requires a new policy version and explicit post-test documentation",
+  "phase3_1_1_test_access": {
+    "common_test_features_materialized": false,
+    "common_test_segments_scored": false,
+    "test_performance_metrics_computed": false,
+    "real_bootstrap_run": false
+  }
+}

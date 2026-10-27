@@ -1,0 +1,81 @@
+{
+  "schema_version": "phase3.1-baseline-ladder-v1",
+  "status": "FIRST_THREE_BASELINES_FROZEN_AND_AUTHORIZED_FOR_PRETEST_FIT",
+  "model_seeds": [0, 1, 2, 3, 4],
+  "bootstrap_seed": 1995,
+  "primary_bootstrap": {
+    "policy_version": "phase3.0.1-class-stratified-cluster-v1",
+    "method": "class-stratified cluster bootstrap conditional on the observed evaluation cohort",
+    "reporting_slices": ["machine", "domain"],
+    "strata": ["is_anomaly"],
+    "automatic_operating_condition_strata": false,
+    "robotic_arm_unit": "physical parent recording; retain every child segment",
+    "brushless_motor_unit": "released recording/segment under the audited one-segment-per-recording structure",
+    "paired_draws": "identical clusters and multiplicities for both models",
+    "replicates": 10000,
+    "confidence": 0.95,
+    "interval": "percentile"
+  },
+  "scientific_limitation_ids": {
+    "RoboticArm": [
+      "robotic_arm_source_validation_six_parents_v1",
+      "robotic_arm_released_adaptation_eighteen_parents_v1"
+    ],
+    "BrushlessMotor": [
+      "brushless_motor_acquisition_time_class_confound_v1"
+    ]
+  },
+  "entries": [
+    {
+      "order": 1,
+      "family": "statistical_reference",
+      "implementation": "root mean square distance from the training mean after training-only feature z-scoring",
+      "status": "PRIMARY_PHASE3_1",
+      "seeds": [0],
+      "seed_note": "deterministic; 0 is a canonical ledger field, not a repeated stochastic run",
+      "fit_labels": "none; normal training cohort only"
+    },
+    {
+      "order": 2,
+      "family": "isolation_forest",
+      "implementation": "sklearn.ensemble.IsolationForest",
+      "hyperparameters": {"n_estimators": 200, "max_samples": "auto", "contamination": "auto", "max_features": 1.0, "bootstrap": false, "n_jobs": 1},
+      "score_transform": "negative score_samples",
+      "status": "PRIMARY_PHASE3_1",
+      "seeds": [0, 1, 2, 3, 4],
+      "fit_labels": "none; normal training cohort only"
+    },
+    {
+      "order": 3,
+      "family": "one_class_svm",
+      "implementation": "sklearn.svm.OneClassSVM",
+      "hyperparameters": {"kernel": "rbf", "gamma": "scale", "nu": 0.05, "tol": 0.001, "shrinking": true, "cache_size": 512.0, "max_iter": -1},
+      "score_transform": "negative decision_function",
+      "status": "PRIMARY_PHASE3_1",
+      "seeds": [0],
+      "seed_note": "deterministic; 0 is a canonical ledger field, not a repeated stochastic run",
+      "fit_labels": "none; normal training cohort only"
+    },
+    {
+      "order": 4,
+      "family": "tree_based_benchmark",
+      "status": "NOT_AUTHORIZED_IN_PHASE3_1",
+      "condition": "admit only a scientifically justified normal-only objective; never train on test anomaly labels"
+    },
+    {
+      "order": 5,
+      "family": "reconstruction_models",
+      "status": "NOT_AUTHORIZED_IN_PHASE3_1"
+    },
+    {
+      "order": 6,
+      "family": "temporal_models",
+      "status": "NOT_AUTHORIZED_IN_PHASE3_1"
+    },
+    {
+      "order": 7,
+      "family": "reliability_aware_fusion",
+      "status": "NOT_AUTHORIZED_IN_PHASE3_1"
+    }
+  ]
+}

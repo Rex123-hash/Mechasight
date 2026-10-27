@@ -1,0 +1,6 @@
+fold,focal_parents,focal_segments,focal_windows,exact_12slot_solution_exists,proof_method,min_shortfall_at_12_slots,binding_strata_at_12_slots,all_binding_strata_target_domain,minimum_donor_slots_for_exact_match,v2_parent_gap,v3_parent_gap,v2_kish_ess_gap,v3_kish_ess_gap,v3_segments_match_exactly,v3_all_25_strata_match_exactly,v3_target_domain_equal_both_arms
+1,12,372,27528,False,integer program (HiGHS via scipy.optimize.milp) - infeasibility is proven,1.0,weight25|BckgE,False,13,10,-1,7.18,0.31,True,True,True
+2,12,374,27676,False,integer program (HiGHS via scipy.optimize.milp) - infeasibility is proven,4.0,weight25|BckgE;weight30|BckgB;weight30|BckgE;weight35|BckgG,False,15,6,-3,4.57,1.98,True,True,True
+3,12,283,20942,True,integer program (HiGHS via scipy.optimize.milp) - infeasibility is proven,0.0,,True,12,9,0,5.85,0.6,True,True,True
+4,12,363,26862,False,integer program (HiGHS via scipy.optimize.milp) - infeasibility is proven,1.0,weight35|BckgG,False,13,10,-1,7.35,0.71,True,True,True
+5,12,228,16872,True,integer program (HiGHS via scipy.optimize.milp) - infeasibility is proven,0.0,,True,12,11,0,6.25,0.81,True,True,True

@@ -1,0 +1,203 @@
+{
+  "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+  "config_path": "configs/phase3/protocol_a_official_reproduction_v1.json",
+  "config_sha256": "4bc61b56af6dc42528edb704baf32e96f83be4f35e1afc94a4faa1610375e928",
+  "generated_utc": "2026-09-08T10:29:24.674236+00:00",
+  "head_at_freeze": "bd61137099ae9d166907935307c831a271f11517",
+  "official_split": [
+    {
+      "anomaly_test_segments": 156,
+      "anomaly_test_segments_with_normal_training_sibling": 0,
+      "machine": "BrushlessMotor",
+      "normal_test_segments": 156,
+      "normal_test_segments_with_training_sibling": 0,
+      "official_test_segments": 312,
+      "official_train_segments": 1281,
+      "overlap_retained_deliberately": true,
+      "parent_recordings_total": 1593,
+      "parents_crossing_official_split": 0,
+      "test_parents": 312,
+      "test_segments_from_crossing_parents": 0,
+      "train_parents": 1281
+    },
+    {
+      "anomaly_test_segments": 232,
+      "anomaly_test_segments_with_normal_training_sibling": 0,
+      "machine": "RoboticArm",
+      "normal_test_segments": 232,
+      "normal_test_segments_with_training_sibling": 212,
+      "official_test_segments": 464,
+      "official_train_segments": 1839,
+      "overlap_retained_deliberately": true,
+      "parent_recordings_total": 101,
+      "parents_crossing_official_split": 62,
+      "test_parents": 87,
+      "test_segments_from_crossing_parents": 212,
+      "train_parents": 76
+    }
+  ],
+  "parameters_recovered_that_were_previously_unrecorded": {
+    "batch_norm_in_architecture": true,
+    "checkpoint_selection": "upstream stores best_model_state = self.state_dict(), which holds live tensor references rather than a copy, so the restored weights are the final epoch's, not the best-validation epoch's. Reproduced, not corrected.",
+    "early_stopping": "validation loss, patience 3",
+    "note": "None of these were recorded in the repository before Phase 3.3. The only epoch figure previously present (50) is documented in docs/source_verification.md as belonging to a different framework described in the upstream README, not to the notebook that produced the published results.",
+    "num_epochs": 1000,
+    "optimizer": "torch.optim.Adam with PyTorch defaults apart from lr",
+    "patience": 3,
+    "shuffle_test": false,
+    "shuffle_train": true,
+    "shuffle_validation": false,
+    "validation_split": "sklearn train_test_split, window level, stratified by anomaly_label + domain_shift_op + domain_shift_env, random_state 1995"
+  },
+  "pre_test_state": {
+    "note": "Building the official test windows is preprocessing, not scoring. No model has been applied to official test data at freeze time, and the evaluator refuses to run without a Protocol-A ledger entry.",
+    "official_test_metrics_computed": false,
+    "official_test_scored": false,
+    "official_test_windows_built": true,
+    "protocol_a_ledger_entries": 0,
+    "protocol_b_ledger_entries": 28
+  },
+  "preprocessing": {
+    "BrushlessMotor": {
+      "generated_utc": "2026-09-08T10:28:43.499338+00:00",
+      "machine": "BrushlessMotor",
+      "splits": {
+        "test": {
+          "bytes": 380104432,
+          "reused_existing": false,
+          "seconds": 30.1,
+          "segments": 312,
+          "sha256": "7f0b1072c1057b9e593678804a355dc9605408435aa2749669c4ee0a9702ed0e",
+          "skipped": [],
+          "windows": 15912
+        },
+        "train": {
+          "bytes": 1554982896,
+          "reused_existing": false,
+          "seconds": 112.2,
+          "segments": 1281,
+          "sha256": "c9a82447948cb0cc83c6262a14dd6d0092fc2eecaaeae293c242466304065a72",
+          "skipped": [],
+          "windows": 65331
+        }
+      }
+    },
+    "RoboticArm": {
+      "generated_utc": "2026-09-08T10:26:17.528331+00:00",
+      "machine": "RoboticArm",
+      "splits": {
+        "test": {
+          "bytes": 818549104,
+          "reused_existing": false,
+          "seconds": 60.1,
+          "segments": 464,
+          "sha256": "22e351f8f79411322b201fca3e3af2e87d7993b0f11dc4112d3f84771044484c",
+          "skipped": [],
+          "windows": 34336
+        },
+        "train": {
+          "bytes": 3238224440,
+          "reused_existing": false,
+          "seconds": 272.8,
+          "segments": 1839,
+          "sha256": "31a0be7653de4ae630f5ea17a78ef181eeecd02835c40a8b8a356b31a71616f3",
+          "skipped": [],
+          "windows": 136086
+        }
+      }
+    }
+  },
+  "protocol": "official_baseline_reproduction",
+  "protocol_b_integrity_at_freeze": {
+    "ledger_sha256": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+    "phase32_artifacts_verified": 155,
+    "split_v3_sha256": "68e5406d63e96cf5ee418ae58808f5c3e7790889ba1b8497420642d1f0d8409e"
+  },
+  "published_reference_values": {
+    "BrushlessMotor": {
+      "overall": 58.95,
+      "source": 73.63,
+      "target": 55.59
+    },
+    "RoboticArm": {
+      "overall": 91.62,
+      "source": 93.28,
+      "target": 90.48
+    },
+    "source": "Albertini et al., DCASE 2024 Workshop, paper Table 4 (authors' own results)",
+    "status": "REFERENCE_ONLY_NOT_A_TUNING_TARGET",
+    "usage_rule": "may be compared against, never optimised towards"
+  },
+  "purpose": "historical comparability anchor; Protocol B remains the primary benchmark",
+  "regime": "T",
+  "repository_record_corrections": [
+    {
+      "action": "recorded here; the historical document is not rewritten",
+      "actual_upstream": "each hidden block is Linear -> BatchNorm1d -> ReLU; the bottleneck Linear(2048,16) and the output Linear(2048,input_dim) have no BatchNorm and no activation",
+      "location": "docs/research_definition.md 5.9",
+      "recorded": "FC(...->2048) -> FC -> FC -> FC(2048->16) (ReLU), mirrored decoder",
+      "severity": "material architecture omission"
+    },
+    {
+      "action": "corrected forms recorded in the Protocol-A config",
+      "actual_upstream": "those values correspond to the CRLF-converted bytes, not the raw file bytes",
+      "location": "reports/phase2/upstream_baseline_provenance.json",
+      "recorded": "four SHA-256 file hashes",
+      "severity": "provenance-recording defect, no content impact"
+    }
+  ],
+  "reproduction_tolerance": {
+    "classification": {
+      "CLOSE": "absolute error > 0.5 and <= 2.0 AUC points",
+      "EXACT": "absolute error 0.00 AUC points",
+      "MATERIAL_DEVIATION": "absolute error > 2.0 AUC points",
+      "NEAR_EXACT": "absolute error <= 0.5 AUC points"
+    },
+    "frozen_before_any_own_test_result_was_computed": true,
+    "justification": "Upstream seeds torch and the sklearn split but does not disable cuDNN nondeterminism, and its early stopping (patience 3) means a single epoch's difference changes the final weights. Run-to-run variation of a fraction of an AUC point is therefore expected even from the authors' own code, so bitwise equality is not a reasonable criterion. 0.5 points is adopted as the near-exact band and 2.0 points as the material-deviation boundary. Both were fixed before any MechaSight Protocol-A test score was computed.",
+    "material_threshold_auc_points": 2.0,
+    "near_exact_threshold_auc_points": 0.5
+  },
+  "schema_version": "phase3.3-protocol-a-pretest-freeze-v1",
+  "training": {},
+  "upstream_verification": {
+    "byte_for_byte_match_with_pinned_tree": true,
+    "commit": "592bcbbed58893dc26bbab3240c5d7a3105a1a7f",
+    "files": {
+      "baseline.ipynb": {
+        "bytes_raw": 7805,
+        "git_blob_sha1": "52615b6089d09db6456b99e5010d745bd7608b4f",
+        "phase2_recorded_matches_crlf_form": true,
+        "phase2_recorded_sha256": "73972d70cb95f71e0d5bbdb5f24549eea557116670ac608a30643ca23b0098d4",
+        "sha256_crlf": "73972d70cb95f71e0d5bbdb5f24549eea557116670ac608a30643ca23b0098d4",
+        "sha256_raw_lf": "abc7fa4c70e0c252f596f76c55bb99695fd44691298478bf988c3803dbf933a5"
+      },
+      "model.py": {
+        "bytes_raw": 13027,
+        "git_blob_sha1": "7f756a9232d958dc6a9a8ae7c7a61564e9cae101",
+        "phase2_recorded_matches_crlf_form": true,
+        "phase2_recorded_sha256": "7704cdbea5f8258dbab06d6fd1c2980e425d886a5ed16fc3922375c6d331dc82",
+        "sha256_crlf": "7704cdbea5f8258dbab06d6fd1c2980e425d886a5ed16fc3922375c6d331dc82",
+        "sha256_raw_lf": "1ae87c5beb795effa11d9d0bcb6bf76704c0295baaa6065647e81fa294d7d8f1"
+      },
+      "preprocess.ipynb": {
+        "bytes_raw": 24818,
+        "git_blob_sha1": "a85a7c27b0d979cc11c8b9c979ec0fc248013be0",
+        "phase2_recorded_matches_crlf_form": true,
+        "phase2_recorded_sha256": "45a560da566025cabd812dadf1e5330ff2c8200be3aac8d0f855dff152419d38",
+        "sha256_crlf": "45a560da566025cabd812dadf1e5330ff2c8200be3aac8d0f855dff152419d38",
+        "sha256_raw_lf": "716ce752d88397032984b81698d8223bdf8ff36727552516cd575f77ce090c1c"
+      },
+      "utilities.py": {
+        "bytes_raw": 17511,
+        "git_blob_sha1": "24efb2366bbd186219477251f76324b7d97dbbe0",
+        "phase2_recorded_matches_crlf_form": true,
+        "phase2_recorded_sha256": "2770b2fe5732986896f7150f3c6d61992837581fbd1f50e7d853b26c378c8f30",
+        "sha256_crlf": "2770b2fe5732986896f7150f3c6d61992837581fbd1f50e7d853b26c378c8f30",
+        "sha256_raw_lf": "eb7487e9130ca13f71c6ce01a4e40706f25ef454a763fb5ca2d384a512b57e40"
+      }
+    },
+    "phase2_recorded_hash_discrepancy": "The Phase-2 provenance SHA-256 values do not match the raw upstream bytes. They are reproduced exactly by the CRLF-converted form, so the Phase-2 hashes were recorded after Windows line-ending conversion. Content is identical; the recorded hash form was non-portable. Both forms and the git blob SHA-1 are now recorded.",
+    "tree_sha": "471d3bce83b94e822fe8c1112e49687f9b782d5f"
+  }
+}

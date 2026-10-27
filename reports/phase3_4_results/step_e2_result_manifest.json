@@ -1,0 +1,115 @@
+{
+  "analysis_artifact": "reports/phase3_4_results/phase3_4_inc1_salvage_analysis.json",
+  "analysis_artifact_sha256": "6441ed66b88074417ee0772e2618af0842050d2533d48029bb07a831ec1384bd",
+  "analysis_inputs": {
+    "anomaly_reference_segments": 232,
+    "combined_raw_scores_sha256": "199474ef97a27714b4fb138f1ca9f23a1604daa09a62b258278b782d9df58875",
+    "n_focal_parents": 48,
+    "n_focal_segments_descriptive": 158,
+    "per_experiment_artifact_sha256": {
+      "p34d-2af84983abd170013b73": "ccee18db8732025aefb03f42dfc8a1315b7c24c14245eaf3b601a95233ed8a9d",
+      "p34d-406b59f08e154b284159": "1926f1cdca781afa3bcb54b5655fb881e03346b36c632b41495d47d75eae8ead",
+      "p34d-652bc1e3f9d29a51a460": "512b21dd51d22185da049c821d204f25bbc48e82720fe6802289eb2063e7c039",
+      "p34d-66656cf0901b180cf037": "fa6cf2154d989eb3f28a4707e2dc13db90971917b988f4ff1e9fa289e5a3cdb8",
+      "p34d-88b93ddbacbc5829f326": "ec8d9b513472038731315f17621694cd07ecd5ad496ec0017bc8ea8bfce98410",
+      "p34d-a4e8316f62fa982ec52d": "a23f672818a327da7ebe6e46be5fc44ed9fc03d89d1483df2655748a59c3cd01",
+      "p34d-ed8467570acf122c36cd": "4f1ad47cb93ebd3248198527296f92bb52461e6b88a97d83106b59a6361142b7",
+      "p34d-fd6e3bfd4c091e155d99": "9de21c5899870394fa600de1e45b830016a263e00641c562f764bad6ddaacf65"
+    },
+    "retained_experiment_ids": [
+      "p34d-fd6e3bfd4c091e155d99",
+      "p34d-a4e8316f62fa982ec52d",
+      "p34d-88b93ddbacbc5829f326",
+      "p34d-2af84983abd170013b73",
+      "p34d-652bc1e3f9d29a51a460",
+      "p34d-406b59f08e154b284159",
+      "p34d-66656cf0901b180cf037",
+      "p34d-ed8467570acf122c36cd"
+    ],
+    "retained_folds": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "analysis_label": "INCIDENT-CONTINGENT SECONDARY SENSITIVITY ANALYSIS",
+  "bootstrap": {
+    "fold_stratified": true,
+    "interval": "percentile 95 percent",
+    "parents_per_fold": 12,
+    "parents_per_replicate": 48,
+    "replicates": 10000,
+    "seed": 27182
+  },
+  "ci95": [
+    -0.0014088851686507907,
+    0.02038057407656849
+  ],
+  "claims_before_after": [
+    9,
+    9
+  ],
+  "e1_provenance_commit": "ac71988",
+  "estimator_identity": {
+    "function": "parent_concordance_delta",
+    "module": "src/experiment/focal_concordance.py",
+    "module_sha256": "154ce1b80d9c0edaf94ab9c0ad624c71e5c33904a24b209a03998b527dfc5f7d",
+    "unchanged_since": "c10fdfcc890f97a595c132d87dc8b4bb04d7161e"
+  },
+  "fold_1_absent": {
+    "attempts": [],
+    "claimed": false,
+    "experiment_id": "p34d-e56529a2f56f98fd4a7a"
+  },
+  "fold_level_deltas_descriptive": {
+    "2": 0.029648800971538044,
+    "3": 0.003220785440613031,
+    "4": -0.0020489104406130228,
+    "5": 0.002945723009031206
+  },
+  "generated_utc": "2026-09-12T09:00:39.317241+00:00",
+  "in_memory_recomputation_identical": true,
+  "inc1": {
+    "attempt_history": [
+      "SCORE_STARTED"
+    ],
+    "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+    "score_completed": false
+  },
+  "ledger_entries": 40,
+  "ledger_sha256": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+  "mandatory_report_statements": [
+    "the original design had 5 paired folds / 60 focal parents",
+    "INC-1 consumed fold-1 PRESENT before inference",
+    "zero protected forwards occurred in INC-1",
+    "zero score was observed from INC-1",
+    "the frozen single-use policy prohibited retry",
+    "fold-1 ABSENT was intentionally left unused",
+    "the original five-fold primary analysis is incomplete",
+    "the folds 2-5 analysis is a pre-score incident-contingent secondary sensitivity analysis"
+  ],
+  "original_primary_analysis_status": "NOT FULLY ESTIMABLE DUE TO INC-1",
+  "parent_config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+  "point_estimate": 0.008441599745142315,
+  "protected_inference_during_e2": 0,
+  "recovery_config_identity": "p34r-inc1-4f86592159eadbbe276d9c6f",
+  "recovery_config_sha256": "3b72cabeba5b77c40e8c3e36fc7272f9f541bcb3142b926dc351bd4850cd1755",
+  "required_limitations": [
+    "one of five pre-registered fold pairs is missing for a non-random, procedural reason (harness incident), so the retained cohort is 48 of the 60 pre-registered focal parents",
+    "the retained cohort was fixed before any score existed and was not selected on any outcome",
+    "the interval is conditional on eight fitted models; between-model variability is described by four fold-level deltas only",
+    "the analysis inherits every residual confound and claim boundary of the parent config, including the residual parent gap (0-3, ABSENT larger)",
+    "no confirmatory claim may be made from this analysis",
+    "residual V3 parent-count gap remains 0-3, ABSENT larger",
+    "donor material is metadata-matched but signal content differs",
+    "training volume remains approximately 76-85% of official training",
+    "no causal leakage claim is made"
+  ],
+  "schema_version": "phase3.4-step-e2-result-manifest-v1",
+  "score_completed_before_after": [
+    8,
+    8
+  ],
+  "stage": "E2: frozen INC-1 salvage analysis computed from persisted E1 artifacts only"
+}

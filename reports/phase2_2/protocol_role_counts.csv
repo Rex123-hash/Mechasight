@@ -1,0 +1,5 @@
+machine,regime,source_training_parents,source_training_segments,source_validation_parents,source_validation_segments,target_adaptation_parents,target_adaptation_segments,adaptation_sibling_blocked_parents,adaptation_sibling_blocked_segments,common_evaluation_parents,common_evaluation_segments,train_parents,train_segments
+BrushlessMotor,S,1137,1137,126,126,18,18,0,0,312,312,1137,1137
+BrushlessMotor,T,1137,1137,126,126,18,18,0,0,312,312,1155,1155
+RoboticArm,S,44,1528,6,186,18,27,18,96,33,466,44,1528
+RoboticArm,T,44,1528,6,186,18,27,18,96,33,466,62,1555

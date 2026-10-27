@@ -1,0 +1,34 @@
+{
+  "schema_version": "phase2-v1",
+  "format": "JSON Lines; one row per physical window",
+  "required_fields": [
+    "machine",
+    "sensor_modalities",
+    "raw_file_references",
+    "source_file",
+    "segment_id",
+    "original_segment_id",
+    "parent_recording",
+    "window_id",
+    "window_index",
+    "window_start_s",
+    "window_end_s",
+    "protocol",
+    "regime",
+    "split",
+    "domain",
+    "operating_condition",
+    "background_condition",
+    "anomaly_label",
+    "sampling_rate_metadata",
+    "preprocessing_config_id"
+  ],
+  "sampling_rate_metadata_per_modality": [
+    "effective_rate_hz",
+    "original_sample_count",
+    "transformed_sample_count",
+    "transformation",
+    "timestamp_preserved"
+  ],
+  "traceability_rule": "window_id is unique; every window maps to one segment and one parent recording; no parent or segment may have multiple split values within a protocol/regime."
+}

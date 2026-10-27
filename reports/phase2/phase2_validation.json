@@ -1,0 +1,233 @@
+{
+  "status": "PASS",
+  "assertions": [
+    {
+      "name": "no_parent_recording_crosses_split",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "anomalies_test_only",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "regime_s_target_normals_unseen",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "deterministic_split_reproduction",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "robotic_arm_test_condition_coverage",
+      "status": "PASS",
+      "violations": 0,
+      "minimum_normal_test_recordings_per_condition": 2
+    },
+    {
+      "name": "smoke_manifest_traceability",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "smoke_window_siblings_do_not_cross_split",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "smoke_cache_config_identity",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "smoke_feature_traceability",
+      "status": "PASS",
+      "violations": 0
+    }
+  ],
+  "split_rows": 7792,
+  "split_unique_segments_per_regime": 3896,
+  "smoke_builds": [
+    {
+      "segments_read": 1,
+      "windows_written": 51,
+      "accelerometer_files_affected": 1,
+      "accelerometer_samples_dropped": 1,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 286,
+      "machine": "BrushlessMotor",
+      "split": "train",
+      "protocol": "mechasight_experimental_protocol",
+      "regime": "T",
+      "preprocessing_config_id": "phase2-v1-f0a93c55130baa01",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase2_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__train__phase2-v1-f0a93c55130baa01.h5",
+      "manifest_path": "data\\interim\\phase2_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__train__phase2-v1-f0a93c55130baa01__manifest.jsonl",
+      "feature_path": "data\\interim\\phase2_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__train__phase2-v1-f0a93c55130baa01__features.jsonl",
+      "cache_bytes": 2575764,
+      "manifest_bytes": 94489,
+      "feature_bytes": 266922
+    },
+    {
+      "segments_read": 1,
+      "windows_written": 74,
+      "accelerometer_files_affected": 0,
+      "accelerometer_samples_dropped": 0,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 248,
+      "machine": "RoboticArm",
+      "split": "train",
+      "protocol": "mechasight_experimental_protocol",
+      "regime": "T",
+      "preprocessing_config_id": "phase2-v1-f0a93c55130baa01",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase2_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__train__phase2-v1-f0a93c55130baa01.h5",
+      "manifest_path": "data\\interim\\phase2_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__train__phase2-v1-f0a93c55130baa01__manifest.jsonl",
+      "feature_path": "data\\interim\\phase2_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__train__phase2-v1-f0a93c55130baa01__features.jsonl",
+      "cache_bytes": 3679392,
+      "manifest_bytes": 132502,
+      "feature_bytes": 387399
+    },
+    {
+      "segments_read": 1,
+      "windows_written": 51,
+      "accelerometer_files_affected": 0,
+      "accelerometer_samples_dropped": 0,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 286,
+      "machine": "BrushlessMotor",
+      "split": "train",
+      "protocol": "official_baseline_reproduction",
+      "regime": "T",
+      "preprocessing_config_id": "phase2-v1-f1aada899322ee9c",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase2_smoke_release\\cache\\official_baseline_reproduction\\regime_T\\BrushlessMotor__official_baseline_reproduction__regime-T__train__phase2-v1-f1aada899322ee9c.h5",
+      "manifest_path": "data\\interim\\phase2_smoke_release\\cache\\official_baseline_reproduction\\regime_T\\BrushlessMotor__official_baseline_reproduction__regime-T__train__phase2-v1-f1aada899322ee9c__manifest.jsonl",
+      "feature_path": "data\\interim\\phase2_smoke_release\\cache\\official_baseline_reproduction\\regime_T\\BrushlessMotor__official_baseline_reproduction__regime-T__train__phase2-v1-f1aada899322ee9c__features.jsonl",
+      "cache_bytes": 2552784,
+      "manifest_bytes": 99290,
+      "feature_bytes": 192367
+    },
+    {
+      "segments_read": 1,
+      "windows_written": 74,
+      "accelerometer_files_affected": 0,
+      "accelerometer_samples_dropped": 0,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 248,
+      "machine": "RoboticArm",
+      "split": "train",
+      "protocol": "official_baseline_reproduction",
+      "regime": "T",
+      "preprocessing_config_id": "phase2-v1-f1aada899322ee9c",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase2_smoke_release\\cache\\official_baseline_reproduction\\regime_T\\RoboticArm__official_baseline_reproduction__regime-T__train__phase2-v1-f1aada899322ee9c.h5",
+      "manifest_path": "data\\interim\\phase2_smoke_release\\cache\\official_baseline_reproduction\\regime_T\\RoboticArm__official_baseline_reproduction__regime-T__train__phase2-v1-f1aada899322ee9c__manifest.jsonl",
+      "feature_path": "data\\interim\\phase2_smoke_release\\cache\\official_baseline_reproduction\\regime_T\\RoboticArm__official_baseline_reproduction__regime-T__train__phase2-v1-f1aada899322ee9c__features.jsonl",
+      "cache_bytes": 3662448,
+      "manifest_bytes": 140888,
+      "feature_bytes": 278649
+    }
+  ],
+  "estimated_window_counts": [
+    {
+      "regime": "S",
+      "machine": "BrushlessMotor",
+      "split": "test",
+      "segments": 330,
+      "estimated_windows_at_100ms_nonoverlap": 16830
+    },
+    {
+      "regime": "S",
+      "machine": "BrushlessMotor",
+      "split": "train",
+      "segments": 1137,
+      "estimated_windows_at_100ms_nonoverlap": 57987
+    },
+    {
+      "regime": "S",
+      "machine": "BrushlessMotor",
+      "split": "validation",
+      "segments": 126,
+      "estimated_windows_at_100ms_nonoverlap": 6426
+    },
+    {
+      "regime": "S",
+      "machine": "RoboticArm",
+      "split": "test",
+      "segments": 589,
+      "estimated_windows_at_100ms_nonoverlap": 43586
+    },
+    {
+      "regime": "S",
+      "machine": "RoboticArm",
+      "split": "train",
+      "segments": 1528,
+      "estimated_windows_at_100ms_nonoverlap": 113072
+    },
+    {
+      "regime": "S",
+      "machine": "RoboticArm",
+      "split": "validation",
+      "segments": 186,
+      "estimated_windows_at_100ms_nonoverlap": 13764
+    },
+    {
+      "regime": "T",
+      "machine": "BrushlessMotor",
+      "split": "test",
+      "segments": 312,
+      "estimated_windows_at_100ms_nonoverlap": 15912
+    },
+    {
+      "regime": "T",
+      "machine": "BrushlessMotor",
+      "split": "train",
+      "segments": 1150,
+      "estimated_windows_at_100ms_nonoverlap": 58650
+    },
+    {
+      "regime": "T",
+      "machine": "BrushlessMotor",
+      "split": "validation",
+      "segments": 131,
+      "estimated_windows_at_100ms_nonoverlap": 6681
+    },
+    {
+      "regime": "T",
+      "machine": "RoboticArm",
+      "split": "test",
+      "segments": 481,
+      "estimated_windows_at_100ms_nonoverlap": 35594
+    },
+    {
+      "regime": "T",
+      "machine": "RoboticArm",
+      "split": "train",
+      "segments": 1610,
+      "estimated_windows_at_100ms_nonoverlap": 119140
+    },
+    {
+      "regime": "T",
+      "machine": "RoboticArm",
+      "split": "validation",
+      "segments": 212,
+      "estimated_windows_at_100ms_nonoverlap": 15688
+    }
+  ],
+  "estimated_total_windows_per_protocol_b_regime": 251665,
+  "bytes_per_window_from_smoke": {
+    "mechasight_experimental_protocol:BrushlessMotor": 57591.666666666664,
+    "mechasight_experimental_protocol:RoboticArm": 56747.2027027027,
+    "official_baseline_reproduction:BrushlessMotor": 55773.35294117647,
+    "official_baseline_reproduction:RoboticArm": 55161.95945945946
+  },
+  "estimated_full_regime_disk_gib": {
+    "RoboticArm_plus_BrushlessMotor_cache_manifest_features": 13.2,
+    "cache_only": 11.7
+  },
+  "memory_design": "streaming one segment/window at a time; full corpus is never resident in RAM"
+}

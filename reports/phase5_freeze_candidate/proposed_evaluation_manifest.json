@@ -1,0 +1,1725 @@
+{
+  "accounting": {
+    "accounting_definitions": {
+      "authorization": "1 human authorisation covering 1 batch of 232 units",
+      "completed_result": "only after all 232 tables are persisted and hash-verified (completion gate GREEN) and analyse-once has finished; a ledger row records authorised exposure, not a completed result",
+      "derived_fusion_scoring": "208: a frozen L2 rule applied to sealed Phase-4 score tables; no raw-sensor inference",
+      "new_model_inference": "24: a frozen L1-new model applied to protected inputs",
+      "new_protected_evaluation_units": "232 = one ledger row each = one new detector evaluated against protected outcomes",
+      "protected_data_reads": {
+        "labels": "common-test labels, in analyse-once only",
+        "not_read": "raw common-test recordings (no protected gate scan)",
+        "protected_inputs": "common-evaluation spectral caches and common-test feature artifacts (for the 24 L1-new units only)",
+        "sealed_protected_outputs": "the 156 Phase-4 score tables (to derive L2) and, in analyse-once only, the 28 Phase-3.2 score tables"
+      },
+      "reanalysis_of_existing_protected_outputs": "184 tables (156 Phase 4 + 28 Phase 3.2) used as comparators; no new detector meets the test labels, so no new look"
+    },
+    "authorization_units": 1,
+    "count_identity": "24 (new L1) + 52 (L2 all three) + 156 (L2 pairs) = 232",
+    "derived_protected_tables_from_sealed_phase4_scores": 208,
+    "fusion_subsets_per_unit": 4,
+    "historical_tables_reanalysed_without_new_look": {
+      "phase3_2_all_channel_l1": 28,
+      "phase4_single_modality": 156
+    },
+    "ledger": {
+      "expected_end": 428,
+      "expected_start": 196,
+      "rows_appended": 232
+    },
+    "model_fitting_jobs": {
+      "dense_autoencoder_l1": 20,
+      "mahalanobis_l1": 4,
+      "total": 24
+    },
+    "new_protected_looks": 232,
+    "protected_inference_operations": {
+      "inputs": "existing hash-verified common-evaluation spectral caches (20 dense-AE units) and common-test feature artifacts (4 Mahalanobis units), read only inside the authorized score-all scope after the exposure is recorded",
+      "integrity_gate_scans_of_common_test_inputs": 0,
+      "l1_new_scoring_on_common_test": 24
+    },
+    "protected_tables": {
+      "L1_new": 24,
+      "L1_reused_from_phase3_2": 28,
+      "L2_all_three": 52,
+      "L2_pairs_equal_L3_under_single_modality_loss": 156,
+      "L3_clean": "0 separate tables: L3 is identical to L2(all three) when every sensor passes, and L3 is not executed on protected inputs"
+    },
+    "units": {
+      "count": 52,
+      "definition": "machine x regime x family x seed",
+      "machine_regime_cells": 4,
+      "per_machine_regime": 13
+    },
+    "validation_only_operations": {
+      "dead_input_constant_scores": "156 (one synthetic constant input per frozen Phase-4 model; no data)",
+      "end_to_end_suite_segment_runs": 1992,
+      "gate_clean_scans": "all training and source-validation segment-channels, both machines",
+      "l1_new_validation_scoring_and_q90": 24,
+      "l1_reused_validation_bundles_verified": 28,
+      "l2_calibrations_and_fused_q90_thresholds": 208
+    }
+  },
+  "authorization_granted": false,
+  "identity": {
+    "base_commit": "e69e85e4616c8e8ded1f0a04bc0f50a0ff16e825",
+    "cohort_hashes": {
+      "BrushlessMotor": "e1b09c058261ae04f6574330dab17ca89127616bd4bd9fac4978bd19b821b3ad",
+      "RoboticArm": "23c5b7e3f1b0e6f28d6159a8c893abb5de309a0b4b978c713f43ba4383a775da"
+    },
+    "planned_ids": [
+      "p3-04b940acc27c7439e1d32b24",
+      "p3-06ea507b93e119054b5c3ba4",
+      "p3-0abdd30c4b8457111796fd1b",
+      "p3-0b4eab16d7dc7f32887145d3",
+      "p3-0f1210655594b046269dad9d",
+      "p3-2716c4ea337f275c128e16e4",
+      "p3-2e565557cfa9e411ea66ac24",
+      "p3-3673cbd9302b3f784b04a6a4",
+      "p3-374e6c8b9768d4a542412576",
+      "p3-45a029d01ee6d3e165f82e65",
+      "p3-4dfba9a4541ea9996153c604",
+      "p3-684cab6c96c667b54e1b4f3a",
+      "p3-739ec5209aa8b00089c479bd",
+      "p3-88b539eb6d84111eaad0f648",
+      "p3-a1a176477b5a4abe33912d45",
+      "p3-a9790d804bc4fa232341b364",
+      "p3-b92a4d84588d57d680e72949",
+      "p3-c3ff10cf8f348a5c6e6104c1",
+      "p3-c7104d98baeb6b312d168b2b",
+      "p3-cc67d2432b24bfb11aa66f4d",
+      "p3-d6b20c84b9b48ce9915258aa",
+      "p3-d95d13c5eac87b81b6b00142",
+      "p3-e0bd283a234f13ae699535ca",
+      "p3-fb2ff00838b9ac616550c0cd",
+      "p5l2-005df22bc335f29ba99c",
+      "p5l2-0468e3d7589fd5cce608",
+      "p5l2-04ec4357afaa9ce6126e",
+      "p5l2-055b49c533703d5f1b85",
+      "p5l2-05a958870a03eba4269a",
+      "p5l2-0747993e7c2a3b6a80dc",
+      "p5l2-09aed44ecbf21005830c",
+      "p5l2-0a6542a97496b68fe482",
+      "p5l2-0ae56a38c0a69fa30804",
+      "p5l2-0d0584ef4617ead20c85",
+      "p5l2-0fb37fc4749fb415c0dd",
+      "p5l2-1098e3039d05b51a306d",
+      "p5l2-1102008b181e0f2ed683",
+      "p5l2-1151b1ec63fae75fb373",
+      "p5l2-1359b7b8627102b243d9",
+      "p5l2-1474b976b22ba892cf03",
+      "p5l2-1619294223dc911a4325",
+      "p5l2-1677cbd64ea867d50bf9",
+      "p5l2-1725bba454cd59c69310",
+      "p5l2-172fbb68201010fdc8b9",
+      "p5l2-18231e2988f1bc4f301c",
+      "p5l2-1ad39182ee931e459381",
+      "p5l2-1af3e220bbf84eade5fd",
+      "p5l2-1b1880a79862fb465f00",
+      "p5l2-1c299b3c6ceac0808913",
+      "p5l2-1e5deed8e454a6f90163",
+      "p5l2-1f3c64f21a0840e26b87",
+      "p5l2-1fd38c3b6b506bee9f0b",
+      "p5l2-20696c40970ab7b56af3",
+      "p5l2-2178f35009a8a2b08a2b",
+      "p5l2-22a6719dedc3b587b475",
+      "p5l2-2477a53efe4ca2058f79",
+      "p5l2-24f969278f9cec1e6ddd",
+      "p5l2-27e4dbae35bb9a37e67f",
+      "p5l2-288e6582fa72064e2ded",
+      "p5l2-2a874cab962b4c2c6147",
+      "p5l2-2b320721540e175922fa",
+      "p5l2-2d5580b4e602fc463a33",
+      "p5l2-2d8cbc23fccf3a3da544",
+      "p5l2-2de1d01e64ed6f1288c1",
+      "p5l2-2ebecc446224d5f7ae12",
+      "p5l2-315d77c0a273854e8b5f",
+      "p5l2-3235e62cdd989626f37f",
+      "p5l2-326006018dc6fb7ee995",
+      "p5l2-33e69b83f21aa7042eea",
+      "p5l2-34f283b43d8d78536e58",
+      "p5l2-34f29fb5efde63d0f778",
+      "p5l2-355f96151e3b56fb7aab",
+      "p5l2-36ea5100b36e0177f5ec",
+      "p5l2-375e3905ebb1c116b5bb",
+      "p5l2-377a2ce1907daf273412",
+      "p5l2-38802190d51b305339cb",
+      "p5l2-39d4a39ab711ca4337fd",
+      "p5l2-39e0abc01728c9a1aacc",
+      "p5l2-39ebed0bc9dcdd1d3a67",
+      "p5l2-3a2a98c8b295c76faa72",
+      "p5l2-3a5f0efc711ad39c789e",
+      "p5l2-3ac68d5f05cc3be9cd71",
+      "p5l2-3aef7dd48e51a68bd23b",
+      "p5l2-3d01ab6f807e9f6202b4",
+      "p5l2-3d954279f4948febe191",
+      "p5l2-3f92c28123645f4d2472",
+      "p5l2-4065b06df6fec68206fd",
+      "p5l2-411b7e17b69c6a539791",
+      "p5l2-4339b7dbd2574e9d54d3",
+      "p5l2-4355972c891f17bd3739",
+      "p5l2-4691c0f06cb196e68fa0",
+      "p5l2-471a0679e23789b6606c",
+      "p5l2-496aeb91ac3c38fd879a",
+      "p5l2-4c6c8467c3f410702d97",
+      "p5l2-4d201c5e78c9f218df93",
+      "p5l2-4eaebb45562aed97482c",
+      "p5l2-4efa2eeb96c223f89569",
+      "p5l2-4f1ad9ffaa06a0b1665e",
+      "p5l2-504c85095ef151366f75",
+      "p5l2-509c7ec997e725cdce13",
+      "p5l2-5142b589d5b3844f2c17",
+      "p5l2-527d1f71e3dedc26b7a3",
+      "p5l2-52d05cb40903db316ca8",
+      "p5l2-531d555d1bcbcf66979b",
+      "p5l2-536710aa838acece1176",
+      "p5l2-5392afdd4a88195f6e2d",
+      "p5l2-571416b6dcd0a4201777",
+      "p5l2-574330047c0c8e8bcd46",
+      "p5l2-57c7bf2facebd3d2bc44",
+      "p5l2-5cfd5b41b11a029891f7",
+      "p5l2-5e6e0a5802ddf115565e",
+      "p5l2-5ec1086abfe1b57fc28a",
+      "p5l2-5ec7030da842922e3354",
+      "p5l2-5f3ae01db64caf003f8d",
+      "p5l2-5f9b979723a4484a661b",
+      "p5l2-5ffe7daa80b7e177d3d5",
+      "p5l2-602c92dabfb995d61c25",
+      "p5l2-617c550a88d05ceceea1",
+      "p5l2-61802a604fa4c6c92b3e",
+      "p5l2-6196329d2ca5e696621e",
+      "p5l2-630e7f001cf1e3a8d0d0",
+      "p5l2-63897750bece4c3733f2",
+      "p5l2-655acb5a7af01e712755",
+      "p5l2-658829be2faff83573fb",
+      "p5l2-669aa32b4cb811ffdf23",
+      "p5l2-67036af8ef3583ef56b4",
+      "p5l2-693b9cf8b9bdbfb94d47",
+      "p5l2-695a277d915fbea79019",
+      "p5l2-6984e0ef86d07bd6c45f",
+      "p5l2-6b8e356f64ee2cbc36b0",
+      "p5l2-6b9fb569a4a2fbe9f500",
+      "p5l2-6bdd3b0b79983979bb7d",
+      "p5l2-6d07b28d41ca78c317f7",
+      "p5l2-6e44a820f8ca56d99464",
+      "p5l2-715add67cd2a87b30897",
+      "p5l2-721064a428d1437e0662",
+      "p5l2-72f5608f0391d9148883",
+      "p5l2-746681c360a9a411f274",
+      "p5l2-772156e691e3626f620d",
+      "p5l2-77bb802804073a46d78a",
+      "p5l2-786b11557d872d734b85",
+      "p5l2-7daac93ac3c95f52d393",
+      "p5l2-7f264d402176ed74a63b",
+      "p5l2-80056104e2b100e0b15c",
+      "p5l2-824f1cbe12b6a792690c",
+      "p5l2-86bc774eb51cf323e1ad",
+      "p5l2-87308e8eadf1153c9976",
+      "p5l2-875d776522bccc4a17e4",
+      "p5l2-8be8ba49bb096d16d507",
+      "p5l2-8e38b6537e79fc1837f4",
+      "p5l2-8fe980f27c74b14940b6",
+      "p5l2-90ed15f2324328552cb3",
+      "p5l2-9136831b7a8ce3960801",
+      "p5l2-924bda34913601242161",
+      "p5l2-935ec8f62c3d881d2833",
+      "p5l2-974a64cb7a702397ccc8",
+      "p5l2-97d7f64f81c32716117e",
+      "p5l2-999c155dacfccc2a360c",
+      "p5l2-9ba57b4de8c494d09752",
+      "p5l2-9bcf2ad28e132ee38b57",
+      "p5l2-9c495020db317eec767d",
+      "p5l2-9cd99eb7b96aee059ada",
+      "p5l2-9ef31a991cd211741182",
+      "p5l2-a1a4fe00bf578576b8e3",
+      "p5l2-a3c352cd1b410a514e29",
+      "p5l2-a3df797d859416cc655f",
+      "p5l2-a48691b6507cb707d764",
+      "p5l2-a785dfc8b5524af57b22",
+      "p5l2-a8839cce6c43383543d2",
+      "p5l2-a91843f4d46b5dea0446",
+      "p5l2-a9a08ab9da2dc1aa94cb",
+      "p5l2-ac5ac3fb321f03086790",
+      "p5l2-acdd3dc7e874aa442b40",
+      "p5l2-ade248f2f1c376201339",
+      "p5l2-aef9f9fc75f7a4725f67",
+      "p5l2-b0ff2d8af008fc9b222b",
+      "p5l2-b1397f5a2d5591eaf739",
+      "p5l2-b2c7a00222fc6ab9a68c",
+      "p5l2-b3c17c24b315bd55e5da",
+      "p5l2-b5dcf12db91719307be4",
+      "p5l2-b6ba70da60c0723babd6",
+      "p5l2-b8477fcc4d1e93e5fd98",
+      "p5l2-b89233005d9ac8d36084",
+      "p5l2-b8c649dc72cec059d965",
+      "p5l2-bb3cde8ef306237ec659",
+      "p5l2-bbc9f4e47557a9f697eb",
+      "p5l2-bbf6724d9b6f9453a7a2",
+      "p5l2-c221e956ff1462c7d2af",
+      "p5l2-c2d6c1526f275ff7455a",
+      "p5l2-c54c2146a699d7beb24d",
+      "p5l2-c58c02f58f87b534514c",
+      "p5l2-c6b6cc13e4f35f3ba4ca",
+      "p5l2-c6e095b18dec88c961a8",
+      "p5l2-c7e9a7aaa7b262a0cbca",
+      "p5l2-c86fc635ab15046ec6f8",
+      "p5l2-ca643f067ff4ca477375",
+      "p5l2-cc097e1afd41527968f1",
+      "p5l2-cc8a85179ce41112f3ee",
+      "p5l2-d0ac6abb205db0d95c9e",
+      "p5l2-d31655a91a68af05ef66",
+      "p5l2-d3b0e71632da35759029",
+      "p5l2-d3cd56702bc1b0ead9b4",
+      "p5l2-d4432c2661d537763f12",
+      "p5l2-d55b57d6de456a2a1766",
+      "p5l2-d5aa1fdcc16eadb8f882",
+      "p5l2-d84f42ddb4a4621c4b8b",
+      "p5l2-d9c6ce5196ef1705043b",
+      "p5l2-dba7bb9889ddd921f6b2",
+      "p5l2-dd0fb1751c9157b6e88c",
+      "p5l2-df3e1f6e77d8600d091d",
+      "p5l2-e1764d2b26f0978f08b8",
+      "p5l2-e186e676e851cefe72a3",
+      "p5l2-e1b6f2d7e4e199119bd4",
+      "p5l2-e3fdb5b362f7ff536701",
+      "p5l2-e4980fe527c56ac42534",
+      "p5l2-e603dec8d2d1482bf750",
+      "p5l2-e8d5592f23c05b25b0c7",
+      "p5l2-e909dfb8a97d3fb048a9",
+      "p5l2-eaa850c70d234d6a058c",
+      "p5l2-ed9aedf00d677393d472",
+      "p5l2-eff59556576b6a423468",
+      "p5l2-f01d4e25230b0b84cdcf",
+      "p5l2-f030cf5f3a4151edd3ec",
+      "p5l2-f06e864200ee3acce305",
+      "p5l2-f15d3cd5cf4e848d8940",
+      "p5l2-f3db03105651e9bd1a86",
+      "p5l2-f5d6917d86d790428cc1",
+      "p5l2-f7adfa5e484e63d2ef08",
+      "p5l2-faf64d3e80d9f3994c8d",
+      "p5l2-fc6e37cb67e0bd72d510",
+      "p5l2-fd21b81a36683f0fbaf9",
+      "p5l2-fe724d56a9e7c98affa9"
+    ],
+    "registry_sha256": "489c6fd6653648f7f686d4537aa221f0b253bdd7ffe60e6e430ea2b7810691cc"
+  },
+  "planned_units": [
+    {
+      "experiment_id": "p3-04b940acc27c7439e1d32b24",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p3-06ea507b93e119054b5c3ba4",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p3-0abdd30c4b8457111796fd1b",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p3-0b4eab16d7dc7f32887145d3",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p3-0f1210655594b046269dad9d",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p3-2716c4ea337f275c128e16e4",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p3-2e565557cfa9e411ea66ac24",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p3-3673cbd9302b3f784b04a6a4",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p3-374e6c8b9768d4a542412576",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p3-45a029d01ee6d3e165f82e65",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p3-4dfba9a4541ea9996153c604",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p3-684cab6c96c667b54e1b4f3a",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p3-739ec5209aa8b00089c479bd",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p3-88b539eb6d84111eaad0f648",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p3-a1a176477b5a4abe33912d45",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p3-a9790d804bc4fa232341b364",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p3-b92a4d84588d57d680e72949",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p3-c3ff10cf8f348a5c6e6104c1",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p3-c7104d98baeb6b312d168b2b",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p3-cc67d2432b24bfb11aa66f4d",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p3-d6b20c84b9b48ce9915258aa",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p3-d95d13c5eac87b81b6b00142",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p3-e0bd283a234f13ae699535ca",
+      "operation": "new_L1_inference",
+      "unit": "BrushlessMotor|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p3-fb2ff00838b9ac616550c0cd",
+      "operation": "new_L1_inference",
+      "unit": "RoboticArm|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-005df22bc335f29ba99c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-0468e3d7589fd5cce608",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-04ec4357afaa9ce6126e",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-055b49c533703d5f1b85",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-05a958870a03eba4269a",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-0747993e7c2a3b6a80dc",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-09aed44ecbf21005830c",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-0a6542a97496b68fe482",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-0ae56a38c0a69fa30804",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-0d0584ef4617ead20c85",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-0fb37fc4749fb415c0dd",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-1098e3039d05b51a306d",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-1102008b181e0f2ed683",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-1151b1ec63fae75fb373",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-1359b7b8627102b243d9",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-1474b976b22ba892cf03",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-1619294223dc911a4325",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-1677cbd64ea867d50bf9",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-1725bba454cd59c69310",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-172fbb68201010fdc8b9",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-18231e2988f1bc4f301c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-1ad39182ee931e459381",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-1af3e220bbf84eade5fd",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-1b1880a79862fb465f00",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-1c299b3c6ceac0808913",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-1e5deed8e454a6f90163",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-1f3c64f21a0840e26b87",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-1fd38c3b6b506bee9f0b",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-20696c40970ab7b56af3",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-2178f35009a8a2b08a2b",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-22a6719dedc3b587b475",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-2477a53efe4ca2058f79",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-24f969278f9cec1e6ddd",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-27e4dbae35bb9a37e67f",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-288e6582fa72064e2ded",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-2a874cab962b4c2c6147",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-2b320721540e175922fa",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-2d5580b4e602fc463a33",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-2d8cbc23fccf3a3da544",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-2de1d01e64ed6f1288c1",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-2ebecc446224d5f7ae12",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-315d77c0a273854e8b5f",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-3235e62cdd989626f37f",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-326006018dc6fb7ee995",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-33e69b83f21aa7042eea",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-34f283b43d8d78536e58",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-34f29fb5efde63d0f778",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-355f96151e3b56fb7aab",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-36ea5100b36e0177f5ec",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-375e3905ebb1c116b5bb",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-377a2ce1907daf273412",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-38802190d51b305339cb",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-39d4a39ab711ca4337fd",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-39e0abc01728c9a1aacc",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-39ebed0bc9dcdd1d3a67",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-3a2a98c8b295c76faa72",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-3a5f0efc711ad39c789e",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-3ac68d5f05cc3be9cd71",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-3aef7dd48e51a68bd23b",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-3d01ab6f807e9f6202b4",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-3d954279f4948febe191",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-3f92c28123645f4d2472",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-4065b06df6fec68206fd",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-411b7e17b69c6a539791",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-4339b7dbd2574e9d54d3",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-4355972c891f17bd3739",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-4691c0f06cb196e68fa0",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-471a0679e23789b6606c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-496aeb91ac3c38fd879a",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-4c6c8467c3f410702d97",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-4d201c5e78c9f218df93",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-4eaebb45562aed97482c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-4efa2eeb96c223f89569",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-4f1ad9ffaa06a0b1665e",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-504c85095ef151366f75",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-509c7ec997e725cdce13",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-5142b589d5b3844f2c17",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-527d1f71e3dedc26b7a3",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-52d05cb40903db316ca8",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-531d555d1bcbcf66979b",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-536710aa838acece1176",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-5392afdd4a88195f6e2d",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-571416b6dcd0a4201777",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-574330047c0c8e8bcd46",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-57c7bf2facebd3d2bc44",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-5cfd5b41b11a029891f7",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-5e6e0a5802ddf115565e",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-5ec1086abfe1b57fc28a",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-5ec7030da842922e3354",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-5f3ae01db64caf003f8d",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-5f9b979723a4484a661b",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-5ffe7daa80b7e177d3d5",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-602c92dabfb995d61c25",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-617c550a88d05ceceea1",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-61802a604fa4c6c92b3e",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-6196329d2ca5e696621e",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-630e7f001cf1e3a8d0d0",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-63897750bece4c3733f2",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-655acb5a7af01e712755",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-658829be2faff83573fb",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-669aa32b4cb811ffdf23",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-67036af8ef3583ef56b4",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-693b9cf8b9bdbfb94d47",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-695a277d915fbea79019",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-6984e0ef86d07bd6c45f",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-6b8e356f64ee2cbc36b0",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-6b9fb569a4a2fbe9f500",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-6bdd3b0b79983979bb7d",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-6d07b28d41ca78c317f7",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-6e44a820f8ca56d99464",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-715add67cd2a87b30897",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-721064a428d1437e0662",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-72f5608f0391d9148883",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-746681c360a9a411f274",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-772156e691e3626f620d",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-77bb802804073a46d78a",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-786b11557d872d734b85",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-7daac93ac3c95f52d393",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-7f264d402176ed74a63b",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-80056104e2b100e0b15c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-824f1cbe12b6a792690c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-86bc774eb51cf323e1ad",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-87308e8eadf1153c9976",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-875d776522bccc4a17e4",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-8be8ba49bb096d16d507",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-8e38b6537e79fc1837f4",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-8fe980f27c74b14940b6",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-90ed15f2324328552cb3",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-9136831b7a8ce3960801",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-924bda34913601242161",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-935ec8f62c3d881d2833",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-974a64cb7a702397ccc8",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-97d7f64f81c32716117e",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-999c155dacfccc2a360c",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-9ba57b4de8c494d09752",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-9bcf2ad28e132ee38b57",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-9c495020db317eec767d",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-9cd99eb7b96aee059ada",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-9ef31a991cd211741182",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-a1a4fe00bf578576b8e3",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-a3c352cd1b410a514e29",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-a3df797d859416cc655f",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-a48691b6507cb707d764",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-a785dfc8b5524af57b22",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-a8839cce6c43383543d2",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|dense_autoencoder|3"
+    },
+    {
+      "experiment_id": "p5l2-a91843f4d46b5dea0446",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-a9a08ab9da2dc1aa94cb",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-ac5ac3fb321f03086790",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-acdd3dc7e874aa442b40",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-ade248f2f1c376201339",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-aef9f9fc75f7a4725f67",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-b0ff2d8af008fc9b222b",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-b1397f5a2d5591eaf739",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-b2c7a00222fc6ab9a68c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-b3c17c24b315bd55e5da",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-b5dcf12db91719307be4",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-b6ba70da60c0723babd6",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-b8477fcc4d1e93e5fd98",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-b89233005d9ac8d36084",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-b8c649dc72cec059d965",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-bb3cde8ef306237ec659",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-bbc9f4e47557a9f697eb",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-bbf6724d9b6f9453a7a2",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-c221e956ff1462c7d2af",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-c2d6c1526f275ff7455a",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-c54c2146a699d7beb24d",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-c58c02f58f87b534514c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-c6b6cc13e4f35f3ba4ca",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-c6e095b18dec88c961a8",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-c7e9a7aaa7b262a0cbca",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-c86fc635ab15046ec6f8",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-ca643f067ff4ca477375",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-cc097e1afd41527968f1",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|S|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-cc8a85179ce41112f3ee",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-d0ac6abb205db0d95c9e",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-d31655a91a68af05ef66",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-d3b0e71632da35759029",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-d3cd56702bc1b0ead9b4",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-d4432c2661d537763f12",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-d55b57d6de456a2a1766",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-d5aa1fdcc16eadb8f882",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-d84f42ddb4a4621c4b8b",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-d9c6ce5196ef1705043b",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|4"
+    },
+    {
+      "experiment_id": "p5l2-dba7bb9889ddd921f6b2",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-dd0fb1751c9157b6e88c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-df3e1f6e77d8600d091d",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-e1764d2b26f0978f08b8",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|T|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-e186e676e851cefe72a3",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-e1b6f2d7e4e199119bd4",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|S|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-e3fdb5b362f7ff536701",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|T|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-e4980fe527c56ac42534",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-e603dec8d2d1482bf750",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-e8d5592f23c05b25b0c7",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "RoboticArm|T|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-e909dfb8a97d3fb048a9",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|0"
+    },
+    {
+      "experiment_id": "p5l2-eaa850c70d234d6a058c",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|S|mahalanobis_shrinkage|0"
+    },
+    {
+      "experiment_id": "p5l2-ed9aedf00d677393d472",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "RoboticArm|S|statistical_reference|0"
+    },
+    {
+      "experiment_id": "p5l2-eff59556576b6a423468",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-f01d4e25230b0b84cdcf",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|isolation_forest|4"
+    },
+    {
+      "experiment_id": "p5l2-f030cf5f3a4151edd3ec",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|dense_autoencoder|1"
+    },
+    {
+      "experiment_id": "p5l2-f06e864200ee3acce305",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|dense_autoencoder|2"
+    },
+    {
+      "experiment_id": "p5l2-f15d3cd5cf4e848d8940",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc+gyro",
+      "unit": "BrushlessMotor|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-f3db03105651e9bd1a86",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|T|isolation_forest|2"
+    },
+    {
+      "experiment_id": "p5l2-f5d6917d86d790428cc1",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "BrushlessMotor|S|one_class_svm|0"
+    },
+    {
+      "experiment_id": "p5l2-f7adfa5e484e63d2ef08",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|S|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-faf64d3e80d9f3994c8d",
+      "operation": "derived_L2_scoring",
+      "subset": "acc+gyro",
+      "unit": "RoboticArm|T|isolation_forest|1"
+    },
+    {
+      "experiment_id": "p5l2-fc6e37cb67e0bd72d510",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "RoboticArm|S|isolation_forest|3"
+    },
+    {
+      "experiment_id": "p5l2-fd21b81a36683f0fbaf9",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+acc",
+      "unit": "BrushlessMotor|T|dense_autoencoder|0"
+    },
+    {
+      "experiment_id": "p5l2-fe724d56a9e7c98affa9",
+      "operation": "derived_L2_scoring",
+      "subset": "mic+gyro",
+      "unit": "BrushlessMotor|S|dense_autoencoder|1"
+    }
+  ],
+  "proposed_batch_id": "p5-candidate-batch-17e7da9e2a1a4de7abe6e2f3",
+  "required_order_and_recovery": {
+    "attempt_log": "append-only JSONL in the staging area: step, unit id, state transition, UTC time and code SHA for every step, including failures, so incomplete operations remain attributable",
+    "derived_table_provenance": "each L2 table records the experiment ids and verified hashes of the Phase-4 tables it consumed, the calibration parameters and threshold from its validation bundle, and the rule version",
+    "error_semantics": "no integrity gate runs on protected data, so every exception in the protected batch is a TECHNICAL (software/infrastructure) failure; there is no protected outcome called sensor degradation in this design",
+    "execution_identity": "clean tracked tree; scoring HEAD bound into the batch id; proposed batch id recorded at the freeze; authorised ids and cohort hashes must equal the proposed ones",
+    "failure_policy": "see recovery and unit_states; inherits the Phase-4 rule that the same identity is never rerun and no metric is computed before all planned tables verify",
+    "human_authorization": "after the 5.5 freeze and an independent read-only audit, an explicit authorisation token stated by the human in chat and recorded in a pre-scoring identity record; authorized_protected_read is an accident guard, not an authorisation",
+    "inherits": "Phase-4 score-all-then-analyse-once machinery, failure policy and provenance conventions; no second provenance framework",
+    "ledger_semantics": "one row per new protected evaluation unit (24 L1-new + 208 derived L2); re-analysis of the 156 Phase-4 and 28 Phase-3.2 tables adds no row; rows record authorised exposure, not completion",
+    "manifest_hashes": "pre_analysis_score_manifest_sha256, post_analysis_score_manifest_sha256 and score_payload_sha256 (canonical JSON excluding mutable status fields)",
+    "order": [
+      "1 pre-exposure verification on non-protected artifacts only: authorisation token, clean tracked tree, ledger == 196 and verify_ledger_history GREEN, every Phase-5 bundle/model/manifest hash, frozen design hash; no protected file is opened",
+      "2 record the exposure: append exactly 232 ledger rows atomically (batch=<id> in every reason) and write batch_authorization.json (batch_id, ledger_start_count 196, ledger_end_count 428, experiment_count 232, code_git_sha) and an attempt log entry EXPOSURE_RECORDED, all before any protected read",
+      "3 open the authorized read scope; verify protected integrity (common-evaluation cache and common-test artifact hashes, Phase-4 score-manifest payload and table hashes); a mismatch is a TECHNICAL failure after exposure",
+      "4 score the 24 L1-new tables from label-free protected inputs; derive the 208 L2 tables from the verified sealed Phase-4 tables; persist each table to sealed staging with its hash; log each unit's PERSISTED state",
+      "5 completion gate: 232 tables present, hashed, finite, label-free, ids equal to the authorised set",
+      "6 analyse-once: read labels and the 28 Phase-3.2 comparator tables inside the scope; compute every contrast, category and diagnostic once; final"
+    ],
+    "ordering_change_from_phase4": "Phase 4 materialised label-free test inputs before its ledger append; Phase 5 records the exposure first, so every protected read is attributable to a recorded authorisation",
+    "read_scope": "a single new protected script is the only additional opener of authorized_protected_read; it is added to the AUTHORIZED_SCOPES tripwire in the 5.5 freeze commit; the scope is an accident guard, not an authorisation",
+    "recalculation_guard": "analyse-once refuses if an analysis directory exists; a completed analysis is final",
+    "recovery": {
+      "after_exposure": "looks are consumed; analyse-once refuses unless all 232 planned units are PERSISTED; an incident record names the failed units and cause",
+      "before_exposure": "a refusal at step 1 consumes no look and needs no recovery record",
+      "duplicate_prevention": "verify_ledger_history refuses a repeated experiment id; analyse-once refuses if any planned unit has zero or more than one PERSISTED table",
+      "no_retry_under_same_identity": "the same experiment id is never scored twice",
+      "recovery_batch": "only FAILED_TECHNICAL units are re-attempted, under a new human authorisation, a new versioned batch id and new experiment ids (original id + '-r<k>'), appended as a new authorised ledger segment; a mapping file links each recovery id to its planned unit",
+      "retained_units": "units already PERSISTED with verified hashes are kept and never re-scored"
+    },
+    "unit_states": {
+      "AUTHORISED": "in the human-approved batch",
+      "COMPLETED": "PERSISTED, completion gate GREEN and analyse-once finished",
+      "EXPOSED": "ledger row appended (looks consumed whether or not scoring completes)",
+      "FAILED_TECHNICAL": "EXPOSED without a persisted table, with an attempt-log failure record",
+      "PERSISTED": "score table written to sealed staging and hash-recorded",
+      "PLANNED": "in the frozen design"
+    }
+  },
+  "scoring_head": null,
+  "scoring_head_requirement": "bind separately at authorization; approved ids/cohorts must equal this proposal",
+  "status": "CANDIDATE — NOT YET AUTHORIZED FOR PROTECTED EVALUATION.",
+  "unit_state": "PLANNED",
+  "unresolved_authorization_gates": [
+    "Independent read-only pre-test audit and explicit human authorization have not occurred.",
+    "The V2 section-13 protected executor and its fixture tests are absent. No new scope is enabled. A separately reviewed implementation and updated freeze are required before Phase 5.6; this metadata candidate is not execution-ready.",
+    "Ignored protected caches/raw inputs have stat identities only; content integrity must be verified inside a future authorized scope AFTER exposure is recorded.",
+    "Full split-based unit_binding was not rerun: it parses protected labels. Its existing successful report is pinned; fresh metadata binding uses the frozen Phase-4 pre-test cohort contracts instead."
+  ]
+}

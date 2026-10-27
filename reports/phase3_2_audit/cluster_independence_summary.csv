@@ -1,0 +1,13 @@
+machine,domain,class,segments,parent_recordings
+RoboticArm,source,normal,214,8
+RoboticArm,source,anomaly,116,13
+RoboticArm,target,normal,20,6
+RoboticArm,target,anomaly,116,6
+RoboticArm,ALL,normal,234,14
+RoboticArm,ALL,anomaly,232,19
+BrushlessMotor,source,normal,78,78
+BrushlessMotor,source,anomaly,78,78
+BrushlessMotor,target,normal,78,78
+BrushlessMotor,target,anomaly,78,78
+BrushlessMotor,ALL,normal,156,156
+BrushlessMotor,ALL,anomaly,156,156

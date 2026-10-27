@@ -1,0 +1,52 @@
+{
+  "checkpoints": {
+    "BrushlessMotor": {
+      "path": "data/interim/protocol_a/BrushlessMotor/protocol_a_baseline_seed1995.pth",
+      "sha256": "70f1da7d0ea837f339790d9ff88da7615f3fc818c0dd5c50736d69fd65351248",
+      "torch_version": "2.14.0+cpu"
+    },
+    "RoboticArm": {
+      "path": "data/interim/protocol_a/RoboticArm/protocol_a_baseline_seed1995.pth",
+      "sha256": "67062daf7134d5dbc59fc120570e5c2aba46b39446ab6b553dd6e16a87553964",
+      "torch_version": "2.14.0+cpu"
+    }
+  },
+  "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+  "files": {
+    "reports/phase3_3_protocol_a/evaluate_BrushlessMotor.json": "3eef6b611aae3e7af2629e7eedcf0d38532762349ae611f8dde84dd91504c3d0",
+    "reports/phase3_3_protocol_a/evaluate_RoboticArm.json": "764c62d1e4dea1c3fca4e73c2de912cc72ba1e56bd87e3a8f194d7b68dea7b8b",
+    "reports/phase3_3_protocol_a/preprocess_BrushlessMotor.json": "f3e6be9ca80513e61e9c12609f012e3cb597c5de6b0906879e56a3a4a5c28e04",
+    "reports/phase3_3_protocol_a/preprocess_RoboticArm.json": "12bff7d30ab7d374bb6593971e283b2eff4811c09e5118730db2526d96754847",
+    "reports/phase3_3_protocol_a/protocol_a_ledger_authorization.json": "cc4d567d135ce7d0082171015385b1e103b46f32276c9c8e47a9ede5eb575171",
+    "reports/phase3_3_protocol_a/protocol_a_pretest_freeze.json": "51bd5fe7a801b1658f0c204d7c170267b7637bd809bde631c7d30a0c1dde17db",
+    "reports/phase3_3_protocol_a/protocol_a_pretest_freeze.md": "b72b21b0773b6cf67527c1e9dcdd3ddf9857503895a14667aca4110a5efb85fd",
+    "reports/phase3_3_protocol_a/protocol_a_primary_auc.csv": "2dbfdc983b73dc91aae175abac3fab4ed328791994100396fa0bc7284018d4ea",
+    "reports/phase3_3_protocol_a/protocol_a_published_comparison.csv": "40b473042082b73901c2a8a8f53cfe3e7fdf1c2ce38b1fe352c6fe76b77e7c44",
+    "reports/phase3_3_protocol_a/protocol_a_reproduction_discrepancy_log.csv": "369330006401369b809c39d9bb98f72fc4bb64598a00915ed5c9c9fddb3fcdd7",
+    "reports/phase3_3_protocol_a/protocol_a_reproduction_report.json": "b83b1157da6807297b104f2ee955a3386e4f28b4314710a94d266da7a6b9d233",
+    "reports/phase3_3_protocol_a/protocol_a_reproduction_report.md": "f25eb538cfbde244d075491e403a16bb9743f37dba05c7db0d191b2b28ec9075",
+    "reports/phase3_3_protocol_a/protocol_a_split_overlap_context.csv": "28c9235f3cad3ec8a2c146d11d228bf2cda33d0e8ba8a4f8925f3651e97b3394",
+    "reports/phase3_3_protocol_a/training/BrushlessMotor_training.json": "73ec14c483bedb5f61f33b1697f274d3c3656ca79c1099f63683e55b8817f08e",
+    "reports/phase3_3_protocol_a/training/RoboticArm_training.json": "27c8f267e8fe6cf1b4ec815e376bc67c28a3c93dad466dea3cdb9536346e60f5"
+  },
+  "generated_utc": "2026-09-08T15:03:18.305157+00:00",
+  "schema_version": "phase3.3-protocol-a-artifacts-v1",
+  "windowed_datasets": {
+    "BrushlessMotor/test": {
+      "note": "local ignored artifact, not committed",
+      "path": "data/interim/protocol_a/BrushlessMotor/test_dataset_window_0.100s.h5"
+    },
+    "BrushlessMotor/train": {
+      "note": "local ignored artifact, not committed",
+      "path": "data/interim/protocol_a/BrushlessMotor/train_dataset_window_0.100s.h5"
+    },
+    "RoboticArm/test": {
+      "note": "local ignored artifact, not committed",
+      "path": "data/interim/protocol_a/RoboticArm/test_dataset_window_0.100s.h5"
+    },
+    "RoboticArm/train": {
+      "note": "local ignored artifact, not committed",
+      "path": "data/interim/protocol_a/RoboticArm/train_dataset_window_0.100s.h5"
+    }
+  }
+}

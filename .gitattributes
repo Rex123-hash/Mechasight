@@ -1,0 +1,20 @@
+# Forward provenance policy (Phase 3.4 COMMIT A, audit finding A6).
+# Research-critical text artifacts are stored and checked out with LF so that
+# a SHA-256 over the working-tree bytes equals the SHA-256 over the git blob on
+# every platform. Historical manifests from Phase 3.3 through 3.4D are NOT
+# rewritten; their hash forms are documented in
+# reports/phase3_4d_audit/manifest_hash_form_check.csv.
+*.json   text eol=lf
+*.jsonl  text eol=lf
+*.csv    text eol=lf
+*.md     text eol=lf
+*.py     text eol=lf
+*.txt    text eol=lf
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.h5     binary
+*.pth    binary
+*.png    binary
+*.pdf    binary
+*.docx   binary
+*.claim text eol=lf

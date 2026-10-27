@@ -1,0 +1,94 @@
+{
+  "A_four_fold_incident_contingent_result_PRESERVED": {
+    "artifact_sha256": "6441ed66b88074417ee0772e2618af0842050d2533d48029bb07a831ec1384bd",
+    "ci95": [
+      -0.0014088851686507907,
+      0.02038057407656849
+    ],
+    "commit": "a8b3d6c",
+    "folds": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "n_parents": 48,
+    "point_estimate": 0.008441599745142315,
+    "sign_counts": [
+      17,
+      6,
+      25
+    ]
+  },
+  "B_five_fold_recovered_result": {
+    "artifact": "reports/phase3_4_results/phase3_4_five_fold_recovered_analysis.json",
+    "artifact_sha256": "427b04cb96c97fe1dd218d515c1f0fb3378e65551d95c9a30d858f1347807188",
+    "bootstrap": {
+      "fold_stratified": true,
+      "interval": "percentile 95 percent",
+      "parents_per_fold": 12,
+      "per_replicate": 60,
+      "replicates": 10000,
+      "seed": 27182
+    },
+    "ci95": [
+      9.225420771756938e-05,
+      0.017639275451559924
+    ],
+    "fold_level_deltas": {
+      "1": 0.007440818281335529,
+      "2": 0.0299878557744937,
+      "3": 0.002941810344827585,
+      "4": -0.0024916187739463594,
+      "5": 0.002557471264367811
+    },
+    "folds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "n_parents": 60,
+    "point_estimate": 0.008087267378215654,
+    "sign_counts": [
+      28,
+      6,
+      26
+    ]
+  },
+  "amendment_commit": "a799934",
+  "analysis_inputs": {
+    "e1_artifacts": {
+      "p34d-2af84983abd170013b73": "ccee18db8732025aefb03f42dfc8a1315b7c24c14245eaf3b601a95233ed8a9d",
+      "p34d-406b59f08e154b284159": "1926f1cdca781afa3bcb54b5655fb881e03346b36c632b41495d47d75eae8ead",
+      "p34d-652bc1e3f9d29a51a460": "512b21dd51d22185da049c821d204f25bbc48e82720fe6802289eb2063e7c039",
+      "p34d-66656cf0901b180cf037": "fa6cf2154d989eb3f28a4707e2dc13db90971917b988f4ff1e9fa289e5a3cdb8",
+      "p34d-88b93ddbacbc5829f326": "ec8d9b513472038731315f17621694cd07ecd5ad496ec0017bc8ea8bfce98410",
+      "p34d-a4e8316f62fa982ec52d": "a23f672818a327da7ebe6e46be5fc44ed9fc03d89d1483df2655748a59c3cd01",
+      "p34d-ed8467570acf122c36cd": "4f1ad47cb93ebd3248198527296f92bb52461e6b88a97d83106b59a6361142b7",
+      "p34d-fd6e3bfd4c091e155d99": "9de21c5899870394fa600de1e45b830016a263e00641c562f764bad6ddaacf65"
+    },
+    "e1_combined_sha256": "199474ef97a27714b4fb138f1ca9f23a1604daa09a62b258278b782d9df58875",
+    "fold1_combined_sha256": "cdda80f92f26d8de7430576dedc3a298154d703949a7bffa2dc8c83d7a09e9fe",
+    "fold1_recovery_artifacts": {
+      "p34r-f1rec-78c8f486fdb7c822af87": "c5d51937608ca737b071611abf0bb20ff95e0ada89d50f9b320199f6c6ec182f",
+      "p34r-f1rec-e83624b2152b673c30c5": "e08e89b4b714397c91beb3922ada7f4274bf02bfdeadde8f65e9aac3c1fac1f5"
+    }
+  },
+  "estimator_module_sha256": "154ce1b80d9c0edaf94ab9c0ad624c71e5c33904a24b209a03998b527dfc5f7d",
+  "finding_IMPL_1": {
+    "consequence": "each focal segment's concordance is ranked against anomaly scores from every fold's model of the same arm, not only its own fold's model; fold-level descriptive deltas for folds 2-5 therefore shift slightly between the four-fold and five-fold analyses (e.g. fold 2: 0.029649 -> 0.029988) although the underlying artifacts are identical",
+    "detected": "during the five-fold recovery analysis, after results were visible",
+    "status": "DISCLOSED, NOT CORRECTED - the estimator was frozen and audited before any score existed and both committed results use it consistently; any per-fold-reference variant would be a new post-hoc analysis requiring independent authorisation",
+    "summary": "the frozen estimator implementation pools the 232-segment anomaly reference across all folds present in the frame (1160 anomaly rows per arm with five folds; 928 with four), whereas the pre-registered text states N_anomaly = 232 within the same arm"
+  },
+  "generated_utc": "2026-09-12T09:57:47.876496+00:00",
+  "in_memory_recomputation_identical": true,
+  "ledger_entries": 40,
+  "ledger_sha256": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+  "protected_inference_during_analysis": 0,
+  "raw_recovery_commit": "8282575",
+  "safety_tag": "phase3-pre-fold1-recovery=a8b3d6c",
+  "schema_version": "phase3.4-fold1-recovery-result-manifest-v1"
+}

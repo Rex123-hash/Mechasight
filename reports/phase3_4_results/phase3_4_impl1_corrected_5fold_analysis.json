@@ -1,0 +1,292 @@
+{
+  "schema_version": "phase3.4-impl1-corrected-analysis-v1",
+  "analysis_label": "IMPL-1 CORRECTED ORIGINAL FIVE-FOLD ANALYSIS (fold-specific anomaly reference; fold 1 recovered)",
+  "correction": {
+    "id": "IMPL-1",
+    "defect": "historical parent_concordance_delta ranked each focal segment against the anomaly rows of every fold's model of the same arm (232 x n_folds rows) when given a pooled frame",
+    "corrected_to": "exactly the 232 anomaly segments scored by the SAME fold's model of the SAME arm, per fold",
+    "estimator": "src/experiment/focal_concordance.parent_concordance_delta_by_fold",
+    "supersedes_for_interpretation": [
+      "reports/phase3_4_results/phase3_4_inc1_salvage_analysis.json (6441ed66...)",
+      "reports/phase3_4_results/phase3_4_five_fold_recovered_analysis.json (427b04cb...)"
+    ],
+    "historical_artifacts_retained_unchanged": true
+  },
+  "computed_from": "10 persisted per-segment score artifacts only; no inference",
+  "config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+  "amendment_id": "fold1-technical-recovery-v1",
+  "experiment_ids": [
+    "p34d-92fd40fc93c8c8d2e819",
+    "p34d-e56529a2f56f98fd4a7a",
+    "p34d-fd6e3bfd4c091e155d99",
+    "p34d-a4e8316f62fa982ec52d",
+    "p34d-88b93ddbacbc5829f326",
+    "p34d-2af84983abd170013b73",
+    "p34d-652bc1e3f9d29a51a460",
+    "p34d-406b59f08e154b284159",
+    "p34d-66656cf0901b180cf037",
+    "p34d-ed8467570acf122c36cd"
+  ],
+  "recovery_ids": [
+    "p34r-f1rec-78c8f486fdb7c822af87",
+    "p34r-f1rec-e83624b2152b673c30c5"
+  ],
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "reference_audit": [
+    {
+      "fold": 1,
+      "arm": "ABSENT",
+      "n_reference": 232,
+      "reference_folds": [
+        1
+      ],
+      "reference_arms": [
+        "ABSENT"
+      ],
+      "n_focal_normal": 45
+    },
+    {
+      "fold": 1,
+      "arm": "PRESENT",
+      "n_reference": 232,
+      "reference_folds": [
+        1
+      ],
+      "reference_arms": [
+        "PRESENT"
+      ],
+      "n_focal_normal": 45
+    },
+    {
+      "fold": 2,
+      "arm": "ABSENT",
+      "n_reference": 232,
+      "reference_folds": [
+        2
+      ],
+      "reference_arms": [
+        "ABSENT"
+      ],
+      "n_focal_normal": 40
+    },
+    {
+      "fold": 2,
+      "arm": "PRESENT",
+      "n_reference": 232,
+      "reference_folds": [
+        2
+      ],
+      "reference_arms": [
+        "PRESENT"
+      ],
+      "n_focal_normal": 40
+    },
+    {
+      "fold": 3,
+      "arm": "ABSENT",
+      "n_reference": 232,
+      "reference_folds": [
+        3
+      ],
+      "reference_arms": [
+        "ABSENT"
+      ],
+      "n_focal_normal": 46
+    },
+    {
+      "fold": 3,
+      "arm": "PRESENT",
+      "n_reference": 232,
+      "reference_folds": [
+        3
+      ],
+      "reference_arms": [
+        "PRESENT"
+      ],
+      "n_focal_normal": 46
+    },
+    {
+      "fold": 4,
+      "arm": "ABSENT",
+      "n_reference": 232,
+      "reference_folds": [
+        4
+      ],
+      "reference_arms": [
+        "ABSENT"
+      ],
+      "n_focal_normal": 34
+    },
+    {
+      "fold": 4,
+      "arm": "PRESENT",
+      "n_reference": 232,
+      "reference_folds": [
+        4
+      ],
+      "reference_arms": [
+        "PRESENT"
+      ],
+      "n_focal_normal": 34
+    },
+    {
+      "fold": 5,
+      "arm": "ABSENT",
+      "n_reference": 232,
+      "reference_folds": [
+        5
+      ],
+      "reference_arms": [
+        "ABSENT"
+      ],
+      "n_focal_normal": 38
+    },
+    {
+      "fold": 5,
+      "arm": "PRESENT",
+      "n_reference": 232,
+      "reference_folds": [
+        5
+      ],
+      "reference_arms": [
+        "PRESENT"
+      ],
+      "n_focal_normal": 38
+    }
+  ],
+  "estimand": "parent-equal-weighted focal concordance delta",
+  "primary": {
+    "name": "parent-equal-weighted focal concordance delta (folds [1, 2, 3, 4, 5], 60 parents; fold-specific reference)",
+    "point_estimate": 0.007873734263820466,
+    "ci95_low": -0.0006144101498358003,
+    "ci95_high": 0.017794458983305953,
+    "bootstrap": {
+      "replicates": 10000,
+      "seed": 27182,
+      "fold_stratified": true,
+      "parents_per_fold": 12,
+      "parents_per_replicate": 60,
+      "interval": "percentile 95 percent",
+      "conditional_on": "the 10 fitted models (5 pairs)",
+      "does_not_include": [
+        "training seed uncertainty",
+        "model-pair sampling uncertainty",
+        "site or general-population uncertainty"
+      ]
+    },
+    "n_focal_parents": 60,
+    "n_focal_segments_descriptive": 203,
+    "fold_level_deltas_descriptive": {
+      "1": 0.007797105911330046,
+      "2": 0.030729166666666655,
+      "3": 0.007420378352490413,
+      "4": -0.009201388888888882,
+      "5": 0.0026234092775040967
+    },
+    "parents_delta_positive": 28,
+    "parents_delta_zero": 10,
+    "parents_delta_negative": 22
+  },
+  "secondary": {
+    "impl1_status": "UNAFFECTED - each quantity was always computed inside its own fold's sub-frame",
+    "S1_segment_weighted_focal_auroc_delta_by_fold": {
+      "1": 0.008812260536398275,
+      "2": 0.03308189655172411,
+      "3": 0.002342578710644583,
+      "4": -0.0011409736308315432,
+      "5": 0.002835753176043454
+    },
+    "S4_raw_focal_normal_score_shift_by_fold_SCALE_DEPENDENT": {
+      "1": -0.005303634537590862,
+      "2": -0.0038404554128647073,
+      "3": 0.0009232241174449429,
+      "4": -0.0015664328547084772,
+      "5": -7.959416038105793e-05
+    },
+    "S5_anomaly_reference_raw_shift_by_fold_specificity": {
+      "1": -0.0001720015344949255,
+      "2": -0.0011754223498804395,
+      "3": 0.0006051274209186719,
+      "4": -0.0012797422963997107,
+      "5": -0.0011467910532293457
+    }
+  },
+  "mandatory_qualifiers": [
+    "donor-matchable focal cohort of 60 parents and 203 normal segments, not the full test set",
+    "post-test controlled sensitivity analysis, not confirmatory evidence",
+    "not global split leakage",
+    "not published-AUC inflation",
+    "not causal proof",
+    "does not generalise automatically to BrushlessMotor, other models or other sites",
+    "the interval is conditional on the ten trained models and excludes training-model uncertainty",
+    "a residual parent gap of 0 to 3 remains, with the ABSENT arm holding MORE parents than PRESENT (fold gaps PRESENT minus ABSENT = -1, -3, 0, -1, 0); exact equality is proven unreachable at 12 donor slots for folds 1, 2 and 4"
+  ],
+  "parent_deltas": {
+    "20240221_11_10_55_dataLog": 0.0,
+    "20240221_11_19_10_dataLog": -0.008620689655172487,
+    "20240221_11_42_02_dataLog": -0.01724137931034479,
+    "20240221_11_50_16_dataLog": 0.004310344827586188,
+    "20240221_11_58_31_dataLog": -0.008620689655172376,
+    "20240221_12_06_46_dataLog": -0.002155172413793094,
+    "20240221_12_15_01_dataLog": 0.004310344827586188,
+    "20240221_12_23_16_dataLog": -0.0021551724137931494,
+    "20240221_12_40_44_dataLog": 0.0,
+    "20240221_12_48_58_dataLog": -0.006465517241379282,
+    "20240221_12_57_13_dataLog": 0.0,
+    "20240221_13_05_28_dataLog": 0.0,
+    "20240221_13_13_43_dataLog": 0.001436781609195396,
+    "20240221_13_21_57_dataLog": 0.0,
+    "20240221_13_38_27_dataLog": -0.004310344827586188,
+    "20240221_13_46_42_dataLog": -0.004310344827586299,
+    "20240221_13_54_56_dataLog": 0.004310344827586188,
+    "20240221_14_11_25_dataLog": -0.000718390804597698,
+    "20240221_15_10_26_dataLog": -0.01580459770114943,
+    "20240221_15_18_40_dataLog": 0.025862068965517238,
+    "20240221_15_27_06_dataLog": 0.03448275862068965,
+    "20240222_10_16_25_dataLog": 0.02909482758620688,
+    "20240222_10_41_10_dataLog": 0.011494252873563204,
+    "20240222_10_57_39_dataLog": -0.007758620689655204,
+    "20240222_11_05_54_dataLog": 0.012392241379310345,
+    "20240222_11_56_37_dataLog": 0.0,
+    "20240222_13_46_29_dataLog": 0.0,
+    "20240222_13_54_43_dataLog": 0.0,
+    "20240222_14_02_57_dataLog": 0.004310344827586188,
+    "20240222_14_19_26_dataLog": -0.006465517241379282,
+    "20240222_14_27_40_dataLog": 0.0021551724137931494,
+    "20240222_14_35_55_dataLog": 0.001077586206896547,
+    "20240222_14_44_09_dataLog": -0.014367816091953997,
+    "20240222_14_52_24_dataLog": 0.025862068965517238,
+    "20240222_15_00_38_dataLog": 0.012931034482758608,
+    "20240222_15_08_53_dataLog": 0.004310344827586225,
+    "20240405_10_45_40_dataLog": 1.586032892321652e-17,
+    "20240405_11_02_26_corr300_dataLog": -0.008620689655172431,
+    "20240405_11_10_50_dataLog": 0.0,
+    "20240405_11_19_13_dataLog": -0.0008620689655172598,
+    "20240405_11_27_37_corr318_dataLog": 0.006465517241379337,
+    "20240405_11_49_50_dataLog": 0.011206896551724133,
+    "20240405_12_15_00_dataLog": 0.005747126436781584,
+    "20240405_12_23_24_dataLog": 0.0482758620689655,
+    "20240405_12_31_47_dataLog": -0.031034482758620707,
+    "20240405_12_53_04_dataLog": -0.012392241379310345,
+    "20240405_13_18_15_dataLog": -0.00287356321839081,
+    "20240405_14_27_24_dataLog": -0.0043103448275862155,
+    "20240405_14_54_41_dataLog": 0.060344827586206906,
+    "20240416_13_27_14_dataLog": 0.0010775862068965747,
+    "20240416_13_35_37_corr_377_dataLog": -0.011083743842364515,
+    "20240416_16_45_47_dataLog": 0.00933908045977011,
+    "20240416_16_54_10_dataLog": -0.008620689655172376,
+    "20240418_10_08_20_dataLog": 0.004310344827586243,
+    "20240418_10_16_44_dataLog": 0.0,
+    "20240418_10_55_20_dataLog": 0.0295566502463054,
+    "20240418_14_01_48_dataLog": 0.21982758620689652,
+    "20240418_14_10_11_dataLog": -0.10775862068965525,
+    "20240418_14_53_33_dataLog": 0.05172413793103442,
+    "20240418_15_20_24_dataLog": 0.13275862068965516
+  }
+}

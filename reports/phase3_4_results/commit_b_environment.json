@@ -1,0 +1,30 @@
+{
+  "schema_version": "phase3.4-commit-b-environment-v1",
+  "captured_utc": "2026-09-11T19:32:17.796496+00:00",
+  "frozen_execution_environment_id": "p34c-env-b7a5de2af4c1d9614e49",
+  "frozen": {
+    "python": "3.14.4",
+    "torch": "2.14.0+cpu",
+    "cuda_available": false,
+    "torch_num_threads": 8,
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "sklearn": "1.9.0",
+    "h5py": "3.16.0"
+  },
+  "live_at_commit_b": {
+    "python": "3.14.4",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "torch": "2.14.0+cpu",
+    "cuda_available": false,
+    "torch_num_threads": 8,
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "sklearn": "1.9.0",
+    "h5py": "3.16.0"
+  },
+  "live_matches_frozen": true,
+  "device": "cpu",
+  "cuda_installed_during_phase": false,
+  "backend_switched": false
+}

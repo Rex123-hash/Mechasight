@@ -1,0 +1,54 @@
+{
+  "candidate_environment": {
+    "h5py": "3.16.0",
+    "joblib": "1.5.3",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "pytest": "9.0.3",
+    "python": "3.14.4",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.0",
+    "torch": "2.14.0"
+  },
+  "candidate_metadata_checks": "PASS",
+  "execution_ready": false,
+  "full_unit_verifier_rerun": false,
+  "l0_model_manifests_verified": 156,
+  "l1_metadata_bindings": 24,
+  "l2_development_reproduction": {
+    "fused_rows_reproduced": 32448,
+    "records_reproduced": 208
+  },
+  "l3_assertions": "existing E0-E6 PASS; not rerun",
+  "l3_official_identity": {
+    "code_git_sha": "77d9cc5299bbf6c5abe01f9131ed2afda6e80271",
+    "corruption_version": "phase5-l3-corruptions-v1",
+    "design_config": "configs\\phase5\\fusion_design_v2.json",
+    "design_config_sha256": "2e33299d3c0347ebdc13392d149b248b8ec175f2bea5b2049e5bb2fa996a759a",
+    "gate_version": "phase5-integrity-gate-v2",
+    "l2_records_sha256": "c3778e9e42750ee20aa3009a1ebe82a9dce9c4808c81059be48c5131edd1faad",
+    "l3_source_hash": "cc0cfc48054ac4c77ce07717675a083792eb42e9163071044bec0e6a98490649",
+    "official": true,
+    "preprocessing_configs_canonical_sha256": {
+      "S": "bb934f9d4d970e3c283fdc038202fd5e86e2fe251d9cf81873babcf467572406",
+      "T": "56dac950944f52686785db6267d2b2c52b081c9cb44b7b4750a03cdeb946ddb9"
+    },
+    "runner_version": "phase5-l3-runner-v1",
+    "split_manifest_canonical_sha256": "dedddce2d24abf24d9d498a247fcc7517d1002a143849baf664511db4decc47e",
+    "torch_threads": "4",
+    "tracked_tree_clean": true
+  },
+  "ledger_rows_before_after": [
+    196,
+    196
+  ],
+  "protected_contents_read": false,
+  "reused_l1_metadata": 28,
+  "status": "CANDIDATE — NOT YET AUTHORIZED FOR PROTECTED EVALUATION.",
+  "unresolved_authorization_gates": [
+    "Independent read-only pre-test audit and explicit human authorization have not occurred.",
+    "The V2 section-13 protected executor and its fixture tests are absent. No new scope is enabled. A separately reviewed implementation and updated freeze are required before Phase 5.6; this metadata candidate is not execution-ready.",
+    "Ignored protected caches/raw inputs have stat identities only; content integrity must be verified inside a future authorized scope AFTER exposure is recorded.",
+    "Full split-based unit_binding was not rerun: it parses protected labels. Its existing successful report is pinned; fresh metadata binding uses the frozen Phase-4 pre-test cohort contracts instead."
+  ]
+}

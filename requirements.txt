@@ -1,0 +1,13 @@
+# MechaSight Phase-3.1 pre-test baseline environment (verified on Python 3.14).
+# Phase 3.1 fits classical anomaly baselines on authorized normal training data only.
+
+numpy==2.4.4
+pandas==3.0.2
+pyarrow==24.0.0       # immutable IMAD-DS parquet input
+h5py==3.16.0          # streaming ragged window cache
+matplotlib==3.10.8    # Phase-1 audit figures
+pytest==9.0.3         # protocol/leakage/signal-processing tests
+scikit-learn==1.9.0   # Isolation Forest, One-Class SVM, and frozen metric definitions
+joblib==1.5.3         # explicit classical-model serialization/reload support
+torch==2.14.0            # Single-Modality Benchmarking dense autoencoder (CPU build is sufficient)
+psutil==7.2.2           # Multi-Sensor Fusion development driver: pre-flight memory gate only

@@ -1,0 +1,24 @@
+{
+  "version": "phase2-v1",
+  "protocol": "official_baseline_reproduction",
+  "regime": "T",
+  "machines": ["RoboticArm", "BrushlessMotor"],
+  "window_length_s": 0.1,
+  "stride_s": 0.1,
+  "gyro_warmup_s": 0.035,
+  "drop_initial_acc_samples": {"RoboticArm": 0, "BrushlessMotor": 0},
+  "normalization": "std_window",
+  "resampling": {
+    "enabled_for": [],
+    "method": "linear",
+    "edge_handling": "not_applicable",
+    "anti_aliasing": "not_applicable_no_resampling",
+    "target_rates_hz": {}
+  },
+  "features": ["time"],
+  "cache_format": "hdf5_ragged_v1",
+  "window_boundary": "right_inclusive_then_truncate",
+  "official_fixed_rates_hz": {"mic": 16000.0, "acc": 7063.0, "gyro": 7063.0},
+  "official_pad_or_truncate": true,
+  "split_version": "released_split"
+}

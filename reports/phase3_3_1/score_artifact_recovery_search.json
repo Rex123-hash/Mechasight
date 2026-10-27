@@ -1,0 +1,52 @@
+{
+  "schema_version": "phase3.3.1-score-recovery-search-v1",
+  "generated_utc": "2026-09-08T15:35:46.552980+00:00",
+  "purpose": "determine whether an authentic per-segment Protocol-A score artifact, created during the original locked test run, still exists anywhere",
+  "rule_applied": "recovering an existing artifact is permitted; generating one is not",
+  "model_inference_performed": false,
+  "scores_regenerated": false,
+  "locations_searched": [
+    {
+      "location": "reports/ (entire tree)",
+      "method": "grep for the seven score column names and for segment-id patterns",
+      "result": "4 files matched, all aggregate-only: evaluate_RoboticArm.json, evaluate_BrushlessMotor.json, protocol_a_primary_auc.csv, protocol_a_reproduction_report.json. None contains a per-segment row."
+    },
+    {
+      "location": "data/interim/protocol_a/",
+      "method": "full file listing plus HDF5 dataset enumeration",
+      "result": "6 files only: 2 checkpoints and 4 windowed HDF5 datasets. The HDF5 files contain exactly the 3 sensor arrays and 5 label arrays written at preprocessing time; no score dataset was ever added."
+    },
+    {
+      "location": "tmp/",
+      "method": "full file listing",
+      "result": "synopsis rendering assets and scripts only; no Protocol-A score data."
+    },
+    {
+      "location": "temporary working and task-output directories",
+      "method": "grep for score column names and segment-id patterns across the session tree",
+      "result": "matches are source code only (the artifact generator scripts and the pinned upstream notebooks). The three CSVs present are Phase-3.2 Protocol-B audit artifacts (bootstrap, recompute, threshold transfer), not Protocol-A scores. No evaluate-stage stdout capture retained scores; the evaluator prints only the aggregate JSON, truncated to 1500 characters."
+    },
+    {
+      "location": "git history (all refs)",
+      "method": "diff-filter=D search for deleted score/segment artifacts",
+      "result": "no per-segment score artifact was ever committed and later removed."
+    },
+    {
+      "location": "git stash and dangling objects",
+      "method": "git stash list; git fsck --lost-found; inspected every dangling blob",
+      "result": "no stashes. All dangling blobs are Phase-2 era source files and tests."
+    },
+    {
+      "location": "checkpoint-adjacent files",
+      "method": "directory listing beside both .pth files",
+      "result": "nothing beside the checkpoints except the windowed HDF5 inputs."
+    }
+  ],
+  "root_cause": "scripts/run_protocol_a_reproduction.py stage_evaluate builds the grouped per-segment score table in memory and returns only the aggregate AUC dictionary. The table is never written to disk.",
+  "authentic_original_score_artifact_found": false,
+  "permanent_record": "Per-segment Protocol-A scores were not persisted during the original locked test run and cannot be reconstructed without re-inference.",
+  "finding_status": "OPEN_ACCEPTED_LIMITATION",
+  "why_not_resolved": "Resolution requires the original score values. They do not exist. Re-running inference with the frozen checkpoint would produce new values, not recovered ones, and would constitute a new test access requiring separate authorisation and versioning. That was not done.",
+  "why_not_red": "Nothing indicates the recorded aggregates are wrong. The AUC estimator was independently validated against upstream's brute-force nested loop, all 42 primary_auc.csv rows are exactly consistent with the evaluator output, both test cohort hashes recompute correctly, and the evaluator provably loaded the trained checkpoints. What is missing is re-derivability, not correctness.",
+  "future_option_not_exercised_here": "A deliberate re-inference against the same frozen checkpoint could create a reproducibility artifact, but it would be a NEW test access and must be separately authorised and versioned."
+}

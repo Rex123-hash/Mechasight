@@ -1,0 +1,41 @@
+fold,dimension,current_v2,parent_balanced_v3,favours
+1,final parent-count difference,10.0,-1.0,v3
+1,Kish effective-parent gap,7.18,0.31,v3
+1,segment-count mismatch between arms,0.0,0.0,tie
+1,25-stratum shortfall (segments),0.0,0.0,tie
+1,target-domain training gap between arms,0.0,0.0,tie
+1,training volume (% of official),79.7716150081566,76.4,v2
+1,donor parent diversity,47.0,13.0,v2
+1,focal cohort coverage (parents),12.0,12.0,tie
+2,final parent-count difference,6.0,-3.0,v3
+2,Kish effective-parent gap,4.57,1.98,v3
+2,segment-count mismatch between arms,0.0,0.0,tie
+2,25-stratum shortfall (segments),0.0,0.0,tie
+2,target-domain training gap between arms,0.0,0.0,tie
+2,training volume (% of official),79.66286025013595,76.7,v2
+2,donor parent diversity,50.0,15.0,v2
+2,focal cohort coverage (parents),12.0,12.0,tie
+3,final parent-count difference,9.0,0.0,v3
+3,Kish effective-parent gap,5.85,0.6,v3
+3,segment-count mismatch between arms,0.0,0.0,tie
+3,25-stratum shortfall (segments),0.0,0.0,tie
+3,target-domain training gap between arms,0.0,0.0,tie
+3,training volume (% of official),84.61120174007613,81.9,v2
+3,donor parent diversity,51.0,12.0,v2
+3,focal cohort coverage (parents),12.0,12.0,tie
+4,final parent-count difference,10.0,-1.0,v3
+4,Kish effective-parent gap,7.35,0.71,v3
+4,segment-count mismatch between arms,0.0,0.0,tie
+4,25-stratum shortfall (segments),0.0,0.0,tie
+4,target-domain training gap between arms,0.0,0.0,tie
+4,training volume (% of official),80.2610114192496,77.8,v2
+4,donor parent diversity,47.0,13.0,v2
+4,focal cohort coverage (parents),12.0,12.0,tie
+5,final parent-count difference,11.0,0.0,v3
+5,Kish effective-parent gap,6.25,0.81,v3
+5,segment-count mismatch between arms,0.0,0.0,tie
+5,25-stratum shortfall (segments),0.0,0.0,tie
+5,target-domain training gap between arms,0.0,0.0,tie
+5,training volume (% of official),87.60195758564437,85.0,v2
+5,donor parent diversity,43.0,12.0,v2
+5,focal cohort coverage (parents),12.0,12.0,tie

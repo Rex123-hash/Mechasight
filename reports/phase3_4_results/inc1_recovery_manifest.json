@@ -1,0 +1,50 @@
+{
+  "analysis_artifacts": 0,
+  "contains_test_performance": false,
+  "excluded_experiment_ids": [
+    "p34d-92fd40fc93c8c8d2e819",
+    "p34d-e56529a2f56f98fd4a7a"
+  ],
+  "files": {
+    "configs/phase3/roboticarm_focal_toggle_execution_v2.json": "70b1830e5cf2608dd97c20dda87d32f7a41205873246a74bb99626d31edea965",
+    "configs/phase3/roboticarm_focal_toggle_inc1_recovery_v1.json": "3b72cabeba5b77c40e8c3e36fc7272f9f541bcb3142b926dc351bd4850cd1755",
+    "docs/phase34_inc1_recovery_freeze.md": "800ac640e72d4a4bf97ec3f6c0dc56eaaaf5c0f2dc9b3092b1f9c892b8624141",
+    "reports/experiment_results/test_look_ledger.jsonl": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+    "reports/phase3_4_results/score_attempts/p34d-92fd40fc93c8c8d2e819.jsonl": "0392dc579838318cd06fc9fe9006cd9a23c99cdfea964ddc25af5a877614dca3",
+    "reports/phase3_4_results/score_claims/p34d-92fd40fc93c8c8d2e819.claim": "990d4bacfa74e7f00b3e885e4fe413a16726b6e53daf9c9abfeb447a8e63281b",
+    "reports/phase3_4_results/test_look_authorization.json": "eff9392ecd8b48d60ebd253bb56cdd3afefd7fd16ee8df507e369349d041a865",
+    "scripts/run_focal_toggle_experiment.py": "98047737174bf0ab549c0ccc3db12f911d1d3eca7aee0a1d059321c2bb3b8cdb",
+    "src/experiment/focal_toggle_execution.py": "2340f7fd07ac8259a6dd1f638a99910b9814880473bccd4594e141a81a179583",
+    "tests/conftest.py": "8ad212750a587938b125ab6e463a821d2e1dfd521f6f0c97cd59e028b3299d3b",
+    "tests/test_phase34_inc1_recovery.py": "014870fb7c7d2e1baba68364e4b321ed8ad9b9d0da2d600e850b05f6a61ecde3",
+    "tests/test_phase34_score_claim_race.py": "5eb2f629a987079ddd240398a5565d3e8613e2bcefc86d19923d8be1c03b626c",
+    "tests/test_phase34_score_exposure_gate.py": "510cf7e210aa8a2410b52efc4758f0ca7ad51219c5c5d7ed37bd2794e01329f8"
+  },
+  "generated_utc": "2026-09-11T20:17:17.373922+00:00",
+  "hash_form": "canonical LF (canonical_sha256)",
+  "ledger_entries": 40,
+  "ledger_sha256": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+  "ledger_unchanged_since_576b8a1": true,
+  "parent_config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+  "protected_test_inference_run": false,
+  "recovery_config_identity": "p34r-inc1-4f86592159eadbbe276d9c6f",
+  "retained_experiment_ids": [
+    "p34d-fd6e3bfd4c091e155d99",
+    "p34d-a4e8316f62fa982ec52d",
+    "p34d-88b93ddbacbc5829f326",
+    "p34d-2af84983abd170013b73",
+    "p34d-652bc1e3f9d29a51a460",
+    "p34d-406b59f08e154b284159",
+    "p34d-66656cf0901b180cf037",
+    "p34d-ed8467570acf122c36cd"
+  ],
+  "schema_version": "phase3.4-inc1-recovery-manifest-v1",
+  "score_artifacts": 0,
+  "score_attempts_files": 1,
+  "score_claims": 1,
+  "score_completed": 0,
+  "score_started": 1,
+  "stage": "INC-1 recovery freeze, pre-scoring; between D and E",
+  "starting_head": "576b8a1",
+  "test_scores_computed": false
+}

@@ -1,0 +1,46 @@
+{
+  "repository": "https://github.com/augustif/IMAD-DS_baseline",
+  "branch_at_retrieval": "main",
+  "commit_sha": "592bcbbed58893dc26bbab3240c5d7a3105a1a7f",
+  "commit_author_date": "2026-04-28T22:28:35+02:00",
+  "retrieval_date_local": "2026-08-22",
+  "retrieval_timezone": "Asia/Calcutta",
+  "files_inspected": [
+    {
+      "path": "preprocess.ipynb",
+      "sha256": "45a560da566025cabd812dadf1e5330ff2c8200be3aac8d0f855dff152419d38"
+    },
+    {
+      "path": "baseline.ipynb",
+      "sha256": "73972d70cb95f71e0d5bbdb5f24549eea557116670ac608a30643ca23b0098d4"
+    },
+    {
+      "path": "model.py",
+      "sha256": "7704cdbea5f8258dbab06d6fd1c2980e425d886a5ed16fc3922375c6d331dc82"
+    },
+    {
+      "path": "utilities.py",
+      "sha256": "2770b2fe5732986896f7150f3c6d61992837581fbd1f50e7d853b26c378c8f30"
+    }
+  ],
+  "dataset": {
+    "doi": "10.5281/zenodo.12665499",
+    "concept_doi": "10.5281/zenodo.12636236",
+    "record": "12665499",
+    "version": null,
+    "version_note": "Zenodo API version field is null; no version number is asserted.",
+    "archives": [
+      {
+        "filename": "BrushlessMotor.7z",
+        "bytes": 1577018050,
+        "md5": "d5f1a49b928b1b0b01c3d6de930cd277"
+      },
+      {
+        "filename": "RoboticArm.7z",
+        "bytes": 3545453763,
+        "md5": "a64498b7dcc297946a7fb8366e38ba33"
+      }
+    ]
+  },
+  "protocol_a_rule": "Protocol A is reproducible only against this commit and these archive checksums; moving branch heads are not a source of truth."
+}

@@ -1,0 +1,3 @@
+machine,parent_recordings_total,official_train_segments,official_test_segments,train_parents,test_parents,parents_crossing_official_split,test_segments_from_crossing_parents,normal_test_segments,normal_test_segments_with_training_sibling,anomaly_test_segments,anomaly_test_segments_with_normal_training_sibling,overlap_retained_deliberately
+BrushlessMotor,1593,1281,312,1281,312,0,0,156,0,156,0,True
+RoboticArm,101,1839,464,76,87,62,212,232,212,232,0,True

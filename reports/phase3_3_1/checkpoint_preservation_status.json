@@ -1,0 +1,39 @@
+{
+  "schema_version": "phase3.3.1-checkpoint-preservation-v1",
+  "generated_utc": "2026-09-08T15:35:46.552980+00:00",
+  "checkpoints": {
+    "RoboticArm": {
+      "path": "data/interim/protocol_a/RoboticArm/protocol_a_baseline_seed1995.pth",
+      "exists": true,
+      "bytes": 163273117,
+      "mebibytes": 155.7,
+      "megabytes_decimal": 163.3,
+      "recorded_sha256": "67062daf7134d5dbc59fc120570e5c2aba46b39446ab6b553dd6e16a87553964",
+      "current_sha256": "67062daf7134d5dbc59fc120570e5c2aba46b39446ab6b553dd6e16a87553964",
+      "hash_matches_record": true,
+      "tracked_by_git": false
+    },
+    "BrushlessMotor": {
+      "path": "data/interim/protocol_a/BrushlessMotor/protocol_a_baseline_seed1995.pth",
+      "exists": true,
+      "bytes": 163273117,
+      "mebibytes": 155.7,
+      "megabytes_decimal": 163.3,
+      "recorded_sha256": "70f1da7d0ea837f339790d9ff88da7615f3fc818c0dd5c50736d69fd65351248",
+      "current_sha256": "70f1da7d0ea837f339790d9ff88da7615f3fc818c0dd5c50736d69fd65351248",
+      "hash_matches_record": true,
+      "tracked_by_git": false
+    }
+  },
+  "both_present_and_intact": true,
+  "combined_mebibytes": 311.4,
+  "combined_megabytes_decimal": 326.5,
+  "storage_status": "LOCAL-ONLY",
+  "durable_backup_verified": false,
+  "durable_backup_location": null,
+  "backup_claim_note": "No backup location is asserted. None was found and none is invented.",
+  "classification": "REPRODUCIBILITY RISK",
+  "risk_statement": "Both checkpoints exist on this machine and hash exactly to the values recorded at training time. They are not tracked by Git and no durable backup has been verified. If these files are lost, the Phase-3.3 result cannot be re-scored without retraining, which would not reproduce the same weights (different execution environment, patience-based early stopping, final-epoch checkpoint aliasing).",
+  "not_committed_reason": "approximately 326.5 MB (311.4 MiB) combined; committing binaries of this size into the repository was not done automatically and is not recommended here",
+  "recommended_mitigation": "archive both files to durable storage outside the working tree and record the destination in a future provenance supplement"
+}

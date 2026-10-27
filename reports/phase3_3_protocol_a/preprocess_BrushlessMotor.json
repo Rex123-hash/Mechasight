@@ -1,0 +1,24 @@
+{
+  "machine": "BrushlessMotor",
+  "generated_utc": "2026-09-08T10:28:43.499338+00:00",
+  "splits": {
+    "train": {
+      "segments": 1281,
+      "windows": 65331,
+      "skipped": [],
+      "seconds": 112.2,
+      "sha256": "c9a82447948cb0cc83c6262a14dd6d0092fc2eecaaeae293c242466304065a72",
+      "bytes": 1554982896,
+      "reused_existing": false
+    },
+    "test": {
+      "segments": 312,
+      "windows": 15912,
+      "skipped": [],
+      "seconds": 30.1,
+      "sha256": "7f0b1072c1057b9e593678804a355dc9605408435aa2749669c4ee0a9702ed0e",
+      "bytes": 380104432,
+      "reused_existing": false
+    }
+  }
+}

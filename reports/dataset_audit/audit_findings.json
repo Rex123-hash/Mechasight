@@ -1,0 +1,1000 @@
+{
+  "generated_utc": "2026-08-21T14:24:10.849600+00:00",
+  "data_root": "data\\raw\\extracted",
+  "limit_applied": null,
+  "machines": [
+    {
+      "machine": "BrushlessMotor",
+      "layout": {
+        "machine": "BrushlessMotor",
+        "root": "data\\raw\\extracted\\BrushlessMotor\\BrushlessMotor",
+        "n_directories": 2,
+        "n_metadata_csv": 6,
+        "metadata_csv_names": [
+          "attributes_anomaly_source_test.csv",
+          "attributes_anomaly_target_test.csv",
+          "attributes_normal_source_test.csv",
+          "attributes_normal_source_train.csv",
+          "attributes_normal_target_test.csv",
+          "attributes_normal_target_train.csv"
+        ],
+        "n_parquet": 4779,
+        "parquet_by_sensor": {
+          "mic": 1593,
+          "acc": 1593,
+          "gyro": 1593
+        },
+        "n_parquet_unclassified": 0,
+        "parquet_unclassified_examples": [],
+        "n_other_files": 0,
+        "other_file_names": [],
+        "other_file_suffixes": {},
+        "n_zero_byte_files": 0,
+        "zero_byte_examples": [],
+        "n_duplicate_basenames": 0,
+        "duplicate_basename_examples": [],
+        "n_unparsed_metadata_names": 0,
+        "unparsed_metadata_names": [],
+        "total_bytes": 4113111483,
+        "n_orphan_parquet_files": 0,
+        "orphan_parquet_examples": []
+      },
+      "metadata_files": [
+        {
+          "path": "data\\raw\\extracted\\BrushlessMotor\\BrushlessMotor\\test\\attributes_anomaly_source_test.csv",
+          "name": "attributes_anomaly_source_test.csv",
+          "readable": true,
+          "n_rows": 78,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 78
+        },
+        {
+          "path": "data\\raw\\extracted\\BrushlessMotor\\BrushlessMotor\\test\\attributes_anomaly_target_test.csv",
+          "name": "attributes_anomaly_target_test.csv",
+          "readable": true,
+          "n_rows": 78,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 78
+        },
+        {
+          "path": "data\\raw\\extracted\\BrushlessMotor\\BrushlessMotor\\test\\attributes_normal_source_test.csv",
+          "name": "attributes_normal_source_test.csv",
+          "readable": true,
+          "n_rows": 78,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 78
+        },
+        {
+          "path": "data\\raw\\extracted\\BrushlessMotor\\BrushlessMotor\\test\\attributes_normal_target_test.csv",
+          "name": "attributes_normal_target_test.csv",
+          "readable": true,
+          "n_rows": 78,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 78
+        },
+        {
+          "path": "data\\raw\\extracted\\BrushlessMotor\\BrushlessMotor\\train\\attributes_normal_source_train.csv",
+          "name": "attributes_normal_source_train.csv",
+          "readable": true,
+          "n_rows": 1263,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 1263
+        },
+        {
+          "path": "data\\raw\\extracted\\BrushlessMotor\\BrushlessMotor\\train\\attributes_normal_target_train.csv",
+          "name": "attributes_normal_target_train.csv",
+          "readable": true,
+          "n_rows": 18,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 18
+        }
+      ],
+      "label_consistency": {
+        "n_rows": 1593,
+        "checked_split_label": true,
+        "checked_anomaly_label": true,
+        "anomaly_mismatch_count": 0,
+        "anomaly_comparable_count": 1593,
+        "domain_mismatch_count": 0,
+        "domain_comparable_count": 1593,
+        "split_mismatch_count": 0,
+        "split_comparable_count": 1593,
+        "anomaly_vs_filename_mismatch_count": 0,
+        "n_duplicate_segment_ids": 0
+      },
+      "balance": {
+        "n_test_segments": 312,
+        "conditions": {
+          "domain_shift_op": {
+            "values": [
+              "spd1000",
+              "spd1100",
+              "spd1200",
+              "spd1300",
+              "spd1400",
+              "spd1500",
+              "spd1600",
+              "spd1700",
+              "spd1800",
+              "spd1900",
+              "spd2000",
+              "spd2400",
+              "spd2800",
+              "spd3000"
+            ],
+            "overall": {
+              "n": 312,
+              "n_condition_values": 14,
+              "mutual_information_bits": 0.0012083474169278722,
+              "null_mean_bits": 0.030833814379335186,
+              "null_p95_bits": 0.05282462939154875,
+              "excess_over_null_bits": -0.029625466962407313,
+              "p_value": 1.0,
+              "interpretable": true
+            },
+            "by_domain": {
+              "source": {
+                "n": 156,
+                "n_condition_values": 9,
+                "mutual_information_bits": 0.002118319037257488,
+                "null_mean_bits": 0.0374732365529089,
+                "null_p95_bits": 0.07129507646682148,
+                "excess_over_null_bits": -0.03535491751565141,
+                "p_value": 1.0,
+                "interpretable": true
+              },
+              "target": {
+                "n": 156,
+                "n_condition_values": 5,
+                "mutual_information_bits": 0.00029837579659801653,
+                "null_mean_bits": 0.018961083212665982,
+                "null_p95_bits": 0.045386485362844585,
+                "excess_over_null_bits": -0.018662707416067965,
+                "p_value": 1.0,
+                "interpretable": true
+              }
+            }
+          },
+          "domain_shift_env": {
+            "values": [
+              "BckgA",
+              "BckgB",
+              "BckgC",
+              "BckgD",
+              "BckgE",
+              "BckgF",
+              "BckgG"
+            ],
+            "overall": {
+              "n": 312,
+              "n_condition_values": 7,
+              "mutual_information_bits": 0.00046747163390556434,
+              "null_mean_bits": 0.014267173961506603,
+              "null_p95_bits": 0.030674980773812362,
+              "excess_over_null_bits": -0.013799702327601039,
+              "p_value": 1.0,
+              "interpretable": true
+            },
+            "by_domain": {
+              "source": {
+                "n": 156,
+                "n_condition_values": 4,
+                "mutual_information_bits": 0.00022337968518385652,
+                "null_mean_bits": 0.014387733081072529,
+                "null_p95_bits": 0.03740295126443536,
+                "excess_over_null_bits": -0.014164353395888672,
+                "p_value": 1.0,
+                "interpretable": true
+              },
+              "target": {
+                "n": 156,
+                "n_condition_values": 3,
+                "mutual_information_bits": 0.0007115635826273522,
+                "null_mean_bits": 0.00932769967422279,
+                "null_p95_bits": 0.028018089740476496,
+                "excess_over_null_bits": -0.008616136091595438,
+                "p_value": 0.9750124937531235,
+                "interpretable": true
+              }
+            }
+          }
+        },
+        "condition_columns_present": [
+          "domain_shift_op",
+          "domain_shift_env"
+        ],
+        "condition_columns_missing": [],
+        "joint_condition": {
+          "n": 312,
+          "n_condition_values": 51,
+          "mutual_information_bits": 0.0049918412798070685,
+          "null_mean_bits": 0.13458890688499484,
+          "null_p95_bits": 0.1801891626161384,
+          "excess_over_null_bits": -0.12959706560518777,
+          "p_value": 1.0,
+          "interpretable": true
+        },
+        "machine": "BrushlessMotor"
+      },
+      "temporal_structure": {
+        "n_segments": 1593,
+        "n_unparsed_segment_ids": 0,
+        "n_unique_recording_stamps": 1593,
+        "segment_index_values": [
+          0
+        ],
+        "analysable": true,
+        "recording_dates": [
+          "2024-04-23"
+        ],
+        "session_first": "2024-04-23 10:20:21",
+        "session_last": "2024-04-23 18:22:40",
+        "session_hours": 8.038611111111111,
+        "one_segment_per_recording": true,
+        "n_stamps_reused_across_segments": 0,
+        "segments_per_recording": {
+          "min": 1,
+          "median": 1.0,
+          "max": 1,
+          "n_recordings": 1593
+        },
+        "n_segments_with_corr_marker": 0,
+        "id_extra_values": [],
+        "n_recordings_spanning_train_and_test": 0,
+        "recordings_spanning_splits_examples": [],
+        "n_recordings_spanning_multiple_labels": 0,
+        "n_recordings_spanning_multiple_domains": 0,
+        "n_segments_in_straddling_recordings": 0,
+        "normal_window": {
+          "n": "1437",
+          "first": "2024-04-23 10:20:21",
+          "last": "2024-04-23 16:40:50"
+        },
+        "anomaly_window": {
+          "n": "156",
+          "first": "2024-04-23 16:48:07",
+          "last": "2024-04-23 18:22:40"
+        },
+        "normal_anomaly_overlap_s": -437.0,
+        "classes_temporally_disjoint": true,
+        "n_normal_after_first_anomaly": 0,
+        "n_anomaly_before_last_normal": 0,
+        "window_by_anomaly_label": {
+          "belt": {
+            "n": "81",
+            "first": "2024-04-23 16:48:07",
+            "last": "2024-04-23 17:33:42"
+          },
+          "magnetic": {
+            "n": "75",
+            "first": "2024-04-23 17:38:02",
+            "last": "2024-04-23 18:22:40"
+          },
+          "normal": {
+            "n": "1437",
+            "first": "2024-04-23 10:20:21",
+            "last": "2024-04-23 16:40:50"
+          }
+        },
+        "anomaly_type_overlap_s": {
+          "belt|magnetic": -260.0
+        },
+        "normal_train_test_overlap_s": 22511.0,
+        "normal_train_test_alternating_blocks": 177,
+        "normal_train_test_block_size_median": 2.0,
+        "inter_recording_gap_s": {
+          "min": 9.0,
+          "median": 10.0,
+          "max": 437.0
+        },
+        "machine": "BrushlessMotor"
+      },
+      "observed_schema": {
+        "mic": {
+          "column_sets": {
+            "Time|MIC [Waveform]": 1593
+          },
+          "time_dtypes": {
+            "float64": 1593
+          }
+        },
+        "acc": {
+          "column_sets": {
+            "Time|A_x [g]|A_y [g]|A_z [g]": 1593
+          },
+          "time_dtypes": {
+            "float64": 1593
+          }
+        },
+        "gyro": {
+          "column_sets": {
+            "Time|G_x [mdps]|G_y [mdps]|G_z [mdps]": 1593
+          },
+          "time_dtypes": {
+            "float64": 1593
+          }
+        }
+      }
+    },
+    {
+      "machine": "RoboticArm",
+      "layout": {
+        "machine": "RoboticArm",
+        "root": "data\\raw\\extracted\\RoboticArm\\RoboticArm",
+        "n_directories": 2,
+        "n_metadata_csv": 6,
+        "metadata_csv_names": [
+          "attributes_anomaly_source_test.csv",
+          "attributes_anomaly_target_test.csv",
+          "attributes_normal_source_test.csv",
+          "attributes_normal_source_train.csv",
+          "attributes_normal_target_test.csv",
+          "attributes_normal_target_train.csv"
+        ],
+        "n_parquet": 6909,
+        "parquet_by_sensor": {
+          "mic": 2303,
+          "acc": 2303,
+          "gyro": 2303
+        },
+        "n_parquet_unclassified": 0,
+        "parquet_unclassified_examples": [],
+        "n_other_files": 0,
+        "other_file_names": [],
+        "other_file_suffixes": {},
+        "n_zero_byte_files": 0,
+        "zero_byte_examples": [],
+        "n_duplicate_basenames": 0,
+        "duplicate_basename_examples": [],
+        "n_unparsed_metadata_names": 0,
+        "unparsed_metadata_names": [],
+        "total_bytes": 7194000084,
+        "n_orphan_parquet_files": 0,
+        "orphan_parquet_examples": []
+      },
+      "metadata_files": [
+        {
+          "path": "data\\raw\\extracted\\RoboticArm\\RoboticArm\\test\\attributes_anomaly_source_test.csv",
+          "name": "attributes_anomaly_source_test.csv",
+          "readable": true,
+          "n_rows": 116,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 116
+        },
+        {
+          "path": "data\\raw\\extracted\\RoboticArm\\RoboticArm\\test\\attributes_anomaly_target_test.csv",
+          "name": "attributes_anomaly_target_test.csv",
+          "readable": true,
+          "n_rows": 116,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 116
+        },
+        {
+          "path": "data\\raw\\extracted\\RoboticArm\\RoboticArm\\test\\attributes_normal_source_test.csv",
+          "name": "attributes_normal_source_test.csv",
+          "readable": true,
+          "n_rows": 116,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 116
+        },
+        {
+          "path": "data\\raw\\extracted\\RoboticArm\\RoboticArm\\test\\attributes_normal_target_test.csv",
+          "name": "attributes_normal_target_test.csv",
+          "readable": true,
+          "n_rows": 116,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 116
+        },
+        {
+          "path": "data\\raw\\extracted\\RoboticArm\\RoboticArm\\train\\attributes_normal_source_train.csv",
+          "name": "attributes_normal_source_train.csv",
+          "readable": true,
+          "n_rows": 1812,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 1812
+        },
+        {
+          "path": "data\\raw\\extracted\\RoboticArm\\RoboticArm\\train\\attributes_normal_target_train.csv",
+          "name": "attributes_normal_target_train.csv",
+          "readable": true,
+          "n_rows": 27,
+          "columns": [
+            "segment_id",
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env",
+            "imp23absu_mic",
+            "ism330dhcx_acc",
+            "ism330dhcx_gyro"
+          ],
+          "n_columns": 8,
+          "filename_parsed": true,
+          "sensor_columns_present": [
+            "acc",
+            "gyro",
+            "mic"
+          ],
+          "sensor_columns_missing": [],
+          "label_columns_present": [
+            "split_label",
+            "anomaly_label",
+            "domain_shift_op",
+            "domain_shift_env"
+          ],
+          "label_columns_missing": [],
+          "segment_id_source": "released_column",
+          "n_null_segment_id": 0,
+          "n_unique_segment_id": 27
+        }
+      ],
+      "label_consistency": {
+        "n_rows": 2303,
+        "checked_split_label": true,
+        "checked_anomaly_label": true,
+        "anomaly_mismatch_count": 0,
+        "anomaly_comparable_count": 2303,
+        "domain_mismatch_count": 0,
+        "domain_comparable_count": 2303,
+        "split_mismatch_count": 0,
+        "split_comparable_count": 2303,
+        "anomaly_vs_filename_mismatch_count": 0,
+        "n_duplicate_segment_ids": 0
+      },
+      "balance": {
+        "n_test_segments": 464,
+        "conditions": {
+          "domain_shift_op": {
+            "values": [
+              "weight00",
+              "weight10",
+              "weight15",
+              "weight20",
+              "weight25",
+              "weight30",
+              "weight35"
+            ],
+            "overall": {
+              "n": 464,
+              "n_condition_values": 7,
+              "mutual_information_bits": 0.0,
+              "null_mean_bits": 0.00942391321476365,
+              "null_p95_bits": 0.019948604000070792,
+              "excess_over_null_bits": -0.00942391321476365,
+              "p_value": 1.0,
+              "interpretable": true
+            },
+            "by_domain": {
+              "source": {
+                "n": 232,
+                "n_condition_values": 4,
+                "mutual_information_bits": 0.0,
+                "null_mean_bits": 0.009244208494580313,
+                "null_p95_bits": 0.024351622259437572,
+                "excess_over_null_bits": -0.009244208494580313,
+                "p_value": 1.0,
+                "interpretable": true
+              },
+              "target": {
+                "n": 232,
+                "n_condition_values": 3,
+                "mutual_information_bits": 0.0,
+                "null_mean_bits": 0.006281067959788556,
+                "null_p95_bits": 0.018501589438784417,
+                "excess_over_null_bits": -0.006281067959788556,
+                "p_value": 1.0,
+                "interpretable": true
+              }
+            }
+          },
+          "domain_shift_env": {
+            "values": [
+              "BckgA",
+              "BckgB",
+              "BckgC",
+              "BckgD",
+              "BckgE",
+              "BckgF",
+              "BckgG"
+            ],
+            "overall": {
+              "n": 464,
+              "n_condition_values": 7,
+              "mutual_information_bits": 0.0,
+              "null_mean_bits": 0.009272882355967826,
+              "null_p95_bits": 0.019162118163482702,
+              "excess_over_null_bits": -0.009272882355967826,
+              "p_value": 1.0,
+              "interpretable": true
+            },
+            "by_domain": {
+              "source": {
+                "n": 232,
+                "n_condition_values": 4,
+                "mutual_information_bits": 0.0,
+                "null_mean_bits": 0.009534754899536797,
+                "null_p95_bits": 0.025424888374609877,
+                "excess_over_null_bits": -0.009534754899536797,
+                "p_value": 1.0,
+                "interpretable": true
+              },
+              "target": {
+                "n": 232,
+                "n_condition_values": 3,
+                "mutual_information_bits": 0.0,
+                "null_mean_bits": 0.006189511249637337,
+                "null_p95_bits": 0.018501589438784417,
+                "excess_over_null_bits": -0.006189511249637337,
+                "p_value": 1.0,
+                "interpretable": true
+              }
+            }
+          }
+        },
+        "condition_columns_present": [
+          "domain_shift_op",
+          "domain_shift_env"
+        ],
+        "condition_columns_missing": [],
+        "joint_condition": {
+          "n": 464,
+          "n_condition_values": 25,
+          "mutual_information_bits": 0.0,
+          "null_mean_bits": 0.03797294471897889,
+          "null_p95_bits": 0.05774844795457733,
+          "excess_over_null_bits": -0.03797294471897889,
+          "p_value": 1.0,
+          "interpretable": true
+        },
+        "machine": "RoboticArm"
+      },
+      "temporal_structure": {
+        "n_segments": 2303,
+        "n_unparsed_segment_ids": 0,
+        "n_unique_recording_stamps": 101,
+        "segment_index_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47
+        ],
+        "analysable": true,
+        "recording_dates": [
+          "2024-02-21",
+          "2024-02-22",
+          "2024-04-05",
+          "2024-04-16",
+          "2024-04-18"
+        ],
+        "session_first": "2024-02-21 11:10:55",
+        "session_last": "2024-04-18 15:58:04",
+        "session_hours": 1372.7858333333334,
+        "one_segment_per_recording": false,
+        "n_stamps_reused_across_segments": 2202,
+        "segments_per_recording": {
+          "min": 1,
+          "median": 16.0,
+          "max": 48,
+          "n_recordings": 101
+        },
+        "n_segments_with_corr_marker": 85,
+        "id_extra_values": [
+          "_corr103",
+          "_corr300",
+          "_corr318",
+          "_corr481",
+          "_corr83",
+          "_corr_377"
+        ],
+        "n_recordings_spanning_train_and_test": 62,
+        "recordings_spanning_splits_examples": [
+          "20240221_11_10_55",
+          "20240221_11_19_10",
+          "20240221_11_42_02",
+          "20240221_11_50_16",
+          "20240221_11_58_31",
+          "20240221_12_06_46",
+          "20240221_12_15_01",
+          "20240221_12_23_16",
+          "20240221_12_40_44",
+          "20240221_12_48_58"
+        ],
+        "n_recordings_spanning_multiple_labels": 0,
+        "n_recordings_spanning_multiple_domains": 0,
+        "n_segments_in_straddling_recordings": 1837,
+        "normal_window": {
+          "n": "2071",
+          "first": "2024-02-21 11:10:55",
+          "last": "2024-04-18 15:58:04"
+        },
+        "anomaly_window": {
+          "n": "232",
+          "first": "2024-02-21 15:59:06",
+          "last": "2024-04-18 13:40:40"
+        },
+        "normal_anomaly_overlap_s": 4916494.0,
+        "classes_temporally_disjoint": false,
+        "n_normal_after_first_anomaly": 1211,
+        "n_anomaly_before_last_normal": 232,
+        "window_by_anomaly_label": {
+          "loosescrewsA": {
+            "n": "232",
+            "first": "2024-02-21 15:59:06",
+            "last": "2024-04-18 13:40:40"
+          },
+          "normal": {
+            "n": "2071",
+            "first": "2024-02-21 11:10:55",
+            "last": "2024-04-18 15:58:04"
+          }
+        },
+        "anomaly_type_overlap_s": {},
+        "normal_train_test_overlap_s": 4939769.0,
+        "normal_train_test_alternating_blocks": 255,
+        "normal_train_test_block_size_median": 2.0,
+        "inter_recording_gap_s": {
+          "min": 0.0,
+          "median": 0.0,
+          "max": 3697306.0
+        },
+        "machine": "RoboticArm"
+      },
+      "observed_schema": {
+        "mic": {
+          "column_sets": {
+            "Time|MIC [Waveform]": 2303
+          },
+          "time_dtypes": {
+            "float64": 2303
+          }
+        },
+        "acc": {
+          "column_sets": {
+            "Time|A_x [g]|A_y [g]|A_z [g]": 2303
+          },
+          "time_dtypes": {
+            "float64": 2303
+          }
+        },
+        "gyro": {
+          "column_sets": {
+            "Time|G_x [mdps]|G_y [mdps]|G_z [mdps]": 2303
+          },
+          "time_dtypes": {
+            "float64": 2303
+          }
+        }
+      }
+    }
+  ]
+}

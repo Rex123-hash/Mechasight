@@ -1,0 +1,179 @@
+{
+  "E0": {
+    "comparisons": 1872,
+    "max_abs_difference": 8.881784197001252e-16,
+    "passed": true,
+    "tolerance": 1e-09
+  },
+  "E1": {
+    "by_code": {
+      "A1": {
+        "matching": 72,
+        "runs": 72
+      },
+      "A2": {
+        "matching": 72,
+        "runs": 72
+      },
+      "A3": {
+        "matching": 72,
+        "runs": 72
+      },
+      "B1": {
+        "matching": 72,
+        "runs": 72
+      },
+      "B2": {
+        "matching": 72,
+        "runs": 72
+      },
+      "B3": {
+        "matching": 72,
+        "runs": 72
+      },
+      "B4": {
+        "matching": 72,
+        "runs": 72
+      },
+      "B5": {
+        "matching": 72,
+        "runs": 72
+      },
+      "C1": {
+        "matching": 72,
+        "runs": 72
+      },
+      "C2": {
+        "matching": 72,
+        "runs": 72
+      },
+      "C3": {
+        "matching": 72,
+        "runs": 72
+      },
+      "C4": {
+        "matching": 72,
+        "runs": 72
+      },
+      "CLEAN": {
+        "matching": 24,
+        "runs": 24
+      },
+      "D1": {
+        "matching": 72,
+        "runs": 72
+      },
+      "M1": {
+        "matching": 72,
+        "runs": 72
+      },
+      "M2": {
+        "matching": 24,
+        "runs": 24
+      },
+      "N1": {
+        "matching": 72,
+        "runs": 72
+      },
+      "N2": {
+        "matching": 72,
+        "runs": 72
+      },
+      "N3": {
+        "matching": 72,
+        "runs": 72
+      },
+      "N4": {
+        "matching": 72,
+        "runs": 72
+      },
+      "N5": {
+        "matching": 72,
+        "runs": 72
+      },
+      "N6": {
+        "matching": 72,
+        "runs": 72
+      },
+      "N7": {
+        "matching": 72,
+        "runs": 72
+      },
+      "N8": {
+        "matching": 72,
+        "runs": 72
+      },
+      "N9": {
+        "matching": 72,
+        "runs": 72
+      }
+    },
+    "examples": [],
+    "mismatches": 0,
+    "passed": true,
+    "runs_checked": 1704
+  },
+  "E2": {
+    "comparisons": 31824,
+    "max_abs_difference": 0.0,
+    "passed": true,
+    "runs": 648,
+    "scope": "untouched surviving modalities of A1-A3, B1-B5 and M1 runs vs the same segment's clean run, every frozen Phase-4 detector of those modalities",
+    "tolerance": 1e-09
+  },
+  "E3": {
+    "all_three_decisions": 26832,
+    "examples": [],
+    "pair_decisions": 13104,
+    "passed": true,
+    "single_decisions": 1872,
+    "single_robust_z_decision_identical": 1872,
+    "violations": 0
+  },
+  "E4": {
+    "abstaining_runs": 384,
+    "failing_runs": [],
+    "passed": true,
+    "unit_rows": 9984,
+    "unit_rows_by_status": {
+      "ABSTAIN_ALIGNMENT_FAILURE": 9360,
+      "ABSTAIN_SENSOR_INVALID": 624
+    }
+  },
+  "E5": {
+    "clean_vs_persisted_l2_max_abs_difference": 4.440892098500626e-16,
+    "examples": [],
+    "passed": true,
+    "tolerance": 1e-09,
+    "unit_decisions_checked": 17472,
+    "violations": 0
+  },
+  "E6": {
+    "examples": [],
+    "exceptions": 0,
+    "passed": true
+  },
+  "all_pass_criteria_passed": true,
+  "bridging_conditions": {
+    "B1": {
+      "evidence": "E1 restricted to A1-A3, B1-B3, B5",
+      "holds": true
+    },
+    "B2": {
+      "evidence": "E2",
+      "holds": true
+    },
+    "B3": {
+      "evidence": "E3",
+      "holds": true
+    },
+    "B4": {
+      "evidence": "E4: C and D abstain, so only A/B failures can map to the pair tables",
+      "holds": true
+    },
+    "B5": {
+      "statement": "the surviving physical sensors are unaffected by whatever failed the other one; every synthetic corruption alters only its target file, so the suite cannot test it",
+      "status": "ASSUMPTION - not testable on this dataset"
+    }
+  }
+}

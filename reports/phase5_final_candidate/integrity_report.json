@@ -1,0 +1,17 @@
+{
+  "first_defence_directory": "not read or modified by this tooling",
+  "frozen_package_identity": "7f3ae36e42b1ffee66e83915fa7c5138817b842f4cc7be3ecee911c0094c4bab",
+  "frozen_package_verified": true,
+  "protected_inference_or_outcome_analysis": "none",
+  "protected_stat_snapshot": {
+    "changed_or_missing": [],
+    "entries": 32,
+    "method": "size+mtime vs d7ea8ac inventory; no protected bytes read",
+    "new_files": []
+  },
+  "real_ledger": {
+    "rows": 196,
+    "sha256": "f75584611c18ff387bee8c06f1fcc999c3046def876ba13dea1c744fce64de5f"
+  },
+  "tracked_frozen_and_protected_git_changes": []
+}

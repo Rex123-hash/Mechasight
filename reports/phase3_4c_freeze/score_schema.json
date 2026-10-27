@@ -1,0 +1,124 @@
+{
+  "schema_version": "phase3.4C-score-artifact-v1",
+  "binding": true,
+  "purpose": "the Phase-3.3 audit could not re-derive its headline metrics because per-segment scores were never written. Every aggregate in Phase 3.4 must be recomputable from this artifact with no model inference.",
+  "one_row_per": "official test segment x experiment (464 rows per experiment)",
+  "rows_per_experiment": 464,
+  "total_rows_planned": 4640,
+  "write_rule": "written atomically (temporary file then rename) and hashed BEFORE any aggregate metric is computed; aggregates are computed FROM the persisted file",
+  "columns": [
+    {
+      "name": "experiment_id",
+      "type": "string",
+      "note": "from planned_experiments.csv"
+    },
+    {
+      "name": "config_identity",
+      "type": "string"
+    },
+    {
+      "name": "fold",
+      "type": "integer"
+    },
+    {
+      "name": "arm",
+      "type": "string",
+      "domain": [
+        "PRESENT",
+        "ABSENT"
+      ]
+    },
+    {
+      "name": "seed",
+      "type": "integer"
+    },
+    {
+      "name": "segment_id",
+      "type": "string"
+    },
+    {
+      "name": "parent_id",
+      "type": "string"
+    },
+    {
+      "name": "focal_parent_status",
+      "type": "string",
+      "domain": [
+        "focal_this_fold",
+        "focal_other_fold",
+        "non_focal",
+        "excluded_blocking"
+      ]
+    },
+    {
+      "name": "focal_fold",
+      "type": "integer_or_null"
+    },
+    {
+      "name": "split_label",
+      "type": "string"
+    },
+    {
+      "name": "anomaly_label",
+      "type": "string"
+    },
+    {
+      "name": "domain_shift_op",
+      "type": "string"
+    },
+    {
+      "name": "domain_shift_env",
+      "type": "string"
+    },
+    {
+      "name": "total_loss",
+      "type": "float64"
+    },
+    {
+      "name": "f_imp23absu_mic",
+      "type": "float64"
+    },
+    {
+      "name": "s_imp23absu_mic",
+      "type": "float64"
+    },
+    {
+      "name": "f_ism330dhcx_acc",
+      "type": "float64"
+    },
+    {
+      "name": "s_ism330dhcx_acc",
+      "type": "float64"
+    },
+    {
+      "name": "f_ism330dhcx_gyro",
+      "type": "float64"
+    },
+    {
+      "name": "s_ism330dhcx_gyro",
+      "type": "float64"
+    },
+    {
+      "name": "checkpoint_sha256",
+      "type": "string"
+    },
+    {
+      "name": "evaluator_git_sha",
+      "type": "string"
+    },
+    {
+      "name": "test_cohort_hash",
+      "type": "string"
+    },
+    {
+      "name": "training_membership_sha256",
+      "type": "string"
+    },
+    {
+      "name": "execution_environment_id",
+      "type": "string"
+    }
+  ],
+  "float_precision": "full float64 repr; no rounding at write time",
+  "artifact_hash_recorded_in": "reports/phase3_4_results/artifact_manifest.json (future)"
+}

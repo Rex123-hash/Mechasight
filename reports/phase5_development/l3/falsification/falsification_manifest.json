@@ -1,0 +1,1151 @@
+{
+  "clean_scan_summary_sha256": "3fc2f7bcd0258ad4a54d0af3bc16f4e183b6555995976fe8c819604eb4d84044",
+  "completion": "COMPLETE",
+  "corrupted_copies_root": "data/interim/phase5/l3_falsification/official/corrupted",
+  "corruption_parameters": {
+    "A2_channel": "the modality's first stored channel",
+    "B1_dead_value": 0.0,
+    "B2_stuck": "from start + 0.25 L to end, every channel holds its value at the last sample before start + 0.25 L",
+    "B3_dropout_value": 0.0,
+    "B4_flatline": "centred 40 %, every channel holds its value at the first sample of the region",
+    "B5_plateau_value": "the signed clean-training extreme of that machine-channel (largest |value|)",
+    "C_position": "stored row i = first row with t >= start + 0.5 L; C1 swaps t[i] and t[i+1]; C2 sets t[i+1] = t[i]; C3 sets t[i] = NaN; C4 keeps rows with t <= t0 + 0.5 (t_last - t0)",
+    "D1": "the modality's file is not written",
+    "M_dead": "M1 and M2 apply B1 to two or three modalities",
+    "N4_offset_sd": "pooled population SD of the machine-channel over all clean-training coverage samples",
+    "N8_impulses": "every 0.25 s from start, +10 x the channel's segment SD added to the first sample at or after each instant",
+    "N9_tone": "113 Hz sinusoid, amplitude = the channel's segment SD, phase 0 at start",
+    "S_full_scale": {
+      "acc": 15.988832,
+      "gyro": "clean-training max |value| of the machine-channel",
+      "mic": "clean-training max |value| of the machine-channel"
+    },
+    "noise_power_reference": "population variance of the channel's coverage samples in that segment",
+    "noise_seed": "first 16 hex digits of sha256('machine|segment|scenario|modality|channel') as an integer",
+    "partial_region": "fraction p of the coverage duration, centred: [start + (1-p)/2 L, start + (1+p)/2 L)",
+    "region_reference": "the clean segment's common coverage [start, end) after the frozen startup transforms; samples outside it are never changed",
+    "version": "phase5-l3-corruptions-v1"
+  },
+  "detector_score_rows": 108576,
+  "elapsed_s": 713.9729353999719,
+  "expected_runs": 1992,
+  "files": {
+    "detector_scores.csv": "96540437d261d1b6438043a5cc55447e7aa64c57c0c1c54400ad39d3e9be245e",
+    "runs.csv": "28eae84e34ef772f94fa32fbc7465e9aed97ac8b931f7c3fe02fffe360e770ef",
+    "ungated_dead_input_scores.csv": "5a8c9cc832c5299712d103b9b41f0ddfcf3c145d16d5bf74a4e08e3593c12eae",
+    "unit_decisions.csv": "95dc7d507f064cb71d169ee3ed387be928abe2124e20c2dc66a46091c896ac91"
+  },
+  "finished_utc": "2026-10-25T15:16:02.244217+00:00",
+  "gate_parameters": {
+    "coverage_min_fraction": 0.9,
+    "flatline_invalid_fraction": 0.5,
+    "flatline_min_run_s": 0.02,
+    "nominal_duration_s": {
+      "BrushlessMotor": 5.2,
+      "RoboticArm": 7.5
+    }
+  },
+  "identity": {
+    "code_git_sha": "77d9cc5299bbf6c5abe01f9131ed2afda6e80271",
+    "corruption_version": "phase5-l3-corruptions-v1",
+    "design_config": "configs\\phase5\\fusion_design_v2.json",
+    "design_config_sha256": "2e33299d3c0347ebdc13392d149b248b8ec175f2bea5b2049e5bb2fa996a759a",
+    "gate_version": "phase5-integrity-gate-v2",
+    "l2_records_sha256": "c3778e9e42750ee20aa3009a1ebe82a9dce9c4808c81059be48c5131edd1faad",
+    "l3_source_hash": "cc0cfc48054ac4c77ce07717675a083792eb42e9163071044bec0e6a98490649",
+    "official": true,
+    "preprocessing_configs_canonical_sha256": {
+      "S": "bb934f9d4d970e3c283fdc038202fd5e86e2fe251d9cf81873babcf467572406",
+      "T": "56dac950944f52686785db6267d2b2c52b081c9cb44b7b4750a03cdeb946ddb9"
+    },
+    "runner_version": "phase5-l3-runner-v1",
+    "split_manifest_canonical_sha256": "dedddce2d24abf24d9d498a247fcc7517d1002a143849baf664511db4decc47e",
+    "torch_threads": "4",
+    "tracked_tree_clean": true
+  },
+  "ledger_rows_before_after": [
+    196,
+    196
+  ],
+  "limitations": [
+    "synthetic corruptions are negative controls for gate behaviour, not physical fault evidence",
+    "B5 (surviving sensors unaffected by the other failure) is an assumption the suite cannot test",
+    "the ungated demonstration is in-sample on the validation cohort that set the thresholds",
+    "partial flatlines below 0.50, gain error, drift, noise and timing jitter are not detected by design"
+  ],
+  "machines": [
+    "RoboticArm",
+    "BrushlessMotor"
+  ],
+  "protected_inputs_read": false,
+  "runs": 1992,
+  "scenarios": [
+    {
+      "code": "CLEAN",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "CLEAN",
+      "targets": []
+    },
+    {
+      "code": "A1",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "INVALID_G1_NON_FINITE"
+      },
+      "scenario_id": "A1|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "A1",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "INVALID_G1_NON_FINITE",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "A1|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "A1",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "INVALID_G1_NON_FINITE",
+        "mic": "VALID"
+      },
+      "scenario_id": "A1|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "A2",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "INVALID_G1_NON_FINITE"
+      },
+      "scenario_id": "A2|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "A2",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "INVALID_G1_NON_FINITE",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "A2|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "A2",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "INVALID_G1_NON_FINITE",
+        "mic": "VALID"
+      },
+      "scenario_id": "A2|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "A3",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "INVALID_G1_NON_FINITE"
+      },
+      "scenario_id": "A3|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "A3",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "INVALID_G1_NON_FINITE",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "A3|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "A3",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "INVALID_G1_NON_FINITE",
+        "mic": "VALID"
+      },
+      "scenario_id": "A3|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "B1",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "INVALID_G2_FLATLINE"
+      },
+      "scenario_id": "B1|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "B1",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "INVALID_G2_FLATLINE",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "B1|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "B1",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "INVALID_G2_FLATLINE",
+        "mic": "VALID"
+      },
+      "scenario_id": "B1|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "B2",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "INVALID_G2_FLATLINE"
+      },
+      "scenario_id": "B2|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "B2",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "INVALID_G2_FLATLINE",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "B2|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "B2",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "INVALID_G2_FLATLINE",
+        "mic": "VALID"
+      },
+      "scenario_id": "B2|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "B3",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "INVALID_G2_FLATLINE"
+      },
+      "scenario_id": "B3|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "B3",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "INVALID_G2_FLATLINE",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "B3|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "B3",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "INVALID_G2_FLATLINE",
+        "mic": "VALID"
+      },
+      "scenario_id": "B3|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "B4",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "B4|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "B4",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "B4|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "B4",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "B4|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "B5",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "INVALID_G2_FLATLINE"
+      },
+      "scenario_id": "B5|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "B5",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "INVALID_G2_FLATLINE",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "B5|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "B5",
+      "expected_status": "DECISION_L2_PAIR",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "INVALID_G2_FLATLINE",
+        "mic": "VALID"
+      },
+      "scenario_id": "B5|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "C1",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "FAIL_C_TIMING"
+      },
+      "scenario_id": "C1|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "C1",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "FAIL_C_TIMING",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "C1|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "C1",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "FAIL_C_TIMING",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "C1|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "C2",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "FAIL_C_TIMING"
+      },
+      "scenario_id": "C2|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "C2",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "FAIL_C_TIMING",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "C2|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "C2",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "FAIL_C_TIMING",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "C2|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "C3",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "FAIL_C_TIMING"
+      },
+      "scenario_id": "C3|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "C3",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "FAIL_C_TIMING",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "C3|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "C3",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "FAIL_C_TIMING",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "C3|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "C4",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "FAIL_C_TIMING"
+      },
+      "scenario_id": "C4|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "C4",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "FAIL_C_TIMING",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "C4|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "C4",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "FAIL_C_TIMING",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "C4|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "D1",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "FAIL_D_ABSENT"
+      },
+      "scenario_id": "D1|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "D1",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "FAIL_D_ABSENT",
+        "gyro": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "D1|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "D1",
+      "expected_status": "ABSTAIN_ALIGNMENT_FAILURE",
+      "expected_verdicts": {
+        "acc": "NOT_EVALUATED_ALIGNMENT_FAILED",
+        "gyro": "FAIL_D_ABSENT",
+        "mic": "NOT_EVALUATED_ALIGNMENT_FAILED"
+      },
+      "scenario_id": "D1|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "M1",
+      "expected_status": "DECISION_PHASE4_SINGLE",
+      "expected_verdicts": {
+        "acc": "INVALID_G2_FLATLINE",
+        "gyro": "VALID",
+        "mic": "INVALID_G2_FLATLINE"
+      },
+      "scenario_id": "M1|mic+acc",
+      "targets": [
+        "mic",
+        "acc"
+      ]
+    },
+    {
+      "code": "M1",
+      "expected_status": "DECISION_PHASE4_SINGLE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "INVALID_G2_FLATLINE",
+        "mic": "INVALID_G2_FLATLINE"
+      },
+      "scenario_id": "M1|mic+gyro",
+      "targets": [
+        "mic",
+        "gyro"
+      ]
+    },
+    {
+      "code": "M1",
+      "expected_status": "DECISION_PHASE4_SINGLE",
+      "expected_verdicts": {
+        "acc": "INVALID_G2_FLATLINE",
+        "gyro": "INVALID_G2_FLATLINE",
+        "mic": "VALID"
+      },
+      "scenario_id": "M1|acc+gyro",
+      "targets": [
+        "acc",
+        "gyro"
+      ]
+    },
+    {
+      "code": "M2",
+      "expected_status": "ABSTAIN_SENSOR_INVALID",
+      "expected_verdicts": {
+        "acc": "INVALID_G2_FLATLINE",
+        "gyro": "INVALID_G2_FLATLINE",
+        "mic": "INVALID_G2_FLATLINE"
+      },
+      "scenario_id": "M2|mic+acc+gyro",
+      "targets": [
+        "mic",
+        "acc",
+        "gyro"
+      ]
+    },
+    {
+      "code": "N1",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N1|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N1",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N1|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N1",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N1|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "N2",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N2|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N2",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N2|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N2",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N2|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "N3",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N3|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N3",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N3|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N3",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N3|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "N4",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N4|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N4",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N4|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N4",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N4|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "N5",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N5|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N5",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N5|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N5",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N5|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "N6",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N6|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N6",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N6|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N6",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N6|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "N7",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N7|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N7",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N7|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N7",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N7|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "N8",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N8|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N8",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N8|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N8",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N8|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "N9",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N9|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "N9",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N9|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "N9",
+      "expected_status": "DECISION_L2_ALL_THREE",
+      "expected_verdicts": {
+        "acc": "VALID",
+        "gyro": "VALID",
+        "mic": "VALID"
+      },
+      "scenario_id": "N9|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "S1",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S1|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "S1",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S1|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "S1",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S1|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "S2",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S2|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "S2",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S2|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "S2",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S2|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "S3",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S3|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "S3",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S3|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "S3",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S3|gyro",
+      "targets": [
+        "gyro"
+      ]
+    },
+    {
+      "code": "S4",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S4|mic",
+      "targets": [
+        "mic"
+      ]
+    },
+    {
+      "code": "S4",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S4|acc",
+      "targets": [
+        "acc"
+      ]
+    },
+    {
+      "code": "S4",
+      "expected_status": null,
+      "expected_verdicts": null,
+      "scenario_id": "S4|gyro",
+      "targets": [
+        "gyro"
+      ]
+    }
+  ],
+  "selected_segments": {
+    "BrushlessMotor": [
+      "20240423_12_43_26_segment_0",
+      "20240423_12_58_18_segment_0",
+      "20240423_13_26_03_segment_0",
+      "20240423_13_45_34_segment_0",
+      "20240423_14_06_35_segment_0",
+      "20240423_14_31_06_segment_0",
+      "20240423_14_46_59_segment_0",
+      "20240423_15_10_33_segment_0",
+      "20240423_15_34_22_segment_0",
+      "20240423_16_01_03_segment_0",
+      "20240423_16_20_24_segment_0",
+      "20240423_16_39_03_segment_0"
+    ],
+    "RoboticArm": [
+      "20240221_12_23_16_dataLog_0",
+      "20240221_12_23_16_dataLog_24",
+      "20240221_12_23_16_dataLog_8",
+      "20240221_13_46_42_dataLog_6",
+      "20240221_15_10_26_dataLog_23",
+      "20240221_15_10_26_dataLog_7",
+      "20240405_14_54_41_dataLog_21",
+      "20240405_14_54_41_dataLog_37",
+      "20240418_10_41_53_dataLog_0",
+      "20240418_14_53_33_dataLog_20",
+      "20240418_14_53_33_dataLog_36",
+      "20240418_14_53_33_dataLog_9"
+    ]
+  },
+  "started_utc": "2026-10-25T15:04:03.091584+00:00",
+  "test_evaluated": false,
+  "unit_decision_rows": 51792
+}

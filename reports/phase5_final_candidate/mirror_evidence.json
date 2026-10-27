@@ -1,0 +1,96 @@
+{
+  "access": {
+    "analysis_phase_label_reads": 2,
+    "count_index_builds": 20,
+    "forged_capability_tests": "tests/test_phase5_mirror_adapter.py::test_A_forged_capability_reads_nothing",
+    "hdf5_datasets_requested": [
+      "acc",
+      "gyro",
+      "mic"
+    ],
+    "hdf5_opens": 60,
+    "hdf5_opens_after_exposure": true,
+    "label_or_poison_columns_requested": false,
+    "provenance_json_requested": false,
+    "score_phase_label_reads": 0,
+    "trusted_parquet_reads": 512,
+    "trusted_parquet_reads_after_exposure": true
+  },
+  "cells": {
+    "BrushlessMotor|S": "cc1729e6cb0cc28da8f2bf991230e61d51c869976f5651b762bf651c14cf9d0b",
+    "BrushlessMotor|T": "c9cde57b77217cdd9712a9cbc48e3fa62a230c0baed31a96cb67851c92de224a",
+    "RoboticArm|S": "892d40d61edcfaaa3fdf9a2dde608ea48062c8ba237ae237f6e3e2464278a187",
+    "RoboticArm|T": "8218bd241189a92c3c552bee5dc804f2a38c3f2be0547eb5bf8fde1ada3034af"
+  },
+  "cohort_segments": {
+    "BrushlessMotor": 126,
+    "RoboticArm": 186
+  },
+  "data_origin": "PERMITTED development source-validation cohorts registered as a protected-style mirror; SYNTHETIC fake labels",
+  "disabled_entry_points_refused": [
+    "execute_real_protected",
+    "read_protected_inputs",
+    "build_protected_count_index",
+    "append_protected_batch",
+    "protected_manifest_read",
+    "protected_schema_executor"
+  ],
+  "fixture_root": "<temp>/mechasight-SYNTHETIC-5-6c-mirror-y3z7x5uz",
+  "inference_adapter": "phase5-frozen-l1-inference-adapter-v1",
+  "input_schema": "phase5-protected-style-dev-mirror-v1",
+  "ledger": {
+    "appended_segments": [
+      "authorized_batch:SYNTHETIC-08543f6c87988fc279b2feaf"
+    ],
+    "real_ledger_sha256_unchanged": true,
+    "rows_before_after": [
+      196,
+      428
+    ],
+    "verified_with": "verify_ledger_history (unmodified) + JsonlLedger.validate_batches"
+  },
+  "not_protected_performance": true,
+  "operations": {
+    "derived_L2_scoring": 208,
+    "new_L1_inference": 24
+  },
+  "provenance": {
+    "implementations": {
+      "phase5-frozen-l1-inference-adapter-v1": 24,
+      "phase5-l2-frozen-robust-z-mean-v1": 208
+    },
+    "kinds": {
+      "derived_L2_scoring": 208,
+      "frozen_L1_inference": 24
+    },
+    "l2_component_origins": {
+      "PERMITTED_PHASE4_SOURCE_VALIDATION": 208
+    }
+  },
+  "real_model_results": {
+    "l1_families": {
+      "dense_autoencoder": 20,
+      "mahalanobis_shrinkage": 4
+    },
+    "l1_max_abs_diff_vs_frozen_bundle_validation_scores": 0.0,
+    "l1_segment_scores": 3744,
+    "l1_units": 24,
+    "l1_window_counts_equal": true,
+    "l2_max_abs_diff_vs_persisted_l2_fused_validation": 0.0,
+    "l2_rows": 32448,
+    "l2_units": 208,
+    "models_refitted": 0,
+    "thresholds_unchanged": true
+  },
+  "recipe": "phase5-protected-style-dev-mirror-v1",
+  "scope": "DEVELOPMENT_MIRROR_ONLY",
+  "synthetic_results": {
+    "analyse_twice_refused": true,
+    "analysis_primary_contrasts": 140,
+    "analysis_primary_intervals": 420,
+    "analysis_replicates": 10000,
+    "analysis_sha256": "6411f6bcd034e8dcef9034bc25ca67d3d9cb5977dce626a17c9c7226c13a08d3",
+    "labels": "SYNTHETIC parent-homogeneous fake labels; development validation has no faults"
+  },
+  "units": 232
+}

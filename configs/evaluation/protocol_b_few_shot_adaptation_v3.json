@@ -1,0 +1,140 @@
+{
+  "version": "phase2.2-evaluation-v1",
+  "protocol": "mechasight_experimental_protocol",
+  "split_version": "protocol_b_few_shot_adaptation_v3",
+  "comparison": {
+    "test_cohort": "identical for Regime S and Regime T",
+    "validation_cohort": "identical source-normal parent recordings for Regime S and Regime T",
+    "only_intended_difference": "Regime T fits on the released target-normal training allocation (RoboticArm 27, BrushlessMotor 18); Regime S reserves exactly that allocation unused",
+    "adaptation_budget": "released few-shot allocation only; same-parent siblings are blocked, not trained on"
+  },
+  "validation": {
+    "population": "source_validation normal parent recordings only",
+    "target_adaptation_use": "the released adaptation allocation is train-only in Regime T and reserved in Regime S; blocked siblings are used by neither regime for anything",
+    "forbidden": [
+      "test hyperparameter selection",
+      "test normalization fitting",
+      "test feature selection",
+      "test window selection",
+      "test aggregation selection",
+      "test threshold calibration",
+      "test early stopping"
+    ]
+  },
+  "metrics": {
+    "primary_threshold_free": [
+      "AUROC",
+      "AUPRC"
+    ],
+    "secondary_threshold_free": [
+      "pAUROC@FPR<=0.1"
+    ],
+    "threshold_dependent": [
+      "F1",
+      "recall",
+      "sensitivity",
+      "specificity",
+      "false_positive_rate"
+    ],
+    "protocol_a_implementation": "strict pairwise normal_score < anomaly_score; ties zero",
+    "protocol_b_implementation": "one pinned standard-library implementation for every paired model"
+  },
+  "threshold": {
+    "calibration_population": "source_validation normal segment scores only",
+    "quantile": 0.9,
+    "quantile_method": "higher",
+    "decision_rule": "anomaly if segment_score > threshold",
+    "test_labels_used": false
+  },
+  "score_aggregation": {
+    "protocol_a": "median of window reconstruction errors, exactly as pinned upstream",
+    "protocol_b_primary": "median of window anomaly scores",
+    "provenance": "every segment score stores all contributing window_ids",
+    "test_set_search": "forbidden"
+  },
+  "uncertainty": {
+    "robotic_arm": {
+      "method": "parent-recording cluster bootstrap",
+      "replicates": 10000,
+      "seed": 1995,
+      "strata": [
+        "domain",
+        "anomaly_status",
+        "operating_condition"
+      ],
+      "unit_sampled": "parent_recording with all child segments retained",
+      "paired_comparisons": "same parent draws for both models; interval on metric difference",
+      "interval": "2.5/97.5 percentile"
+    },
+    "brushless_motor": {
+      "method": "recording/segment-level stratified bootstrap",
+      "strata": [
+        "domain",
+        "anomaly_status",
+        "operating_condition"
+      ],
+      "limitation": "fault and acquisition-session effects remain non-identifiable"
+    },
+    "forbidden_units": [
+      "windows",
+      "RoboticArm sibling segments treated as independent"
+    ]
+  },
+  "supersedes": {
+    "split_version": "protocol_b_common_test_v2",
+    "evaluation_version": "phase2.1-evaluation-v1",
+    "scope": "training/adaptation role labels only; the Phase-2.1 common evaluation cohort, source-validation cohort, metrics, threshold policy, score aggregation and uncertainty design are carried forward unchanged"
+  },
+  "primary_scientific_question": "Does access to the released few-shot target-normal training allocation improve anomaly detection under domain shift?",
+  "adaptation_budget": {
+    "definition": {
+      "target_adaptation_observed": "released target-normal training segments actually consumed by Regime T",
+      "target_adaptation_parent_groups": "distinct physical parent recordings containing those released segments",
+      "target_adaptation_blocked_siblings": "further normal segments of those same parent recordings; consumed by nothing",
+      "target_adaptation_parent_closure": "observed + blocked siblings; a leakage bookkeeping total, never a training budget"
+    },
+    "RoboticArm": {
+      "target_adaptation_observed": 27,
+      "target_adaptation_parent_groups": 18,
+      "target_adaptation_blocked_siblings": 96,
+      "target_adaptation_parent_closure": 123
+    },
+    "BrushlessMotor": {
+      "target_adaptation_observed": 18,
+      "target_adaptation_parent_groups": 18,
+      "target_adaptation_blocked_siblings": 0,
+      "target_adaptation_parent_closure": 18
+    },
+    "rationale": "Parent independence requires sibling segments of an adaptation parent to be excluded from evaluation. It does not require them to become adaptation training data. IMAD-DS intentionally exposes only the released allocation, so the primary Regime-T experiment consumes only that allocation.",
+    "blocked_sibling_use": {
+      "regime_s_training": false,
+      "regime_t_training": false,
+      "validation": false,
+      "threshold_calibration": false,
+      "hyperparameter_selection": false,
+      "common_test": false,
+      "sole_purpose": "enforce parent independence of the common evaluation cohort"
+    }
+  },
+  "protocol_roles": {
+    "source_training": "model fitting and learned preprocessing statistics",
+    "source_validation": "early stopping, model/window/feature selection, threshold calibration",
+    "target_adaptation": "Regime T model fitting; reserved and unused in Regime S",
+    "adaptation_sibling_blocked": "nothing; withheld solely to keep adaptation parents out of evaluation",
+    "common_evaluation": "final reported metrics only, identical for Regime S and T",
+    "exclusivity": "every segment carries exactly one primary protocol role"
+  },
+  "secondary_regimes": {
+    "T-parent-complete": {
+      "status": "DOCUMENTED, NOT AUTHORISED, NOT RUN",
+      "definition": "adaptation on all 123 normal RoboticArm segments of the 18 adaptation parents",
+      "labelling_requirement": "must be reported as a larger adaptation-budget experiment and never conflated with the primary few-shot Regime T",
+      "possible_budget_study": [
+        "0 target examples",
+        "27 released target examples",
+        "123 parent-complete target segments"
+      ],
+      "authorised_now": false
+    }
+  }
+}

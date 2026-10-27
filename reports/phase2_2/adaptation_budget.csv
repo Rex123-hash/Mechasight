@@ -1,0 +1,3 @@
+machine,target_adaptation_observed,target_adaptation_parent_groups,target_adaptation_blocked_siblings,target_adaptation_parent_closure,blocked_sibling_parent_groups,blocked_parents_subset_of_adaptation_parents
+BrushlessMotor,18,18,0,18,0,True
+RoboticArm,27,18,96,123,18,True

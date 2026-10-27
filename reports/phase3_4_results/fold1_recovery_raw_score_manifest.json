@@ -1,0 +1,105 @@
+{
+  "amendment_commit": "a799934",
+  "amendment_id": "fold1-technical-recovery-v1",
+  "amendment_sha256": "5bc290b50f758de83885dd7fbc6d78990d366ca36e38eb5329f00cf4e2980356",
+  "analysis_artifacts_from_this_stage": 0,
+  "combined_artifact": "reports/phase3_4_results/fold1_recovery_combined_raw_scores.csv",
+  "combined_artifact_sha256": "cdda80f92f26d8de7430576dedc3a298154d703949a7bffa2dc8c83d7a09e9fe",
+  "evaluator_head": "a799934a97696933498e0ce98da026d46f9d764b",
+  "executions": [
+    {
+      "arm": "PRESENT",
+      "artifact_sha256": "c5d51937608ca737b071611abf0bb20ff95e0ada89d50f9b320199f6c6ec182f",
+      "attempt_history": [
+        "SCORE_STARTED",
+        "SCORE_COMPLETED"
+      ],
+      "checkpoint_sha256": "85386f2df404e5db49923b604e08676b9d6d934b49c5d3c633f785e5c676060e",
+      "claim": {
+        "arm": "PRESENT",
+        "checkpoint_sha256": "85386f2df404e5db49923b604e08676b9d6d934b49c5d3c633f785e5c676060e",
+        "config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+        "evaluator_git_sha": "a799934a97696933498e0ce98da026d46f9d764b",
+        "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+        "fold": 1,
+        "ledger_authorization_timestamp_utc": "2026-09-11T19:49:04.480058+00:00",
+        "original_incident_claim": {
+          "attempt_history": [
+            "SCORE_STARTED"
+          ],
+          "claim_timestamp_utc": "2026-09-11T19:50:25.721473+00:00",
+          "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+          "protected_forward_passes": 0,
+          "score_artifact": false
+        },
+        "recovery_amendment": "fold1-technical-recovery-v1",
+        "recovery_amendment_commit": "a799934a97696933498e0ce98da026d46f9d764b",
+        "recovery_amendment_sha256": "5bc290b50f758de83885dd7fbc6d78990d366ca36e38eb5329f00cf4e2980356",
+        "recovery_id": "p34r-f1rec-78c8f486fdb7c822af87",
+        "recovery_of_experiment_id": "p34d-92fd40fc93c8c8d2e819",
+        "seed": 1995,
+        "status": "CLAIMED",
+        "test_cohort_hash": "83cd11956f8ee94907bcf366605259d4986acca8ff69a5bceb3874ee6a7a8efa",
+        "timestamp_utc": "2026-09-12T09:54:46.907310+00:00",
+        "training_membership_sha256": "19805b3fdb035162d44c6391a14b844aa8e615d7305e5918f3a043a0a6fb96a3",
+        "zero_forward_evidence": "original INC-1 attempt ends at SCORE_STARTED; no artifact; sentinel replaced inference"
+      },
+      "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+      "order": 1,
+      "recovery_id": "p34r-f1rec-78c8f486fdb7c822af87"
+    },
+    {
+      "arm": "ABSENT",
+      "artifact_sha256": "e08e89b4b714397c91beb3922ada7f4274bf02bfdeadde8f65e9aac3c1fac1f5",
+      "attempt_history": [
+        "SCORE_STARTED",
+        "SCORE_COMPLETED"
+      ],
+      "checkpoint_sha256": "4b4d848b74d860e5adef335d8c305bcc1338200faf195cca9c99e318c00276c1",
+      "claim": {
+        "arm": "ABSENT",
+        "checkpoint_sha256": "4b4d848b74d860e5adef335d8c305bcc1338200faf195cca9c99e318c00276c1",
+        "config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+        "evaluator_git_sha": "a799934a97696933498e0ce98da026d46f9d764b",
+        "experiment_id": "p34d-e56529a2f56f98fd4a7a",
+        "fold": 1,
+        "ledger_authorization_timestamp_utc": "2026-09-11T19:49:04.480058+00:00",
+        "original_incident_claim": null,
+        "recovery_amendment": "fold1-technical-recovery-v1",
+        "recovery_amendment_commit": "a799934a97696933498e0ce98da026d46f9d764b",
+        "recovery_amendment_sha256": "5bc290b50f758de83885dd7fbc6d78990d366ca36e38eb5329f00cf4e2980356",
+        "recovery_id": "p34r-f1rec-e83624b2152b673c30c5",
+        "recovery_of_experiment_id": "p34d-e56529a2f56f98fd4a7a",
+        "seed": 1995,
+        "status": "CLAIMED",
+        "test_cohort_hash": "83cd11956f8ee94907bcf366605259d4986acca8ff69a5bceb3874ee6a7a8efa",
+        "timestamp_utc": "2026-09-12T09:55:21.626933+00:00",
+        "training_membership_sha256": "4a6005d2e2f9899002b8d6184c06ac87ea8a013e747f9db12a5e3819ec0b244e",
+        "zero_forward_evidence": "never claimed before this recovery"
+      },
+      "experiment_id": "p34d-e56529a2f56f98fd4a7a",
+      "order": 2,
+      "recovery_id": "p34r-f1rec-e83624b2152b673c30c5"
+    }
+  ],
+  "failures": 0,
+  "fold_1_absent_original_namespace_claimed": false,
+  "generated_utc": "2026-09-12T09:56:30.883405+00:00",
+  "inc1_original": {
+    "attempt_history": [
+      "SCORE_STARTED"
+    ],
+    "claim_bytes_sha256": "990d4bacfa74e7f00b3e885e4fe413a16726b6e53daf9c9abfeb447a8e63281b",
+    "unchanged": true
+  },
+  "ledger_entries": 40,
+  "ledger_sha256": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+  "performance_metrics_computed": false,
+  "protected_evaluator_equivalent_to": "64694e6 (GREEN audit; _run_protected_inference and persistence byte-identical)",
+  "protected_inference_count": 2,
+  "retries": 0,
+  "rows_per_artifact": 464,
+  "schema_version": "phase3.4-fold1-recovery-raw-score-manifest-v1",
+  "stage": "fold-1 technical recovery: two protected evaluations, once each; NO analysis",
+  "total_new_rows": 928
+}

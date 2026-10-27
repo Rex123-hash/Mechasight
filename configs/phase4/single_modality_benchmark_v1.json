@@ -1,0 +1,124 @@
+{
+  "schema_version": "phase4-single-modality-benchmark-v1",
+  "stage": "single_modality_model_benchmarking",
+  "legacy_roadmap_name": "Phase 4",
+  "status": "FROZEN_FOR_PRETEST_FIT; PROTECTED_BATCH_NOT_AUTHORIZED",
+  "research_question": "How well can each sensing modality detect machine anomalies on its own, per machine, under the leakage-controlled Protocol B?",
+  "protocol": "mechasight_experimental_protocol",
+  "split_version": "protocol_b_few_shot_adaptation_v3",
+  "preprocessing_configs": {
+    "S": "configs/preprocessing/mechasight_few_shot_regime_s.json",
+    "T": "configs/preprocessing/mechasight_few_shot_regime_t.json"
+  },
+  "machines": ["RoboticArm", "BrushlessMotor"],
+  "regimes": ["S", "T"],
+  "modalities": ["mic", "acc", "gyro"],
+  "cross_modality_cells": "none; all-channel and fusion cells belong to Multi-Sensor Fusion Development",
+  "families": [
+    {
+      "family": "statistical_reference",
+      "input": "engineered segment-median features of one modality, train-only z-score",
+      "implementation": "src.models.classical (phase3.1-classical-baselines-v1), unchanged",
+      "seeds": [0],
+      "role": "engineering floor; isotropic distance"
+    },
+    {
+      "family": "isolation_forest",
+      "input": "engineered segment-median features of one modality, train-only z-score",
+      "implementation": "src.models.classical (phase3.1-classical-baselines-v1), unchanged",
+      "seeds": [0, 1, 2, 3, 4],
+      "role": "tree-partition outlier detector"
+    },
+    {
+      "family": "one_class_svm",
+      "input": "engineered segment-median features of one modality, train-only z-score",
+      "implementation": "src.models.classical (phase3.1-classical-baselines-v1), unchanged",
+      "seeds": [0],
+      "role": "kernel one-class boundary"
+    },
+    {
+      "family": "mahalanobis_shrinkage",
+      "input": "engineered segment-median features of one modality, train-only z-score",
+      "implementation": "src.models.mahalanobis (phase4-mahalanobis-shrinkage-v1): sklearn.covariance.LedoitWolf, assume_centered=false; score = squared Mahalanobis distance",
+      "seeds": [0],
+      "role": "closed-form Gaussian density with feature correlation (research definition section 11 row 1)"
+    },
+    {
+      "family": "dense_autoencoder",
+      "input": "per-window log-power spectrum of one modality, train-only per-bin z-score",
+      "implementation": "src.models.dense_autoencoder (phase4-dense-autoencoder-protocol-b-v1)",
+      "architecture": "d -> 256 -> 64 -> 16 -> 64 -> 256 -> d; ReLU hidden; linear output",
+      "loss": "mse",
+      "optimizer": {"name": "adam", "learning_rate": 0.001, "weight_decay": 0.0},
+      "batch_size": 256,
+      "max_epochs": 200,
+      "early_stopping": {"cohort": "source_validation", "quantity": "mean window mse", "patience": 10},
+      "checkpoint_selection": "best_source_validation_window_mse",
+      "window_score": "mean squared reconstruction error",
+      "segment_score": "median of window scores",
+      "seeds": [0, 1, 2, 3, 4],
+      "role": "learned per-modality reconstruction scorer; the model the fusion stage builds on"
+    }
+  ],
+  "modality_inputs": {
+    "classical_feature_columns": "columns of the frozen 98-feature Phase-3.1 artifact whose name starts with '<modality>__' (mic 14, acc 42, gyro 42)",
+    "autoencoder_pipeline": [
+      "frozen resample_regular at the configured target rate",
+      "truncate to fixed length floor(0.1 * target_rate) - 2 samples (mic 1598; RoboticArm acc/gyro 704; BrushlessMotor acc/gyro 711); the -1 proposal was falsified by 121 RoboticArm mic windows of 1598 resampled samples measured over all 194,165 train/validation windows before any model was fit; shorter windows are technical defects",
+      "frozen one_sided_power",
+      "log(power + 1e-12)",
+      "concatenate channels of that modality only (channel-major)"
+    ],
+    "autoencoder_input_dims": {
+      "RoboticArm": {"mic": 800, "acc": 1059, "gyro": 1059},
+      "BrushlessMotor": {"mic": 800, "acc": 1068, "gyro": 1068}
+    },
+    "raw_waveform_input": "not selected for this benchmark (not claimed invalid)"
+  },
+  "normalization": {
+    "classical": "train_only_feature_zscore_after_segment_median (epsilon 1e-5)",
+    "autoencoder": "train_only_per_bin_zscore_of_log_power_spectrum (epsilon 1e-5); per-window standardisation is not used"
+  },
+  "threshold_policy": "empirical q90 of source-validation segment scores, quantile method higher; identical rule for every configuration",
+  "seed_aggregation": "frozen R8 rule: per bootstrap replicate compute each seed's metric and average; deterministic families carry seed 0 as a ledger field only; no best-seed selection",
+  "bootstrap": {
+    "policy_version": "phase3.0.1-class-stratified-cluster-v1",
+    "seed": 1995,
+    "replicates": 10000,
+    "confidence": 0.95,
+    "interval": "percentile",
+    "unit": "parent recording (RoboticArm); recording=segment (BrushlessMotor)"
+  },
+  "experiment_count": {
+    "cells": "2 machines x 2 regimes x 3 modalities = 12",
+    "configs_per_cell": "1 + 5 + 1 + 1 + 5 = 13",
+    "total": 156
+  },
+  "protected_evaluation": {
+    "design": "score_all_then_analyse_once",
+    "ledger_expected_start": 40,
+    "batch_size": 156,
+    "score_all": "all 156 looks appended atomically; scoring loop reads no anomaly label and computes no metric; per-segment tables hashed into a sealed staging manifest",
+    "analyse_once": "refuses unless exactly 156 hashed tables verify; then AUROC, AUPRC with prevalence, pAUROC@0.10, source/target slices, healthy-target FPR at frozen q90, seed aggregation, paired modality contrasts, T-minus-S contrasts; a completed analysis is final",
+    "reporting_conventions": "phase3.2.1: count-identity F1, undefined precision when nothing flagged, AP minus prevalence context"
+  },
+  "pre_registered_contrasts": {
+    "modality_pairs": ["acc_minus_mic", "gyro_minus_mic", "acc_minus_gyro"],
+    "within": "each (machine, regime, family)",
+    "regime": "T minus S within each (machine, modality, family)",
+    "metrics": ["auroc", "average_precision", "standardized_pauroc_fpr_0_10"],
+    "dominance_rule": "a modality dominates another on a machine and regime only when the paired CI excludes zero with the same sign in every one of the five families; otherwise the ranking is reported as model-dependent"
+  },
+  "pre_registered_expectations": [
+    "the microphone is the modality whose target-slice ranking metrics and healthy-target false-positive rate degrade most, because the environmental shift is injected into the audio channel only",
+    "BrushlessMotor results are benchmark discrimination on the released cohort and are never worded as pure mechanical-fault sensitivity (brushless_motor_acquisition_time_class_confound_v1)",
+    "RoboticArm target-slice values rest on 20 healthy segments from 6 parents and are reported with that disclosure"
+  ],
+  "reproduction_check_before_scoring": "every bundle's config/provenance/threshold/score files and every model artifact (checkpoint or joblib) are hash-verified against the frozen manifests; the frozen checkpoint is scored, never a retrain",
+  "failure_policy": "docs/phase4_failure_policy_note.md",
+  "scientific_limitation_ids": {
+    "RoboticArm": ["robotic_arm_source_validation_six_parents_v1", "robotic_arm_released_adaptation_eighteen_parents_v1"],
+    "BrushlessMotor": ["brushless_motor_acquisition_time_class_confound_v1"]
+  },
+  "not_in_this_benchmark": ["random_forest", "xgboost", "lightgbm", "cnn", "tcn", "knn_embedding", "all_channel_cells", "raw_waveform_autoencoder"]
+}

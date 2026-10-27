@@ -1,0 +1,53 @@
+{
+  "machine": "RoboticArm",
+  "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+  "segments_scored": 464,
+  "windows_scored": 34336,
+  "auc": {
+    "total_loss": {
+      "all": 0.9150750594530321,
+      "source": 0.9314060642092746,
+      "target": 0.9081450653983353
+    },
+    "f_imp23absu_mic": {
+      "all": 0.6706673602853745,
+      "source": 0.7361771700356718,
+      "target": 0.638153983353151
+    },
+    "s_imp23absu_mic": {
+      "all": 0.5182074910820452,
+      "source": 0.5306183115338883,
+      "target": 0.5082491082045184
+    },
+    "f_ism330dhcx_acc": {
+      "all": 0.909464179548157,
+      "source": 0.9870689655172413,
+      "target": 0.9450802615933412
+    },
+    "s_ism330dhcx_acc": {
+      "all": 0.8830075802615933,
+      "source": 0.982832936979786,
+      "target": 0.829667063020214
+    },
+    "f_ism330dhcx_gyro": {
+      "all": 0.8760590071343638,
+      "source": 0.9322235434007135,
+      "target": 0.9317776456599287
+    },
+    "s_ism330dhcx_gyro": {
+      "all": 0.4909891498216409,
+      "source": 0.5052764565992865,
+      "target": 0.4777794292508918
+    }
+  },
+  "score_columns": [
+    "total_loss",
+    "f_imp23absu_mic",
+    "s_imp23absu_mic",
+    "f_ism330dhcx_acc",
+    "s_ism330dhcx_acc",
+    "f_ism330dhcx_gyro",
+    "s_ism330dhcx_gyro"
+  ],
+  "checkpoint_sha256": "67062daf7134d5dbc59fc120570e5c2aba46b39446ab6b553dd6e16a87553964"
+}

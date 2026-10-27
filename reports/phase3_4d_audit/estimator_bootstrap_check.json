@@ -1,0 +1,26 @@
+{
+  "schema_version": "phase3.4E-estimator-bootstrap-check-v1",
+  "generated_utc": "2026-09-10T17:14:43.128495+00:00",
+  "method": "compared the frozen module against an independently written reference implementation (explicit loops, no shared code) on synthetic scores with an unbalanced cohort of 60 parents holding 1 to 8 normal segments each",
+  "primary_estimand_unchanged_from_phase34c": true,
+  "checks": {
+    "point_estimate_matches_reference_to_1e-12": true,
+    "every_parent_delta_matches_reference": true,
+    "parent_equal_weighting_confirmed": true,
+    "differs_from_segment_weighting_on_unbalanced_cohort": true,
+    "segment_weighted_mean_of_C_equals_strict_focal_auroc": true,
+    "invariant_to_monotone_within_arm_transforms": "verified under x*1000, +7 and exp; max |dC| = 0",
+    "exact_ties_score_zero_like_upstream": true,
+    "no_segment_level_pseudo_replication": "the bootstrap resamples parents; segments move with their parent and are never drawn individually"
+  },
+  "bootstrap": {
+    "frozen_procedure": "fold-stratified: 12 parents resampled with replacement within each of the five folds, 10000 replicates, seed 27182, percentile 95",
+    "fold_membership_preserved": true,
+    "sibling_segments_stay_inside_parent_aggregate": true,
+    "folds_not_treated_as_N5_inferential_evidence": true,
+    "interval_flagged_conditional_on_ten_fitted_models": true,
+    "reference_agreement": "module and independent reference intervals agree to three decimal places; exact equality is not expected because the two implementations consume the random stream in a different order",
+    "reproducible_under_fixed_seed": true
+  },
+  "verdict": "VERIFIED"
+}

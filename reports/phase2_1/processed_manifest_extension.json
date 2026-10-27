@@ -1,0 +1,14 @@
+{
+  "schema_version": "phase2.1-v2",
+  "extends": "reports/phase2/processed_manifest_schema.json",
+  "added_required_field_for_protocol_b_v2": "data_pool",
+  "data_pool_values": [
+    "source_training",
+    "source_validation",
+    "target_adaptation",
+    "common_evaluation"
+  ],
+  "regime_s_target_adaptation_split": "reserved_adaptation",
+  "regime_t_target_adaptation_split": "train",
+  "matched_test_rule": "For each machine, Regime S and Regime T common_evaluation segment_id and parent_recording sets must be identical."
+}

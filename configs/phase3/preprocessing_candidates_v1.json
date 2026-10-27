@@ -1,0 +1,48 @@
+{
+  "schema_version": "phase3.0-preprocessing-candidates-v1",
+  "status": "PRIMARY_FROZEN_PHASE3_1",
+  "protocol_a": {
+    "policy": "frozen official reproduction; no Phase-3 selection is permitted",
+    "config": "configs/preprocessing/official_baseline_reproduction.json"
+  },
+  "protocol_b": {
+    "selection_population": "source_validation only",
+    "robotic_arm_validation_cohort": {
+      "segment_count": 186,
+      "physical_parent_count": 6,
+      "limitation_id": "robotic_arm_source_validation_six_parents_v1"
+    },
+    "not_adaptation_population": "RoboticArm target adaptation is a distinct 27-segment, 18-parent training allocation",
+    "forbidden_selection_population": [
+      "common_evaluation",
+      "target test",
+      "anomaly test performance"
+    ],
+    "primary_selection_status": "FROZEN_BEFORE_COMMON_TEST",
+    "candidate_dimensions": {
+      "window_length_s": [0.1],
+      "stride_s": [0.1],
+      "normalization": [
+        "none",
+        "std_window",
+        "train_zscore"
+      ]
+    },
+    "phase3_1_primary": {
+      "window_length_s": 0.1,
+      "stride_s": 0.1,
+      "window_feature_normalization": "none",
+      "segment_aggregation": "median per engineered feature",
+      "model_input_normalization": "feature-wise z-score fitted on the complete authorized training cohort only",
+      "feature_families": ["time", "frequency"],
+      "status": "PRIMARY_PRE_REGISTERED_CONFIGURATION",
+      "selection_basis": "scientific conservatism, consistency with the accepted Phase-2 pipeline, and classical-model tractability; not validation or test performance"
+    },
+    "sensitivity_only_not_run": [
+      "alternative window lengths or strides",
+      "window-level training instead of segment medians",
+      "alternative training-only scalers"
+    ],
+    "rule": "Test performance must never decide which preprocessing configuration becomes primary."
+  }
+}

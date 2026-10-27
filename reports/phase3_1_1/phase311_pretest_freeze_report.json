@@ -1,0 +1,36 @@
+{
+  "schema_version": "phase3.1.1-pretest-freeze-report-v1",
+  "status": "COMPLETE_AWAITING_INDEPENDENT_AUDIT",
+  "starting_head": "78b536304d94d50afcc293348c5fa0c34e729f62",
+  "phase3_1_bundle_count": 28,
+  "phase3_1_bundles_changed": false,
+  "phase3_1_models_refit": false,
+  "reporting_policy": {
+    "path": "configs/phase3/first_test_reporting_policy_v1.json",
+    "schema_version": "phase3.1.1-first-common-test-reporting-v1",
+    "policy_identity": "p311-reporting-5e76ab7dabd5689c7b0ced68",
+    "file_sha256": "a1f695d31a6042619bad3e4fa9103a62b32c41a699c54ce7d9ae35ce36b7da2c",
+    "status": "PRETEST_FROZEN_NOT_YET_EXECUTED"
+  },
+  "experiment_code_identity_audit": {
+    "path": "reports/phase3_1_1/experiment_code_identity_audit.json",
+    "status": "PASS_WITH_EXPLICIT_GIT_FIELD_SEMANTIC_CLARIFICATION",
+    "bundle_source_snapshot_hash": "93c33580054e9e45f228e385ba726bb43ad0dfb3531f83bb9f3c9c5fb003e229",
+    "accepted_base_git_sha": "3bf046dd8edb29d99f1d246b33f88674a5b53a2d",
+    "authoritative_phase3_1_generation_commit": "78b536304d94d50afcc293348c5fa0c34e729f62",
+    "all_28_bundle_identities_consistent": true,
+    "final_commit_reproduces_source_snapshot": true
+  },
+  "test_access": {
+    "test_manifest_metadata_inspected": false,
+    "common_test_features_materialized": false,
+    "common_test_segments_scored": false,
+    "test_performance_metrics_computed": false,
+    "real_bootstrap_run": false
+  },
+  "test_look_ledger": {
+    "starting_count": 0,
+    "ending_count": 0,
+    "changed": false
+  }
+}

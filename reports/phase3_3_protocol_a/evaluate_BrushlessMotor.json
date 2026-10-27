@@ -1,0 +1,53 @@
+{
+  "machine": "BrushlessMotor",
+  "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+  "segments_scored": 312,
+  "windows_scored": 15912,
+  "auc": {
+    "total_loss": {
+      "all": 0.5898257725180802,
+      "source": 0.7373438527284681,
+      "target": 0.5570348454963839
+    },
+    "f_imp23absu_mic": {
+      "all": 0.535379684418146,
+      "source": 0.594017094017094,
+      "target": 0.47518080210387903
+    },
+    "s_imp23absu_mic": {
+      "all": 0.4917406311637081,
+      "source": 0.5266272189349113,
+      "target": 0.42965154503616043
+    },
+    "f_ism330dhcx_acc": {
+      "all": 0.6729125575279421,
+      "source": 0.7705456936226167,
+      "target": 0.5641025641025641
+    },
+    "s_ism330dhcx_acc": {
+      "all": 0.6619000657462196,
+      "source": 0.789447731755424,
+      "target": 0.51232741617357
+    },
+    "f_ism330dhcx_gyro": {
+      "all": 0.571827744904668,
+      "source": 0.6834319526627219,
+      "target": 0.551939513477975
+    },
+    "s_ism330dhcx_gyro": {
+      "all": 0.5752383300460223,
+      "source": 0.6847468770545694,
+      "target": 0.5644312952005259
+    }
+  },
+  "score_columns": [
+    "total_loss",
+    "f_imp23absu_mic",
+    "s_imp23absu_mic",
+    "f_ism330dhcx_acc",
+    "s_ism330dhcx_acc",
+    "f_ism330dhcx_gyro",
+    "s_ism330dhcx_gyro"
+  ],
+  "checkpoint_sha256": "70f1da7d0ea837f339790d9ff88da7615f3fc818c0dd5c50736d69fd65351248"
+}

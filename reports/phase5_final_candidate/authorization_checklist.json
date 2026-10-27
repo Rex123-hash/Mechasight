@@ -1,0 +1,51 @@
+{
+  "authorized_looks": 0,
+  "human_decisions": {
+    "H1": {
+      "decision": "approve the count-derived label-free index method for the protected cohorts",
+      "state": "UNRESOLVED"
+    },
+    "H2": {
+      "decision": "confirm index construction is covered by the 232-look scoring batch, after its append and exposure record",
+      "state": "UNRESOLVED"
+    },
+    "H3": {
+      "decision": "approve post-exposure byte hashing of protected caches/artifacts against declared Phase-4 hashes",
+      "state": "UNRESOLVED"
+    },
+    "H4": {
+      "decision": "retry policy: a new authorization per recovery batch; proposed hard cap 660 appended looks",
+      "state": "UNRESOLVED"
+    },
+    "H5": {
+      "decision": "analysis label source: column projection of common-test feature artifacts under a separate analysis token",
+      "state": "UNRESOLVED"
+    },
+    "H6": {
+      "decision": "name the independent reviewer and the reviewed implementation SHA the authorization binds",
+      "state": "UNRESOLVED"
+    },
+    "H7": {
+      "decision": "acknowledge the reversed Phase-4 materialisation order (exposure first, then reads)",
+      "state": "UNRESOLVED"
+    }
+  },
+  "issued_tokens": [],
+  "required_before_any_protected_read": [
+    "independent review of this candidate at a named commit (not this self-check)",
+    "H1-H7 recorded by a human with the reviewer and reviewed SHA",
+    "protected artifact bindings resolved from approved metadata references (currently UNRESOLVED)",
+    "a committed batch authorization record for 232 looks, ledger 196 -> 428",
+    "a human-issued scoring token; a separate human-issued analysis token",
+    "activation of the disabled entry points in a reviewed change"
+  ],
+  "status": "OPEN \u2014 nothing below is approved, decided or issued by this candidate",
+  "still_disabled": [
+    "execute_real_protected",
+    "read_protected_inputs",
+    "build_protected_count_index",
+    "build_protected_window_index",
+    "append_protected_batch",
+    "PROTECTED input schema"
+  ]
+}

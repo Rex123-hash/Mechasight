@@ -1,0 +1,1156 @@
+{
+  "schema_version": "phase5-fusion-design-v1",
+  "status": "PROPOSED — NOT AUTHORIZED FOR EXPERIMENTAL EXECUTION",
+  "stage": "multi_sensor_fusion_development",
+  "legacy_roadmap_name": "Phase 5",
+  "design_document": "docs/phase5_fusion_design_v1.md",
+  "design_base_commit": "f6a33af4db0a610947ad8f7de7fa5d9081873232",
+  "change_control": "Any change to an arm, family, seed, subset, calibration, threshold, gate, margin, contrast or count after independent review requires a new versioned design (v2) recorded before any Phase-5 model fit; the v1 file is never edited in place after review.",
+  "inherits_unchanged": {
+    "protocol": "mechasight_experimental_protocol",
+    "split_version": "protocol_b_few_shot_adaptation_v3",
+    "preprocessing_configs": {
+      "S": "configs/preprocessing/mechasight_few_shot_regime_s.json",
+      "T": "configs/preprocessing/mechasight_few_shot_regime_t.json"
+    },
+    "single_modality_benchmark_config": "configs/phase4/single_modality_benchmark_v1.json",
+    "threshold_policy_version": "phase3.0-source-validation-q90-v1",
+    "bootstrap_policy_version": "phase3.0.1-class-stratified-cluster-v1",
+    "bootstrap": {
+      "seed": 1995,
+      "replicates": 10000,
+      "confidence": 0.95,
+      "interval": "percentile",
+      "shared_draws": "the frozen Phase-3.2/Phase-4 draws (same cohort, same draw identity) so every contrast is paired",
+      "unit": "parent recording (RoboticArm); recording=segment (BrushlessMotor)"
+    },
+    "seed_aggregation": "frozen R8 rule: per bootstrap replicate compute each seed's metric and average; no best-seed selection",
+    "segment_aggregation": "median of window scores",
+    "score_direction": "higher_is_more_anomalous (verified for all 156 Phase-4 bundles)",
+    "common_test_cohort": {
+      "RoboticArm": {
+        "segments": 466,
+        "normal": 234,
+        "anomalous": 232,
+        "target_slice_normal": 20,
+        "target_slice_normal_parents": 6,
+        "test_cohort_hash": "23c5b7e3f1b0e6f28d6159a8c893abb5de309a0b4b978c713f43ba4383a775da"
+      },
+      "BrushlessMotor": {
+        "segments": 312,
+        "normal": 156,
+        "anomalous": 156,
+        "target_slice_normal": 78,
+        "test_cohort_hash": "e1b09c058261ae04f6574330dab17ca89127616bd4bd9fac4978bd19b821b3ad"
+      }
+    },
+    "source_validation_cohort": {
+      "RoboticArm": 186,
+      "BrushlessMotor": 126,
+      "note": "normal source-validation segments only; identical for S and T and for every modality"
+    },
+    "scientific_limitation_ids": {
+      "RoboticArm": [
+        "robotic_arm_source_validation_six_parents_v1",
+        "robotic_arm_released_adaptation_eighteen_parents_v1"
+      ],
+      "BrushlessMotor": [
+        "brushless_motor_acquisition_time_class_confound_v1"
+      ]
+    }
+  },
+  "research_question": "Under leakage-controlled Protocol B (few-shot split v3, Regimes S and T, frozen common test), and separately for RoboticArm and BrushlessMotor, does combining microphone, accelerometer and gyroscope evidence - by feature-level fusion (L1) or by source-validation-calibrated score averaging (L2) - change ranking discrimination, healthy-target false-alarm rate and anomaly recall at a frozen source-validation threshold relative to each matched single-modality detector; and, when one modality is lost, how much of that capability does an integrity-gated late fusion (L3) retain?",
+  "hypotheses": {
+    "direction": "two-sided for every contrast; no directional prior for or against fusion",
+    "H1": "L2 (all three modalities) differs from each matched single modality (mic, acc, gyro individually) on the ranking axis and/or the operating axis.",
+    "H2": "L1 (early fusion) differs from L2 (late fusion) when matched on family and seed.",
+    "H3": "Under the loss of one modality, L3 (gated late fusion of the remaining two) retains or loses capability relative to intact L2.",
+    "null_reading": "a contrast whose interval lies inside the pre-declared practical margin is reported as EQUIVALENT, not as a failure"
+  },
+  "estimand": "Delta(metric) = metric(fusion arm) - metric(comparator) on the common test cohort, seed-averaged per replicate (R8), conditional on the observed evaluation cohort; 95% percentile interval from the shared paired class-stratified cluster bootstrap.",
+  "machines": [
+    "RoboticArm",
+    "BrushlessMotor"
+  ],
+  "regimes": [
+    "S",
+    "T"
+  ],
+  "modalities": [
+    "mic",
+    "acc",
+    "gyro"
+  ],
+  "families": [
+    {
+      "family": "statistical_reference",
+      "seeds": [
+        0
+      ]
+    },
+    {
+      "family": "isolation_forest",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "family": "one_class_svm",
+      "seeds": [
+        0
+      ]
+    },
+    {
+      "family": "mahalanobis_shrinkage",
+      "seeds": [
+        0
+      ]
+    },
+    {
+      "family": "dense_autoencoder",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "family_scope_rationale": "All five Phase-4 families are retained so every fusion contrast is matched to an existing single-modality detector and conclusions can be checked for cross-family consistency. No family is added, removed or selected on the basis of Phase-4 protected performance.",
+  "arms": {
+    "L0_single_modality": {
+      "status": "EXISTS - completed Phase-4 protected benchmark; not retrained, not rescored",
+      "detectors_reused": 156,
+      "comparators": "mic, acc and gyro individually, matched on machine, regime, family and seed",
+      "historical_best": "the family-matched best Phase-4 modality is reported only as a labelled post-hoc historical benchmark (selected using previously observed protected results)"
+    },
+    "L1_feature_level_fusion": {
+      "definition": "one detector per unit trained on all three modalities jointly",
+      "classical_input": "all 98 frozen Phase-3.1 segment-median features (mic 14 + acc 42 + gyro 42), train-only feature z-score; identical code, hyperparameters, seeds and threshold rule to the single-modality fits",
+      "statistical_reference_isolation_forest_one_class_svm": "REUSE the 28 Phase-3.2 all-channel detectors (already fitted, validated in reports/phase3_1/validation_only, and protected-scored in reports/phase3_2). A field-by-field comparison shows zero differences from the Phase-4 classical configs in split, split-manifest hash, preprocessing config, normalisation, threshold policy, aggregation, score direction, windowing and hyperparameters; same test cohort hash. Refitting would reproduce the same detectors and spend 28 duplicate looks.",
+      "mahalanobis_shrinkage": "NEW FIT: LedoitWolf (assume_centered=false) on the 98 standardised features; score = squared Mahalanobis distance (1137-1555 training segments per unit; n/p >= 11.6)",
+      "dense_autoencoder": {
+        "status": "NEW FIT",
+        "input": "per-window concatenation [mic | acc | gyro] of the frozen Phase-4 log-power spectra from the same cache row (one window_id)",
+        "input_dim": {
+          "RoboticArm": 2918,
+          "BrushlessMotor": 2936
+        },
+        "modality_share_of_bins": {
+          "RoboticArm": {
+            "mic": 0.274,
+            "acc": 0.363,
+            "gyro": 0.363
+          },
+          "BrushlessMotor": {
+            "mic": 0.272,
+            "acc": 0.364,
+            "gyro": 0.364
+          }
+        },
+        "standardisation": "train-only per-bin z-score (equals the three Phase-4 per-modality standardisers concatenated; asserted in 5.2)",
+        "architecture": "frozen Phase-4 template d -> 256 -> 64 -> 16 -> 64 -> 256 -> d; ReLU hidden; linear output",
+        "loss": "plain MSE over all concatenated bins (naive; no modality re-weighting)",
+        "training": "Adam 1e-3, batch 256, <=200 epochs, patience 10 on source-validation window MSE, best-validation checkpoint; seeds 0-4",
+        "window_score": "mean squared reconstruction error",
+        "segment_score": "median of window scores",
+        "capacity_note": "one 16-d bottleneck for three modalities versus three 16-d bottlenecks in L2; accepted as the frozen recipe, reported as a limitation, not tuned"
+      },
+      "threshold": "q90 (method higher) of the L1 detector's own source-validation segment scores"
+    },
+    "L2_score_level_fusion": {
+      "definition": "fixed rule over the frozen Phase-4 per-modality segment scores of the same machine, regime, family and seed; no model is trained or retrained",
+      "seed_pairing": "seed s of mic, acc and gyro are fused together (deterministic families use seed 0)",
+      "calibration": "per modality, robust z = (score - median_v) / IQR_v, where median_v and IQR_v are taken from that modality's frozen source-validation segment scores (normal source-validation only)",
+      "pooling": "arithmetic mean of the calibrated scores of the modalities in the subset",
+      "subsets": [
+        [
+          "mic",
+          "acc",
+          "gyro"
+        ],
+        [
+          "acc",
+          "gyro"
+        ],
+        [
+          "mic",
+          "gyro"
+        ],
+        [
+          "mic",
+          "acc"
+        ]
+      ],
+      "threshold": "q90 (method higher) of the fused source-validation scores of that exact subset; never inherited from a single modality",
+      "missing_score": "none expected (complete Phase-4 tables); a missing or non-finite per-modality score is a technical defect -> STOP, never imputed",
+      "degenerate_scale": "IQR_v == 0 for any modality is a technical defect -> STOP (checked in 5.3 on validation; not repaired by a fallback)"
+    },
+    "L3_integrity_gated_score_fusion": {
+      "definition": "L2 mean fusion that excludes a modality whose raw signal fails a frozen integrity gate in that segment, using the q90 threshold fitted on source validation for the remaining subset",
+      "weight": "w_m(x) = 1 if modality m passes the integrity gate on segment x, else 0; fused = mean of calibrated scores over modalities with w_m = 1; threshold = q90 of the source-validation fused scores of that available subset",
+      "all_modalities_gated": "segment is reported as SENSOR-INVALID (no anomaly decision) and counted separately; never silently scored",
+      "inference_class": "frozen per-sample inference: every gate parameter is fixed before evaluation and the gate reads only that segment's own raw signal; no statistic is estimated from the protected cohort",
+      "what_it_is_not": "not sensor-quality estimation and not anomaly-novelty weighting",
+      "protected_realisation": {
+        "clean_condition": "On clean data every modality passes, so L3 equals L2(all three). The protected score-all scans the test inputs with the gate before any ledger append; the planned matrix assumes zero gated segment-modalities (the dataset audit found 0 NaN, 0 Inf, 0 constant channels, 0 gaps, 0 non-monotonic timestamps in all 11,688 files). If any segment-modality is gated, score-all STOPS before the ledger append and the design is amended; no L3 table is silently added.",
+        "modality_loss_condition": "Complete loss of modality m (dead, disconnected or stuck sensor) is gated with certainty (verified on synthetic inputs in 5.4), so L3 under loss of m is exactly the L2 detector of the remaining pair with its own validation threshold. The three L2 pair tables are therefore the L3 loss-condition detectors; no corrupted protected input is created and no new inference is run."
+      }
+    }
+  },
+  "integrity_gate": {
+    "version": "phase5-integrity-gate-v1",
+    "evaluated_on": "the modality's raw (post startup-transform, pre-normalisation) signal over the segment's common coverage",
+    "rules": {
+      "G1_non_finite": "any non-finite sample value or timestamp -> invalid",
+      "G2_flatline": "fraction of samples lying in runs of identical consecutive values lasting >= 20 ms, in any channel, >= 0.50 -> invalid (captures dead, stuck-at, zero-dropout and saturation plateaus)",
+      "G3_timing": "non-monotonic or duplicate timestamps, or the modality's own stream covering < 0.90 of the segment's nominal duration -> invalid"
+    },
+    "parameters_fixed_a_priori": "20 ms and 0.50 / 0.90 are fixed now from the physical definition of a dead or stuck sensor, not fitted to data",
+    "clean_data_acceptance": "In 5.4 the gate must trigger on zero clean training and source-validation segment-modalities of both machines (including the released target-normal training segments and target-domain audio). Any trigger -> STOP and report; the parameters are not retuned.",
+    "not_used": [
+      "anomaly-score novelty",
+      "input-space distance to the training manifold",
+      "inter-modality disagreement",
+      "any statistic of the protected cohort"
+    ]
+  },
+  "excluded_arms": [
+    {
+      "arm": "L2 max pooling",
+      "reason": "L3 is a gated mean, so L2-mean is its exact ablation; max pooling alarms whenever any single modality exceeds the fused threshold, so one failed or fooled sensor controls the decision by construction, and it degenerates completely under modality loss. Excluded for parsimony (would add 208 looks), not because of any Phase-4 result."
+    },
+    {
+      "arm": "novelty-weighted fusion (former R2)",
+      "reason": "its statistic is the per-modality anomaly score in another form; down-weighting novel modalities suppresses the modality that is correctly detecting a fault. Not a reliability measure; rejected."
+    },
+    {
+      "arm": "inter-modality disagreement weighting (former R3)",
+      "reason": "circular: on a fault visible in one modality only, the correct modality is the disagreeing one."
+    },
+    {
+      "arm": "audio down-weighting under shift",
+      "reason": "suggested in the Phase-4 report from observed protected results (microphone false alarms); adopting it would be outcome-driven selection."
+    },
+    {
+      "arm": "target-normal-calibrated fusion thresholds",
+      "reason": "changes the frozen source-validation threshold policy; a separate question for a later stage."
+    },
+    {
+      "arm": "L1 pair models (early fusion of two modalities)",
+      "reason": "would require 52 x 3 = 156 new fits and looks; the pair question is answered by L2/L3 pairs built from genuinely trained single-modality detectors."
+    },
+    {
+      "arm": "L1 under modality loss",
+      "reason": "early fusion has no gating mechanism; evaluating it needs new inference on corrupted protected inputs and does not bear on the L3-versus-L2 question."
+    },
+    {
+      "arm": "protected sensor-fault and additive-noise sweeps (research_definition section 13.3-13.4)",
+      "reason": "each corruption x severity x modality needs new inference of every affected detector on protected inputs (hundreds of looks); partial degradations are studied in development on validation data only (5.4) and protected sweeps are deferred to a possible later, separately designed stage."
+    },
+    {
+      "arm": "new architectures (CNN, TCN, attention, learned fusion weights)",
+      "reason": "out of scope until the matched naive ladder is evaluated."
+    }
+  ],
+  "experiment_matrix": {
+    "units": {
+      "definition": "machine x regime x family x seed",
+      "count": 52,
+      "per_machine_regime": 13,
+      "machine_regime_cells": 4
+    },
+    "fusion_subsets_per_unit": 4,
+    "protected_tables": {
+      "L1_reused_from_phase3_2": 28,
+      "L1_new": 24,
+      "L2_all_three": 52,
+      "L2_pairs_equal_L3_under_single_modality_loss": 156,
+      "L3_clean": "0 separate tables (identical to L2 all-three when the pre-ledger gate scan finds no gated segment; otherwise STOP)"
+    },
+    "model_fitting_jobs": {
+      "total": 24,
+      "mahalanobis_l1": 4,
+      "dense_autoencoder_l1": 20
+    },
+    "validation_only_operations": {
+      "l1_new_validation_scoring_and_q90": 24,
+      "l1_reused_validation_bundles_verified": 28,
+      "l2_calibrations_and_fused_q90_thresholds": 208,
+      "gate_clean_scans": "all training and source-validation segments, both machines, 3 modalities",
+      "gate_positive_and_negative_controls": "synthetic corruptions of source-validation segments (see development_falsification)",
+      "dead_input_constant_scores": "156 (one synthetic constant input per frozen Phase-4 model; no data)"
+    },
+    "protected_inference_operations": {
+      "l1_new_scoring_on_common_test": 24,
+      "integrity_gate_scans_of_common_test_inputs": 2,
+      "note": "L1-new inputs: the existing hash-verified common-evaluation spectral caches (dense AE) and common-test feature artifacts (Mahalanobis). Gate scans: the raw common-test recordings through the guarded preprocessing pipeline (split=test), one scan per machine covering mic, acc and gyro; label-free, no score, no metric. All read only inside the authorized score-all scope."
+    },
+    "derived_protected_tables_from_sealed_phase4_scores": 208,
+    "historical_tables_reanalysed_without_new_look": {
+      "phase4_single_modality": 156,
+      "phase3_2_all_channel_l1": 28
+    },
+    "new_protected_looks": 232,
+    "authorization_units": 1,
+    "ledger": {
+      "expected_start": 196,
+      "rows_appended": 232,
+      "expected_end": 428
+    },
+    "count_identity": "24 (new L1) + 52 (L2 all three) + 156 (L2 pairs) = 232"
+  },
+  "unit_registry": [
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "statistical_reference",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-58a090761947d7c69a1dc352",
+        "acc": "p3-e9d74be4e2a2938ec0446580",
+        "gyro": "p3-eb67b0225003bf0817c678a9"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-994e171b9c84299ee0506001"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-6f12ff1089deef7d228878b2",
+        "acc": "p3-acf80223211265be5a6f8969",
+        "gyro": "p3-ab720c570f20ea36b7fa74ef"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-b7df07b4435147ce84abb2fb"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 1,
+      "phase4_single_modality_ids": {
+        "mic": "p3-6402c788ebf3a56480aab140",
+        "acc": "p3-c882709e8c1d1e19582cdf8c",
+        "gyro": "p3-f4e1c0d49176b7590f0c0149"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-d523942f6e3b110247ccd97a"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 2,
+      "phase4_single_modality_ids": {
+        "mic": "p3-0e58169926dab7606fedd29e",
+        "acc": "p3-f797180987a0b87b70a55d05",
+        "gyro": "p3-895a08a800424a8ea8ec7830"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-d2e84d3ccdbb25446ed3b5c2"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 3,
+      "phase4_single_modality_ids": {
+        "mic": "p3-301aba9978994ff658f416a0",
+        "acc": "p3-137cf5406f21bf9ffba624b6",
+        "gyro": "p3-aaa8c784f1e82ad050eec350"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-61da2e22429837caf51172a3"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 4,
+      "phase4_single_modality_ids": {
+        "mic": "p3-1c3f5fef2b9e87e875caa8ef",
+        "acc": "p3-b33debb223312cbc3a8ca398",
+        "gyro": "p3-5b50ae72ebc8060ead2dbcfa"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-4bad66197b1b5b39bc0e1ce8"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "one_class_svm",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-0085a769c61751e74c58683e",
+        "acc": "p3-66782b636c39691e2ff84be0",
+        "gyro": "p3-f0bacd59e1a15444bea0c1b4"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-c0b106088a660b45248207a8"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "mahalanobis_shrinkage",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-2ca9e9d67d0bb8bbd324d480",
+        "acc": "p3-a7a2b6f3581800c17aaff7b1",
+        "gyro": "p3-814a5dd46512b26a8eebcbf1"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-be153736e7c0dc6a3d24594d",
+        "acc": "p3-0b3f1ea9c5ff3f41e4c04d35",
+        "gyro": "p3-5003862957688b713e27a712"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 1,
+      "phase4_single_modality_ids": {
+        "mic": "p3-e79c33182ff49ec1ed8528de",
+        "acc": "p3-b66bec7567463d00b7ab8429",
+        "gyro": "p3-1b7a09a1464b1ad44d8ba7ca"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 2,
+      "phase4_single_modality_ids": {
+        "mic": "p3-3ff086360e6685782d79cc32",
+        "acc": "p3-801551ccf808a7d5dfbecb4f",
+        "gyro": "p3-59b26df4757665d0f77cebf5"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 3,
+      "phase4_single_modality_ids": {
+        "mic": "p3-789925263554f920477ff9b4",
+        "acc": "p3-1296a7b0127a9b5efc22c1b0",
+        "gyro": "p3-b75c90443db5556b4f824d72"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 4,
+      "phase4_single_modality_ids": {
+        "mic": "p3-5d276f166abd48a2b50ad561",
+        "acc": "p3-a2f6208c683cbcf72da7a779",
+        "gyro": "p3-39705a086188babaa92c9a3d"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "statistical_reference",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-c254298833dd9b7b5bcafd07",
+        "acc": "p3-0e3ed8c340c6437e2bcad03e",
+        "gyro": "p3-ce3e235ee57294ba3c5df4e7"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-00ef3593eef3eef458aac8ec"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-1767839818f9caaa0e32939e",
+        "acc": "p3-71e5f96b18b6b274c7b93023",
+        "gyro": "p3-6f6860fa78f04d19dce8d934"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-f2e82658337725d643461f5a"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 1,
+      "phase4_single_modality_ids": {
+        "mic": "p3-56bd542d653cb5206c61da49",
+        "acc": "p3-8d1e3a938ca6651151d564fd",
+        "gyro": "p3-93268731836cbac2b2219cbc"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-4df2732b72997882e300c7ee"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 2,
+      "phase4_single_modality_ids": {
+        "mic": "p3-e7b03b458c534f00d1241f23",
+        "acc": "p3-11ecfc75b8552c1c5d4795a0",
+        "gyro": "p3-7888974487c433864484150d"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-e0cb98b1d50e1b760ad00c33"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 3,
+      "phase4_single_modality_ids": {
+        "mic": "p3-76f3669036cf5e56d889f510",
+        "acc": "p3-19a78121ef253a675464b3a3",
+        "gyro": "p3-49a7a489953b1c7231f30460"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-efee4a25a307b9556f1ef9e1"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 4,
+      "phase4_single_modality_ids": {
+        "mic": "p3-d85edbbab9ce5e12de49bca0",
+        "acc": "p3-cfae0a87d7b373df8f3d59cd",
+        "gyro": "p3-7a0b96915d93596e5c05bb45"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-b2c1eb73ec1f836d95401be0"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "one_class_svm",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-af619089cd0da4ae95f3714e",
+        "acc": "p3-e155d8b6126fc8b59c7043c4",
+        "gyro": "p3-236af45f39af5043ca424fde"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-3dfb6a47e2b1ee1a4da8ed4f"
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "mahalanobis_shrinkage",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-9fb0c349958eae5fe3ee79c0",
+        "acc": "p3-fb010dc69794ad640e4d308d",
+        "gyro": "p3-28d344d0d97bc38356010534"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-55da293bd6eb46d7f1bc92d1",
+        "acc": "p3-52e3a05ec2b5d29f0eb6f065",
+        "gyro": "p3-6f31b174a2a3da2f59a211b6"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 1,
+      "phase4_single_modality_ids": {
+        "mic": "p3-967bb2474d02e10b00d8e296",
+        "acc": "p3-39ac808fc7dfb7f8bf246947",
+        "gyro": "p3-9abecb8fb1baf5ea8f678abe"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 2,
+      "phase4_single_modality_ids": {
+        "mic": "p3-cbb57da9f53d3b5e5e4cdf92",
+        "acc": "p3-5c29b6454358ce0c8a5ac921",
+        "gyro": "p3-4f33f9edf6e111a97c8f2664"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 3,
+      "phase4_single_modality_ids": {
+        "mic": "p3-44ae84417bcf96425a30f265",
+        "acc": "p3-4d278a29fb22ba50a39269b9",
+        "gyro": "p3-46c5567ad9caf2e97412175a"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 4,
+      "phase4_single_modality_ids": {
+        "mic": "p3-e8e3f4f9bfc145a5ac432e85",
+        "acc": "p3-fd7d7bd162d542a04c5c042a",
+        "gyro": "p3-65ccd6296f967c75d16110e4"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "statistical_reference",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-9c46edfd94a739b6e2de43cf",
+        "acc": "p3-4a4a0195f45f2509cbbe31f9",
+        "gyro": "p3-3be12d63a29f4cdd4300980b"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-c3480b35881d464a75f3b359"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-cc1794684b7fd2c9ea2734b2",
+        "acc": "p3-19db5f4fc7a16bcdaa79b953",
+        "gyro": "p3-2ecd81f396dd8fd1c18095ac"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-d75e7a94e44f1caf8a5a595a"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 1,
+      "phase4_single_modality_ids": {
+        "mic": "p3-604a3b04607b1f92c96c18bc",
+        "acc": "p3-7a13c08d4b174948547fb34b",
+        "gyro": "p3-761c472e5c1d2f11cf3fe66f"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-611ddf562a1bccc1714e44b8"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 2,
+      "phase4_single_modality_ids": {
+        "mic": "p3-4be0e9e70c52da6549382603",
+        "acc": "p3-9a2e49a4e56558b4efb6a216",
+        "gyro": "p3-06b0332a8c6dd6ffda3f841d"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-296f1214c5d29239fd3f95a7"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 3,
+      "phase4_single_modality_ids": {
+        "mic": "p3-8bc2cdc3cd18233f6e1e9a42",
+        "acc": "p3-e4d7bb22a5bfbe9be62bd043",
+        "gyro": "p3-d2722e3b0bcc28ed77acdcee"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-92d37c41321bf4991c224a7b"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "isolation_forest",
+      "seed": 4,
+      "phase4_single_modality_ids": {
+        "mic": "p3-ada1af5fb742962065006ea9",
+        "acc": "p3-1ee40a7e5287ec60df7f5ca0",
+        "gyro": "p3-3de2aa1309284e822d6c14f7"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-a164ab66f27ae30b8964b5d5"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "one_class_svm",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-17a4381b0a96da99e8669df8",
+        "acc": "p3-8e3d87bbe5d5a8e0205414ee",
+        "gyro": "p3-19c69ed7de31aeebc5312d8a"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-c72840a71b6f3d36ed7a30d0"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "mahalanobis_shrinkage",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-986f542b80111036f1e27c22",
+        "acc": "p3-9aaed8b0ae22a16cad631a3e",
+        "gyro": "p3-3bb00f3414cc2ce5019f0f92"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-215d13f266730525b1c94f4c",
+        "acc": "p3-c96fde0b49b4d66efe23cbdd",
+        "gyro": "p3-2d70b1292cd04450f75fbc58"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 1,
+      "phase4_single_modality_ids": {
+        "mic": "p3-5832d89f9c3df37616b75179",
+        "acc": "p3-206b1e2cc46b5a4b9d92330f",
+        "gyro": "p3-425a6f533ce0da9a0118c89a"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 2,
+      "phase4_single_modality_ids": {
+        "mic": "p3-698a22759bbe98e36d1e0b9d",
+        "acc": "p3-053fe5ae82f7a2f4ebfe8225",
+        "gyro": "p3-b5a7e66ddf3074b0ae6c43d8"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 3,
+      "phase4_single_modality_ids": {
+        "mic": "p3-b2fc1d729cb876939dbbbc1c",
+        "acc": "p3-18f0e80f075694de9c5ed194",
+        "gyro": "p3-cd9e722af92c7051880bfa3b"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "family": "dense_autoencoder",
+      "seed": 4,
+      "phase4_single_modality_ids": {
+        "mic": "p3-bf588bed9b20d0637c97e00e",
+        "acc": "p3-5617ba5d6098a6e674b60ec3",
+        "gyro": "p3-b7b564e044e20272bfb28644"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "statistical_reference",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-34ee034217df31d25fd94f0b",
+        "acc": "p3-65c90099fca33cbe3b86485d",
+        "gyro": "p3-1ae2f13740101934760b5769"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-f0f1a4a48cc815e2faf3d696"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-cf3261e68a033e23ba9b13c0",
+        "acc": "p3-6522fe0b1b76956957caaafb",
+        "gyro": "p3-5a2569ae6f5917e06ff9db72"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-a2b4c42e73f2ac6104e622c8"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 1,
+      "phase4_single_modality_ids": {
+        "mic": "p3-71424030aac7965e7aee4d04",
+        "acc": "p3-425cf52b09c15a332bc2145f",
+        "gyro": "p3-9f157b6c890dcc46feafd797"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-649152f9076af141b8701f69"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 2,
+      "phase4_single_modality_ids": {
+        "mic": "p3-d242c4d0bb60797b909737dc",
+        "acc": "p3-c9cef88c03bd687ef3cf82f6",
+        "gyro": "p3-9c1903dab814a7634e4bcc41"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-56aaef3d39745f6f79059405"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 3,
+      "phase4_single_modality_ids": {
+        "mic": "p3-f2268130d88330879a143f93",
+        "acc": "p3-3f582f7e657dee99713c85a0",
+        "gyro": "p3-183496a419b44467931a8bae"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-93869e664dd39a5c050ce499"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "isolation_forest",
+      "seed": 4,
+      "phase4_single_modality_ids": {
+        "mic": "p3-bdd52a322f3adff31a79a411",
+        "acc": "p3-b78653581e1777db7546cccc",
+        "gyro": "p3-8e2bb998a570f60af616d75c"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-5205733640c5094021b2a4b0"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "one_class_svm",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-24695f824a816dc134f84dd7",
+        "acc": "p3-539b42bc4c9fd1614f87f379",
+        "gyro": "p3-f4fb044f3148811611c42420"
+      },
+      "l1_source": "reuse_phase3_2_sealed",
+      "l1_phase3_2_id": "p3-3c27f8c1e723c409051319c8"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "mahalanobis_shrinkage",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-fd86fcd577e72c499f9f6781",
+        "acc": "p3-ca0dc8c5d8d0ece27315a71b",
+        "gyro": "p3-0636c85e1340187912ea7839"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 0,
+      "phase4_single_modality_ids": {
+        "mic": "p3-c3155ad4cdb030a299e24974",
+        "acc": "p3-af66e9d645282c42e081aa5f",
+        "gyro": "p3-bedc104f65429f584f0b83ab"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 1,
+      "phase4_single_modality_ids": {
+        "mic": "p3-6ab003d99497904632d484f3",
+        "acc": "p3-5f7a969839fb9d5f9dd4566e",
+        "gyro": "p3-d5021b623a2f30989274b29e"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 2,
+      "phase4_single_modality_ids": {
+        "mic": "p3-93365f8e94df4727ab4f5c64",
+        "acc": "p3-c4879149129e544991369b17",
+        "gyro": "p3-4871d98d5c7de8ae4c77d0b3"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 3,
+      "phase4_single_modality_ids": {
+        "mic": "p3-573b0ad405a4e2201538b294",
+        "acc": "p3-48f5701d87b92879cfc11eaa",
+        "gyro": "p3-6b711aff87c569bfc8cbb95c"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "family": "dense_autoencoder",
+      "seed": 4,
+      "phase4_single_modality_ids": {
+        "mic": "p3-e27c8dbfb35ef8c5e48c4095",
+        "acc": "p3-de4d8b4abfdd78885f06ec72",
+        "gyro": "p3-ffbbb6b9776a1806807c2c62"
+      },
+      "l1_source": "new_fit_phase5",
+      "l1_phase3_2_id": null
+    }
+  ],
+  "outcomes": {
+    "ranking_primary": "AUROC on the complete common test",
+    "ranking_secondary": [
+      "AUPRC (with prevalence context)",
+      "standardised pAUROC at FPR <= 0.10",
+      "target-slice AUROC",
+      "source-slice AUROC"
+    ],
+    "operating_primary": {
+      "healthy_target_fpr": "false-alarm rate on healthy target-domain segments at the frozen q90 threshold (lower is better)",
+      "recall": "anomaly recall on the complete cohort at the frozen q90 threshold (higher is better)"
+    },
+    "operating_secondary": [
+      "healthy source-slice FPR",
+      "target-slice recall",
+      "precision when defined",
+      "F1 by count identity"
+    ],
+    "reliability_outcomes": {
+      "development": "gate false-trigger rate on clean data; gate detection of synthetic integrity failures; source-validation FPR of gated vs ungated fusion under synthetic modality loss",
+      "protected": "H3 contrasts (each L2 pair vs intact L2 all three) and each pair vs its two member modalities"
+    }
+  },
+  "interpretation": {
+    "practical_margins": {
+      "auroc": 0.02,
+      "average_precision": 0.02,
+      "healthy_target_fpr": 0.1,
+      "recall": 0.05
+    },
+    "margin_rationale": "Fixed by engineering judgement before any Phase-5 result and not derived from any Phase-4 effect size or variance: AUROC/AUPRC 0.02 is the smallest ranking change treated as practically relevant; healthy-target FPR 0.10 equals two of the 20 RoboticArm healthy target segments (the smallest change that is not a single segment); recall 0.05 is about 12 RoboticArm or 8 BrushlessMotor anomalies.",
+    "metric_category": {
+      "IMPROVED": "95% CI excludes 0 in the favourable direction and |point| >= margin",
+      "DEGRADED": "95% CI excludes 0 in the unfavourable direction and |point| >= margin",
+      "EQUIVALENT": "95% CI lies inside (-margin, +margin), or excludes 0 with |point| < margin (detectable but practically negligible)",
+      "INCONCLUSIVE": "any other case, including fewer than 9000 valid bootstrap replicates"
+    },
+    "ranking_axis": "category of Delta AUROC (AUPRC and pAUROC are reported and any disagreement is flagged, never substituted)",
+    "operating_axis": {
+      "O+": "one of {healthy-target FPR, recall} IMPROVED and the other IMPROVED or EQUIVALENT",
+      "O-": "one DEGRADED and the other DEGRADED or EQUIVALENT",
+      "O_tradeoff": "one IMPROVED and the other DEGRADED (fewer false alarms bought with fewer detections, or the reverse)",
+      "O0": "both EQUIVALENT",
+      "O?": "otherwise (any INCONCLUSIVE component without a decisive conflict)"
+    },
+    "joint_categories": {
+      "BOTH_IMPROVED": "R IMPROVED and O+",
+      "RANKING_GAIN_OPERATION_PRESERVED": "R IMPROVED and O0",
+      "OPERATING_GAIN_RANKING_PRESERVED": "R EQUIVALENT and O+",
+      "TRADE_OFF": "(R IMPROVED and O- or O_tradeoff) or (R DEGRADED and O+) or (R EQUIVALENT and O_tradeoff)",
+      "EQUIVALENT": "R EQUIVALENT and O0",
+      "UNDERPERFORMANCE": "(R DEGRADED and O- or O0 or O_tradeoff) or (R EQUIVALENT and O-)",
+      "INCONCLUSIVE": "R INCONCLUSIVE or O?, reported with whichever axis is decisive"
+    },
+    "aggregation_across_families": "per (machine, regime, contrast) the five family categories are reported side by side; a machine-level statement requires all five families to be non-contradicting on the claimed axis (Phase-4 dominance convention); otherwise the result is FAMILY-DEPENDENT",
+    "small_slice_rule": "RoboticArm operating-axis results rest on 20 healthy target segments from 6 parents and are labelled LOW-PRECISION; no RoboticArm operating claim is made from a point estimate",
+    "trade_off_rule": "a TRADE_OFF is a finding, reported with both components; it is neither a success nor a failure of fusion"
+  },
+  "contrasts": {
+    "primary": {
+      "P1": "L2(all three) - each single modality (mic, acc, gyro individually); per machine x regime x family; AUROC, healthy-target FPR, recall",
+      "P2": "L1 - L2(all three); per machine x regime x family",
+      "P3": "L2(pair without m) - L2(all three) for m in {mic, acc, gyro}: the cost of losing modality m under gating"
+    },
+    "secondary": {
+      "S1": "L1 - each single modality",
+      "S2": "L2(pair) - each of its two member modalities",
+      "S3": "fusion arms vs the post-hoc historical best single modality (labelled post-hoc)",
+      "S4": "source-slice and target-slice versions of every primary contrast",
+      "S5": "AUPRC and pAUROC versions of every primary contrast",
+      "S6": "T - S for every fusion arm"
+    },
+    "multiplicity": "no family-wise correction; inference is conditional on the observed cohort and claims require cross-family consistency (5/5 non-contradicting). The number of contrasts is stated in the report so chance findings at the 5% level are expected and read accordingly."
+  },
+  "statistics": {
+    "ranking_metric_intervals": "reuse the Phase-4 family_bootstrap / paired-difference machinery and the shared draws",
+    "threshold_metric_intervals": "NEW in 5.3: paired bootstrap of healthy-target FPR and recall differences with the same draws and the same R8 seed averaging (Phase 4 reported these as point estimates only)",
+    "valid_replicates": "reported for every interval; < 9000 valid replicates -> INCONCLUSIVE"
+  },
+  "development_falsification": {
+    "where": "training and source-validation data only; no protected data",
+    "positive_controls": "synthetic integrity failures injected into one modality of source-validation segments: constant (dead), zero dropout, stuck-at-last-value, saturation plateau, non-finite samples, truncated stream, each at coverage 10/25/50/75/100%; expected: gate fires at >= 50% flatline coverage and for any non-finite or truncated stream",
+    "negative_controls": "fault-like but valid perturbations: gain x0.5, x2, x3; bias offset; additive Gaussian noise at 20/10/0 dB SNR; impulse train; added tone; natural target-domain audio. Expected: gate never fires. Any firing falsifies the claim that the gate is insensitive to signal content and -> STOP",
+    "clean_false_trigger": "gate on every clean training and source-validation segment-modality; expected 0; any trigger -> STOP (no retuning)",
+    "ungated_failure_demonstration": "compute each frozen Phase-4 model's score of a synthetic dead (constant) input, calibrate it, and report source-validation FPR of L2(all three) ungated with that constant vs L3 gated (the pair) under loss of each modality",
+    "protected_diagnostic_preregistered": "in analyse-once: number of gated segment-modalities among test anomalies and test normals per machine (expected 0/0 from the audit); any gated anomaly is listed individually"
+  },
+  "protected_execution": {
+    "inherits": "Phase-4 score-all-then-analyse-once machinery, failure policy and provenance conventions; no second provenance framework",
+    "human_authorization": "after the 5.5 freeze and an independent read-only audit, an explicit authorisation token stated by the human in chat and recorded in a pre-scoring identity record; authorized_protected_read is an accident guard, not an authorisation",
+    "execution_identity": "clean tracked tree; scoring HEAD bound into the batch id; proposed batch id recorded at the freeze; authorised ids and cohort hashes must equal the proposed ones",
+    "read_scope": "a single new protected script is the only additional caller of authorized_protected_read; it is added to the AUTHORIZED_SCOPES tripwire in the 5.5 freeze commit",
+    "order": [
+      "verify token, clean tree, ledger == 196, every bundle/model/manifest hash, Phase-4 score-manifest payload and table hashes, Phase-3.2 artifact hashes",
+      "open authorized scope; integrity-gate scan of the common-test inputs (label-free); STOP before any ledger append if any segment-modality is gated",
+      "materialise L1-new label-free test inputs from the existing hash-verified caches",
+      "append exactly 232 looks atomically (batch=<id> in every row) and write batch_authorization.json",
+      "score 24 L1-new tables and derive 208 L2 tables from the sealed Phase-4 tables into a sealed staging area; no label read, no metric",
+      "completion gate: 232 tables present, hashed, finite, label-free",
+      "analyse-once: all contrasts, categories and diagnostics in one pass; final"
+    ],
+    "ledger_semantics": "one look per new protected table (24 L1-new + 208 derived L2); re-analysis of the 156 Phase-4 and 28 Phase-3.2 tables adds no look because no new detector is exposed to the test labels; every row carries batch=<id>; batch_authorization.json records batch_id, ledger_start_count 196, ledger_end_count 428, experiment_count 232, code_git_sha so verify_ledger_history accepts it unchanged",
+    "derived_table_provenance": "each L2 table records the experiment ids and verified hashes of the Phase-4 tables it consumed, the calibration parameters and threshold from its validation bundle, and the rule version",
+    "manifest_hashes": "pre_analysis_score_manifest_sha256, post_analysis_score_manifest_sha256 and score_payload_sha256 (canonical JSON excluding mutable status fields)",
+    "recalculation_guard": "analyse-once refuses if an analysis directory exists; a completed analysis is final",
+    "failure_policy": "Phase-4 policy inherited: a refusal before the ledger append consumes no look; after the append the looks are consumed and the same identity is never rerun; recovery requires a new versioned batch identity and an incident record; no metric before all 232 tables verify"
+  },
+  "required_pre_5_3_hygiene": [
+    "guarded loaders and a path tripwire for sealed historical protected score tables (reports/phase4_protected/staging/scores/*.csv, reports/phase3_2/experiments/*/scores.parquet), which the Phase-5.0 read guard does not yet cover"
+  ],
+  "claim_boundary": [
+    "Phase-4 aggregate protected results were observed before this design; Phase 5 is prospective in its frozen implementation but is not a pristine confirmatory test of fusion in general",
+    "results are per machine and per regime; no universal fusion claim",
+    "BrushlessMotor results are benchmark discrimination under brushless_motor_acquisition_time_class_confound_v1; a fusion gain there may reflect better session discrimination",
+    "RoboticArm operating results rest on 20 healthy target segments from 6 parents",
+    "L3 is integrity gating validated on synthetic failures; it is not sensor-quality estimation and says nothing about partial real-world degradation",
+    "the loss condition models complete loss of one modality only"
+  ],
+  "unresolved_until_measured": [
+    "U1: whether any clean segment has >= 50% flatline coverage (the audit rules out only 100%); measured in 5.4",
+    "U2: whether the Phase-3.1 validation-only thresholds are byte-identical to the thresholds Phase 3.2 applied; verified by hash in 5.2",
+    "U3: whether IQR_v > 0 for every modality, family and seed; measured in 5.3",
+    "U4: L1 dense-AE training time at 2918/2936 input dims (Phase-4 single-modality AE averaged about 4 min per fit)",
+    "U5: valid-replicate counts for RoboticArm healthy-target FPR intervals with 6 parents"
+  ],
+  "implementation_stages": [
+    {
+      "stage": "5.2",
+      "name": "fusion data assembly and hygiene",
+      "scope": "train/validation only",
+      "stop": true
+    },
+    {
+      "stage": "5.3",
+      "name": "matched naive fusion (L1-new fits, L2 calibration and thresholds)",
+      "scope": "train/validation only",
+      "stop": true
+    },
+    {
+      "stage": "5.4",
+      "name": "integrity gate and development falsification",
+      "scope": "train/validation and synthetic inputs only",
+      "stop": true
+    },
+    {
+      "stage": "5.5",
+      "name": "pre-test freeze and protected script on fixtures",
+      "scope": "no protected data",
+      "stop": true,
+      "independent_audit": true
+    },
+    {
+      "stage": "5.6",
+      "name": "human protected authorisation",
+      "scope": "decision only",
+      "stop": true
+    },
+    {
+      "stage": "5.7",
+      "name": "protected score-all and analyse-once",
+      "scope": "one authorised batch",
+      "stop": true
+    },
+    {
+      "stage": "5.8",
+      "name": "result report and ledger segment registration",
+      "scope": "documentation",
+      "stop": true
+    }
+  ]
+}

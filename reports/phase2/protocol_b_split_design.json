@@ -1,0 +1,14 @@
+{
+  "split_version": "protocol_b_v1",
+  "selected_seed": 1995,
+  "candidate_seeds_reported": [
+    1995,
+    20240821,
+    20260821
+  ],
+  "selection_rule": "Seed 1995 was adopted a priori to reuse the pinned upstream baseline seed; no signal values, anomaly scores, or future model results were inspected.",
+  "robotic_arm_rule": "All anomaly recordings test; normal recordings stratified by domain and operating condition, approximately 80/10/10 by recording with minimum one validation and two test recordings per stratum. Regime S maps every target normal recording to test.",
+  "brushless_motor_rule": "Released test retained; released normal-train recordings split 90/10 train/validation within domain and operating condition. Regime S maps released target-train normals to test.",
+  "rows": 7792,
+  "parent_leakage_count": 0
+}

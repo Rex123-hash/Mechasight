@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "split_version": "protocol_b_common_test_v2",
+  "seed": 1995,
+  "supersedes": "reports/phase2/protocol_b_split_v1.csv for future S-vs-T comparisons",
+  "historical_v1_preserved": true,
+  "reason": "Regime S and Regime T must be compared on an identical held-out evaluation cohort so that performance differences are attributable to target-normal adaptation rather than test-set composition.",
+  "adaptation_expansion": [
+    {
+      "machine": "BrushlessMotor",
+      "released_target_normal_segments": 18,
+      "released_target_normal_parent_recordings": 18,
+      "leakage_safe_adaptation_parent_recordings": 18,
+      "leakage_safe_adaptation_segments": 18,
+      "additional_sibling_segments_reserved": 0
+    },
+    {
+      "machine": "RoboticArm",
+      "released_target_normal_segments": 27,
+      "released_target_normal_parent_recordings": 18,
+      "leakage_safe_adaptation_parent_recordings": 18,
+      "leakage_safe_adaptation_segments": 123,
+      "additional_sibling_segments_reserved": 96
+    }
+  ],
+  "matched_test_proof": [
+    {
+      "machine": "BrushlessMotor",
+      "s_test_segments": 312,
+      "t_test_segments": 312,
+      "test_segment_symmetric_difference": 0,
+      "s_test_parents": 312,
+      "t_test_parents": 312,
+      "test_parent_symmetric_difference": 0,
+      "anomaly_test_symmetric_difference": 0
+    },
+    {
+      "machine": "RoboticArm",
+      "s_test_segments": 466,
+      "t_test_segments": 466,
+      "test_segment_symmetric_difference": 0,
+      "s_test_parents": 33,
+      "t_test_parents": 33,
+      "test_parent_symmetric_difference": 0,
+      "anomaly_test_symmetric_difference": 0
+    }
+  ]
+}

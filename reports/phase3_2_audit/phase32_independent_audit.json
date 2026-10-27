@@ -1,0 +1,327 @@
+{
+  "artifacts_created": [
+    "docs/phase32_independent_audit.md",
+    "reports/phase3_2_audit/phase32_independent_audit.json",
+    "reports/phase3_2_audit/metric_reproduction_check.csv",
+    "reports/phase3_2_audit/undefined_metric_correction_preview.csv",
+    "reports/phase3_2_audit/family_undefined_metric_preview.csv",
+    "reports/phase3_2_audit/domain_slice_prevalence_context.csv",
+    "reports/phase3_2_audit/threshold_transfer_diagnostic.csv",
+    "reports/phase3_2_audit/cluster_independence_summary.csv"
+  ],
+  "audit_id": "p32-independent-audit-v1",
+  "audit_scope": "read-only independent verification of the Phase-3.2 first locked common test",
+  "audit_timestamp_utc": "2026-09-08T09:09:46.808223+00:00",
+  "average_precision_prevalence_trap": {
+    "affected": [
+      {
+        "anomaly_prevalence_ap_baseline": 0.8529411764705882,
+        "average_precision": 0.8213177020951459,
+        "domain": "target",
+        "machine": "RoboticArm",
+        "model_family": "statistical_reference",
+        "regime": "S"
+      },
+      {
+        "anomaly_prevalence_ap_baseline": 0.8529411764705882,
+        "average_precision": 0.8256040066344714,
+        "domain": "target",
+        "machine": "RoboticArm",
+        "model_family": "one_class_svm",
+        "regime": "S"
+      },
+      {
+        "anomaly_prevalence_ap_baseline": 0.8529411764705882,
+        "average_precision": 0.8246666331456067,
+        "domain": "target",
+        "machine": "RoboticArm",
+        "model_family": "statistical_reference",
+        "regime": "T"
+      },
+      {
+        "anomaly_prevalence_ap_baseline": 0.5,
+        "average_precision": 0.3973186048304546,
+        "domain": "target",
+        "machine": "BrushlessMotor",
+        "model_family": "isolation_forest",
+        "regime": "T"
+      }
+    ],
+    "brushless_motor_slice_ap_baseline": 0.5,
+    "published_tables_include_prevalence_baseline": false,
+    "robotic_arm_source_slice_ap_baseline": 0.3515151515151515,
+    "robotic_arm_target_slice_ap_baseline": 0.8529411764705882,
+    "slices_with_ap_below_own_prevalence_baseline": 4
+  },
+  "bootstrap_audit": {
+    "accounts_for": [
+      "evaluation-cohort sampling variability given fixed fitted models"
+    ],
+    "brushless_motor_resampling_unit": "released_recording_segment_one_to_one",
+    "ci_method": "percentile",
+    "class_stratified_parent_counts_preserved_per_replicate": true,
+    "confidence": 0.95,
+    "does_not_account_for": [
+      "model-training variability (models are re-fit once, not bootstrapped)",
+      "seed uncertainty as a population (5 fixed seeds are averaged, not resampled)",
+      "new-machine / new-site / new-installation transfer",
+      "the BrushlessMotor acquisition-time confound, which is a bias not a variance"
+    ],
+    "inference_scope": "conditional on this observed evaluation cohort and these fixed seeds",
+    "invalid_replicates": 0,
+    "one_weight_matrix_per_machine_reused_across_regimes_families_seeds": true,
+    "paired_contrasts_require_identical_draw_identity": true,
+    "replicates": 10000,
+    "robotic_arm_resampling_unit": "physical_parent_recording",
+    "seed": 1995,
+    "sibling_segments_share_one_multiplicity_in_every_replicate": true,
+    "status": "PASS"
+  },
+  "cluster_independence": [
+    {
+      "class": "normal",
+      "domain": "source",
+      "machine": "RoboticArm",
+      "parent_recordings": 8,
+      "segments": 214
+    },
+    {
+      "class": "anomaly",
+      "domain": "source",
+      "machine": "RoboticArm",
+      "parent_recordings": 13,
+      "segments": 116
+    },
+    {
+      "class": "normal",
+      "domain": "target",
+      "machine": "RoboticArm",
+      "parent_recordings": 6,
+      "segments": 20
+    },
+    {
+      "class": "anomaly",
+      "domain": "target",
+      "machine": "RoboticArm",
+      "parent_recordings": 6,
+      "segments": 116
+    },
+    {
+      "class": "normal",
+      "domain": "ALL",
+      "machine": "RoboticArm",
+      "parent_recordings": 14,
+      "segments": 234
+    },
+    {
+      "class": "anomaly",
+      "domain": "ALL",
+      "machine": "RoboticArm",
+      "parent_recordings": 19,
+      "segments": 232
+    },
+    {
+      "class": "normal",
+      "domain": "source",
+      "machine": "BrushlessMotor",
+      "parent_recordings": 78,
+      "segments": 78
+    },
+    {
+      "class": "anomaly",
+      "domain": "source",
+      "machine": "BrushlessMotor",
+      "parent_recordings": 78,
+      "segments": 78
+    },
+    {
+      "class": "normal",
+      "domain": "target",
+      "machine": "BrushlessMotor",
+      "parent_recordings": 78,
+      "segments": 78
+    },
+    {
+      "class": "anomaly",
+      "domain": "target",
+      "machine": "BrushlessMotor",
+      "parent_recordings": 78,
+      "segments": 78
+    },
+    {
+      "class": "normal",
+      "domain": "ALL",
+      "machine": "BrushlessMotor",
+      "parent_recordings": 156,
+      "segments": 156
+    },
+    {
+      "class": "anomaly",
+      "domain": "ALL",
+      "machine": "BrushlessMotor",
+      "parent_recordings": 156,
+      "segments": 156
+    }
+  ],
+  "cohort_integrity": {
+    "blocked_siblings_in_any_scored_cohort": 0,
+    "distinct_normalizers_across_four_machine_regime_cells": 4,
+    "s_t_common_test_identical_per_machine": true,
+    "scored_test_equals_frozen_common_evaluation_role": true,
+    "split_manifest_blob_unchanged_since_phase_2_2": true,
+    "target_adaptation_in_regime_s_training": 0,
+    "test_parent_intersect_train_parent": 0,
+    "test_parent_intersect_validation_parent": 0,
+    "train_parent_intersect_validation_parent": 0,
+    "validation_all_source_domain_normal": true
+  },
+  "dataset_representation_audit": {
+    "adc_performed_at": "original physical acquisition on STEVAL-STWINBX1, before publication",
+    "adc_performed_by_mechasight": false,
+    "audio_container_files_present": 0,
+    "microphone_rows_per_robotic_arm_segment": 120000,
+    "microphone_storage": "Parquet table, columns Time(float64) and 'MIC [Waveform]'(float64)",
+    "reading_parquet_is": "deserialization of stored numeric samples, not analogue-to-digital conversion",
+    "release_file_extensions": {
+      "csv": 12,
+      "parquet": 11688
+    }
+  },
+  "healthy_target_independence_caveat": {
+    "brushless_motor_healthy_target_parent_recordings": 78,
+    "brushless_motor_healthy_target_segments": 78,
+    "no_confidence_interval_reported_for_healthy_target_fpr": true,
+    "ra_ocsvm_s_to_t_change_parents_moving": 4,
+    "ra_ocsvm_s_to_t_change_parents_total": 6,
+    "robotic_arm_healthy_target_parent_recordings": 6,
+    "robotic_arm_healthy_target_segments": 20,
+    "segments_per_parent": [
+      1,
+      2,
+      2,
+      2,
+      6,
+      7
+    ]
+  },
+  "isolation_forest_seed_audit": {
+    "all_five_seeds_reported_with_sd_min_max": true,
+    "averages_scores_before_metric": false,
+    "drops_seeds": false,
+    "family_point_is_arithmetic_mean_of_seed_metrics": true,
+    "max_abs_diff_family_point_vs_mean_of_seeds": 1.11e-16,
+    "per_replicate_order_is_metric_then_mean": true,
+    "precision_family_aggregation_note": "RoboticArm/T precision: seed 0 = 0.0 (defined), seeds 1-4 undefined; the mean propagates to undefined. Documented behaviour is 'arithmetic mean of five seed metrics', which is silently unreachable when any seed metric is undefined.",
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "selects_best_seed": false
+  },
+  "ledger": {
+    "bundles_without_ledger_entry": 0,
+    "entries_after": 28,
+    "entries_before": 28,
+    "entries_match_result_bundles": true,
+    "ledger_entries_without_bundle": 0,
+    "path": "reports/experiment_results/test_look_ledger.jsonl",
+    "sha256_before": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+    "unchanged": true,
+    "unique_batches": [
+      "p32-test-batch-8f7d48324fd10df97ae29100"
+    ],
+    "unique_git_sha": [
+      "99f6055156c314bbf26a847713d26792979fd050"
+    ],
+    "unique_timestamps": 1
+  },
+  "no_model_was_trained_or_rescored_during_this_audit": true,
+  "repository": {
+    "branch": "master",
+    "commits_after_results": "",
+    "evaluator_commit": "99f6055156c314bbf26a847713d26792979fd050",
+    "expected_head": "a576c9df8000dd1c0a5ad6fd73845f97facf98b2",
+    "head": "a576c9df8000dd1c0a5ad6fd73845f97facf98b2",
+    "head_matches_expected": true,
+    "results_commit_touched_code_or_config": false,
+    "tracked_worktree_clean": true
+  },
+  "representation_audit": {
+    "artifact_row_counts_match_frozen_roles": true,
+    "band_energy_in_primary_representation": false,
+    "channels": 7,
+    "feature_count": 98,
+    "is_median_of_window_model_scores": false,
+    "src_experiment_aggregation_py_used_by_phase31_or_phase32": false,
+    "statistics_per_channel": 14,
+    "verified_chain": "raw sensor stream -> 100 ms non-overlapping windows -> 98 engineered features per window -> median of EACH FEATURE across the segment's windows -> one 98-dim segment vector -> training-only population feature z-score -> classical model -> one segment score"
+  },
+  "reproduction": {
+    "artifact_manifest_files_verified": 155,
+    "artifact_manifest_mismatches": 0,
+    "bootstrap_ci_rows_checked": 36,
+    "cohort_hash_all_match": true,
+    "configurations_checked": 28,
+    "confusion_counts_all_match": true,
+    "family_delta_rows_checked": 36,
+    "max_abs_diff_auroc": 0.0,
+    "max_abs_diff_average_precision": 0.0,
+    "max_abs_diff_standardized_pauroc": 0.0,
+    "max_abs_diff_threshold": 2.220446049250313e-16,
+    "s_vs_t_delta_rows_checked": 18,
+    "status": "PASS"
+  },
+  "scientific_files_modified": [],
+  "sensor_terminology_audit": {
+    "ambiguous_locations": [
+      "README.md:64",
+      "docs/source_verification.md:47",
+      "docs/assumptions_and_open_questions.md:143",
+      "docs/research_definition.md:77,281,901,993 (mostly quoting the upstream baseline)"
+    ],
+    "device_names": [
+      "IMP23ABSU microphone",
+      "ISM330DHCX 6-axis IMU"
+    ],
+    "modality_names": [
+      "microphone/audio",
+      "accelerometer/vibration",
+      "gyroscope/angular motion"
+    ],
+    "numeric_signal_channels": 7,
+    "physical_sensor_devices": 2,
+    "preferred_wording": "three sensing modalities from two physical sensor devices (seven numeric channels)",
+    "sensing_modalities": 3
+  },
+  "undefined_metric_finding": {
+    "all_null_f1_rows_are": "RoboticArm isolation_forest, all 5 seeds in both regimes",
+    "any_test_pins_the_null_behaviour": false,
+    "classification": "convention-dependent, but materially misleading as published",
+    "count_identity_f1_defined_for_all_affected_rows": true,
+    "count_identity_f1_value_for_all_affected_rows": 0.0,
+    "decision": "C \u2014 VERSIONED REPORTING CORRECTION NEEDED",
+    "frozen_reporting_policy_specifies_undefined_convention": false,
+    "harmonic_and_count_definitions_agree_where_both_defined_max_abs_diff": 1.11e-16,
+    "mechanism_a_precision_undefined_tp0_fp0": 9,
+    "mechanism_b_precision_plus_recall_zero": 1,
+    "rows_with_null_f1": 10,
+    "rows_with_null_precision": 9
+  },
+  "verdict": "YELLOW",
+  "verdict_basis": "Every score, threshold, confusion count, ranking metric, bootstrap interval and paired contrast reproduces exactly from the persisted evidence, and every cohort and leakage invariant holds. No scientific defect was found. Two reporting conventions and a set of stale documents materially misrepresent the results to a reader and require a versioned, score-preserving correction.",
+  "weighted_bootstrap_equivalence_test": {
+    "adversarial_cases": 1050,
+    "covers": [
+      "heavy ties",
+      "extreme class imbalance",
+      "near-separable",
+      "all-scores-equal degenerate",
+      "zero-weight rows"
+    ],
+    "max_abs_diff_vs_duplicate_row_ground_truth": 8.882e-16,
+    "status": "PASS"
+  }
+}

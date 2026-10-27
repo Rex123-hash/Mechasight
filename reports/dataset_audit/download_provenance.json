@@ -1,0 +1,36 @@
+{
+  "zenodo_record": "12665499",
+  "zenodo_record_url": "https://zenodo.org/records/12665499",
+  "doi": "10.5281/zenodo.12665499",
+  "concept_doi": "10.5281/zenodo.12636236",
+  "licence": "CC BY-SA 4.0",
+  "verified_utc": "2026-08-21T14:09:46.548936+00:00",
+  "live_record_matches_pinned_values": true,
+  "files": [
+    {
+      "filename": "BrushlessMotor.7z",
+      "source_url": "https://zenodo.org/api/records/12665499/files/BrushlessMotor.7z/content",
+      "expected_size": 1577018050,
+      "expected_checksum": "md5:d5f1a49b928b1b0b01c3d6de930cd277",
+      "present": true,
+      "actual_size": 1577018050,
+      "size_match": true,
+      "actual_checksum": "md5:d5f1a49b928b1b0b01c3d6de930cd277",
+      "checksum_match": true,
+      "status": "VERIFIED"
+    },
+    {
+      "filename": "RoboticArm.7z",
+      "source_url": "https://zenodo.org/api/records/12665499/files/RoboticArm.7z/content",
+      "expected_size": 3545453763,
+      "expected_checksum": "md5:a64498b7dcc297946a7fb8366e38ba33",
+      "present": true,
+      "actual_size": 3545453763,
+      "size_match": true,
+      "actual_checksum": "md5:a64498b7dcc297946a7fb8366e38ba33",
+      "checksum_match": true,
+      "status": "VERIFIED"
+    }
+  ],
+  "all_verified": true
+}

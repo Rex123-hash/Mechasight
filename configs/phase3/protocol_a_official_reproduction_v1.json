@@ -1,0 +1,254 @@
+{
+  "architecture": {
+    "approximate_parameter_count": 40800000,
+    "batch_norm_note": "BatchNorm1d is present in the upstream source but was omitted from the repository's earlier architecture summary in docs/research_definition.md 5.9.",
+    "batch_norm_present": true,
+    "decoder_block": "Linear -> BatchNorm1d -> ReLU for each of [2048, 2048, 2048] in reverse, then Linear(2048, 5836) with no BatchNorm and no activation",
+    "encoder_block": "Linear -> BatchNorm1d -> ReLU for each of [2048, 2048, 2048], then Linear(2048, 16) with no BatchNorm and no activation",
+    "layer_dims": [
+      2048,
+      2048,
+      2048,
+      16
+    ],
+    "type": "fully connected autoencoder"
+  },
+  "brushless_motor_limitation": {
+    "applies_to_protocol_a": true,
+    "forbidden": "pure mechanical-fault sensitivity",
+    "limitation_id": "brushless_motor_acquisition_time_class_confound_v1",
+    "permitted": "published/reproduced benchmark discrimination on the released BrushlessMotor cohort"
+  },
+  "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+  "dataset": {
+    "archives": [
+      {
+        "bytes": 3545453763,
+        "filename": "RoboticArm.7z",
+        "md5": "a64498b7dcc297946a7fb8366e38ba33"
+      },
+      {
+        "bytes": 1577018050,
+        "filename": "BrushlessMotor.7z",
+        "md5": "d5f1a49b928b1b0b01c3d6de930cd277"
+      }
+    ],
+    "concept_doi": "10.5281/zenodo.12636236",
+    "doi": "10.5281/zenodo.12665499",
+    "version": null,
+    "version_note": "Zenodo API version field is null; no version number is asserted."
+  },
+  "explicitly_not_inherited_from_protocol_b": [
+    "measured machine-specific effective sampling rates",
+    "BrushlessMotor first-accelerometer-sample correction",
+    "half-open windowing",
+    "native-rate multi-sensor processing",
+    "the 98 engineered features",
+    "feature-median segment aggregation",
+    "train-only segment-feature z-scoring",
+    "Isolation Forest",
+    "One-Class SVM",
+    "the Protocol-B common evaluation cohort",
+    "parent-disjoint splits",
+    "the Protocol-B q90 threshold policy"
+  ],
+  "implementation": {
+    "module": "src/reproduction/protocol_a.py",
+    "runner": "scripts/run_protocol_a_reproduction.py",
+    "version": "phase3.3-protocol-a-reproduction-v1"
+  },
+  "preprocessing": {
+    "brushless_motor_first_accelerometer_sample_correction": false,
+    "channels": {
+      "imp23absu_mic": 1,
+      "ism330dhcx_acc": 3,
+      "ism330dhcx_gyro": 3
+    },
+    "concatenated_input_dim": 5836,
+    "fixed_rates_hz": {
+      "imp23absu_mic": 16000,
+      "ism330dhcx_acc": 7063,
+      "ism330dhcx_gyro": 7063
+    },
+    "gyroscope_warm_up": "35ms",
+    "length_handling": "zero-pad if short, truncate if long, to int(fs * 0.1)",
+    "measured_effective_rates_used": false,
+    "normalisation": "std_window (per window, per channel, epsilon in denominator)",
+    "normalisation_fitting": "none - applied independently to train, validation and test",
+    "segment_end_rule": "min(all sensors' last timestamps)",
+    "segment_start_rule": "max(gyro_first + 35ms, max(all sensors' first timestamps))",
+    "slicing": "pandas label-based datetime slicing, RIGHT-INCLUSIVE",
+    "storage_dtype": "float32 (h5py default)",
+    "window_count_rule": "(end - start) // 100ms",
+    "window_lengths": {
+      "imp23absu_mic": 1600,
+      "ism330dhcx_acc": 706,
+      "ism330dhcx_gyro": 706
+    },
+    "window_size": "100ms",
+    "window_stride": "100ms non-overlapping"
+  },
+  "protocol": "official_baseline_reproduction",
+  "published_reference_values": {
+    "BrushlessMotor": {
+      "overall": 58.95,
+      "source": 73.63,
+      "target": 55.59
+    },
+    "RoboticArm": {
+      "overall": 91.62,
+      "source": 93.28,
+      "target": 90.48
+    },
+    "source": "Albertini et al., DCASE 2024 Workshop, paper Table 4 (authors' own results)",
+    "status": "REFERENCE_ONLY_NOT_A_TUNING_TARGET",
+    "usage_rule": "may be compared against, never optimised towards"
+  },
+  "purpose": "Faithful reproduction of the published IMAD-DS official baseline, as a historical comparability anchor. This is not the MechaSight deployment protocol; Protocol B remains the primary leakage-controlled benchmark.",
+  "regime": "T",
+  "reporting_slices": [
+    "overall_s_plus_t",
+    "source_domain",
+    "target_domain"
+  ],
+  "reproduction_tolerance": {
+    "classification": {
+      "CLOSE": "absolute error > 0.5 and <= 2.0 AUC points",
+      "EXACT": "absolute error 0.00 AUC points",
+      "MATERIAL_DEVIATION": "absolute error > 2.0 AUC points",
+      "NEAR_EXACT": "absolute error <= 0.5 AUC points"
+    },
+    "frozen_before_any_own_test_result_was_computed": true,
+    "justification": "Upstream seeds torch and the sklearn split but does not disable cuDNN nondeterminism, and its early stopping (patience 3) means a single epoch's difference changes the final weights. Run-to-run variation of a fraction of an AUC point is therefore expected even from the authors' own code, so bitwise equality is not a reasonable criterion. 0.5 points is adopted as the near-exact band and 2.0 points as the material-deviation boundary. Both were fixed before any MechaSight Protocol-A test score was computed.",
+    "material_threshold_auc_points": 2.0,
+    "near_exact_threshold_auc_points": 0.5
+  },
+  "robotic_arm_overlap_disclosure": {
+    "anomaly_test_segments_with_normal_training_sibling": 0,
+    "forbidden_language": "the official AUC is inflated",
+    "normal_test_segments_total": 232,
+    "normal_test_segments_with_training_sibling": 212,
+    "parent_recordings": 101,
+    "parents_crossing_official_split": 62,
+    "permitted_language": "recording overlap creates a credible mechanism for optimistic bias; the magnitude is to be measured",
+    "reason": "Protocol A exists to reproduce the released evaluation; making it parent-disjoint would defeat its purpose.",
+    "retained_deliberately": true,
+    "segments_affected_by_crossing_parents": 1837
+  },
+  "schema_version": "phase3.3-protocol-a-official-reproduction-v1",
+  "scope_limits": {
+    "leakage_magnitude_claim_permitted": false,
+    "reason": "Protocol A and Protocol B differ in split, preprocessing, model family and representation simultaneously, so their difference does not isolate the effect of parent-recording overlap. A controlled experiment holding model and preprocessing constant while varying only the grouping is required, and is not performed here."
+  },
+  "scoring": {
+    "anomaly_score": "per-window reconstruction MSE over the concatenated multi-sensor vector",
+    "auc": {
+      "implementation": "upstream calculate_single_auc",
+      "published_column_names": [
+        "S+T",
+        "Source",
+        "Target"
+      ],
+      "rule": "pair scores 1 only when normal_score < anomaly_score; exact ties score zero",
+      "sklearn_roc_auc_used_for_headline": false,
+      "slices": [
+        "all",
+        "source",
+        "target"
+      ]
+    },
+    "per_sensor_columns": "f_<sensor> from the joint reconstruction; s_<sensor> from masked-input evaluation",
+    "score_orientation": "higher is more anomalous",
+    "segment_aggregation": "median of the segment's window scores"
+  },
+  "split": {
+    "note": "Regime T: the released target-normal training segments are included in training, as upstream does.",
+    "parent_disjoint": false,
+    "regrouping_applied": false,
+    "source": "released_official_train_test_folders",
+    "target_normal_training_allocation": {
+      "BrushlessMotor": 18,
+      "RoboticArm": 27
+    },
+    "test_metadata": [
+      "attributes_normal_source_test.csv",
+      "attributes_anomaly_source_test.csv",
+      "attributes_normal_target_test.csv",
+      "attributes_anomaly_target_test.csv"
+    ],
+    "train_metadata": [
+      "attributes_normal_source_train.csv",
+      "attributes_normal_target_train.csv"
+    ]
+  },
+  "training": {
+    "batch_size": 1024,
+    "checkpoint_selection": "upstream stores best_model_state = self.state_dict(), which holds live tensor references rather than a copy, so the restored weights are the final epoch's, not the best-validation epoch's. Reproduced, not corrected.",
+    "determinism": "upstream does not set cudnn.deterministic or use_deterministic_algorithms, so GPU training is seeded but not bitwise reproducible. Faithful reproduction preserves this; an optional deterministic mode is NOT used.",
+    "device": "environment parameter; upstream comments explicitly instruct adapting it per machine ('mps', 'cuda', or 'cpu')",
+    "early_stopping": "stop when validation loss has not improved for 3 consecutive epochs",
+    "learning_rate": 0.0001,
+    "loss": "utilities.MSE = mean squared error over dim=1, then mean over the batch",
+    "num_epochs": 1000,
+    "optimizer": "torch.optim.Adam",
+    "optimizer_other_arguments": "PyTorch defaults (betas 0.9/0.999, eps 1e-8, weight_decay 0)",
+    "patience": 3,
+    "seed": 1995,
+    "seed_scope": "torch.manual_seed and torch.cuda.manual_seed; sklearn train_test_split random_state",
+    "shuffle": {
+      "test": false,
+      "train": true,
+      "validation": false
+    },
+    "validation": {
+      "level": "window",
+      "random_state": 1995,
+      "recording_disjoint": false,
+      "size": 0.1,
+      "stratify_by": "anomaly_label + domain_shift_op + domain_shift_env"
+    }
+  },
+  "upstream": {
+    "commit_date_utc": "2026-04-28T20:28:35Z",
+    "commit_message": "updated readme.md",
+    "commit_sha": "592bcbbed58893dc26bbab3240c5d7a3105a1a7f",
+    "files": {
+      "baseline.ipynb": {
+        "bytes_raw": 7805,
+        "git_blob_sha1": "52615b6089d09db6456b99e5010d745bd7608b4f",
+        "phase2_recorded_matches_crlf_form": true,
+        "phase2_recorded_sha256": "73972d70cb95f71e0d5bbdb5f24549eea557116670ac608a30643ca23b0098d4",
+        "sha256_crlf": "73972d70cb95f71e0d5bbdb5f24549eea557116670ac608a30643ca23b0098d4",
+        "sha256_raw_lf": "abc7fa4c70e0c252f596f76c55bb99695fd44691298478bf988c3803dbf933a5"
+      },
+      "model.py": {
+        "bytes_raw": 13027,
+        "git_blob_sha1": "7f756a9232d958dc6a9a8ae7c7a61564e9cae101",
+        "phase2_recorded_matches_crlf_form": true,
+        "phase2_recorded_sha256": "7704cdbea5f8258dbab06d6fd1c2980e425d886a5ed16fc3922375c6d331dc82",
+        "sha256_crlf": "7704cdbea5f8258dbab06d6fd1c2980e425d886a5ed16fc3922375c6d331dc82",
+        "sha256_raw_lf": "1ae87c5beb795effa11d9d0bcb6bf76704c0295baaa6065647e81fa294d7d8f1"
+      },
+      "preprocess.ipynb": {
+        "bytes_raw": 24818,
+        "git_blob_sha1": "a85a7c27b0d979cc11c8b9c979ec0fc248013be0",
+        "phase2_recorded_matches_crlf_form": true,
+        "phase2_recorded_sha256": "45a560da566025cabd812dadf1e5330ff2c8200be3aac8d0f855dff152419d38",
+        "sha256_crlf": "45a560da566025cabd812dadf1e5330ff2c8200be3aac8d0f855dff152419d38",
+        "sha256_raw_lf": "716ce752d88397032984b81698d8223bdf8ff36727552516cd575f77ce090c1c"
+      },
+      "utilities.py": {
+        "bytes_raw": 17511,
+        "git_blob_sha1": "24efb2366bbd186219477251f76324b7d97dbbe0",
+        "phase2_recorded_matches_crlf_form": true,
+        "phase2_recorded_sha256": "2770b2fe5732986896f7150f3c6d61992837581fbd1f50e7d853b26c378c8f30",
+        "sha256_crlf": "2770b2fe5732986896f7150f3c6d61992837581fbd1f50e7d853b26c378c8f30",
+        "sha256_raw_lf": "eb7487e9130ca13f71c6ce01a4e40706f25ef454a763fb5ca2d384a512b57e40"
+      }
+    },
+    "license": "No LICENSE file exists in the pinned upstream tree. Upstream source is therefore NOT vendored into this repository; only its verified identity and behaviour are recorded, and the reproduction is independently implemented.",
+    "repository": "https://github.com/augustif/IMAD-DS_baseline",
+    "tree_sha": "471d3bce83b94e822fe8c1112e49687f9b782d5f",
+    "verification": "Re-fetched at the pinned commit and verified byte-for-byte against the GitHub tree: all four git blob SHA-1 values match. The Phase-2 recorded SHA-256 values are reproduced exactly by the CRLF-converted form of the same bytes, so the Phase-2 provenance hashes were computed after Windows line-ending conversion. Content is identical; only the recorded hash form was non-portable."
+  }
+}

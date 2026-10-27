@@ -1,0 +1,18 @@
+[
+  {
+    "archive": "BrushlessMotor.7z",
+    "status": "EXTRACTED",
+    "compressed_bytes": 1577018050,
+    "extracted_bytes": 4113111483,
+    "extracted_files": 4785,
+    "seconds": 236.1
+  },
+  {
+    "archive": "RoboticArm.7z",
+    "status": "EXTRACTED",
+    "compressed_bytes": 3545453763,
+    "extracted_bytes": 7194000084,
+    "extracted_files": 6915,
+    "seconds": 277.6
+  }
+]

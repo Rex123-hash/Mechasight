@@ -1,0 +1,206 @@
+{
+  "analysis_output": {
+    "must_carry": [
+      "original_primary_analysis.status",
+      "incident summary",
+      "label",
+      "retained ids",
+      "n_focal_parents == 48"
+    ],
+    "path": "reports/phase3_4_results/phase3_4_inc1_salvage_analysis.json",
+    "schema_version": "phase3.4-inc1-salvage-analysis-v1"
+  },
+  "config_identity": "p34r-inc1-4f86592159eadbbe276d9c6f",
+  "config_identity_definition": {
+    "hash": "p34r-inc1- + sha256(json.dumps(payload, sort_keys=True))[:24]",
+    "note": "reporting text, policy text and provenance fields are excluded; the payload pins what is scored and how the salvage statistic is computed",
+    "payload_fields": [
+      "bootstrap",
+      "estimator",
+      "excluded_experiment_ids",
+      "incident",
+      "retained_experiment_ids",
+      "retained_folds",
+      "seed",
+      "supersedes_analysis_of"
+    ]
+  },
+  "contains_any_performance_value": false,
+  "frozen_at_git_head_before_this_commit": "576b8a1",
+  "frozen_decisions": {
+    "evidence": "claim, SCORE_STARTED record and ledger entries for INC-1 are scientific provenance and are never rewritten",
+    "fold_1_absent": {
+      "decision": "DO NOT SCORE",
+      "experiment_id": "p34d-e56529a2f56f98fd4a7a",
+      "rule": "its paired counterpart is permanently incomplete; an unpaired ABSENT score cannot enter a paired estimand; the ledger authorisation stays in the append-only history; the look is left unclaimed",
+      "state": "AUTHORIZED / UNUSED (permanent)"
+    },
+    "fold_1_present": {
+      "decision": "NO RETRY",
+      "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+      "rule": "frozen F1/F3 single-use policy; a claim is never deleted, replaced or recovered; 'no forward occurred' is NOT permission to re-score",
+      "state": "CONSUMED / INCOMPLETE (permanent)"
+    },
+    "ledger": "append-only; none of the ten step-D authorisations is removed, replaced or re-timestamped"
+  },
+  "harness_protection": {
+    "guard": "tests/conftest.py autouse fixture refuses claim creation, exposure-record appends and ledger appends inside the real repository paths, before any os.open",
+    "tests": "tests/test_phase34_inc1_recovery.py"
+  },
+  "incident": {
+    "affected_arm": "PRESENT",
+    "affected_experiment_id": "p34d-92fd40fc93c8c8d2e819",
+    "affected_fold": 1,
+    "attempt_history": [
+      "SCORE_STARTED"
+    ],
+    "authorization_timestamp_utc": "2026-09-11T19:49:04.480058+00:00",
+    "cause": "tests/test_phase34_commit_a.py::test_score_refuses_before_any_claim_or_exposure (COMMIT B version) invoked score_experiment against the real results root after step D; the ledger gate legitimately passed",
+    "checkpoint_sha256": "85386f2df404e5db49923b604e08676b9d6d934b49c5d3c633f785e5c676060e",
+    "claim_timestamp_utc": "2026-09-11T19:50:25.721473+00:00",
+    "id": "INC-1",
+    "protected_forward_passes": 0,
+    "score_artifact_exists": false,
+    "score_completed_exists": false,
+    "score_started_timestamp_utc": "2026-09-11T19:50:25.722314+00:00",
+    "scorer_behaviour": "exactly as frozen (F1/F3)",
+    "test_performance_observed": "none",
+    "zero_forward_evidence": [
+      "_run_protected_inference (the only function that reads protected test data) was replaced by a sentinel that raised before returning; the sentinel raised immediately and read nothing",
+      "the append-only attempt record ends at SCORE_STARTED; the scorer writes SCORE_COMPLETED only after an artifact is persisted and hashed",
+      "no reports/phase3_4_results/scores/ directory exists; no per-segment score row for any experiment exists anywhere in the repository",
+      "the claim file and attempt record are committed at 576b8a1 exactly as created"
+    ]
+  },
+  "inference_run": false,
+  "mandatory_report_statements": [
+    "the original design had 5 paired folds / 60 focal parents",
+    "INC-1 consumed fold-1 PRESENT before inference",
+    "zero protected forwards occurred in INC-1",
+    "zero score was observed from INC-1",
+    "the frozen single-use policy prohibited retry",
+    "fold-1 ABSENT was intentionally left unused",
+    "the original five-fold primary analysis is incomplete",
+    "the folds 2-5 analysis is a pre-score incident-contingent secondary sensitivity analysis"
+  ],
+  "model_trained": false,
+  "original_primary_analysis": {
+    "design": "5 paired folds, 10 models, 60 focal parents, 203 focal normal test segments",
+    "prohibited": "silently dropping fold 1 and calling the remainder the original primary analysis",
+    "reason": "fold 1 PRESENT has no valid score and can never obtain one; fold 1 ABSENT is intentionally unused",
+    "status": "NOT FULLY ESTIMABLE DUE TO INC-1"
+  },
+  "parent_config_document_sha256": "70b1830e5cf2608dd97c20dda87d32f7a41205873246a74bb99626d31edea965",
+  "parent_config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+  "parent_execution_config": "configs/phase3/roboticarm_focal_toggle_execution_v2.json",
+  "salvage_analysis": {
+    "bootstrap": {
+      "conditional_on": "the eight fitted models and the four retained folds",
+      "does_not_include": [
+        "training-seed uncertainty",
+        "model-pair uncertainty",
+        "site/population uncertainty",
+        "uncertainty from the missing fold-1 pair"
+      ],
+      "folds": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "frozen": "FOLD-STRATIFIED PARENT BOOTSTRAP restricted to folds 2-5: resample 12 focal parents with replacement within each retained fold, carry each selected parent's complete focal-normal segment set, one parent-level delta per selected parent, equal-parent mean of the 48 resampled deltas",
+      "implementation": "src/experiment/focal_concordance.parent_concordance_delta(stratify_by_fold=True) on the pooled retained-fold frame; the estimator resamples within whichever folds are present, so no estimator code changes",
+      "interval": "percentile 95 percent",
+      "parents_per_fold": 12,
+      "prohibition": "N=4 folds is never an inferential sample; fold-level deltas are descriptive only",
+      "replicates": 10000,
+      "resampled_parents": 48,
+      "seed": 27182
+    },
+    "estimand": "For donor-matchable focal RoboticArm parents in intact folds 2-5, does exposure to same-parent training siblings change parent-weighted normal-vs-anomaly concordance?",
+    "estimator": {
+      "parent_aggregation": "MEAN over the parent's focal normal segments, unchanged",
+      "per_segment_delta": "delta_i = C_i(PRESENT) - C_i(ABSENT), unchanged",
+      "per_segment_quantity": "unchanged from parent config primary_estimand.per_segment_quantity",
+      "point_estimate": "equal-parent mean over the 48 retained focal parents",
+      "prohibited": [
+        "segment weighting",
+        "any change to the score definition",
+        "any change to the anomaly reference cohort",
+        "any change to checkpoint selection"
+      ]
+    },
+    "expected_focal_normal_test_segments_descriptive": 158,
+    "expected_focal_parents": 48,
+    "expected_persisted_score_rows": 3712,
+    "focal_parents_per_retained_fold": {
+      "2": 12,
+      "3": 12,
+      "4": 12,
+      "5": 12
+    },
+    "label": "INCIDENT-CONTINGENT SECONDARY SENSITIVITY ANALYSIS",
+    "limitations": [
+      "one of five pre-registered fold pairs is missing for a non-random, procedural reason (harness incident), so the retained cohort is 48 of the 60 pre-registered focal parents",
+      "the retained cohort was fixed before any score existed and was not selected on any outcome",
+      "the interval is conditional on eight fitted models; between-model variability is described by four fold-level deltas only",
+      "the analysis inherits every residual confound and claim boundary of the parent config, including the residual parent gap (0-3, ABSENT larger)",
+      "no confirmatory claim may be made from this analysis"
+    ],
+    "not_to_be_called": [
+      "confirmatory",
+      "the original primary Phase-3.4 result",
+      "the pre-registered five-fold analysis"
+    ],
+    "relation_to_original": "identical per-segment concordance C_i(a), identical per-segment delta, identical parent-level mean, identical parent-equal weighting, identical anomaly reference cohort (232 segments), identical checkpoints; restricted to the four intact fold pairs",
+    "retained_experiment_ids": [
+      "p34d-fd6e3bfd4c091e155d99",
+      "p34d-a4e8316f62fa982ec52d",
+      "p34d-88b93ddbacbc5829f326",
+      "p34d-2af84983abd170013b73",
+      "p34d-652bc1e3f9d29a51a460",
+      "p34d-406b59f08e154b284159",
+      "p34d-66656cf0901b180cf037",
+      "p34d-ed8467570acf122c36cd"
+    ],
+    "retained_folds": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "retained_models": 8,
+    "retained_pairs": 4,
+    "secondary_metrics": "the parent config's S1/S4/S5 per-fold quantities, reported for folds 2-5 only, descriptive"
+  },
+  "schema_version": "phase3.4-inc1-recovery-v1",
+  "scoring_plan": {
+    "enforcement": "score_experiment refuses excluded ids and refuses any retained id that is not the next one lacking SCORE_COMPLETED in the frozen order",
+    "frozen_order": [
+      "2A",
+      "2P",
+      "3P",
+      "3A",
+      "4A",
+      "4P",
+      "5P",
+      "5A"
+    ],
+    "frozen_order_experiment_ids": [
+      "p34d-fd6e3bfd4c091e155d99",
+      "p34d-a4e8316f62fa982ec52d",
+      "p34d-88b93ddbacbc5829f326",
+      "p34d-2af84983abd170013b73",
+      "p34d-652bc1e3f9d29a51a460",
+      "p34d-406b59f08e154b284159",
+      "p34d-66656cf0901b180cf037",
+      "p34d-ed8467570acf122c36cd"
+    ],
+    "one_look_each": true,
+    "order_derivation": "the parent execution matrix order 1P 1A 2A 2P 3P 3A 4A 4P 5P 5A with fold 1 removed; fixed before scoring; never reordered adaptively",
+    "rule_if_any_retained_look_becomes_incomplete": "STOP the phase; report as incomplete; no retry; no substitution",
+    "status": "NOT AUTHORISED BY THIS DOCUMENT; requires independent review of this freeze"
+  },
+  "status": "INCIDENT_RECOVERY_FROZEN_PRE_SCORING",
+  "test_score_computed": false
+}

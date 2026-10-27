@@ -1,0 +1,228 @@
+{
+  "schema_version": "phase3.3.1-audit-closure-v1",
+  "generated_utc": "2026-09-08T15:35:46.552980+00:00",
+  "phase": "3.3.1",
+  "role": "conservative scientific-maintenance engineer",
+  "layer_type": "additive correction layer; no historical artifact rewritten",
+  "scientific_result_status": "ACCEPTED",
+  "auditability_status": "YELLOW",
+  "auditability_reason": "The single MODERATE audit finding (F1) cannot be closed without the original per-segment score values, which do not exist. Every other finding is resolved or documented. YELLOW is the honest outcome; it does not qualify the correctness of the reproduction.",
+  "audited_head": "8add93c3e448d39028934c0e38f0b00c79dcb8da",
+  "boundary_respected": {
+    "model_inference_performed": false,
+    "test_scores_regenerated": false,
+    "retraining": false,
+    "seed_changed": false,
+    "device_changed": false,
+    "checkpoint_changed": false,
+    "preprocessing_changed": false,
+    "test_cohort_changed": false,
+    "ledger_entry_added": false,
+    "ledger_entry_removed": false,
+    "historical_phase33_artifact_rewritten": false,
+    "leakage_experiment_started": false
+  },
+  "ledger": {
+    "entries_before": 30,
+    "entries_after": 30,
+    "protocol_b": 28,
+    "protocol_a": 2,
+    "original_prefix_sha256": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+    "original_prefix_expected": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+    "original_prefix_unchanged": true,
+    "file_sha256": "5cef2c4fe3ddd7d1a479147122a6285fc7ab6ab74da82b8bf48f751f55f297fd",
+    "modified_by_phase_3_3_1": false
+  },
+  "epoch_indexing": {
+    "RoboticArm": {
+      "training_json_best_epoch_zero_indexed": 32,
+      "human_report_best_epoch_one_indexed": 33,
+      "epochs_run": 36,
+      "best_valid_loss": 0.5886530705860683,
+      "epoch_actually_scored_one_indexed": 36,
+      "verified_from": "reports/phase3_3_protocol_a/training/RoboticArm_training.json"
+    },
+    "BrushlessMotor": {
+      "training_json_best_epoch_zero_indexed": 22,
+      "human_report_best_epoch_one_indexed": 23,
+      "epochs_run": 26,
+      "best_valid_loss": 0.8151427847998483,
+      "epoch_actually_scored_one_indexed": 26,
+      "verified_from": "reports/phase3_3_protocol_a/training/BrushlessMotor_training.json"
+    }
+  },
+  "historical_artifact_verification": {
+    "files_checked": 15,
+    "all_unchanged": true,
+    "detail": {
+      "reports/phase3_3_protocol_a/evaluate_BrushlessMotor.json": {
+        "declared": "3eef6b611aae3e7af2629e7eedcf0d38532762349ae611f8dde84dd91504c3d0",
+        "current": "3eef6b611aae3e7af2629e7eedcf0d38532762349ae611f8dde84dd91504c3d0",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/evaluate_RoboticArm.json": {
+        "declared": "764c62d1e4dea1c3fca4e73c2de912cc72ba1e56bd87e3a8f194d7b68dea7b8b",
+        "current": "764c62d1e4dea1c3fca4e73c2de912cc72ba1e56bd87e3a8f194d7b68dea7b8b",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/preprocess_BrushlessMotor.json": {
+        "declared": "f3e6be9ca80513e61e9c12609f012e3cb597c5de6b0906879e56a3a4a5c28e04",
+        "current": "f3e6be9ca80513e61e9c12609f012e3cb597c5de6b0906879e56a3a4a5c28e04",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/preprocess_RoboticArm.json": {
+        "declared": "12bff7d30ab7d374bb6593971e283b2eff4811c09e5118730db2526d96754847",
+        "current": "12bff7d30ab7d374bb6593971e283b2eff4811c09e5118730db2526d96754847",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_ledger_authorization.json": {
+        "declared": "cc4d567d135ce7d0082171015385b1e103b46f32276c9c8e47a9ede5eb575171",
+        "current": "cc4d567d135ce7d0082171015385b1e103b46f32276c9c8e47a9ede5eb575171",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_pretest_freeze.json": {
+        "declared": "51bd5fe7a801b1658f0c204d7c170267b7637bd809bde631c7d30a0c1dde17db",
+        "current": "51bd5fe7a801b1658f0c204d7c170267b7637bd809bde631c7d30a0c1dde17db",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_pretest_freeze.md": {
+        "declared": "b72b21b0773b6cf67527c1e9dcdd3ddf9857503895a14667aca4110a5efb85fd",
+        "current": "b72b21b0773b6cf67527c1e9dcdd3ddf9857503895a14667aca4110a5efb85fd",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_primary_auc.csv": {
+        "declared": "2dbfdc983b73dc91aae175abac3fab4ed328791994100396fa0bc7284018d4ea",
+        "current": "2dbfdc983b73dc91aae175abac3fab4ed328791994100396fa0bc7284018d4ea",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_published_comparison.csv": {
+        "declared": "40b473042082b73901c2a8a8f53cfe3e7fdf1c2ce38b1fe352c6fe76b77e7c44",
+        "current": "40b473042082b73901c2a8a8f53cfe3e7fdf1c2ce38b1fe352c6fe76b77e7c44",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_reproduction_discrepancy_log.csv": {
+        "declared": "369330006401369b809c39d9bb98f72fc4bb64598a00915ed5c9c9fddb3fcdd7",
+        "current": "369330006401369b809c39d9bb98f72fc4bb64598a00915ed5c9c9fddb3fcdd7",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_reproduction_report.json": {
+        "declared": "b83b1157da6807297b104f2ee955a3386e4f28b4314710a94d266da7a6b9d233",
+        "current": "b83b1157da6807297b104f2ee955a3386e4f28b4314710a94d266da7a6b9d233",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_reproduction_report.md": {
+        "declared": "f25eb538cfbde244d075491e403a16bb9743f37dba05c7db0d191b2b28ec9075",
+        "current": "f25eb538cfbde244d075491e403a16bb9743f37dba05c7db0d191b2b28ec9075",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/protocol_a_split_overlap_context.csv": {
+        "declared": "28c9235f3cad3ec8a2c146d11d228bf2cda33d0e8ba8a4f8925f3651e97b3394",
+        "current": "28c9235f3cad3ec8a2c146d11d228bf2cda33d0e8ba8a4f8925f3651e97b3394",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/training/BrushlessMotor_training.json": {
+        "declared": "73ec14c483bedb5f61f33b1697f274d3c3656ca79c1099f63683e55b8817f08e",
+        "current": "73ec14c483bedb5f61f33b1697f274d3c3656ca79c1099f63683e55b8817f08e",
+        "unchanged": true
+      },
+      "reports/phase3_3_protocol_a/training/RoboticArm_training.json": {
+        "declared": "27c8f267e8fe6cf1b4ec815e376bc67c28a3c93dad466dea3cdb9536346e60f5",
+        "current": "27c8f267e8fe6cf1b4ec815e376bc67c28a3c93dad466dea3cdb9536346e60f5",
+        "unchanged": true
+      }
+    }
+  },
+  "protocol_b_integrity": {
+    "phase32_manifest_files": 155,
+    "protocol_b_ledger_entries": 28,
+    "split_v3_sha256": "68e5406d63e96cf5ee418ae58808f5c3e7790889ba1b8497420642d1f0d8409e",
+    "reporting_policy_sha256": "a1f695d31a6042619bad3e4fa9103a62b32c41a699c54ce7d9ae35ce36b7da2c",
+    "changed": false
+  },
+  "corrections": [
+    {
+      "id": "F3",
+      "area": "reporting",
+      "severity": "MINOR",
+      "superseded_wording": "The differences are of the size expected from a nondeterministic training run with patience-3 early stopping.",
+      "preferred_wording": "The residual differences are consistent with plausible variation arising from the different execution environment and the upstream training procedure, including patience-based early stopping and final-epoch checkpoint aliasing.",
+      "supplementary_wording": "The upstream implementation is not fully deterministic, but this single reproduction run does not estimate a run-to-run distribution.",
+      "justification": "Only one reproduction run per machine exists, so no variance was measured. The run used CPU, where the cited cuDNN nondeterminism does not apply. Device, backend and torch-version differences are the genuine and sufficient explanation.",
+      "status": "CORRECTED_BY_SUPERSESSION"
+    },
+    {
+      "id": "F4",
+      "area": "reporting",
+      "severity": "MINOR",
+      "superseded_wording": "The project's data path, windowing, feature construction, model and scoring are therefore consistent with the published work.",
+      "preferred_wording": "Dataset handling, input construction/preprocessing, official baseline architecture and scoring are consistent with the pinned published implementation.",
+      "explicit_limit": "This does NOT validate the Phase-3.1 98-engineered-feature representation. Protocol A uses per-window standardised raw multi-sensor windows; the engineered feature pipeline is not exercised anywhere in Phase 3.3.",
+      "justification": "'feature construction' named a pipeline Protocol A does not use.",
+      "status": "CORRECTED_BY_SUPERSESSION"
+    },
+    {
+      "id": "F5",
+      "area": "reporting",
+      "severity": "MINOR",
+      "superseded_wording": "...which makes MechaSight's own results comparable to the literature rather than unmoored from it.",
+      "preferred_wording": "Phase 3.3 establishes a historical comparability anchor for Protocol-A-style results and independently validates the project's handling of the official IMAD-DS data path and released-split baseline.",
+      "explicit_limit": "It does not by itself establish direct numerical comparability between Protocol-B results and the published Protocol-A baseline, because the protocols differ in split, preprocessing, representation and model family.",
+      "justification": "A Protocol-A reproduction cannot transfer comparability to Protocol-B work.",
+      "status": "CORRECTED_BY_SUPERSESSION"
+    },
+    {
+      "id": "F1",
+      "area": "auditability",
+      "severity": "MODERATE",
+      "finding": "Per-segment scores were never persisted; the headline AUCs are not independently re-derivable from artifacts without re-inference.",
+      "action": "Exhaustive read-only recovery search performed; no authentic original score artifact exists anywhere. Nothing was regenerated.",
+      "status": "OPEN_ACCEPTED_LIMITATION"
+    },
+    {
+      "id": "F2",
+      "area": "test-look discipline",
+      "severity": "MINOR",
+      "finding": "No test pinned the number of Protocol-A test looks.",
+      "action": "Added tests/test_phase331_audit_closure.py. The permanent assertion names the two Phase-3.3 experiment ids explicitly, so future explicitly authorised protocols may still append without relaxing it; a separate snapshot test records the current composition.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "F6",
+      "area": "provenance",
+      "severity": "MINOR",
+      "finding": "Protocol-A config not hash-declared in the Phase-3.3 artifact manifest.",
+      "action": "Recorded in protocol_a_provenance_supplement.json. The historical manifest was not edited.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "F7",
+      "area": "provenance",
+      "severity": "MINOR",
+      "finding": "Checkpoints hashed but not tracked; re-verifiable only on this machine.",
+      "action": "Documented in checkpoint_preservation_status.json. Both present, both hash correctly, LOCAL-ONLY, no durable backup verified.",
+      "status": "DOCUMENTED_AS_REPRODUCIBILITY_RISK"
+    },
+    {
+      "id": "F8",
+      "area": "documentation",
+      "severity": "MINOR",
+      "finding": "best_epoch 0-indexed in JSON, 1-indexed in the report.",
+      "action": "Explicit mapping recorded and verified from the JSON: RoboticArm 32 -> 33, BrushlessMotor 22 -> 23. Historical JSON unchanged.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "F9",
+      "area": "test quality",
+      "severity": "MINOR",
+      "finding": "'assert corrected.precision is not 0.0' compared float object identity.",
+      "action": "Replaced with 'not (isinstance(corrected.precision, float) and corrected.precision == 0.0)'. Demonstrated that on a non-interned float the old form evaluates True and lets the substitution bug pass, while the new form catches it.",
+      "status": "RESOLVED"
+    }
+  ],
+  "f1_final_status": "OPEN_ACCEPTED_LIMITATION",
+  "next_scientific_gate": {
+    "recommended": "controlled RoboticArm leakage-magnitude experiment",
+    "designed_or_executed_here": false,
+    "requirement": "hold model, preprocessing and representation constant; vary only the parent grouping"
+  }
+}

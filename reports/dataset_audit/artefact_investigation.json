@@ -1,0 +1,219 @@
+{
+  "accelerometer_artefact": {
+    "BrushlessMotor": {
+      "n_segments_scanned": 1593,
+      "n_with_any_railed_row": 1430,
+      "fraction_with_any_railed_row": 0.8976773383553045,
+      "n_first_row_railed": 1430,
+      "fraction_first_row_railed": 0.8976773383553045,
+      "n_railed_only_in_first_row": 1430,
+      "railed_rows_per_file": {
+        "min": 0,
+        "median": 1.0,
+        "max": 1
+      },
+      "max_railed_row_index_over_all_files": 0,
+      "n_files_with_railed_row_beyond_first": 0,
+      "n_railed_axes_in_first_row_counts": {
+        "2": 606,
+        "1": 597,
+        "3": 227,
+        "0": 163
+      },
+      "association_with_metadata": {
+        "file_split": {
+          "field": "file_split",
+          "testable": true,
+          "chi2": 0.0,
+          "p_value": 1.0,
+          "rate_by_value": {
+            "test": 0.8974358974358975,
+            "train": 0.897736143637783
+          }
+        },
+        "file_domain": {
+          "field": "file_domain",
+          "testable": true,
+          "chi2": 0.0,
+          "p_value": 1.0,
+          "rate_by_value": {
+            "source": 0.897815362931642,
+            "target": 0.896551724137931
+          }
+        },
+        "anomaly_label": {
+          "field": "anomaly_label",
+          "testable": true,
+          "chi2": 1.6866734916786015,
+          "p_value": 0.4302724157704272,
+          "rate_by_value": {
+            "belt": 0.9012345679012346,
+            "magnetic": 0.8533333333333334,
+            "normal": 0.8997912317327766
+          }
+        },
+        "domain_shift_op": {
+          "field": "domain_shift_op",
+          "testable": true,
+          "chi2": 13.892975343086263,
+          "p_value": 0.38142418622578955,
+          "rate_by_value": {
+            "spd1000": 0.8285714285714286,
+            "spd1100": 0.9142857142857143,
+            "spd1200": 0.9411764705882353,
+            "spd1300": 0.9166666666666666,
+            "spd1400": 0.8823529411764706,
+            "spd1500": 0.8734177215189873,
+            "spd1600": 0.9363057324840764,
+            "spd1700": 0.8607594936708861,
+            "spd1800": 0.8789808917197452,
+            "spd1900": 0.8930817610062893,
+            "spd2000": 0.9171974522292994,
+            "spd2400": 0.8924050632911392,
+            "spd2800": 0.9430379746835443,
+            "spd3000": 0.8853503184713376
+          }
+        },
+        "domain_shift_env": {
+          "field": "domain_shift_env",
+          "testable": true,
+          "chi2": 2.5540547104200106,
+          "p_value": 0.8623697084147517,
+          "rate_by_value": {
+            "BckgA": 0.9068493150684932,
+            "BckgB": 0.896551724137931,
+            "BckgC": 0.9034090909090909,
+            "BckgD": 0.8917378917378918,
+            "BckgE": 0.9322033898305084,
+            "BckgF": 0.8888888888888888,
+            "BckgG": 0.8596491228070176
+          }
+        }
+      }
+    },
+    "RoboticArm": {
+      "n_segments_scanned": 2303,
+      "n_with_any_railed_row": 0,
+      "fraction_with_any_railed_row": 0.0,
+      "n_first_row_railed": 0,
+      "fraction_first_row_railed": 0.0,
+      "n_railed_only_in_first_row": 0,
+      "railed_rows_per_file": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0
+      },
+      "max_railed_row_index_over_all_files": -1,
+      "n_files_with_railed_row_beyond_first": 0,
+      "n_railed_axes_in_first_row_counts": {
+        "0": 2303
+      },
+      "association_with_metadata": {
+        "file_split": {
+          "field": "file_split",
+          "testable": false,
+          "note": "flag or field has a single value"
+        },
+        "file_domain": {
+          "field": "file_domain",
+          "testable": false,
+          "note": "flag or field has a single value"
+        },
+        "anomaly_label": {
+          "field": "anomaly_label",
+          "testable": false,
+          "note": "flag or field has a single value"
+        },
+        "domain_shift_op": {
+          "field": "domain_shift_op",
+          "testable": false,
+          "note": "flag or field has a single value"
+        },
+        "domain_shift_env": {
+          "field": "domain_shift_env",
+          "testable": false,
+          "note": "flag or field has a single value"
+        }
+      }
+    }
+  },
+  "corr_marker": {
+    "RoboticArm": {
+      "n_with_marker": 85,
+      "n_total": 2303,
+      "association": {
+        "file_split": {
+          "field": "file_split",
+          "testable": true,
+          "chi2": 0.14344928778867144,
+          "p_value": 0.7048757501735539,
+          "rate_by_value": {
+            "test": 0.040948275862068964,
+            "train": 0.03588907014681892
+          }
+        },
+        "file_domain": {
+          "field": "file_domain",
+          "testable": true,
+          "chi2": 4.319169467906113,
+          "p_value": 0.037685311290939466,
+          "rate_by_value": {
+            "source": 0.0337573385518591,
+            "target": 0.06177606177606178
+          }
+        },
+        "anomaly_label": {
+          "field": "anomaly_label",
+          "testable": true,
+          "chi2": 8.7659508372672,
+          "p_value": 0.0030690603598934807,
+          "rate_by_value": {
+            "loosescrewsA": 0.0,
+            "normal": 0.04104297440849831
+          }
+        },
+        "domain_shift_op": {
+          "field": "domain_shift_op",
+          "testable": true,
+          "chi2": 240.01676787454807,
+          "p_value": 5.567390166239277e-49,
+          "rate_by_value": {
+            "weight00": 0.0,
+            "weight10": 0.0,
+            "weight15": 0.1350293542074364,
+            "weight20": 0.0,
+            "weight25": 0.022988505747126436,
+            "weight30": 0.16470588235294117,
+            "weight35": 0.0
+          }
+        },
+        "domain_shift_env": {
+          "field": "domain_shift_env",
+          "testable": true,
+          "chi2": 14.353623252620485,
+          "p_value": 0.025926014657286812,
+          "rate_by_value": {
+            "BckgA": 0.019455252918287938,
+            "BckgB": 0.08045977011494253,
+            "BckgC": 0.05058365758754864,
+            "BckgD": 0.03740157480314961,
+            "BckgE": 0.04597701149425287,
+            "BckgF": 0.027559055118110236,
+            "BckgG": 0.058823529411764705
+          }
+        }
+      },
+      "n_parent_recordings_with_marker": 6,
+      "n_recordings_mixing_marked_and_unmarked": 0,
+      "n_recordings_entirely_marked": 6,
+      "marked_recording_stamps": [
+        "20240405_10_54_03",
+        "20240405_11_02_26",
+        "20240405_11_27_37",
+        "20240405_11_58_13",
+        "20240405_13_01_28",
+        "20240416_13_35_37"
+      ]
+    }
+  }
+}

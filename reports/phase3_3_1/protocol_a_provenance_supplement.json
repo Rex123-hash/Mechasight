@@ -1,0 +1,22 @@
+{
+  "schema_version": "phase3.3.1-provenance-supplement-v1",
+  "generated_utc": "2026-09-08T15:35:46.552980+00:00",
+  "purpose": "close the artifact-manifest asymmetry noted by the independent audit (F6). The Protocol-A config governs every Phase-3.3 result but was not hash-declared in the Phase-3.3 artifact manifest.",
+  "note": "Git already provides historical immutability for this file: it was committed at the pre-test freeze and has an empty diff to HEAD. This supplement records the content hash explicitly so the config is covered on the same footing as every other artifact.",
+  "historical_manifest_edited": false,
+  "config": {
+    "path": "configs/phase3/protocol_a_official_reproduction_v1.json",
+    "sha256": "4bc61b56af6dc42528edb704baf32e96f83be4f35e1afc94a4faa1610375e928",
+    "bytes": 12383,
+    "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+    "committed_at": "872f8e503d6b249f5cde31d8a351ef633830448c",
+    "unchanged_since_freeze": true
+  },
+  "commit_chain": {
+    "pretest_freeze": "872f8e503d6b249f5cde31d8a351ef633830448c",
+    "evaluator_locked": "4ce1faf5894578f330226d80cd194dfb44ff0cba",
+    "results": "8add93c3e448d39028934c0e38f0b00c79dcb8da",
+    "ancestry": "linear; the freeze commit contains no test-performance artifact"
+  },
+  "ledger_prefix_sha256": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0"
+}

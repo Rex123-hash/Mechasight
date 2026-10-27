@@ -1,0 +1,3 @@
+machine,s_test_segments,t_test_segments,test_segment_symmetric_difference,s_test_parents,t_test_parents,test_parent_symmetric_difference,anomaly_test_symmetric_difference
+BrushlessMotor,312,312,0,312,312,0,0
+RoboticArm,466,466,0,33,33,0,0

@@ -1,0 +1,301 @@
+{
+  "cells": {
+    "BrushlessMotor|S": {
+      "all_modality_row_counts_match": true,
+      "exact_segment_parent_domain_ordinal_row_offset_alignment": true,
+      "index_content_sha256": "7d2855a4ecc9b5849d551c40d187ced94cdba0d6600ed73020d8c7cd22b55aab",
+      "manifest_identity": "cc1729e6cb0cc28da8f2bf991230e61d51c869976f5651b762bf651c14cf9d0b",
+      "physical_times_reconstructed": false,
+      "segments": 126,
+      "windows": 6426
+    },
+    "BrushlessMotor|T": {
+      "all_modality_row_counts_match": true,
+      "exact_segment_parent_domain_ordinal_row_offset_alignment": true,
+      "index_content_sha256": "2b1bb961422a3891deaf6bb30fea282926657f7294f3df6eff5b0511b4326098",
+      "manifest_identity": "c9cde57b77217cdd9712a9cbc48e3fa62a230c0baed31a96cb67851c92de224a",
+      "physical_times_reconstructed": false,
+      "segments": 126,
+      "windows": 6426
+    },
+    "RoboticArm|S": {
+      "all_modality_row_counts_match": true,
+      "exact_segment_parent_domain_ordinal_row_offset_alignment": true,
+      "index_content_sha256": "065e1764aba571427aa2909c807237164e9a9cb77e7f5c13624b371f3c7e935e",
+      "manifest_identity": "892d40d61edcfaaa3fdf9a2dde608ea48062c8ba237ae237f6e3e2464278a187",
+      "physical_times_reconstructed": false,
+      "segments": 186,
+      "windows": 13764
+    },
+    "RoboticArm|T": {
+      "all_modality_row_counts_match": true,
+      "exact_segment_parent_domain_ordinal_row_offset_alignment": true,
+      "index_content_sha256": "920bcc252fab24646e55ccbcf10d5b38105c6140d5e80ba4f36c06ec20b76103",
+      "manifest_identity": "8218bd241189a92c3c552bee5dc804f2a38c3f2be0547eb5bf8fde1ada3034af",
+      "physical_times_reconstructed": false,
+      "segments": 186,
+      "windows": 13764
+    }
+  },
+  "component_source_identity": "89c992f5d839a599a893eb53259079cefa4be684765ec84bd2416c9757a86e4d",
+  "focused_tests": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 103
+  },
+  "human_decisions_H1_H7": "UNRESOLVED",
+  "max_abs_score_difference": 0.0,
+  "model_input_segments": 3744,
+  "not_protected_performance": true,
+  "physical_timestamps_reconstructed": false,
+  "protected_artifact_bindings": "UNRESOLVED; no protected artifact metadata/content inspected",
+  "protected_reader_enabled": false,
+  "real_frozen_models": [
+    {
+      "experiment_id": "p3-2e565557cfa9e411ea66ac24",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 2,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-684cab6c96c667b54e1b4f3a",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 0,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-a9790d804bc4fa232341b364",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 4,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-b92a4d84588d57d680e72949",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 1,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-d6b20c84b9b48ce9915258aa",
+      "family": "mahalanobis_shrinkage",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 0,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-d95d13c5eac87b81b6b00142",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 3,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-0b4eab16d7dc7f32887145d3",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 0,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-3673cbd9302b3f784b04a6a4",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 1,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-374e6c8b9768d4a542412576",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 2,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-88b539eb6d84111eaad0f648",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 4,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-c3ff10cf8f348a5c6e6104c1",
+      "family": "mahalanobis_shrinkage",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 0,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-fb2ff00838b9ac616550c0cd",
+      "family": "dense_autoencoder",
+      "machine": "RoboticArm",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 3,
+      "segments": 186
+    },
+    {
+      "experiment_id": "p3-04b940acc27c7439e1d32b24",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 3,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-2716c4ea337f275c128e16e4",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 0,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-45a029d01ee6d3e165f82e65",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 2,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-4dfba9a4541ea9996153c604",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 4,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-a1a176477b5a4abe33912d45",
+      "family": "mahalanobis_shrinkage",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 0,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-c7104d98baeb6b312d168b2b",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "S",
+      "seed": 1,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-06ea507b93e119054b5c3ba4",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 0,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-0abdd30c4b8457111796fd1b",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 1,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-0f1210655594b046269dad9d",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 3,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-739ec5209aa8b00089c479bd",
+      "family": "mahalanobis_shrinkage",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 0,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-cc67d2432b24bfb11aa66f4d",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 4,
+      "segments": 126
+    },
+    {
+      "experiment_id": "p3-e0bd283a234f13ae699535ca",
+      "family": "dense_autoencoder",
+      "machine": "BrushlessMotor",
+      "max_abs_score_difference": 0.0,
+      "regime": "T",
+      "seed": 2,
+      "segments": 126
+    }
+  ],
+  "real_ledger_modified": false,
+  "real_ledger_rows": 196,
+  "real_ledger_sha256": "f75584611c18ff387bee8c06f1fcc999c3046def876ba13dea1c744fce64de5f",
+  "regression_tests": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 151
+  },
+  "scope": "PERMITTED_DEVELOPMENT_ONLY",
+  "stub_model_calls": 0,
+  "unauthorized_refusals": {
+    "actual_protected_paths_used": false,
+    "artifact_content_hashes": 0,
+    "hdf5_opens": 0,
+    "parquet_reads": 0,
+    "rejected": [
+      "protected_builder",
+      "generic_builder",
+      "feature_reader",
+      "spectral_reader",
+      "lower_path",
+      "lower_draft",
+      "fake_development",
+      "substituted_path",
+      "unregistered_metadata"
+    ]
+  },
+  "windows": 40380
+}

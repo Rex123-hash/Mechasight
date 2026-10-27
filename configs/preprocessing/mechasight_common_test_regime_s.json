@@ -1,0 +1,27 @@
+{
+  "version": "phase2.1-v2",
+  "protocol": "mechasight_experimental_protocol",
+  "regime": "S",
+  "machines": ["RoboticArm", "BrushlessMotor"],
+  "window_length_s": 0.1,
+  "stride_s": 0.1,
+  "gyro_warmup_s": 0.035,
+  "drop_initial_acc_samples": {"RoboticArm": 0, "BrushlessMotor": 1},
+  "normalization": "none",
+  "resampling": {
+    "enabled_for": ["frequency_features"],
+    "method": "linear",
+    "edge_handling": "intersection_only",
+    "anti_aliasing": "not_required_at_near-native_target_rate",
+    "target_rates_hz": {
+      "RoboticArm": {"mic": 16000.0, "acc": 7063.280051, "gyro": 7063.280051},
+      "BrushlessMotor": {"mic": 16003.076013, "acc": 7135.714148, "gyro": 7135.329526}
+    }
+  },
+  "features": ["time", "frequency"],
+  "cache_format": "hdf5_ragged_v1",
+  "window_boundary": "half_open",
+  "official_fixed_rates_hz": {},
+  "official_pad_or_truncate": false,
+  "split_version": "protocol_b_common_test_v2"
+}

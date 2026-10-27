@@ -1,0 +1,3 @@
+machine,released_target_normal_segments,released_target_normal_parent_recordings,leakage_safe_adaptation_parent_recordings,leakage_safe_adaptation_segments,additional_sibling_segments_reserved
+BrushlessMotor,18,18,18,18,0
+RoboticArm,27,18,18,123,96

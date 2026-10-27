@@ -1,0 +1,99 @@
+{
+  "schema_version": "phase3.4E-ilp-verification-v1",
+  "generated_utc": "2026-09-10T17:14:43.128495+00:00",
+  "formulation_audited": {
+    "variables": "one binary x_p per candidate donor parent",
+    "candidate_pool": "76 official training parents minus the 12 focal parents of that fold = 64",
+    "objective": "zero vector for pure feasibility; a capacity-minimising objective is used only for deterministic tie-breaking when selecting among feasible sets",
+    "slot_constraint": "sum_p x_p == S, an EQUALITY so the donor count is exact",
+    "stratum_constraints": "sum_p cap[p,s] * x_p >= need_s for every stratum with need_s > 0",
+    "focal_exclusion": "focal parents are removed from the pool before the model is built, so no solution can select a focal parent as a donor",
+    "integrality": "all variables binary; bounds [0,1]",
+    "solver": "HiGHS via scipy.optimize.milp (scipy 1.18.0)"
+  },
+  "infeasibility_is_a_proof_not_a_timeout": true,
+  "evidence": "scipy status 2 with HiGHS model_status 'Infeasible'. Status 1 (iteration/time limit) was never returned. For fold 2 the LP RELAXATION is also infeasible, which is an independently checkable certificate: with no fractional solution there can be no integer one. Folds 1 and 4 have feasible relaxations, so their infeasibility rests on integrality and is established by HiGHS branch-and-bound exhaustion over a bounded 64-variable binary problem.",
+  "per_fold": {
+    "1": {
+      "pool_size": 64,
+      "binding_strata": 19,
+      "feasible_by_slots": {
+        "12": false,
+        "13": true,
+        "14": true,
+        "15": true,
+        "16": true
+      },
+      "status_at_12": 2,
+      "lp_relaxation_feasible_at_12": true
+    },
+    "2": {
+      "pool_size": 64,
+      "binding_strata": 22,
+      "feasible_by_slots": {
+        "12": false,
+        "13": false,
+        "14": false,
+        "15": true,
+        "16": true
+      },
+      "status_at_12": 2,
+      "lp_relaxation_feasible_at_12": false
+    },
+    "3": {
+      "pool_size": 64,
+      "binding_strata": 22,
+      "feasible_by_slots": {
+        "12": true,
+        "13": true,
+        "14": true,
+        "15": true,
+        "16": true
+      },
+      "status_at_12": 0,
+      "lp_relaxation_feasible_at_12": true
+    },
+    "4": {
+      "pool_size": 64,
+      "binding_strata": 19,
+      "feasible_by_slots": {
+        "12": false,
+        "13": true,
+        "14": true,
+        "15": true,
+        "16": true
+      },
+      "status_at_12": 2,
+      "lp_relaxation_feasible_at_12": true
+    },
+    "5": {
+      "pool_size": 64,
+      "binding_strata": 19,
+      "feasible_by_slots": {
+        "12": true,
+        "13": true,
+        "14": true,
+        "15": true,
+        "16": true
+      },
+      "status_at_12": 0,
+      "lp_relaxation_feasible_at_12": true
+    }
+  },
+  "minimum_slots_reproduced": {
+    "1": 13,
+    "2": 15,
+    "3": 12,
+    "4": 13,
+    "5": 12
+  },
+  "release_record_claim": {
+    "1": 13,
+    "2": 15,
+    "3": 12,
+    "4": 13,
+    "5": 12
+  },
+  "matches_release_record": true,
+  "verdict": "VERIFIED - the release record's feasibility structure is exactly reproduced"
+}

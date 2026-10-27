@@ -1,0 +1,20 @@
+{
+  "base_commit": "e69e85e4616c8e8ded1f0a04bc0f50a0ff16e825",
+  "builder_sources": {
+    "docs/phase5_5_pretest_freeze_candidate.md": "dd85315c7750a4d0741a03e3e3b42978b18438ca4391f14de9179ec16b0e4332",
+    "scripts/prepare_phase5_freeze_candidate.py": "8130d7bb436449166594d47e37373a6ace3d49b8b48182de4ba3c7a14dd6eeba",
+    "src/experiment/fusion_freeze.py": "fbb20e471f088158ae3884f7fbf4082aa3dbe7b9b0ecb0c0a2b36e63eca91b00",
+    "tests/test_phase5_freeze_candidate.py": "52707e5c550b71c7116b78160094fba647971a08a225123f6da32083ed32de06",
+    "tests/test_phase5_protected_read_guard.py": "7fa16cf8e59f791f87c1d3390d381dd11a9277e71e9db4a4fb1cb61a5f59be94",
+    "tests/test_phase5_sealed_score_guard.py": "f0397b76104f4f1b30524b1d087fedf163f08ab435c7ffc0186dc66581e4be1f"
+  },
+  "execution_ready": false,
+  "files": {
+    "integrity_inventory.json": "99140fea290396a9830d7554f66b9e433cd6d07dbe790e5167e0ce526f25f111",
+    "proposed_evaluation_manifest.json": "05f8c15adf86447748691c7ab4b441bef02f35bf2ca68d4dc90108af6cc98e5e",
+    "scientific_contract.json": "9a59646f26c0b4f8ecb4e73c2c5af89e37dc4b6ba2bffafb98dd5066a8d7f726",
+    "scientific_registry.json": "c3da5104c7a86c45e3e4cf3a5913f588a56449cf03460aae67ea83204e4c84c9",
+    "validation_report.json": "9917e834c5b67ba5dc82edf58903356ed1f10c0a4afe95859949ac970c3ad2a0"
+  },
+  "status": "CANDIDATE — NOT YET AUTHORIZED FOR PROTECTED EVALUATION."
+}

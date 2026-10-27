@@ -1,0 +1,27 @@
+{
+  "config_identity": "p34a-ra-overlap-13dbc49b2b983d72e957a320",
+  "contains_any_score": false,
+  "contains_model_output": false,
+  "design_status": "PREEXECUTION_DESIGN_ONLY",
+  "design_verdict": "YELLOW",
+  "files": {
+    "configs/phase3/roboticarm_parent_overlap_sensitivity_v1.json": "4d75f51a1ff152bf955310447d20d24ee4e4c88e1705592c0a72672fa65af082",
+    "docs/phase34_parent_overlap_design.md": "732ec4e56f67dc51c365d20237856b7ce515016377648054c959be76e8082664",
+    "reports/phase3_4_design/parent_overlap_design_decision.json": "230a9b9aae0fc69233f778c86cc7e96607166209e0dc23b4e743845f67951f92",
+    "reports/phase3_4_design/parent_overlap_design_decision.md": "baf5888646d589709c289a5554c8080505f382fda1e91a9f37874974d72b36b0",
+    "reports/phase3_4_design/parent_overlap_feasibility.csv": "37f18d6c855751bc1b3f34db078c6553365cae5355c7aaa93b3656163bc4d53c",
+    "reports/phase3_4_design/parent_overlap_metadata_balance_candidates.csv": "1376f573f06e685c1537ca213f2c68e8ea1c326fe007486ac33fddb67ade0a9b",
+    "reports/phase3_4_design/parent_overlap_parent_counts.csv": "9aed56110a175392e30fbc840c0bcceff55104e7200344f1397808a27d51f4d3",
+    "reports/phase3_4_design/proposed_arm_memberships.csv": "cb9818885c87f40b775674473ab0c4f2edccc0fd74fe40baf7eca870562db666",
+    "tests/test_phase34a_design_freeze.py": "e50f21d50006ff0219b4d6e1959b1f4ad37e6358c88fa4cd1ddc84f2b612a385"
+  },
+  "generated_utc": "2026-09-08T16:02:41.678281+00:00",
+  "inference_run": false,
+  "ledger_entries_appended": 0,
+  "model_trained": false,
+  "phase": "3.4A",
+  "schema_version": "phase3.4A-design-artifacts-v1",
+  "self_reference": "excluded, following the repository manifest convention",
+  "starting_head": "98a20c0755d7967d636ab206dbb75aac7faf10c6",
+  "test_score_computed": false
+}

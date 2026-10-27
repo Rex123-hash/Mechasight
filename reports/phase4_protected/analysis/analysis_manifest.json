@@ -1,0 +1,14 @@
+{
+  "batch_id": "p4-test-batch-0884109383d3695de7a07121",
+  "experiment_count": 156,
+  "files": {
+    "domain_slice_metrics_individual.csv": "1db3fa788dfe5c28fc74edda7227e3c6811c8aafe78e1cf7e5e480b46993e227",
+    "family_bootstrap_metrics.csv": "68a78f421b0b4358fe6910cb15bb9cad222c0a5b5ba53dcf01898a36b2dc0095",
+    "healthy_target_false_positives_individual.csv": "f2ea1556ff6fceb9243fa4432c6d3a4f1b23e36df9527ff6425b6eafb928d46e",
+    "individual_experiment_metrics.csv": "ea50d8b0c2d885ce2526488dcf0f16b197c53ffac44777f64e0de9525c8a14dc",
+    "modality_dominance.csv": "b6bf5981d824bc6baf0e0b561b8f0b51c1f68d10470809b55d76cc37319d02ce",
+    "modality_paired_contrasts.csv": "439488b36a708222a241ce8748e13565d3d159cd7faa701084f8b2c93d4f3166",
+    "regime_paired_contrasts.csv": "68e6d2fe0fdd566db98a4b9b550ec0614cc851ccdd94e5376b5c98f0d6012487"
+  },
+  "score_manifest_sha256": "d0874952a5685ea8eb474b6fa0095e8bf1bf9d6ace4e71e58ef5477633ca5504"
+}

@@ -1,0 +1,42 @@
+{
+  "cohorts": [
+    {
+      "cohort_hash": "23c5b7e3f1b0e6f28d6159a8c893abb5de309a0b4b978c713f43ba4383a775da",
+      "feature_artifact_hash": "da1f1a839d276c7b5f85731d5f33de24165c2fe2010c4d33d112e50d556d3c42",
+      "frozen_manifest_contract_hash": "5073f8a48d797246fd43e44e008c129af2d4270923f04d8a1fb3dcf6ad19dfc7",
+      "machine": "RoboticArm",
+      "regime": "S",
+      "scientific_limitation_id": "robotic_arm_parent_clustered_inference_v1",
+      "segment_count": 466
+    },
+    {
+      "cohort_hash": "e1b09c058261ae04f6574330dab17ca89127616bd4bd9fac4978bd19b821b3ad",
+      "feature_artifact_hash": "57fffb371da7f98bcead81b5f6ae524bb9be561444dc044cdbaee1d7d3c951bc",
+      "frozen_manifest_contract_hash": "bfcc69bc38a11b601e0dd6569dc17628235ff876b53f80ce10b00a16ae3394ba",
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "scientific_limitation_id": "brushless_motor_acquisition_time_class_confound_v1",
+      "segment_count": 312
+    },
+    {
+      "cohort_hash": "23c5b7e3f1b0e6f28d6159a8c893abb5de309a0b4b978c713f43ba4383a775da",
+      "feature_artifact_hash": "6be72de57368416b6a2f54a82b3c6ec8359afe5615bd87b2a9d6138ca106a6cf",
+      "frozen_manifest_contract_hash": "504c72407fd50c4e60fda442428f39e1e1e86fc2da1a0dc651e4b87cc9463c26",
+      "machine": "RoboticArm",
+      "regime": "T",
+      "scientific_limitation_id": "robotic_arm_parent_clustered_inference_v1",
+      "segment_count": 466
+    },
+    {
+      "cohort_hash": "e1b09c058261ae04f6574330dab17ca89127616bd4bd9fac4978bd19b821b3ad",
+      "feature_artifact_hash": "1a54a8023224f318772a78fdb1e478659933103eb32af84af83b0684edd60d4d",
+      "frozen_manifest_contract_hash": "06e1c7b292c7fcb4dded0e36e7d38a958c9450a99869e60ce7d93560859b782c",
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "scientific_limitation_id": "brushless_motor_acquisition_time_class_confound_v1",
+      "segment_count": 312
+    }
+  ],
+  "s_t_identities_equal": true,
+  "status": "PASS"
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": "phase3.2.1-reporting-correction-v1",
+  "status": "POST_TEST_REPORTING_CORRECTION_APPLIED",
+  "parent_policy": {
+    "policy_id": "p311-reporting-5e76ab7dabd5689c7b0ced68",
+    "schema_version": "phase3.1.1-first-common-test-reporting-v1",
+    "file": "configs/phase3/first_test_reporting_policy_v1.json",
+    "file_sha256": "a1f695d31a6042619bad3e4fa9103a62b32c41a699c54ce7d9ae35ce36b7da2c",
+    "relationship": "extended, never modified; the parent remains the historical freeze record"
+  },
+  "correction_reason": "The independent Phase-3.2 audit (docs/phase32_independent_audit.md) returned YELLOW. Every score, threshold, confusion count, ranking metric, bootstrap interval and paired contrast reproduced exactly and no scientific defect was found. The verdict was driven solely by reporting conventions and stale current-status prose that misrepresent the existing evidence to a reader, all of which push in the optimistic direction.",
+  "post_test_status": "This correction was authored after the common test was opened. It changes presentation only. It introduces no new metric methodology, no new uncertainty methodology, no threshold redesign and no model selection.",
+  "immutability": {
+    "no_model_trained": true,
+    "no_model_refit": true,
+    "no_model_rescored": true,
+    "no_threshold_changed": true,
+    "no_hyperparameter_changed": true,
+    "no_seed_selected": true,
+    "no_split_or_adaptation_membership_changed": true,
+    "no_feature_windowing_or_normalization_changed": true,
+    "original_phase32_artifacts_overwritten": false,
+    "test_look_ledger_entries_before": 28,
+    "test_look_ledger_entries_after": 28,
+    "new_test_look": false,
+    "derivation_inputs": [
+      "reports/phase3_2/individual_experiment_metrics.csv",
+      "reports/phase3_2/primary_baselines.csv",
+      "reports/phase3_2/domain_slice_metrics_family.csv",
+      "reports/phase3_2/domain_slice_metrics_individual.csv",
+      "reports/phase3_2/healthy_target_false_positives_family.csv",
+      "reports/phase3_2/healthy_target_false_positives_individual.csv",
+      "reports/phase3_2/isolation_forest_seed_summaries.csv",
+      "reports/phase3_2/experiments/*/config.json",
+      "reports/phase3_2/experiments/*/provenance.json",
+      "reports/phase2_2/protocol_b_few_shot_adaptation_v3.csv"
+    ],
+    "forbidden_inputs": [
+      "any estimator fit or predict call",
+      "sklearn score_samples",
+      "sklearn decision_function",
+      "the Phase-3.2 common-test model runner",
+      "src.models.classical",
+      "raw or interim signal artifacts"
+    ]
+  },
+  "f1_convention": {
+    "corrected_rule": "f1 = 2*TP / (2*TP + FP + FN) when 2*TP + FP + FN > 0, else undefined",
+    "equivalence": "identical to the harmonic mean of precision and recall wherever that form is itself defined; verified over the 18 Phase-3.2 rows where both apply to a maximum absolute difference of 1.1e-16",
+    "why_preferred": "The harmonic form returns undefined whenever TP = 0, because precision is either 0/0 or precision + recall is 0. The count identity remains defined whenever any anomaly or any positive prediction exists, and returns 0.0. Publishing a blank where the correct value is 0.0 hides a real negative result: the detector flagged none of the anomalies present at its frozen operating point.",
+    "affected_phase32_rows": 10,
+    "affected_scope": "RoboticArm isolation_forest, all five seeds in both regimes",
+    "corrected_value_for_all_affected_rows": 0.0,
+    "original_values_retained_alongside": true,
+    "original_column_name": "original_phase32_f1",
+    "corrected_column_name": "phase321_count_identity_f1"
+  },
+  "precision_convention": {
+    "rule": "precision = TP / (TP + FP); when TP + FP == 0 report the explicit string 'undefined - no positive predictions'",
+    "must_not_be_replaced_by_zero": true,
+    "rationale": "TP + FP = 0 is a genuine 0/0. Reporting it as 0.0 would assert a measured precision that was never measurable. This is distinct from F1, which remains well defined and equal to 0.0 in the same rows because anomalies exist in the denominator."
+  },
+  "isolation_forest_family_rule": {
+    "corrected_f1": "compute the count-identity F1 separately for each of the five seeds, then take the arithmetic mean of the five corrected seed values",
+    "never_average_scores": true,
+    "never_select_a_seed": true,
+    "never_drop_a_seed": true,
+    "precision_rule": "no imputation is invented for undefined seed precision; if any seed precision is undefined the family precision is reported as undefined",
+    "precision_transparency_field": "defined_precision_seed_count out of 5, reported so the reason for an undefined family precision is explicit"
+  },
+  "average_precision_prevalence_context": {
+    "rule": "every reported Average Precision value is accompanied by the anomaly prevalence of the identical evaluated slice",
+    "prevalence": "anomaly_count / total_count for that exact slice",
+    "descriptive_field": "ap_minus_prevalence = average_precision - prevalence",
+    "status": "CONTEXT_ONLY",
+    "must_not_be_called": "chance-adjusted average precision",
+    "not_a_new_primary_metric": true,
+    "reason": "Average Precision has a prevalence-dependent floor, so the same numeric value means different things in slices with different class balance. The RoboticArm target slice is 20 normal and 116 anomaly out of 136, a prevalence of about 0.8529, so an AP near 0.82 there is not strong performance.",
+    "auroc_note": "AUROC is retained as prevalence-insensitive ranking context alongside every AP value"
+  },
+  "threshold_transfer_annotation": {
+    "rule": "where a configuration produced no positive predictions on a slice, the reported false-positive rate must be annotated as an absence of alarms rather than as specificity",
+    "required_wording": "No positive alarms were generated at the frozen operating point; therefore zero false positives coexist with zero fault detections.",
+    "must_not_be_described_as": "excellent specificity",
+    "threshold_unchanged": true,
+    "replacement_threshold_in_primary_tables": false,
+    "note": "Any threshold redesign would now be post-test exploratory work and is explicitly out of scope."
+  },
+  "cluster_disclosure": {
+    "rule": "every threshold-dependent rate and every narrow slice is reported with its segment count and its independent physical parent/recording count",
+    "must_not_present": "466 RoboticArm common-test segments as 466 independent physical observations",
+    "known_counts": {
+      "robotic_arm_common_evaluation": "466 segments / 33 parent recordings",
+      "robotic_arm_source_validation": "186 segments / 6 parent recordings",
+      "robotic_arm_healthy_target": "20 segments / 6 parent recordings",
+      "robotic_arm_target_adaptation": "27 consumed segments / 18 parents, with 96 same-parent siblings blocked",
+      "brushless_motor": "one released segment per recording in the audited release"
+    }
+  },
+  "healthy_target_rule": {
+    "no_new_confidence_interval_methodology": true,
+    "reason": "an interval for healthy-target FPR was not part of the frozen Phase-3.1.1 reporting policy; adding one now would be a new methodology rather than a correction",
+    "values_unchanged": true,
+    "must_add": [
+      "healthy_target_sample_count",
+      "healthy_target_parent_recording_count",
+      "explicit uncertainty warning"
+    ],
+    "magnitude_language": "report the observed direction and the raw counts; do not describe the magnitude as precise"
+  },
+  "brushless_motor_confound_rule": {
+    "limitation_id": "brushless_motor_acquisition_time_class_confound_v1",
+    "must_accompany_every_bm_row": true,
+    "permitted": "benchmark anomaly-discrimination performance on the released BrushlessMotor cohort",
+    "forbidden": [
+      "pure mechanical-fault detection performance",
+      "any claim that a high BrushlessMotor AUROC demonstrates physical fault sensitivity"
+    ],
+    "reason": "all released normal recordings precede all released anomalous recordings with no overlap, so fault state and acquisition session/time are perfectly confounded and not independently identifiable"
+  },
+  "sensor_terminology_rule": {
+    "physical_sensor_devices": 2,
+    "device_names": ["IMP23ABSU microphone", "ISM330DHCX 6-axis IMU"],
+    "sensing_modalities": 3,
+    "modality_names": ["microphone / audio", "accelerometer / vibration", "gyroscope / angular motion"],
+    "numeric_signal_channels": 7,
+    "channel_breakdown": "1 microphone + 3 accelerometer axes + 3 gyroscope axes",
+    "preferred_wording": "three sensing modalities from two physical sensor devices, providing seven numeric signal channels",
+    "discouraged_wording": "three physical sensors"
+  },
+  "dataset_representation_rule": {
+    "microphone_distributed_as_audio_container": false,
+    "release_contents": "per-sensor Parquet signal files plus metadata CSV files",
+    "microphone_columns": ["Time", "MIC [Waveform]"],
+    "adc_location": "original physical dataset collection on the acquisition node",
+    "mechasight_performs_adc": false,
+    "reading_parquet_is": "software deserialisation of already-digital numerical data",
+    "future_live_deployment": "would again require physical acquisition hardware with ADC or a digital sensor interface",
+    "microphone_physical_unit": "UNKNOWN - must not be invented"
+  },
+  "representation_wording_rule": {
+    "actual_phase3_classical_representation": "raw sensor streams -> 100 ms windows -> 98 engineered features per window -> median of EACH FEATURE across the segment -> one 98-dimensional segment vector -> train-only feature z-score -> classical model -> one segment anomaly score",
+    "is_not": "window anomaly score -> median score",
+    "historical_config_note": "configs/evaluation/protocol_b_few_shot_adaptation_v3.json carries a generic 'median of window anomaly scores' aggregation field that predates the Phase-3.1 representation freeze. It is deliberately left unchanged so historical artifacts remain reproducible; it is superseded for the Phase-3 classical baseline path by configs/phase3/preprocessing_primary_v1.json and the per-experiment feature_representation field.",
+    "historical_configs_must_not_be_edited_for_cosmetic_currency": true
+  },
+  "artifact_rules": {
+    "output_directory": "reports/phase3_2_1/",
+    "never_overwrite": "reports/phase3_2/",
+    "no_new_experiment_id": true,
+    "identity_field": "reporting_correction_id",
+    "every_corrected_row_must_carry": [
+      "experiment_id",
+      "source_phase32_artifact",
+      "test_cohort_hash",
+      "threshold",
+      "threshold_source_experiment_id",
+      "reporting_correction_policy_id"
+    ]
+  }
+}

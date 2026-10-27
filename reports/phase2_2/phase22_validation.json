@@ -1,0 +1,387 @@
+{
+  "status": "PASS",
+  "assertions": [
+    {
+      "name": "no_consuming_parent_leakage",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "identical_s_t_test_segments",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "identical_s_t_test_parents",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "identical_s_t_anomaly_population",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "identical_s_t_source_validation",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "every_segment_has_exactly_one_protocol_role",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "blocked_siblings_never_enter_model_fitting",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "blocked_siblings_never_enter_validation",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "blocked_siblings_never_enter_evaluation",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "consumed_adaptation_segments_belong_to_adaptation_parents",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "only_released_target_normals_are_consumed_in_primary_regime_t",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "common_test_identical_to_phase_2_1_freeze",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "adaptation_budget_concepts_not_collapsed",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "robotic_arm_regime_t_trains_on_source_plus_released_27",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "brushless_motor_regime_t_trains_on_source_plus_released_18",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "phase_2_1_metric_threshold_aggregation_uncertainty_policy_unchanged",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "few_shot_budget_policy_frozen_and_secondary_regime_unauthorised",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "paired_preprocessing_differs_only_by_regime",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "phase_2_and_phase_2_1_cache_identities_invalidated",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "v3_config_rejects_phase_2_1_split_manifest",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "no_smoke_artifact_contains_a_blocked_sibling",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "adaptation_smoke_builds_contain_only_released_target_normals",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "smoke_s_t_physical_windows_identical",
+      "status": "PASS",
+      "violations": 0
+    },
+    {
+      "name": "pipeline_refuses_to_materialise_non_consuming_splits",
+      "status": "PASS",
+      "violations": 0
+    }
+  ],
+  "adaptation_budget": [
+    {
+      "machine": "BrushlessMotor",
+      "target_adaptation_observed": 18,
+      "target_adaptation_parent_groups": 18,
+      "target_adaptation_blocked_siblings": 0,
+      "target_adaptation_parent_closure": 18,
+      "blocked_sibling_parent_groups": 0,
+      "blocked_parents_subset_of_adaptation_parents": true
+    },
+    {
+      "machine": "RoboticArm",
+      "target_adaptation_observed": 27,
+      "target_adaptation_parent_groups": 18,
+      "target_adaptation_blocked_siblings": 96,
+      "target_adaptation_parent_closure": 123,
+      "blocked_sibling_parent_groups": 18,
+      "blocked_parents_subset_of_adaptation_parents": true
+    }
+  ],
+  "protocol_role_counts": [
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "source_training_parents": 1137,
+      "source_training_segments": 1137,
+      "source_validation_parents": 126,
+      "source_validation_segments": 126,
+      "target_adaptation_parents": 18,
+      "target_adaptation_segments": 18,
+      "adaptation_sibling_blocked_parents": 0,
+      "adaptation_sibling_blocked_segments": 0,
+      "common_evaluation_parents": 312,
+      "common_evaluation_segments": 312,
+      "train_parents": 1137,
+      "train_segments": 1137
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "source_training_parents": 1137,
+      "source_training_segments": 1137,
+      "source_validation_parents": 126,
+      "source_validation_segments": 126,
+      "target_adaptation_parents": 18,
+      "target_adaptation_segments": 18,
+      "adaptation_sibling_blocked_parents": 0,
+      "adaptation_sibling_blocked_segments": 0,
+      "common_evaluation_parents": 312,
+      "common_evaluation_segments": 312,
+      "train_parents": 1155,
+      "train_segments": 1155
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "source_training_parents": 44,
+      "source_training_segments": 1528,
+      "source_validation_parents": 6,
+      "source_validation_segments": 186,
+      "target_adaptation_parents": 18,
+      "target_adaptation_segments": 27,
+      "adaptation_sibling_blocked_parents": 18,
+      "adaptation_sibling_blocked_segments": 96,
+      "common_evaluation_parents": 33,
+      "common_evaluation_segments": 466,
+      "train_parents": 44,
+      "train_segments": 1528
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "source_training_parents": 44,
+      "source_training_segments": 1528,
+      "source_validation_parents": 6,
+      "source_validation_segments": 186,
+      "target_adaptation_parents": 18,
+      "target_adaptation_segments": 27,
+      "adaptation_sibling_blocked_parents": 18,
+      "adaptation_sibling_blocked_segments": 96,
+      "common_evaluation_parents": 33,
+      "common_evaluation_segments": 466,
+      "train_parents": 62,
+      "train_segments": 1555
+    }
+  ],
+  "blocked_sibling_isolation": [
+    {
+      "machine": "BrushlessMotor",
+      "blocked_sibling_segments": 0,
+      "blocked_in_s_train": 0,
+      "blocked_in_s_validation": 0,
+      "blocked_in_s_test": 0,
+      "blocked_in_t_train": 0,
+      "blocked_in_t_validation": 0,
+      "blocked_in_t_test": 0,
+      "v2_v3_test_symmetric_difference": 0,
+      "s_t_test_symmetric_difference": 0
+    },
+    {
+      "machine": "RoboticArm",
+      "blocked_sibling_segments": 96,
+      "blocked_in_s_train": 0,
+      "blocked_in_s_validation": 0,
+      "blocked_in_s_test": 0,
+      "blocked_in_t_train": 0,
+      "blocked_in_t_validation": 0,
+      "blocked_in_t_test": 0,
+      "v2_v3_test_symmetric_difference": 0,
+      "s_t_test_symmetric_difference": 0
+    }
+  ],
+  "regime_train_counts": {
+    "RoboticArm": {
+      "S": 1528,
+      "T": 1555
+    },
+    "BrushlessMotor": {
+      "S": 1137,
+      "T": 1155
+    }
+  },
+  "new_config_ids": {
+    "S": "phase2.2-v3-dcef3e9c758c24ae",
+    "T": "phase2.2-v3-0a0285c9afd6ad6d"
+  },
+  "historical_config_ids": {
+    "mechasight_regime_s": "phase2-v1-03811d672fcd2a3c",
+    "mechasight_regime_t": "phase2-v1-f0a93c55130baa01",
+    "mechasight_common_test_regime_s": "phase2.1-v2-8688f5639d9fa7c1",
+    "mechasight_common_test_regime_t": "phase2.1-v2-f497d27caee67b4a"
+  },
+  "smoke_builds": [
+    {
+      "segments_read": 1,
+      "windows_written": 51,
+      "accelerometer_files_affected": 1,
+      "accelerometer_samples_dropped": 1,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 286,
+      "machine": "BrushlessMotor",
+      "split": "test",
+      "data_pool_filter": "common_evaluation",
+      "protocol": "mechasight_experimental_protocol",
+      "regime": "S",
+      "preprocessing_config_id": "phase2.2-v3-dcef3e9c758c24ae",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_S\\BrushlessMotor__mechasight_experimental_protocol__regime-S__test__phase2.2-v3-dcef3e9c758c24ae.h5",
+      "manifest_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_S\\BrushlessMotor__mechasight_experimental_protocol__regime-S__test__phase2.2-v3-dcef3e9c758c24ae__manifest.jsonl",
+      "feature_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_S\\BrushlessMotor__mechasight_experimental_protocol__regime-S__test__phase2.2-v3-dcef3e9c758c24ae__features.jsonl",
+      "cache_bytes": 2575560,
+      "manifest_bytes": 95965,
+      "feature_bytes": 268602
+    },
+    {
+      "segments_read": 1,
+      "windows_written": 74,
+      "accelerometer_files_affected": 0,
+      "accelerometer_samples_dropped": 0,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 248,
+      "machine": "RoboticArm",
+      "split": "test",
+      "data_pool_filter": "common_evaluation",
+      "protocol": "mechasight_experimental_protocol",
+      "regime": "S",
+      "preprocessing_config_id": "phase2.2-v3-dcef3e9c758c24ae",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_S\\RoboticArm__mechasight_experimental_protocol__regime-S__test__phase2.2-v3-dcef3e9c758c24ae.h5",
+      "manifest_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_S\\RoboticArm__mechasight_experimental_protocol__regime-S__test__phase2.2-v3-dcef3e9c758c24ae__manifest.jsonl",
+      "feature_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_S\\RoboticArm__mechasight_experimental_protocol__regime-S__test__phase2.2-v3-dcef3e9c758c24ae__features.jsonl",
+      "cache_bytes": 3683488,
+      "manifest_bytes": 135317,
+      "feature_bytes": 391003
+    },
+    {
+      "segments_read": 1,
+      "windows_written": 51,
+      "accelerometer_files_affected": 1,
+      "accelerometer_samples_dropped": 1,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 286,
+      "machine": "BrushlessMotor",
+      "split": "test",
+      "data_pool_filter": "common_evaluation",
+      "protocol": "mechasight_experimental_protocol",
+      "regime": "T",
+      "preprocessing_config_id": "phase2.2-v3-0a0285c9afd6ad6d",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__test__phase2.2-v3-0a0285c9afd6ad6d.h5",
+      "manifest_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__test__phase2.2-v3-0a0285c9afd6ad6d__manifest.jsonl",
+      "feature_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__test__phase2.2-v3-0a0285c9afd6ad6d__features.jsonl",
+      "cache_bytes": 2575560,
+      "manifest_bytes": 95965,
+      "feature_bytes": 268602
+    },
+    {
+      "segments_read": 1,
+      "windows_written": 51,
+      "accelerometer_files_affected": 1,
+      "accelerometer_samples_dropped": 1,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 286,
+      "machine": "BrushlessMotor",
+      "split": "train",
+      "data_pool_filter": "target_adaptation",
+      "protocol": "mechasight_experimental_protocol",
+      "regime": "T",
+      "preprocessing_config_id": "phase2.2-v3-0a0285c9afd6ad6d",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__train__phase2.2-v3-0a0285c9afd6ad6d.h5",
+      "manifest_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__train__phase2.2-v3-0a0285c9afd6ad6d__manifest.jsonl",
+      "feature_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\BrushlessMotor__mechasight_experimental_protocol__regime-T__train__phase2.2-v3-0a0285c9afd6ad6d__features.jsonl",
+      "cache_bytes": 2575764,
+      "manifest_bytes": 96325,
+      "feature_bytes": 268758
+    },
+    {
+      "segments_read": 1,
+      "windows_written": 74,
+      "accelerometer_files_affected": 0,
+      "accelerometer_samples_dropped": 0,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 248,
+      "machine": "RoboticArm",
+      "split": "test",
+      "data_pool_filter": "common_evaluation",
+      "protocol": "mechasight_experimental_protocol",
+      "regime": "T",
+      "preprocessing_config_id": "phase2.2-v3-0a0285c9afd6ad6d",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__test__phase2.2-v3-0a0285c9afd6ad6d.h5",
+      "manifest_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__test__phase2.2-v3-0a0285c9afd6ad6d__manifest.jsonl",
+      "feature_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__test__phase2.2-v3-0a0285c9afd6ad6d__features.jsonl",
+      "cache_bytes": 3683488,
+      "manifest_bytes": 135317,
+      "feature_bytes": 391003
+    },
+    {
+      "segments_read": 1,
+      "windows_written": 74,
+      "accelerometer_files_affected": 0,
+      "accelerometer_samples_dropped": 0,
+      "gyro_files_affected": 1,
+      "gyro_samples_dropped": 248,
+      "machine": "RoboticArm",
+      "split": "train",
+      "data_pool_filter": "target_adaptation",
+      "protocol": "mechasight_experimental_protocol",
+      "regime": "T",
+      "preprocessing_config_id": "phase2.2-v3-0a0285c9afd6ad6d",
+      "max_segments": 1,
+      "cache_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__train__phase2.2-v3-0a0285c9afd6ad6d.h5",
+      "manifest_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__train__phase2.2-v3-0a0285c9afd6ad6d__manifest.jsonl",
+      "feature_path": "data\\interim\\phase22_smoke_release\\cache\\mechasight_experimental_protocol\\regime_T\\RoboticArm__mechasight_experimental_protocol__regime-T__train__phase2.2-v3-0a0285c9afd6ad6d__features.jsonl",
+      "cache_bytes": 3683488,
+      "manifest_bytes": 136594,
+      "feature_bytes": 390502
+    }
+  ],
+  "smoke_total_segments": 6,
+  "smoke_total_windows": 375
+}

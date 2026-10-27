@@ -1,0 +1,12 @@
+{
+  "common_test_scores_completed": 28,
+  "expected_experiment_count": 28,
+  "expected_ledger_ending_count": 28,
+  "ledger_end_count": 28,
+  "ledger_start_count": 0,
+  "reporting_policy_id": "p311-reporting-5e76ab7dabd5689c7b0ced68",
+  "schema_version": "phase3.2-first-locked-test-v1",
+  "state": "complete",
+  "test_batch_id": "p32-test-batch-8f7d48324fd10df97ae29100",
+  "test_evaluation_code_sha": "99f6055156c314bbf26a847713d26792979fd050"
+}

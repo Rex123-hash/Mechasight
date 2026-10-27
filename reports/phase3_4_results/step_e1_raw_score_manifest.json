@@ -1,0 +1,52 @@
+{
+  "analysis_artifacts": 0,
+  "authorization_git_sha": "c10fdfcc890f97a595c132d87dc8b4bb04d7161e",
+  "combined_artifact": "reports/phase3_4_results/step_e1_combined_raw_scores.csv",
+  "combined_artifact_sha256": "199474ef97a27714b4fb138f1ca9f23a1604daa09a62b258278b782d9df58875",
+  "combined_contains": "raw per-segment scores and identifiers only; no aggregate metric",
+  "evaluator_head": "64694e6f04378b892c8f986827c9935007219fb3",
+  "fold_1_absent": {
+    "claimed": false,
+    "experiment_id": "p34d-e56529a2f56f98fd4a7a",
+    "state": "AUTHORIZED / UNUSED"
+  },
+  "generated_utc": "2026-09-12T08:43:50.344990+00:00",
+  "inc1": {
+    "attempt_history": [
+      "SCORE_STARTED"
+    ],
+    "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+    "score_completed": false
+  },
+  "ledger_entries": 40,
+  "ledger_sha256": "b0ecbc7ac99edbc14aa4e5006b9210a42f7aa1a7c2045b2b80046ec853020d3e",
+  "per_experiment_artifact_sha256": {
+    "p34d-2af84983abd170013b73": "ccee18db8732025aefb03f42dfc8a1315b7c24c14245eaf3b601a95233ed8a9d",
+    "p34d-406b59f08e154b284159": "1926f1cdca781afa3bcb54b5655fb881e03346b36c632b41495d47d75eae8ead",
+    "p34d-652bc1e3f9d29a51a460": "512b21dd51d22185da049c821d204f25bbc48e82720fe6802289eb2063e7c039",
+    "p34d-66656cf0901b180cf037": "fa6cf2154d989eb3f28a4707e2dc13db90971917b988f4ff1e9fa289e5a3cdb8",
+    "p34d-88b93ddbacbc5829f326": "ec8d9b513472038731315f17621694cd07ecd5ad496ec0017bc8ea8bfce98410",
+    "p34d-a4e8316f62fa982ec52d": "a23f672818a327da7ebe6e46be5fc44ed9fc03d89d1483df2655748a59c3cd01",
+    "p34d-ed8467570acf122c36cd": "4f1ad47cb93ebd3248198527296f92bb52461e6b88a97d83106b59a6361142b7",
+    "p34d-fd6e3bfd4c091e155d99": "9de21c5899870394fa600de1e45b830016a263e00641c562f764bad6ddaacf65"
+  },
+  "performance_metrics_computed": false,
+  "recovery_config_identity": "p34r-inc1-4f86592159eadbbe276d9c6f",
+  "retained_claims": 8,
+  "retained_score_completed": 8,
+  "retained_score_started": 8,
+  "rows_per_artifact": 464,
+  "schema_version": "phase3.4-step-e1-raw-score-manifest-v1",
+  "scoring_order": [
+    "p34d-fd6e3bfd4c091e155d99",
+    "p34d-a4e8316f62fa982ec52d",
+    "p34d-88b93ddbacbc5829f326",
+    "p34d-2af84983abd170013b73",
+    "p34d-652bc1e3f9d29a51a460",
+    "p34d-406b59f08e154b284159",
+    "p34d-66656cf0901b180cf037",
+    "p34d-ed8467570acf122c36cd"
+  ],
+  "stage": "E1: eight retained protected looks scored once each; NO analysis",
+  "total_rows": 3712
+}

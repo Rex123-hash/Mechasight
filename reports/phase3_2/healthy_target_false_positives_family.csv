@@ -1,0 +1,13 @@
+machine,regime,model_family,scientific_limitation_id,healthy_target_sample_count,healthy_target_sample_count_population_std,false_positive,false_positive_population_std,false_positive_rate,false_positive_rate_population_std,count_summary_note
+RoboticArm,S,statistical_reference,robotic_arm_parent_clustered_inference_v1,20.0,0.0,1.0,0.0,0.05,0.0,deterministic literal count
+RoboticArm,S,isolation_forest,robotic_arm_parent_clustered_inference_v1,20.0,0.0,0.0,0.0,0.0,0.0,"IF count is mean across seeds, possibly fractional"
+RoboticArm,S,one_class_svm,robotic_arm_parent_clustered_inference_v1,20.0,0.0,12.0,0.0,0.6,0.0,deterministic literal count
+RoboticArm,T,statistical_reference,robotic_arm_parent_clustered_inference_v1,20.0,0.0,1.0,0.0,0.05,0.0,deterministic literal count
+RoboticArm,T,isolation_forest,robotic_arm_parent_clustered_inference_v1,20.0,0.0,0.4,0.8000000000000002,0.02,0.04,"IF count is mean across seeds, possibly fractional"
+RoboticArm,T,one_class_svm,robotic_arm_parent_clustered_inference_v1,20.0,0.0,6.0,0.0,0.3,0.0,deterministic literal count
+BrushlessMotor,S,statistical_reference,brushless_motor_acquisition_time_class_confound_v1,78.0,0.0,63.0,0.0,0.8076923076923077,0.0,deterministic literal count
+BrushlessMotor,S,isolation_forest,brushless_motor_acquisition_time_class_confound_v1,78.0,0.0,76.6,0.8,0.9820512820512821,0.01025641025641027,"IF count is mean across seeds, possibly fractional"
+BrushlessMotor,S,one_class_svm,brushless_motor_acquisition_time_class_confound_v1,78.0,0.0,78.0,0.0,1.0,0.0,deterministic literal count
+BrushlessMotor,T,statistical_reference,brushless_motor_acquisition_time_class_confound_v1,78.0,0.0,62.0,0.0,0.7948717948717948,0.0,deterministic literal count
+BrushlessMotor,T,isolation_forest,brushless_motor_acquisition_time_class_confound_v1,78.0,0.0,70.8,2.9257477676655586,0.9076923076923077,0.03750958676494305,"IF count is mean across seeds, possibly fractional"
+BrushlessMotor,T,one_class_svm,brushless_motor_acquisition_time_class_confound_v1,78.0,0.0,70.0,0.0,0.8974358974358975,0.0,deterministic literal count

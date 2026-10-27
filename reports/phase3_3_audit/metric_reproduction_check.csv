@@ -1,0 +1,13 @@
+check_id,area,method,expected,observed,status,note
+M01,primary_auc.csv,text-level float equality against evaluate_*.json,"42 rows, 0 mismatches","42 rows, 0 mismatches",PASS,
+M02,published comparison,recomputed all six differences and classifications,"6/6 agree, all NEAR_EXACT","agree=True, worst=0.33",PASS,
+M03,AUC estimator,"vs upstream brute-force nested loop, ties injected",identical on all/source/target,identical=True,PASS,"also differs from sklearn by exactly half the tie fraction, i.e. correct strict-tie semantics"
+M04,train/validation split,"re-ran sklearn train_test_split(0.1, seed 1995, stratified)",122477/13609 and 58797/6534,reproduced=True,PASS,window-level: 1838/1839 RoboticArm segments appear in both train and validation (upstream behaviour)
+M05,test cohort,recomputed ordered_id_hash from the official test HDF5,matches both ledger entries,match=True,PASS,
+M06,RoboticArm overlap,recomputed parent grouping from segment ids in the HDF5,"101 parents, 62 crossing, 212/232 normal, 0/232 anomaly","{""parents_total"": 101, ""crossing"": 62, ""normal_with_train_sibling"": 212, ""anomaly_with_normal_train_sibling"": 0}",PASS,"overlap is asymmetric: it touches the normal class only, which is the structure that would bias optimistically"
+M07,parameter count,"hand arithmetic and torch enumeration, independently",40789724,"hand=40789724, torch=40789724",PASS,
+M08,early stopping,recomputed argmin and patience arithmetic from the loss curves,"exactly 3 non-improving epochs after the best, then stop",consistent=True,PASS,best_epoch is 0-indexed in the JSON; the report quotes the 1-indexed epoch
+M09,checkpoint linkage,re-hashed both .pth files; compared evaluate vs training records,evaluator scored exactly the trained checkpoints,match=True,PASS,checkpoints are 163 MB each and are not committed
+M10,metric re-derivability,searched every persisted artifact for per-window or per-segment anomaly scores,per-segment scores available for independent AUC recomputation,absent - only aggregate AUCs were persisted,GAP,"audit section 10 could not be executed as written; the six headline AUCs are not re-derivable from artifacts without re-running inference, which this audit forbids"
+M11,tolerance freeze,read the config out of the freeze commit and diffed against HEAD,"tolerance committed before first score, unchanged since","committed 16:02:38, first score 17:00:15, diff empty",PASS,
+M12,upstream identity,git blob SHA-1 + byte size against the live GitHub tree API,4/4 files match the pinned commit,4/4 match,PASS,"Phase-2 SHA-256 values reproduce exactly from the CRLF form; provenance-only, content identical"

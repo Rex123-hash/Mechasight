@@ -1,0 +1,24 @@
+{
+  "contains_model_output": false,
+  "contains_new_scores": false,
+  "files": {
+    "docs/phase33_audit_closure.md": "3e1b1aff35cd0c06c4176295a41dceb50fffe65be31bab0b76cf69f728740a2d",
+    "reports/phase3_3_1/checkpoint_preservation_status.json": "b0999a17a35377843acbccf26770ecdb4e750ad166e17e0f49611e38b6f1aae0",
+    "reports/phase3_3_1/phase331_audit_closure.json": "e4e95b7eddb1a2d8e89643651e0dbc704a8e14402b4a54bafc1c05c02f884130",
+    "reports/phase3_3_1/protocol_a_provenance_supplement.json": "fb13f2d17afb1df5c894dcb70d61d8f31f6f92b82a2195f87ba639c644822964",
+    "reports/phase3_3_1/protocol_a_reporting_corrections.md": "079039e538c101369fb0a8d37a18c15349b4bb1b0f5386b3245285eb70b0c134",
+    "reports/phase3_3_1/score_artifact_recovery_search.json": "2c0e7d3cc83b64ecf7befe67476b76e03600f6099065402d631a50ef0db3f298",
+    "tests/test_phase331_audit_closure.py": "b5be0380542d7da9f2c18756e9f252001701bb6ee703ccafb99c9bd74617a5db"
+  },
+  "generated_utc": "2026-09-08T15:36:04.159681+00:00",
+  "historical_phase33_artifacts_rewritten": false,
+  "layer_type": "additive correction layer",
+  "phase": "3.3.1",
+  "phase33_manifest_reference": {
+    "files_verified_unchanged": 15,
+    "path": "reports/phase3_3_protocol_a/artifact_manifest.json",
+    "sha256": "c927804ccacd02a89c387f3ef8e41ef00912ba394feaff6dd5ef1d5718b34c0c"
+  },
+  "schema_version": "phase3.3.1-artifacts-v1",
+  "supersedes_wording_in": "reports/phase3_3_protocol_a/protocol_a_reproduction_report.md (text unchanged; superseded for future citation)"
+}

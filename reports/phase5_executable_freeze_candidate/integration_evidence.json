@@ -1,0 +1,85 @@
+{
+  "analysis_primary_contrasts": 140,
+  "analysis_primary_intervals": 420,
+  "analysis_sha256": "7c1f811c8c101cb51c40c2159775f51a51e09345cab9d98c478b6530f1cd8dbf",
+  "cohort_segments": {
+    "BrushlessMotor": 12,
+    "RoboticArm": 12
+  },
+  "coverage": {
+    "l1_families": {
+      "dense_autoencoder": 20,
+      "mahalanobis_shrinkage": 4
+    },
+    "l1_new_units_real_frozen_model": 24,
+    "l1_new_units_stub": 0,
+    "l2_derived_from_real_phase4_validation_scores": 208,
+    "labels": "SYNTHETIC fake labels (development validation has no faults)",
+    "reused_l1_comparators_real_phase3_validation_scores_analysis_only": 28,
+    "synthetic_stub_demo_units": 232
+  },
+  "data_origin": "PERMITTED development source-validation inputs; SYNTHETIC fake labels",
+  "fixture_manifest_sha256": "db6398bd9000eac7f56d92dfc157116f532637265bf03feddca7e2c5283b0c27",
+  "fixture_root": "<temp>/mechasight-SYNTHETIC-5-5f-integration-nhv0npfn",
+  "index_bypass_rejection": {
+    "counterexample": "unregistered target-domain SegmentSource",
+    "development_manifest_sha256": "b3c513b383a42021bf9c336dcd991eee4c7b05af2bccbf8b11c82cee4fd47757",
+    "parquet_schema_opens": 0,
+    "rejected_entry_points": [
+      "generic",
+      "segment",
+      "timestamps"
+    ],
+    "source_content_hashes": 0,
+    "source_hash_note": "index construction never content-hashes raw sensors",
+    "timestamp_reads": 0
+  },
+  "interfaces": {
+    "inference_adapter": "phase5-frozen-l1-inference-adapter-v1",
+    "input_schema": "phase5-dev-frozen-v1",
+    "window_index_columns": [
+      "machine",
+      "regime",
+      "segment_id",
+      "parent_recording",
+      "domain",
+      "window_index",
+      "window_start_s",
+      "window_end_s",
+      "row"
+    ],
+    "window_index_schema": "phase5-label-free-window-index-v1"
+  },
+  "l1_max_abs_diff_vs_frozen_bundle_validation_scores": 0.0,
+  "l1_real_model_units": 24,
+  "l2_max_abs_diff_vs_persisted_l2_fused_validation": 0.0,
+  "l2_rows": 2496,
+  "ledger": {
+    "appended_segments": [
+      "authorized_batch:SYNTHETIC-5327e12250ccebf98708bf80"
+    ],
+    "backend": "jsonl (TestLookLedger.append_many_atomic + batch_authorization.json)",
+    "rows_before_after": [
+      196,
+      428
+    ],
+    "verified_with": "verify_ledger_history (unmodified)"
+  },
+  "not_real_performance": true,
+  "predictor_provenance_coverage": {
+    "implementations": {
+      "phase5-frozen-l1-inference-adapter-v1": 24,
+      "phase5-l2-frozen-robust-z-mean-v1": 208
+    },
+    "kinds": {
+      "derived_L2_scoring": 208,
+      "frozen_L1_inference": 24
+    },
+    "l2_component_origins": {
+      "PERMITTED_PHASE4_SOURCE_VALIDATION": 208
+    }
+  },
+  "recipe": "phase5-dev-integration-v1",
+  "scope": "SYNTHETIC_ONLY",
+  "units": 232
+}

@@ -1,0 +1,12 @@
+required_limitation,probe,present_in_frozen_claim_boundary
+donor-matchable 60-parent focal cohort,60 parents,True
+post-test controlled sensitivity analysis,post-test,True
+same-parent familiarity interpretation,same-parent,True
+not global leakage,global split leakage,True
+not published-AUC inflation,published-AUC inflation,True
+not causal,causal,True
+no automatic BM/model/site generalisation,BrushlessMotor,True
+conditional-on-ten-models uncertainty,conditional on the ten,True
+residual parent gap 0-3,0 to 3,True
+donor signal-content difference,signal content,True
+9 excluded sibling-bearing normals,9 ,True

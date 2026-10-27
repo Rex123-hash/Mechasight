@@ -1,0 +1,29 @@
+experiment_id,machine,regime,model_family,model_seed,tn,fp,fn,tp,precision_phase32,recall_phase32,f1_phase32,f1_count_identity,f1_denominator_2tp_fp_fn,f1_is_mathematically_defined,f1_phase32_is_null,precision_is_genuinely_0_over_0,null_f1_mechanism,correction_needed
+p3-d75e7a94e44f1caf8a5a595a,BrushlessMotor,S,isolation_forest,0,75,81,27,129,0.6142857142857143,0.8269230769230769,0.7049180327868853,0.7049180327868853,366,True,False,False,not applicable,False
+p3-611ddf562a1bccc1714e44b8,BrushlessMotor,S,isolation_forest,1,74,82,23,133,0.6186046511627907,0.8525641025641025,0.7169811320754716,0.7169811320754716,371,True,False,False,not applicable,False
+p3-296f1214c5d29239fd3f95a7,BrushlessMotor,S,isolation_forest,2,74,82,27,129,0.6113744075829384,0.8269230769230769,0.7029972752043596,0.7029972752043597,367,True,False,False,not applicable,False
+p3-92d37c41321bf4991c224a7b,BrushlessMotor,S,isolation_forest,3,76,80,27,129,0.6172248803827751,0.8269230769230769,0.7068493150684931,0.7068493150684931,365,True,False,False,not applicable,False
+p3-a164ab66f27ae30b8964b5d5,BrushlessMotor,S,isolation_forest,4,71,85,19,137,0.6171171171171171,0.8782051282051282,0.7248677248677248,0.7248677248677249,378,True,False,False,not applicable,False
+p3-c72840a71b6f3d36ed7a30d0,BrushlessMotor,S,one_class_svm,0,75,81,7,149,0.6478260869565218,0.9551282051282052,0.772020725388601,0.772020725388601,386,True,False,False,not applicable,False
+p3-c3480b35881d464a75f3b359,BrushlessMotor,S,statistical_reference,0,87,69,55,101,0.5941176470588235,0.6474358974358975,0.6196319018404908,0.6196319018404908,326,True,False,False,not applicable,False
+p3-a2b4c42e73f2ac6104e622c8,BrushlessMotor,T,isolation_forest,0,84,72,42,114,0.6129032258064516,0.7307692307692307,0.6666666666666667,0.6666666666666666,342,True,False,False,not applicable,False
+p3-649152f9076af141b8701f69,BrushlessMotor,T,isolation_forest,1,76,80,26,130,0.6190476190476191,0.8333333333333334,0.7103825136612022,0.7103825136612022,366,True,False,False,not applicable,False
+p3-56aaef3d39745f6f79059405,BrushlessMotor,T,isolation_forest,2,84,72,30,126,0.6363636363636364,0.8076923076923077,0.7118644067796609,0.711864406779661,354,True,False,False,not applicable,False
+p3-93869e664dd39a5c050ce499,BrushlessMotor,T,isolation_forest,3,79,77,39,117,0.6030927835051546,0.75,0.6685714285714285,0.6685714285714286,350,True,False,False,not applicable,False
+p3-5205733640c5094021b2a4b0,BrushlessMotor,T,isolation_forest,4,76,80,34,122,0.6039603960396039,0.782051282051282,0.6815642458100558,0.6815642458100558,358,True,False,False,not applicable,False
+p3-3c27f8c1e723c409051319c8,BrushlessMotor,T,one_class_svm,0,83,73,8,148,0.669683257918552,0.9487179487179488,0.7851458885941643,0.7851458885941645,377,True,False,False,not applicable,False
+p3-f0f1a4a48cc815e2faf3d696,BrushlessMotor,T,statistical_reference,0,88,68,67,89,0.5668789808917197,0.5705128205128205,0.5686900958466453,0.5686900958466453,313,True,False,False,not applicable,False
+p3-b7df07b4435147ce84abb2fb,RoboticArm,S,isolation_forest,0,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-d523942f6e3b110247ccd97a,RoboticArm,S,isolation_forest,1,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-d2e84d3ccdbb25446ed3b5c2,RoboticArm,S,isolation_forest,2,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-61da2e22429837caf51172a3,RoboticArm,S,isolation_forest,3,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-4bad66197b1b5b39bc0e1ce8,RoboticArm,S,isolation_forest,4,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-c0b106088a660b45248207a8,RoboticArm,S,one_class_svm,0,221,13,103,129,0.908450704225352,0.5560344827586207,0.6898395721925134,0.6898395721925134,374,True,False,False,not applicable,False
+p3-994e171b9c84299ee0506001,RoboticArm,S,statistical_reference,0,233,1,222,10,0.9090909090909092,0.043103448275862,0.0823045267489712,0.0823045267489712,243,True,False,False,not applicable,False
+p3-f2e82658337725d643461f5a,RoboticArm,T,isolation_forest,0,232,2,232,0,0.0,0.0,,0.0,234,True,True,False,"precision + recall == 0 (TP=0, FP>0)",True
+p3-4df2732b72997882e300c7ee,RoboticArm,T,isolation_forest,1,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-e0cb98b1d50e1b760ad00c33,RoboticArm,T,isolation_forest,2,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-efee4a25a307b9556f1ef9e1,RoboticArm,T,isolation_forest,3,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-b2c1eb73ec1f836d95401be0,RoboticArm,T,isolation_forest,4,234,0,232,0,,0.0,,0.0,232,True,True,True,"precision undefined (TP=0, FP=0)",True
+p3-3dfb6a47e2b1ee1a4da8ed4f,RoboticArm,T,one_class_svm,0,228,6,129,103,0.944954128440367,0.4439655172413793,0.6041055718475073,0.6041055718475073,341,True,False,False,not applicable,False
+p3-00ef3593eef3eef458aac8ec,RoboticArm,T,statistical_reference,0,233,1,222,10,0.9090909090909092,0.043103448275862,0.0823045267489712,0.0823045267489712,243,True,False,False,not applicable,False

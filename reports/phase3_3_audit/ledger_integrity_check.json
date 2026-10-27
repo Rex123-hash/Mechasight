@@ -1,0 +1,54 @@
+{
+  "total_entries": 30,
+  "protocol_b_entries": 28,
+  "protocol_a_entries": 2,
+  "original_prefix_sha256": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+  "original_prefix_sha256_expected": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+  "original_prefix_unchanged": true,
+  "first_28_all_protocol_b": true,
+  "append_only_across_git_history": true,
+  "git_diff_at_results_commit": "2 insertions, 0 deletions",
+  "ledger_api_supports_only": [
+    "append",
+    "append_many_atomic",
+    "read"
+  ],
+  "ledger_api_first_committed": "4c0be89 (Phase 3.0) - append-only predates Phase 3.3",
+  "protocol_a_entries_detail": [
+    {
+      "machine": "RoboticArm",
+      "experiment_id": "p33a-1cdb02c0d81c21288e58",
+      "git_sha": "4ce1faf5894578f330226d80cd194dfb44ff0cba",
+      "timestamp_utc": "2026-09-08T11:29:26.289247+00:00",
+      "test_cohort_hash": "83cd11956f8ee94907bcf366605259d4986acca8ff69a5bceb3874ee6a7a8efa",
+      "cohort_hash_recomputed_match": true
+    },
+    {
+      "machine": "BrushlessMotor",
+      "experiment_id": "p33a-65b53c5046de90d1f1a5",
+      "git_sha": "4ce1faf5894578f330226d80cd194dfb44ff0cba",
+      "timestamp_utc": "2026-09-08T11:29:26.289247+00:00",
+      "test_cohort_hash": "1322f463b6158bfc75c9cbb62ffe3c6883e19d063f02fb80600aee678ca04f32",
+      "cohort_hash_recomputed_match": true
+    }
+  ],
+  "one_look_per_machine": true,
+  "authorisation_precedes_scoring": {
+    "authorisation_utc": "2026-09-08T11:29:26Z",
+    "BrushlessMotor_scored_local": "2026-09-08 17:00:15 +0530",
+    "RoboticArm_scored_local": "2026-09-08 20:31:31 +0530",
+    "evaluator_committed_local": "2026-09-08 16:30:06 +0530",
+    "ordering_valid": true
+  },
+  "adversarial_tests_against_the_new_invariant": {
+    "byte_edit_in_original_entry": "REJECTED",
+    "reorder_two_original_entries": "REJECTED",
+    "delete_an_original_entry": "REJECTED",
+    "delete_then_reappend_copy": "REJECTED",
+    "tampered_prefix_plus_valid_protocol_a_append": "REJECTED",
+    "protocol_a_entry_moved_into_first_28": "REJECTED",
+    "legitimate_future_append": "ACCEPTED (intended)"
+  },
+  "verdict": "CORRECT SEMANTIC GENERALIZATION",
+  "gap": "no test pins the number of Protocol-A looks; a third undisclosed Protocol-A entry would not fail the suite"
+}

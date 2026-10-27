@@ -1,0 +1,13 @@
+dimension,v1_global_matched_contrast,v2_focal_parent_sibling_toggle,favours
+closeness to the actual leakage mechanism,indirect: contrasts two whole training regimes,direct: toggles the presence of a test segment's own siblings,v2
+parent identity confounding,severe: the disjoint arm is one fixed set of 14 non-randomly selected parents,controlled: every focal parent is its own comparison; donors are matched and non-focal,v2
+training-size control,"exact at 214 segments, but only 11.6% of official volume",exact per fold; both arms train on 82% of official volume,v2
+metadata control,exact on 12 reachable strata; 13 strata unavailable at any size,exact on all 25 strata,v2
+target-domain preservation,none: the disjoint arm has zero target-domain training segments,preserved in both arms; focal target contributions are replaced by target donors,v2
+full-training-volume preservation,11.6% of official training volume,82% of official training volume,v2
+effective independent clusters in the compared arms,disjoint arm Kish ESS 6.83 vs overlap 8.35-11.26; nominal 14 = 14 is misleading,60 focal parents across 5 folds; contrast is paired within segment,v2
+inferential clarity,between-arm AUROC comparison of models trained on disjoint data,within-segment paired difference: the same test segment scored under two models differing only by the toggle,v2
+compute cost,18 runs x 0.43 h = 7.8 h,10 runs x 3.07 h = 31 h,v1
+ability to replicate,membership replication on the overlap arm only; the disjoint arm has one possible membership,"5 independent folds, each an internally paired contrast; donor draws re-randomisable",v2
+generalizability of the estimate,"a restricted 11.6%, source-domain-only regime","near-official training conditions, but the estimand is same-parent familiarity for focal parents rather than global split leakage",tie
+claim boundary breadth,"global parent-disjoint training contrast, heavily caveated",narrower and more precise: same-parent sibling exposure for focal parents,v2

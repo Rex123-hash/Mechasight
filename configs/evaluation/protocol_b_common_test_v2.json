@@ -1,0 +1,60 @@
+{
+  "version": "phase2.1-evaluation-v1",
+  "protocol": "mechasight_experimental_protocol",
+  "split_version": "protocol_b_common_test_v2",
+  "comparison": {
+    "test_cohort": "identical for Regime S and Regime T",
+    "validation_cohort": "identical source-normal parent recordings for Regime S and Regime T",
+    "only_intended_difference": "Regime T may fit on the frozen target-adaptation pool; Regime S reserves it"
+  },
+  "validation": {
+    "population": "source_validation normal parent recordings only",
+    "target_adaptation_use": "all adaptation-pool examples are train-only in Regime T and reserved in Regime S",
+    "forbidden": [
+      "test hyperparameter selection",
+      "test normalization fitting",
+      "test feature selection",
+      "test window selection",
+      "test aggregation selection",
+      "test threshold calibration",
+      "test early stopping"
+    ]
+  },
+  "metrics": {
+    "primary_threshold_free": ["AUROC", "AUPRC"],
+    "secondary_threshold_free": ["pAUROC@FPR<=0.1"],
+    "threshold_dependent": ["F1", "recall", "sensitivity", "specificity", "false_positive_rate"],
+    "protocol_a_implementation": "strict pairwise normal_score < anomaly_score; ties zero",
+    "protocol_b_implementation": "one pinned standard-library implementation for every paired model"
+  },
+  "threshold": {
+    "calibration_population": "source_validation normal segment scores only",
+    "quantile": 0.9,
+    "quantile_method": "higher",
+    "decision_rule": "anomaly if segment_score > threshold",
+    "test_labels_used": false
+  },
+  "score_aggregation": {
+    "protocol_a": "median of window reconstruction errors, exactly as pinned upstream",
+    "protocol_b_primary": "median of window anomaly scores",
+    "provenance": "every segment score stores all contributing window_ids",
+    "test_set_search": "forbidden"
+  },
+  "uncertainty": {
+    "robotic_arm": {
+      "method": "parent-recording cluster bootstrap",
+      "replicates": 10000,
+      "seed": 1995,
+      "strata": ["domain", "anomaly_status", "operating_condition"],
+      "unit_sampled": "parent_recording with all child segments retained",
+      "paired_comparisons": "same parent draws for both models; interval on metric difference",
+      "interval": "2.5/97.5 percentile"
+    },
+    "brushless_motor": {
+      "method": "recording/segment-level stratified bootstrap",
+      "strata": ["domain", "anomaly_status", "operating_condition"],
+      "limitation": "fault and acquisition-session effects remain non-identifiable"
+    },
+    "forbidden_units": ["windows", "RoboticArm sibling segments treated as independent"]
+  }
+}

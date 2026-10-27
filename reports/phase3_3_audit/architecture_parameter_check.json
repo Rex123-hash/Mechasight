@@ -1,0 +1,77 @@
+{
+  "derived_from": "upstream model.py build_encoder/build_decoder at the pinned commit",
+  "layer_dims": [
+    2048,
+    2048,
+    2048,
+    16
+  ],
+  "window_lengths": {
+    "imp23absu_mic": 1600,
+    "ism330dhcx_acc": 706,
+    "ism330dhcx_gyro": 706
+  },
+  "channels": {
+    "imp23absu_mic": 1,
+    "ism330dhcx_acc": 3,
+    "ism330dhcx_gyro": 3
+  },
+  "per_sensor_input_dims": {
+    "imp23absu_mic": 1600,
+    "ism330dhcx_acc": 2118,
+    "ism330dhcx_gyro": 2118
+  },
+  "input_dim": 5836,
+  "input_dim_expected": 5836,
+  "encoder": [
+    "Linear(5836,2048)",
+    "BatchNorm1d(2048)",
+    "ReLU",
+    "Linear(2048,2048)",
+    "BatchNorm1d(2048)",
+    "ReLU",
+    "Linear(2048,2048)",
+    "BatchNorm1d(2048)",
+    "ReLU",
+    "Linear(2048,16)"
+  ],
+  "decoder": [
+    "Linear(16,2048)",
+    "BatchNorm1d(2048)",
+    "ReLU",
+    "Linear(2048,2048)",
+    "BatchNorm1d(2048)",
+    "ReLU",
+    "Linear(2048,2048)",
+    "BatchNorm1d(2048)",
+    "ReLU",
+    "Linear(2048,5836)"
+  ],
+  "bottleneck_has_no_batchnorm_or_relu": true,
+  "output_layer_has_no_batchnorm_or_relu": true,
+  "parameters_hand_computed": 40789724,
+  "parameters_torch_enumerated": 40789724,
+  "parameters_claimed": 40789724,
+  "parameter_count_agrees": true,
+  "batchnorm_trainable_params_included": "3 x 2 x 2048 per half (weight and bias); running_mean/running_var are buffers, not trainable",
+  "docs_research_definition_5_9_omits_batchnorm": true,
+  "aliasing": {
+    "upstream_line": "best_model_state = self.state_dict()  # no deepcopy",
+    "pytorch_semantics_verified_empirically": true,
+    "state_dict_returns_live_tensor_references": true,
+    "later_optimizer_steps_mutate_the_saved_state": true,
+    "batchnorm_running_stats_also_mutated": true,
+    "consequence": "load_state_dict(best_model_state) restores the FINAL epoch, not the best-validation epoch",
+    "reproduction_preserved_it": true,
+    "models_actually_scored": {
+      "RoboticArm": "epoch 36",
+      "BrushlessMotor": "epoch 26"
+    },
+    "best_validation_epochs_not_scored": {
+      "RoboticArm": "epoch 33",
+      "BrushlessMotor": "epoch 23"
+    },
+    "interpretation_correct": true,
+    "verification_basis": "code path plus PyTorch semantics; the best-validation weights were never persisted, so this cannot be confirmed by artifact comparison"
+  }
+}

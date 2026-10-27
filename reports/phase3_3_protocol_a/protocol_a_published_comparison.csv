@@ -1,0 +1,7 @@
+machine,slice,slice_label,published_auc_percent,reproduced_auc_percent,absolute_difference,absolute_error,classification,tolerance_near_exact,tolerance_material,tolerance_frozen_before_results,published_is_reference_not_target
+RoboticArm,all,Overall (S+T),91.62,91.51,-0.11,0.11,NEAR_EXACT,0.5,2.0,True,True
+RoboticArm,source,Source,93.28,93.14,-0.14,0.14,NEAR_EXACT,0.5,2.0,True,True
+RoboticArm,target,Target,90.48,90.81,0.33,0.33,NEAR_EXACT,0.5,2.0,True,True
+BrushlessMotor,all,Overall (S+T),58.95,58.98,0.03,0.03,NEAR_EXACT,0.5,2.0,True,True
+BrushlessMotor,source,Source,73.63,73.73,0.1,0.1,NEAR_EXACT,0.5,2.0,True,True
+BrushlessMotor,target,Target,55.59,55.7,0.11,0.11,NEAR_EXACT,0.5,2.0,True,True

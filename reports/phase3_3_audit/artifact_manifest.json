@@ -1,0 +1,25 @@
+{
+  "artifact_type": "audit evidence only",
+  "audited_head": "8add93c3e448d39028934c0e38f0b00c79dcb8da",
+  "closure_commit": "1ff34caf5de1ab9c67703b70d1f0ebae210c2ce2",
+  "contains_model_checkpoint": false,
+  "contains_new_experiment_result": false,
+  "contains_newly_generated_scores": false,
+  "contains_raw_sensor_data": false,
+  "files": {
+    "docs/phase33_independent_audit.md": "c85dd8b1de020470bc9cdbffd5036c3e3f19e2beaf7ba4e18881c117e8050997",
+    "reports/phase3_3_audit/architecture_parameter_check.json": "c584667a85814dcf16a567f10b57e6e2e91c7f4eef6f5dee5fcdd2ab2463dd7f",
+    "reports/phase3_3_audit/artifact_integrity_check.csv": "61b68e1738a8b64769a2a527a9fee21deccb63a49014a6b543beeb95bda31286",
+    "reports/phase3_3_audit/claims_audit.csv": "2c16e54473f6d88aec2b5ee45722ff3d8fa92caa2487256b4e9f4b7b6cfcd117",
+    "reports/phase3_3_audit/ledger_integrity_check.json": "3dff862cb0371a238ac14a375519b8f242c65e593e49e190476bd0fc3ef2c614",
+    "reports/phase3_3_audit/metric_reproduction_check.csv": "d8cf27db8d16573b83f0face2a3a8685882fa01a49f4b9caf7a50ca4009075fd",
+    "reports/phase3_3_audit/phase33_independent_audit.json": "bdedb9d53ab6d9381dae1f2f6e74e648c564fee95e75f26f4567f4202b5f35b0"
+  },
+  "generated_utc": "2026-09-08T15:47:00.791956+00:00",
+  "ledger_mutated": false,
+  "note": "Metric values quoted here are recomputed from already-persisted Phase-3.3 aggregates and are bit-identical to reports/phase3_3_protocol_a/evaluate_*.json. No inference was run.",
+  "phase": "3.3 independent audit",
+  "schema_version": "phase3.3-audit-evidence-v1",
+  "self_reference": "excluded, following the manifest convention used by reports/phase3_3_protocol_a and reports/phase3_3_1",
+  "verdict": "YELLOW"
+}

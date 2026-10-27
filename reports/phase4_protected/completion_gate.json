@@ -1,0 +1,20 @@
+{
+  "GREEN": true,
+  "authorized_ids_equal_proposed": true,
+  "batch_id": "p4-test-batch-0884109383d3695de7a07121",
+  "cohort_identities_verify": true,
+  "hashes_verify": true,
+  "ids_present_exactly_once": true,
+  "ledger_40_to_196": true,
+  "ledger_ids_match": true,
+  "ledger_single_batch": true,
+  "manifest_batch_matches_authorization": true,
+  "metrics_not_computed": true,
+  "no_unexpected_or_duplicate": true,
+  "row_counts_466_312": true,
+  "schema_verify": true,
+  "score_manifest_sha256": "d0874952a5685ea8eb474b6fa0095e8bf1bf9d6ace4e71e58ef5477633ca5504",
+  "scores_finite_label_free": true,
+  "scoring_head": "0021c93135a4d31800703520d5026bbed57f9b2e",
+  "tables_count_156": true
+}

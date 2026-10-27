@@ -1,0 +1,156 @@
+{
+  "acceptance": {
+    "both_recovered_fold_1_results_accepted_regardless_of_value": true,
+    "five_fold_result_reported_regardless": "whether it strengthens, weakens, reverses or leaves unchanged the four-fold conclusion",
+    "no_selection_between_four_fold_and_five_fold": true
+  },
+  "amendment_id": "fold1-technical-recovery-v1",
+  "classification": "TECHNICAL RECOVERY OF A VERIFIED ZERO-EXPOSURE EXECUTION FAILURE - not retraining, not tuning, not a new experiment",
+  "contains_any_performance_value_from_fold_1": false,
+  "decision_context": {
+    "four_fold_result_known_at_decision": {
+      "analysis_sha256": "6441ed66b88074417ee0772e2618af0842050d2533d48029bb07a831ec1384bd",
+      "ci95": [
+        -0.0014088851686507907,
+        0.02038057407656849
+      ],
+      "commit": "a8b3d6c",
+      "point_estimate": 0.008441599745142315
+    },
+    "four_fold_result_remains": "FROZEN, reported unchanged, never overwritten or replaced (tag phase3-pre-fold1-recovery = a8b3d6c)",
+    "made_after_four_fold_result_was_known": true,
+    "recovery_justification": "INC-1 was a test-harness execution failure that consumed the single-use claim before any protected-data access: zero forwards, zero score rows, no SCORE_COMPLETED, no artifact, no test performance observed. It produced no scientific model result. The frozen experimental objects (both fold-1 checkpoints) are intact and hash-verified.",
+    "recovery_justified_by_direction_of_result": false,
+    "safety_point": {
+      "branch": "phase3-fold1-technical-recovery",
+      "commit": "a8b3d6c",
+      "tag": "phase3-pre-fold1-recovery"
+    }
+  },
+  "execution_rules": {
+    "code_freeze": "no source change after the amendment commit until both fold-1 evaluations are complete",
+    "completed_result": "final regardless of whether it looks good or bad",
+    "evaluator_equivalence_audit_required_before_scoring": "against the GREEN evaluator at 64694e6",
+    "failure_after_protected_inference_begins": "STOP; preserve the failed attempt; no immediate retry; independent review",
+    "failure_before_protected_data_access": "a technical setup failure may be corrected while preserving the same frozen experimental object; every failed attempt remains logged",
+    "no_performance_inspection_during_scoring": true,
+    "order": [
+      "1P",
+      "1A"
+    ]
+  },
+  "five_fold_analysis": {
+    "anomaly_reference_segments": 232,
+    "bootstrap": {
+      "frozen": "fold-stratified parent bootstrap, folds 1-5, 12 parents with replacement per fold, 60 per replicate",
+      "interval": "percentile 95 percent",
+      "replicates": 10000,
+      "seed": 27182
+    },
+    "estimator": "original: C_i(a) vs the 232-segment anomaly reference within arm; delta_i = C_i(PRESENT) - C_i(ABSENT); parent mean over focal normal segments; equal-parent mean over 60 parents; no segment weighting",
+    "focal_parents": 60,
+    "folds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "implementation": "src/experiment/focal_concordance.parent_concordance_delta(stratify_by_fold=True), unchanged since c10fdfc",
+    "inputs": "fold-1 recovery artifacts + the already-frozen E1 artifacts for folds 2-5 (unchanged, hash-verified)",
+    "label": "RECOVERED ORIGINAL FIVE-FOLD ANALYSIS (completed after a documented zero-exposure technical recovery)",
+    "output": "reports/phase3_4_results/phase3_4_five_fold_recovered_analysis.json (+ .sha256); the four-fold artifact is not touched",
+    "pairs": 5,
+    "parents_per_fold": 12,
+    "report_both": true
+  },
+  "frozen_objects": {
+    "fold_1_absent": {
+      "backup": "data/interim/phase3_4_recovery_backup/fold1/ABSENT_p34d-e56529a2f56f98fd4a7a_4b4d848b.pth (read-only, sha256 verified equal)",
+      "checkpoint_path": "data/interim/phase3_4/fold1/ABSENT/focal_toggle_seed1995.pth",
+      "checkpoint_sha256": "4b4d848b74d860e5adef335d8c305bcc1338200faf195cca9c99e318c00276c1",
+      "experiment_id": "p34d-e56529a2f56f98fd4a7a",
+      "ledger_authorization_timestamp_utc": "2026-09-11T19:49:04.480058+00:00",
+      "prior_state": "AUTHORIZED / UNUSED - never claimed",
+      "training_membership_sha256": "4a6005d2e2f9899002b8d6184c06ac87ea8a013e747f9db12a5e3819ec0b244e"
+    },
+    "fold_1_present": {
+      "backup": "data/interim/phase3_4_recovery_backup/fold1/PRESENT_p34d-92fd40fc93c8c8d2e819_85386f2d.pth (read-only, sha256 verified equal)",
+      "checkpoint_path": "data/interim/phase3_4/fold1/PRESENT/focal_toggle_seed1995.pth",
+      "checkpoint_sha256": "85386f2df404e5db49923b604e08676b9d6d934b49c5d3c633f785e5c676060e",
+      "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+      "ledger_authorization_timestamp_utc": "2026-09-11T19:49:04.480058+00:00",
+      "training_membership_sha256": "19805b3fdb035162d44c6391a14b844aa8e615d7305e5918f3a043a0a6fb96a3"
+    }
+  },
+  "inc1_original_record": {
+    "arm": "PRESENT",
+    "attempt_history": [
+      "SCORE_STARTED"
+    ],
+    "cause": "test harness (COMMIT B version of test_score_refuses_before_any_claim_or_exposure) invoked score_experiment against the real results root after step D",
+    "claim_timestamp_utc": "2026-09-11T19:50:25.721473+00:00",
+    "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+    "fold": 1,
+    "preservation": "claim, SCORE_STARTED record and timestamps are NEVER edited, deleted, completed or reused; they remain in the original namespace as provenance",
+    "protected_forward_passes": 0,
+    "score_artifact": false,
+    "score_completed": false,
+    "score_started_timestamp_utc": "2026-09-11T19:50:25.722314+00:00",
+    "statement": "INC-1 was an execution/harness failure before protected inference. It remains part of the provenance.",
+    "test_performance_observed": "none"
+  },
+  "model_trained": false,
+  "namespace": {
+    "artifact": "reports/phase3_4_results/scores/<experiment_id>__<recovery_id>.csv (+ .sha256)",
+    "attempts": "reports/phase3_4_results/score_attempts/<experiment_id>__<recovery_id>.jsonl",
+    "claim": "reports/phase3_4_results/score_claims/<experiment_id>__<recovery_id>.claim",
+    "rule": "the original <experiment_id> namespace is never reused, edited or deleted"
+  },
+  "phase4_policy_note": "docs/phase4_failure_policy_note.md - TECHNICAL FAILURE != MODEL RESULT; frozen before any Phase-4 protected evaluation",
+  "recovery_executions": [
+    {
+      "arm": "PRESENT",
+      "checkpoint_sha256": "85386f2df404e5db49923b604e08676b9d6d934b49c5d3c633f785e5c676060e",
+      "experiment_id": "p34d-92fd40fc93c8c8d2e819",
+      "fold": 1,
+      "order": 1,
+      "original_incident_claim": "p34d-92fd40fc93c8c8d2e819",
+      "permitted_protected_evaluations": 1,
+      "recovery_id": "p34r-f1rec-78c8f486fdb7c822af87"
+    },
+    {
+      "arm": "ABSENT",
+      "checkpoint_sha256": "4b4d848b74d860e5adef335d8c305bcc1338200faf195cca9c99e318c00276c1",
+      "experiment_id": "p34d-e56529a2f56f98fd4a7a",
+      "fold": 1,
+      "order": 2,
+      "original_incident_claim": null,
+      "permitted_protected_evaluations": 1,
+      "recovery_id": "p34r-f1rec-e83624b2152b673c30c5"
+    }
+  ],
+  "recovery_id_definition": "p34r-f1rec- + sha256(json.dumps({amendment, experiment_id, arm, checkpoint_sha256, original-state binding}, sort_keys=True))[:20]",
+  "schema_version": "phase3.4-fold1-technical-recovery-amendment-v1",
+  "status": "FROZEN_BEFORE_RECOVERY_SCORING",
+  "supersedes_decision": {
+    "how": "by explicit versioned amendment; the earlier decision, its config and its four-fold result remain in history unchanged",
+    "of": "configs/phase3/roboticarm_focal_toggle_inc1_recovery_v1.json frozen_decisions (NO RETRY / DO NOT SCORE)",
+    "parent_execution_config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+    "parent_recovery_config_identity": "p34r-inc1-4f86592159eadbbe276d9c6f"
+  },
+  "test_score_computed_by_this_document": false,
+  "unchanged": [
+    "no retraining",
+    "no tuning",
+    "no changed memberships",
+    "no changed preprocessing",
+    "no changed protected cohort (hash 83cd1195...)",
+    "no changed score definition",
+    "no changed estimator",
+    "no changed bootstrap parameters (10000 replicates, seed 27182, fold-stratified, 12 parents per fold)",
+    "no changed checkpoint selection",
+    "same single protected scorer (_run_protected_inference) and the same score-row construction / persistence code",
+    "same 25-column frozen score schema"
+  ]
+}

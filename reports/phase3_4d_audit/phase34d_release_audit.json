@@ -1,0 +1,296 @@
+{
+  "schema_version": "phase3.4E-release-audit-v1",
+  "generated_utc": "2026-09-10T17:14:43.128495+00:00",
+  "role": "independent skeptical ML experiment-release auditor",
+  "audited_head": "de2d19673d1c25499d136256d38b4d0195adf5f3",
+  "verdict": "YELLOW - EXECUTION AUTHORIZED WITH MANDATORY LIMITATIONS",
+  "execution_authorized": true,
+  "red_level_defect_found": false,
+  "verdict_reason": "Every structural, membership, balance, feasibility, estimator and provenance claim in the release record reproduced exactly under independent recomputation. One MODERATE documentation defect was found and corrected: a mandatory claim qualifier still described the superseded V2 parent imbalance in the wrong direction. YELLOW reflects genuine residual limitations - a 0 to 3 parent gap, an interval conditional on ten fitted models, metadata-only donor matching - not the post-test framing on its own. A second MODERATE finding (A6) is a systemic manifest hash-portability defect: 52 of 73 manifest entries hash CRLF working copies rather than git blobs. Content is verified intact for every entry and the ledger is unaffected, so it does not block execution, but it must be fixed forward.",
+  "actions_not_taken": [
+    "training",
+    "model inference",
+    "test scoring",
+    "checkpoint creation",
+    "ledger modification",
+    "membership modification",
+    "redesign"
+  ],
+  "repository": {
+    "branch": "master",
+    "head": "de2d19673d1c25499d136256d38b4d0195adf5f3",
+    "lineage_linear": true,
+    "phase34A": "6770750",
+    "phase34B": "0f388b2",
+    "phase34C": "ee05157",
+    "phase34D": "de2d196",
+    "ledger_entries": 30,
+    "ledger_sha256": "5cef2c4fe3ddd7d1a479147122a6285fc7ab6ab74da82b8bf48f751f55f297fd",
+    "protocol_b_prefix_sha256": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+    "phase34_test_looks": 0,
+    "phase34_checkpoints": 0,
+    "phase34_score_artifacts": 0
+  },
+  "membership_integrity": {
+    "all_folds_pass": true,
+    "segment_differences": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "window_differences": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "focal_cohort": {
+    "crossing_parents": 62,
+    "excluded": 2,
+    "excluded_ids": [
+      "20240222_11_14_08_dataLog",
+      "20240405_13_09_52_dataLog"
+    ],
+    "eligible": 60,
+    "per_fold": 12,
+    "focal_normal_test_segments": 203,
+    "excluded_sibling_bearing_normals": 9,
+    "anomaly_reference": 232,
+    "identical_to_v2": true
+  },
+  "balance": {
+    "donor_parents": [
+      13,
+      15,
+      12,
+      13,
+      12
+    ],
+    "PRESENT_parents": [
+      63,
+      61,
+      64,
+      63,
+      64
+    ],
+    "ABSENT_parents": [
+      64,
+      64,
+      64,
+      64,
+      64
+    ],
+    "gap_PRESENT_minus_ABSENT": [
+      -1,
+      -3,
+      0,
+      -1,
+      0
+    ],
+    "sign_convention": "PRESENT minus ABSENT; a negative value means ABSENT holds MORE physical parents",
+    "larger_arm": "ABSENT in folds 1, 2 and 4; equal in folds 3 and 5",
+    "strata_mismatches_per_fold": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "target_domain_equal": true,
+    "training_volume_pct": [
+      76.4,
+      76.7,
+      81.9,
+      77.8,
+      85.0
+    ],
+    "v2_kish_ess_gaps": [
+      7.1839,
+      4.5736,
+      5.8496,
+      7.3464,
+      6.2496
+    ],
+    "v3_kish_ess_gaps": [
+      0.3104,
+      1.9781,
+      0.6049,
+      0.7064,
+      0.8075
+    ],
+    "mean_ess_gap_v2": 6.2406,
+    "mean_ess_gap_v3": 0.8815,
+    "mean_reduction_pct": 85.9,
+    "claimed_reduction_pct": 86,
+    "reduction_claim_numerically_correct": true
+  },
+  "ilp_verification": "VERIFIED - the release record's feasibility structure is exactly reproduced",
+  "alternative_partition_claim": {
+    "classification": "SEARCH EVIDENCE, NOT A GLOBAL MATHEMATICAL PROOF",
+    "partitions_tested": 69653,
+    "distinct_partition_space": "2.750e+36",
+    "fraction_explored": "2.533e-32",
+    "requirement": "future reports must not describe the absence of an all-feasible partition as proven; only the per-fold ILP infeasibility at 12 slots is proven"
+  },
+  "estimator_and_bootstrap": "VERIFIED",
+  "provenance_supersession": "VALID VERSIONED SUPERSESSION",
+  "environment": {
+    "frozen_id": "p34c-env-b7a5de2af4c1d9614e49",
+    "device": "cpu",
+    "torch": "2.14.0+cpu",
+    "threads": 8,
+    "live_matches_frozen": true,
+    "cuda_installed_later": false,
+    "mid_phase_switch_prohibited": true
+  },
+  "planned_matrix": {
+    "rows": 10,
+    "unique_experiment_ids": 10,
+    "unique_membership_hashes": 10,
+    "seeds": [
+      1995
+    ],
+    "one_present_one_absent_per_fold": true,
+    "training_order": [
+      "1P",
+      "1A",
+      "2A",
+      "2P",
+      "3P",
+      "3A",
+      "4A",
+      "4P",
+      "5P",
+      "5A"
+    ]
+  },
+  "recommended_execution_sequence": [
+    "A. COMMIT A - execution implementation, evaluator, memberships, environment freeze, experiment identities and ledger-authorisation machinery",
+    "B. TRAIN all 10 models in the frozen order, with NO official-test inference",
+    "C. COMMIT B - all checkpoint hashes, training records and initialization hashes, with NO performance",
+    "D. atomically write and commit all 10 test-look authorisations, each naming the checkpoint hash it authorises, BEFORE the first test inference",
+    "E. score the 10 frozen checkpoints exactly once",
+    "F. persist and hash the score artifact atomically BEFORE any aggregate",
+    "G. compute the frozen metrics only from the persisted scores",
+    "H. commit results"
+  ],
+  "sequence_note": "this matches the frozen documents on the binding requirement and resolves the one ambiguity: authorisation is written at step D, after the checkpoint freeze, so each entry can name the exact checkpoint it authorises. No scientific content changes.",
+  "findings": [
+    {
+      "id": "A1",
+      "severity": "MODERATE",
+      "status": "CORRECTED IN THIS AUDIT",
+      "area": "claim boundary",
+      "finding": "the mandatory claim qualifier was inherited unchanged from the pre-upgrade execution config and still asserted that 'the ABSENT arm contains 12 fewer physical parents by construction'. Under V3 the gap is 0 to 3 in the OPPOSITE direction (ABSENT larger), so the qualifier was wrong in both magnitude and direction and would have attached a false limitation to every reported result.",
+      "why_not_red": "it is a documentation defect in an unexecuted config, correctable before execution, touching no membership, estimand, seed, environment or ledger content. residual_confounds and paired_arm_audit already carried the correct V3 figures, so the config merely contradicted itself.",
+      "correction": "the qualifier now reads: a residual parent gap of 0 to 3 remains, with the ABSENT arm holding MORE parents than PRESENT (fold gaps PRESENT minus ABSENT = -1, -3, 0, -1, 0). The superseded text and the reason are recorded in claim_boundary.audit_correction.",
+      "config_identity_changed": false
+    },
+    {
+      "id": "A2",
+      "severity": "MINOR",
+      "status": "RECORDED",
+      "area": "config identity coverage",
+      "finding": "config_identity is derived from parent design, seed, experiment ids, environment, donor slots and bootstrap settings. It does NOT cover claim_boundary, so finding A1 could not have been detected by an identity comparison.",
+      "recommendation": "future identity payloads should either cover the claim boundary or the claim boundary should be hash-declared separately in the artifact manifest."
+    },
+    {
+      "id": "A3",
+      "severity": "MINOR",
+      "status": "RECORDED - NO ACTION NEEDED",
+      "area": "config completeness",
+      "finding": "the execution config carries no inline score_persistence_requirement key; it references reports/phase3_4c_freeze/score_schema.json by pointer.",
+      "verification": "the pointer resolves, the schema is binding:true, declares 464 rows per experiment and 4640 total, contains every required column, mandates an atomic hashed write before aggregates, is committed, and its hash still matches the Phase-3.4C manifest. The requirement is durably frozen."
+    },
+    {
+      "id": "A4",
+      "severity": "MINOR",
+      "status": "RECOMMENDED FOR EXECUTION",
+      "area": "paired randomness",
+      "finding": "checkpoint metadata does not require an initialization hash, so the claim that PRESENT and ABSENT start from identical initial weights is asserted by policy rather than verified by artifact.",
+      "recommendation": "persist an initialization hash per experiment (SHA-256 over the concatenated initial parameter tensors, taken immediately after model construction and before the first optimizer step) and assert equality within each fold pair. This is cheap, requires no training to specify, and converts a policy claim into a checkable one."
+    },
+    {
+      "id": "A5",
+      "severity": "MINOR",
+      "status": "CLARIFIED",
+      "area": "ledger authorisation timing",
+      "finding": "documents agree on the binding requirement (all 10 authorisations exist durably BEFORE the first test inference) but do not state a single operational point at which they are written. COMMIT A lists 'ledger-authorisation machinery', which is the tooling, not the entries.",
+      "clarification": "authorisation is written and committed as its own step AFTER COMMIT B and BEFORE the first inference. Writing it after the checkpoint freeze means each entry can record the exact checkpoint hash it authorises, which is strictly more provenance than authorising before training. The scientific requirement is unchanged.",
+      "scientific_content_changed": false
+    },
+    {
+      "id": "A6",
+      "severity": "MODERATE",
+      "status": "RECORDED - MUST BE FIXED FORWARD, NOT RETROACTIVELY",
+      "area": "manifest hash portability",
+      "finding": "every phase artifact manifest from 3.3 through 3.4D records SHA-256 values over the WORKING-TREE bytes, and on this Windows checkout (core.autocrlf=true, no .gitattributes) those bytes are CRLF-normalised for most text files after git touches them. 52 of 73 manifest entries therefore hash the CRLF form while git stores LF, and would fail to reproduce on a POSIX checkout or against the git blob. This is the same defect class the Phase-3.3 audit flagged in the Phase-2 upstream provenance record - a recurrence.",
+      "content_integrity": "INTACT. For all 73 entries the manifest hash equals either the LF or the CRLF form of the committed blob; zero entries match neither. No content drift exists.",
+      "ledger_status": "CLEAN. The test-look ledger is LF in both the working tree and the git blob, and the recorded 28-entry prefix hash matches the blob form exactly. The most important provenance object is portable.",
+      "why_not_red": "no scientific content, membership, estimand, seed, environment or ledger value is affected; every manifest entry is verifiable against git modulo line endings, and the cross-reference table manifest_hash_form_check.csv provides both forms for every entry.",
+      "why_moderate": "hash portability is exactly what a manifest is for, the defect is systemic across seven manifests, and it recurred after being flagged once already.",
+      "historical_manifests_edited": false,
+      "required_forward_fix": [
+        "add a .gitattributes pinning text artifacts to LF (or eol=lf for *.json *.csv *.md *.jsonl)",
+        "compute every future manifest hash over LF-normalised bytes so it equals the git blob hash",
+        "add a test that every manifest hash equals the LF-normalised file hash"
+      ],
+      "precedent_set_here": "the Phase-3.4E audit manifest hashes LF-normalised bytes"
+    }
+  ],
+  "remaining_limitations": [
+    "a residual parent gap of 0 to 3 (ABSENT larger) remains; exact equality is proven unreachable at 12 donor slots for three folds and was not found in 69653 alternative partitions",
+    "the interval is conditional on the ten fitted models and estimates no training-model, seed or population uncertainty",
+    "donor material differs in signal content from the focal material it replaces; matching is on pre-test metadata only",
+    "9 sibling-bearing normal test segments from 2 parents remain outside the focal cohort",
+    "11 of 60 focal parents contribute a single normal test segment",
+    "training volume falls to 76-85 percent of official, about 3 points below V2"
+  ],
+  "mandatory_claim_qualifiers": [
+    "donor-matchable focal cohort of 60 parents and 203 normal segments, not the full test set",
+    "post-test controlled sensitivity analysis, not confirmatory evidence",
+    "not global split leakage",
+    "not published-AUC inflation",
+    "not causal proof",
+    "does not generalise automatically to BrushlessMotor, other models or other sites",
+    "the interval is conditional on the ten trained models and excludes training-model uncertainty",
+    "a residual parent gap of 0 to 3 remains, with the ABSENT arm holding MORE parents than PRESENT (fold gaps PRESENT minus ABSENT = -1, -3, 0, -1, 0); exact equality is proven unreachable at 12 donor slots for folds 1, 2 and 4"
+  ],
+  "config_supersession_by_this_audit": {
+    "file": "configs/phase3/roboticarm_focal_toggle_execution_v2.json",
+    "phase34d_recorded_sha256": "fdf9f33e4d6ce0ea1efb00202d7fec2825f03fa102632290f64302477d5caa50",
+    "recovered_from_commit": "de2d19673d1c25499d136256d38b4d0195adf5f3",
+    "recovered_sha256_matches_phase34d_manifest": false,
+    "current_sha256": "77c26d2b081ebc598059b30c1a520b6b87be4ae9221971045e5196bde1b22f0a",
+    "changed": true,
+    "config_identity_before": "p34d-exec-e5470b025229f59a06f4c772",
+    "config_identity_after": "p34d-exec-e5470b025229f59a06f4c772",
+    "config_identity_unchanged": true,
+    "reason": "Phase 3.4E finding A1: the mandatory claim qualifier asserted a 12-parent ABSENT deficit inherited from the V2-era config; under V3 the gap is 0 to 3 in the opposite direction. The qualifier was corrected and the superseded text recorded inside claim_boundary.audit_correction.",
+    "scientific_content_changed": false,
+    "fields_untouched": [
+      "arm memberships",
+      "planned experiments",
+      "primary estimand",
+      "bootstrap",
+      "seed policy",
+      "execution environment",
+      "training order",
+      "ledger policy",
+      "checkpoint policy",
+      "failure policy"
+    ],
+    "phase34d_manifest_entry_is_now_historical": true,
+    "phase34d_manifest_edited": false,
+    "other_phase34d_artifacts_unchanged": "11 of 12",
+    "classification": "VALID VERSIONED SUPERSESSION (documentation correction)",
+    "recovered_lf_sha256": "609a407a1ab026c9b39f33a79f4daccb18b2be5509cc367ed43503ce6346f53d",
+    "phase34d_manifest_recorded_the_CRLF_form": true,
+    "content_matches_modulo_line_endings": true,
+    "note": "the Phase-3.4D manifest stored the CRLF working-copy hash, not the git-blob LF hash (see finding A6). The committed content is identical modulo line endings; the only content change is the A1 correction applied by this audit."
+  }
+}

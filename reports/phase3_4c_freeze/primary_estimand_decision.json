@@ -1,0 +1,282 @@
+{
+  "schema_version": "phase3.4C-primary-estimand-decision-v1",
+  "generated_utc": "2026-09-08T18:59:05.428314+00:00",
+  "status": "PRETEST_EXECUTION_FROZEN",
+  "parent_design": "p34b-ra-focal-2ab15394f78b560f1e8c0880",
+  "parent_head": "0f388b2ba743c29cd06bcab89e8162a09b447dcd",
+  "scientific_classification": "POST-TEST CONTROLLED SENSITIVITY ANALYSIS",
+  "model_trained": false,
+  "test_score_computed": false,
+  "inference_run": false,
+  "ledger_entries_appended": 0,
+  "contains_any_performance_value_from_this_experiment": false,
+  "readiness_verdict": "YELLOW",
+  "readiness_reason": "Every execution and statistical ambiguity named for this phase is now resolved and frozen, so implementation is safe to begin. Two substantive limitations remain and are not resolvable by design: the ABSENT arm structurally contains 12 fewer physical parents than PRESENT, and no bootstrap over this experiment can include training-model uncertainty.",
+  "raw_score_comparability": {
+    "verdict": "NOT DIRECTLY COMPARABLE - demoted to SECONDARY DIAGNOSTIC",
+    "reasons": [
+      "PRESENT and ABSENT are independently trained autoencoders, so their reconstruction errors sit on different absolute scales",
+      "BatchNorm running statistics differ between arms and are applied at evaluation time",
+      "patience-3 early stopping can halt the two arms at different epochs",
+      "the reproduced upstream checkpoint aliasing means the scored weights are the final epoch, which is an arbitrary point rather than a selected optimum",
+      "a global reconstruction-scale shift moves anomaly scores as well as normal scores, so a raw normal-score difference conflates 'normals look more normal' with 'everything reconstructs better'"
+    ],
+    "consequence": "a raw score difference cannot separate the effect of interest from a global scale shift, so it must not be the primary estimand"
+  },
+  "primary_estimand": {
+    "name": "parent-equal-weighted focal concordance delta",
+    "symbol": "Delta_parent_concordance",
+    "per_segment_quantity": "C_i(a) = (1/N_anomaly) * sum_j I(score_i(a) < score_anomaly_j(a)) with N_anomaly = 232, scores for normal and anomaly taken from the SAME arm, exact ties scoring zero exactly as upstream AUC does",
+    "per_segment_delta": "delta_i = C_i(PRESENT) - C_i(ABSENT)",
+    "parent_aggregation": "MEAN",
+    "parent_aggregation_justification": "focal parents hold a median of 3 normal test segments (min 1, max 8) and 11 of 60 hold exactly one. A median over so few values is unstable and discards magnitude, while the mean reduces exactly to the single segment value where n=1 and keeps the two-stage estimator interpretable as a parent-equal-weighted mean of within-parent mean concordance. Chosen on statistical grounds before any result exists.",
+    "point_estimate": "mean over the 60 focal parents of delta_parent(p)",
+    "sign_interpretation": "positive means same-parent sibling exposure improved normal-vs-anomaly ordering for focal parents",
+    "why_defensible": "C_i depends only on the RANK of segment i against the fixed anomaly reference within the same arm, so it is invariant under any strictly increasing transform of that arm's scores. This removes exactly the global scale shift that disqualifies the raw-score difference, while keeping the quantity in AUC units.",
+    "scale_invariance_verified": "confirmed numerically under multiplication, translation and exponentiation: max |dC| = 0"
+  },
+  "relation_to_focal_auroc": {
+    "identity": "the SEGMENT-weighted mean of C_i over focal normals equals the ordinary strict pairwise focal AUROC exactly: AUROC = (1/(N_n*N_a)) sum_i sum_j I(s_i < s_j) = (1/N_n) sum_i C_i",
+    "identity_verified_numerically": true,
+    "difference": "ordinary focal AUROC weights every focal normal SEGMENT equally; the primary estimand weights every focal PARENT equally",
+    "why_parent_weighting_is_primary": "the parent recording is the physical independence unit. Segment weighting would let an 8-segment parent count eight times a 1-segment parent and would inflate the apparent sample size through pseudo-replication.",
+    "weight_divergence": "relative to equal parent weights, segment weighting ranges from 0.30x to 2.36x, so the two estimands are materially different, not a rescaling",
+    "frozen_distinction": "PARENT-EQUAL-WEIGHTED CONCORDANCE DELTA is PRIMARY; ordinary SEGMENT-weighted focal AUROC delta is SECONDARY"
+  },
+  "inference_unit": {
+    "primary_unit": "focal parent recording",
+    "N_primary": 60,
+    "N_segments_descriptive": 203,
+    "segments_per_parent": {
+      "min": 1,
+      "median": 3.0,
+      "mean": 3.38,
+      "max": 8
+    },
+    "rule": "inference is made at the parent level. The 203 segment-level deltas are reported descriptively and must never be treated as 203 independent observations."
+  },
+  "uncertainty": {
+    "procedure": "paired nonparametric bootstrap over the 60 focal parents",
+    "replicates": 10000,
+    "seed": 27182,
+    "seed_note": "distinct from the training seed 1995, the fold seed 20260908 and the donor seed 31415, so no audit quantity shares a stream with an experimental one",
+    "interval": "percentile 95 percent",
+    "steps": [
+      "resample the 60 focal parents with replacement",
+      "carry every focal normal segment of a selected parent with it",
+      "PRESENT and ABSENT are never resampled independently: the pairing is within segment, and delta_i is the resampled quantity",
+      "recompute the parent-equal-weighted mean delta in each replicate"
+    ],
+    "fold_clustering_decision": {
+      "question": "each focal parent belongs to exactly one fold, and parents in a fold share the same trained PRESENT/ABSENT model pair, so their deltas are correlated through the model",
+      "decision": "fold is NOT entered as an additional bootstrap resampling level",
+      "reason": "there are only 5 folds, far too few to estimate a cluster-level variance. Resampling 5 clusters would produce an unstable and misleading interval.",
+      "consequence_stated_plainly": "the primary interval is CONDITIONAL ON THE TEN TRAINED MODELS. It covers parent sampling and does NOT include training-model or seed uncertainty.",
+      "mitigation": "the five fold-level deltas are reported separately as a descriptive spread indicating model-level variability",
+      "prohibition": "folds must NOT be presented as N=5 independent evidence while parent-level resampling is used for the interval"
+    }
+  },
+  "secondary_metrics": [
+    {
+      "id": "S1",
+      "metric": "ordinary segment-weighted focal AUROC delta against the fixed 232-segment anomaly reference"
+    },
+    {
+      "id": "S2",
+      "metric": "source-domain focal AUROC delta"
+    },
+    {
+      "id": "S3",
+      "metric": "target-domain focal concordance delta, reported ONLY if both classes and at least 10 focal parents are present in the target slice; otherwise reported as not estimable"
+    },
+    {
+      "id": "S4",
+      "metric": "raw focal-normal reconstruction-error shift, explicitly labelled SCALE-DEPENDENT DIAGNOSTIC"
+    },
+    {
+      "id": "S5",
+      "metric": "anomaly-reference raw score shift, as a specificity check for global model-scale movement"
+    },
+    {
+      "id": "S6",
+      "metric": "distribution of the 60 parent-level deltas, and the counts of parents with delta > 0, delta == 0 and delta < 0"
+    }
+  ],
+  "metric_garden_control": "exactly six secondary metrics are frozen. No further metric may be added after any score exists.",
+  "seed_policy": {
+    "chosen": "POLICY A - ONE-SEED PRIMARY",
+    "seed": 1995,
+    "models": 10,
+    "second_seed_status": "NOT part of Phase 3.4 primary execution",
+    "rationale": [
+      "the contrast is paired within fold: PRESENT and ABSENT share the identical seed, so seed effects largely cancel inside delta rather than needing to be averaged out",
+      "the inferential sample is 60 parents, not seeds; a second seed would not enlarge it",
+      "the five folds already provide five independently trained model pairs on disjoint focal parents",
+      "a second seed would roughly double compute from about 31 to 61 hours to estimate a quantity that cannot enter the primary point estimate"
+    ],
+    "binding_condition": "the ambiguity that mattered was the word 'optional'. Seed 20260908 is now explicitly OUT. If it is ever run it becomes a separately versioned robustness analysis and CANNOT retroactively alter, replace or be pooled with this primary result.",
+    "prohibition": "no seed may be added, dropped or reweighted after any score is observed"
+  },
+  "training_order": {
+    "rule": "counterbalanced paired order: folds run in ascending order, both arms of a fold run back to back, and the arm that runs first alternates by fold parity (odd folds PRESENT first, even folds ABSENT first)",
+    "reason": "keeps each pair adjacent in time so environment drift affects both arms of a pair almost equally, while the alternation prevents any systematic advantage to whichever arm always runs first",
+    "frozen_sequence": [
+      "1 PRESENT",
+      "1 ABSENT",
+      "2 ABSENT",
+      "2 PRESENT",
+      "3 PRESENT",
+      "3 ABSENT",
+      "4 ABSENT",
+      "4 PRESENT",
+      "5 PRESENT",
+      "5 ABSENT"
+    ],
+    "prohibition": "the order must not be changed or randomised after any result is seen"
+  },
+  "paired_randomness": {
+    "paired_exactly": [
+      "torch.manual_seed(1995) called identically before model construction, so both arms start from identical initial weights",
+      "identical architecture and construction order",
+      "identical validation fraction 0.1 and identical random_state 1995",
+      "identical DataLoader configuration and identical dataset length, so the shuffle permutation SEQUENCE is the same",
+      "identical execution environment id and pinned thread count"
+    ],
+    "cannot_be_paired": [
+      "minibatch CONTENT differs, because the two arms hold different segments at the same indices - this is the intervention itself and cannot be removed",
+      "the stratified validation split selects different segments, because it is computed on each arm's own label frame even under the same seed",
+      "early stopping may halt the arms at different epochs"
+    ],
+    "documented": true
+  },
+  "checkpoint_policy": {
+    "retain_until": "the entire experiment and its independent audit are complete",
+    "count": 10,
+    "estimated_bytes_each": 163273117,
+    "estimated_total_gb": 1.63,
+    "path_pattern": "data/interim/phase3_4/{fold}/{arm}/focal_toggle_seed1995.pth",
+    "record_per_checkpoint": [
+      "experiment_id",
+      "fold",
+      "arm",
+      "seed",
+      "sha256",
+      "path",
+      "execution_environment_id",
+      "epochs_run",
+      "best_validation_epoch",
+      "final_epoch_actually_scored",
+      "config_identity",
+      "training_membership_sha256"
+    ],
+    "durable_storage_proposal": "keep the working copies under data/interim/phase3_4/ (git ignored), record every hash in a committed manifest, and copy the set once to durable storage outside the working tree. NOTHING is uploaded or moved in this phase; the copy requires explicit authorisation.",
+    "phase33_lesson": "Phase 3.3 left its checkpoints local-only without saying so. Here the local-only status is stated up front and the durable copy is an explicit, separately authorised step."
+  },
+  "ledger_policy": {
+    "new_protocol": "roboticarm_focal_parent_sibling_toggle_v1",
+    "entries_to_authorise": 10,
+    "timing": "ALL 10 entries are authorised atomically BEFORE the first test inference of the phase, not one per model",
+    "reason": "authorising all planned looks at once removes any possibility of adaptive stopping after seeing early folds",
+    "per_entry_fields": [
+      "fold",
+      "arm",
+      "seed",
+      "config_identity",
+      "training_membership_sha256",
+      "test_cohort_hash",
+      "evaluator_git_sha",
+      "reason"
+    ],
+    "existing_entries_immutable": 30,
+    "appended_in_this_phase": 0
+  },
+  "execution_commit_structure": {
+    "COMMIT_A": "implementation, evaluator, ledger-authorisation machinery, environment freeze and complete membership and experiment identities - committed BEFORE any test inference",
+    "training": "runs under the frozen policy after COMMIT A",
+    "COMMIT_B": "pre-test trained-model freeze recording every checkpoint hash and training record, still with NO test performance",
+    "then": "only after COMMIT B is verified may the already-authorised test inference run",
+    "hard_rule": "no model may be scored whose exact checkpoint hash is not already frozen in COMMIT B"
+  },
+  "failure_policy": {
+    "principle": "a failed run may be restarted only while it is still BEFORE test exposure, and only for a mechanical failure, never because a result was disliked",
+    "restart_allowed_before_test_inference": [
+      "process crash, power loss or interruption",
+      "disk full or checkpoint write failure",
+      "an exception raised before the checkpoint was written"
+    ],
+    "restart_rule": "delete the incomplete checkpoint, rerun the SAME experiment_id with the SAME seed, membership and environment, and record the restart with its cause in the training record. The restart count is reported.",
+    "never_allowed": [
+      "re-running any model after its test scores exist",
+      "re-running a completed model because its loss curve or any metric looked unexpected",
+      "substituting a different seed, membership, fold or environment",
+      "completing remaining arms on a different backend"
+    ],
+    "nan_or_non_finite_loss": "STOP the phase. Do not restart into a different seed. Record the occurrence, investigate, and treat any change as a new versioned experiment.",
+    "unexpected_early_stopping": "not a failure. Early stopping at any epoch is a legitimate outcome of the frozen schedule and is recorded, not corrected.",
+    "environment_change_mid_experiment": "STOP the phase. Completing remaining arms under a different environment is prohibited.",
+    "score_artifact_write_failure": "the run is not considered scored. The atomic write means either the full artifact exists or none does. Re-running the EVALUATION of an already-frozen checkpoint against the already-authorised look is permitted only if no score artifact was produced, and must be recorded.",
+    "partial_completion": "if the phase stops after some folds, the completed folds are reported as an incomplete experiment with the stopping reason. They must not be presented as the planned design."
+  },
+  "test_cohort_boundaries": {
+    "scored_once_per_experiment": "the complete fixed official 464-segment cohort",
+    "why_full_cohort": "focal normals are needed for the primary, the fixed 232-segment anomaly reference is needed for concordance, and non-focal normals are needed for the global specificity diagnostic",
+    "primary_analysis_restricted_to": {
+      "focal_normal_segments": 203,
+      "focal_parents": 60,
+      "fixed_anomaly_reference": 232
+    },
+    "prohibition": "non-focal normal performance must not influence any primary design choice, threshold, aggregation rule or reporting decision. It is a diagnostic only."
+  },
+  "paired_arm_audit": {
+    "B_identical_between_arms": true,
+    "focal_segments_only_in_PRESENT": true,
+    "donor_segments_only_in_ABSENT": true,
+    "focal_donor_segment_overlap": 0,
+    "donor_parent_never_focal_in_that_fold": true,
+    "segments_windows_strata_match": true,
+    "residual_imbalance": {
+      "severity": "MATERIAL - structural, not fixable",
+      "ABSENT_parents": 64,
+      "PRESENT_parents_range": [
+        70,
+        75
+      ],
+      "kish_ess_gap_range": [
+        4.57,
+        7.35
+      ],
+      "explanation": "ABSENT structurally excludes the 12 focal parents while donors can only come from parents already present in B, so no donor choice can add a parent back. ABSENT therefore has exactly 64 parents in every fold against 70 to 75 for PRESENT, and a Kish effective cluster count lower by 4.6 to 7.4.",
+      "mitigation_tested": "a load-balancing donor rule that spreads donations across more parents was evaluated. It narrowed the ESS gap by only about 1.5 and reduced donor parent diversity, so the frozen memberships were kept rather than churned for marginal gain.",
+      "interpretive_consequence": "the toggle changes parent diversity as well as same-parent sibling presence. Any observed delta is the joint effect of both and must be reported as such."
+    }
+  },
+  "claim_boundary": {
+    "preferred_positive": "For the 60 donor-matchable focal RoboticArm parents, exposing the autoencoder to same-parent training siblings was associated with a [Delta] change in parent-weighted normal-versus-anomaly concordance under the frozen official-baseline pipeline.",
+    "if_negative": "state the negative value plainly, in the same words",
+    "if_near_zero": "state near zero with equal prominence; a null is a result",
+    "mandatory_qualifiers": [
+      "donor-matchable focal cohort of 60 parents and 203 normal segments, not the full test set",
+      "post-test controlled sensitivity analysis, not confirmatory evidence",
+      "not global split leakage",
+      "not published-AUC inflation",
+      "not causal proof",
+      "does not generalise automatically to BrushlessMotor, other models or other sites",
+      "the interval is conditional on the ten trained models and excludes training-model uncertainty",
+      "the ABSENT arm contains 12 fewer physical parents by construction"
+    ]
+  },
+  "v1_status": {
+    "role": "SECONDARY",
+    "execute_before_v2_complete_and_audited": false,
+    "must_not_influence_v2_execution": true,
+    "if_executed": "summarise with the corrected two-stage estimand from Phase 3.4B, not V1's original pooled definition"
+  },
+  "residual_risks": [
+    "the ABSENT arm has 12 fewer physical parents and a lower effective cluster count by construction; the toggle moves parent diversity as well as sibling presence",
+    "the primary interval is conditional on the ten trained models and cannot include training-model or seed variability",
+    "donor material differs in signal content from the focal material it replaces; matching is on pre-test metadata only",
+    "9 sibling-bearing normal test segments from 2 parents sit outside the focal cohort",
+    "11 of 60 focal parents contribute a single normal test segment, so their parent-level delta is a single-segment estimate",
+    "about 31 hours of CPU with no CUDA fallback available; an interruption policy is frozen but the wall-clock exposure is real"
+  ]
+}

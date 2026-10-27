@@ -1,0 +1,576 @@
+{
+  "schema_version": "phase3.3-independent-audit-v1",
+  "generated_utc": "2026-09-08T15:24:10.691606+00:00",
+  "role": "independent skeptical reproduction auditor",
+  "scope": "inspection and recomputation from persisted Protocol-A outputs only",
+  "actions_not_taken": [
+    "retrain",
+    "re-score",
+    "model inference",
+    "seed or device change",
+    "preprocessing change",
+    "cohort change",
+    "tolerance change",
+    "ledger modification",
+    "leakage experiment",
+    "Protocol-B run"
+  ],
+  "verdict": "YELLOW",
+  "verdict_reason": "The reproduction itself is technically sound and provenance-safe: every structural, architectural, configuration, split, cohort and overlap claim was independently reproduced, and no test-integrity violation exists. Two things prevent GREEN: the per-segment scores were never persisted, so the headline metrics are not independently re-derivable from artifacts; and three claims in the report narrative overstate what was established.",
+  "phase_accepted": true,
+  "acceptance_condition": "results stand as recorded; no re-run required. Apply the reporting corrections and persist the per-segment scores in a documentation-only follow-up.",
+  "repository": {
+    "branch": "master",
+    "head": "8add93c3e448d39028934c0e38f0b00c79dcb8da",
+    "starting_head": "bd61137099ae9d166907935307c831a271f11517",
+    "pretest_freeze": "872f8e503d6b249f5cde31d8a351ef633830448c",
+    "evaluator_commit": "4ce1faf5894578f330226d80cd194dfb44ff0cba",
+    "results_commit": "8add93c3e448d39028934c0e38f0b00c79dcb8da",
+    "ancestry_linear": true,
+    "untracked_excluded_paths": [
+      "reports/supervisor/",
+      "reports/synopsis/",
+      "tmp/"
+    ],
+    "phase33_blast_radius_outside_its_namespace": [
+      "reports/experiment_results/test_look_ledger.jsonl (append only)",
+      "tests/test_phase321_reporting_correction.py (invariant generalised)"
+    ]
+  },
+  "ordering_guarantee": {
+    "evaluator_committed": "2026-09-08 16:30:06 +0530",
+    "ledger_authorisation": "2026-09-08 16:59:26 +0530",
+    "first_score_BrushlessMotor": "2026-09-08 17:00:15 +0530",
+    "second_score_RoboticArm": "2026-09-08 20:31:31 +0530",
+    "freeze_commit_contains_no_performance_artifact": true,
+    "valid": true
+  },
+  "upstream_identity": {
+    "commit": "592bcbbed58893dc26bbab3240c5d7a3105a1a7f",
+    "verified_against": "live GitHub trees API at the pinned commit",
+    "files_matching_blob_sha1_and_size": 4,
+    "crlf_discrepancy": "PROVENANCE ONLY - Phase-2 SHA-256 values reproduce exactly from the CRLF-converted bytes; raw content is byte-identical to the pinned tree",
+    "vendoring": "no upstream source vendored; the pinned tree contains no LICENSE",
+    "license_issue": false
+  },
+  "cohorts": {
+    "RoboticArm": {
+      "segments": 464,
+      "windows": 34336,
+      "recomputed_hash": "83cd11956f8ee94907bcf366605259d4986acca8ff69a5bceb3874ee6a7a8efa",
+      "ledger_hash": "83cd11956f8ee94907bcf366605259d4986acca8ff69a5bceb3874ee6a7a8efa"
+    },
+    "BrushlessMotor": {
+      "segments": 312,
+      "windows": 15912,
+      "recomputed_hash": "1322f463b6158bfc75c9cbb62ffe3c6883e19d063f02fb80600aee678ca04f32",
+      "ledger_hash": "1322f463b6158bfc75c9cbb62ffe3c6883e19d063f02fb80600aee678ca04f32"
+    }
+  },
+  "overlap": {
+    "RoboticArm": {
+      "parents_total": 101,
+      "train_parents": 76,
+      "test_parents": 87,
+      "crossing": 62,
+      "test_segments_from_crossing": 212,
+      "normal_test": 232,
+      "normal_with_train_sibling": 212,
+      "anomaly_test": 232,
+      "anomaly_with_normal_train_sibling": 0
+    },
+    "BrushlessMotor": {
+      "parents_total": 1593,
+      "train_parents": 1281,
+      "test_parents": 312,
+      "crossing": 0,
+      "test_segments_from_crossing": 0,
+      "normal_test": 156,
+      "normal_with_train_sibling": 0,
+      "anomaly_test": 156,
+      "anomaly_with_normal_train_sibling": 0
+    }
+  },
+  "published_comparison_recomputed": [
+    {
+      "machine": "RoboticArm",
+      "slice": "all",
+      "published": 91.62,
+      "reproduced_full_precision": 91.50750594530321,
+      "reproduced_2dp": 91.51,
+      "difference": -0.11,
+      "absolute_error": 0.11,
+      "classification": "NEAR_EXACT"
+    },
+    {
+      "machine": "RoboticArm",
+      "slice": "source",
+      "published": 93.28,
+      "reproduced_full_precision": 93.14060642092747,
+      "reproduced_2dp": 93.14,
+      "difference": -0.14,
+      "absolute_error": 0.14,
+      "classification": "NEAR_EXACT"
+    },
+    {
+      "machine": "RoboticArm",
+      "slice": "target",
+      "published": 90.48,
+      "reproduced_full_precision": 90.81450653983353,
+      "reproduced_2dp": 90.81,
+      "difference": 0.33,
+      "absolute_error": 0.33,
+      "classification": "NEAR_EXACT"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "slice": "all",
+      "published": 58.95,
+      "reproduced_full_precision": 58.982577251808024,
+      "reproduced_2dp": 58.98,
+      "difference": 0.03,
+      "absolute_error": 0.03,
+      "classification": "NEAR_EXACT"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "slice": "source",
+      "published": 73.63,
+      "reproduced_full_precision": 73.73438527284681,
+      "reproduced_2dp": 73.73,
+      "difference": 0.1,
+      "absolute_error": 0.1,
+      "classification": "NEAR_EXACT"
+    },
+    {
+      "machine": "BrushlessMotor",
+      "slice": "target",
+      "published": 55.59,
+      "reproduced_full_precision": 55.7034845496384,
+      "reproduced_2dp": 55.7,
+      "difference": 0.11,
+      "absolute_error": 0.11,
+      "classification": "NEAR_EXACT"
+    }
+  ],
+  "worst_absolute_error_auc_points": 0.33,
+  "checks": [
+    {
+      "check_id": "M01",
+      "area": "primary_auc.csv",
+      "method": "text-level float equality against evaluate_*.json",
+      "expected": "42 rows, 0 mismatches",
+      "observed": "42 rows, 0 mismatches",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "check_id": "M02",
+      "area": "published comparison",
+      "method": "recomputed all six differences and classifications",
+      "expected": "6/6 agree, all NEAR_EXACT",
+      "observed": "agree=True, worst=0.33",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "check_id": "M03",
+      "area": "AUC estimator",
+      "method": "vs upstream brute-force nested loop, ties injected",
+      "expected": "identical on all/source/target",
+      "observed": "identical=True",
+      "status": "PASS",
+      "note": "also differs from sklearn by exactly half the tie fraction, i.e. correct strict-tie semantics"
+    },
+    {
+      "check_id": "M04",
+      "area": "train/validation split",
+      "method": "re-ran sklearn train_test_split(0.1, seed 1995, stratified)",
+      "expected": "122477/13609 and 58797/6534",
+      "observed": "reproduced=True",
+      "status": "PASS",
+      "note": "window-level: 1838/1839 RoboticArm segments appear in both train and validation (upstream behaviour)"
+    },
+    {
+      "check_id": "M05",
+      "area": "test cohort",
+      "method": "recomputed ordered_id_hash from the official test HDF5",
+      "expected": "matches both ledger entries",
+      "observed": "match=True",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "check_id": "M06",
+      "area": "RoboticArm overlap",
+      "method": "recomputed parent grouping from segment ids in the HDF5",
+      "expected": "101 parents, 62 crossing, 212/232 normal, 0/232 anomaly",
+      "observed": "{\"parents_total\": 101, \"crossing\": 62, \"normal_with_train_sibling\": 212, \"anomaly_with_normal_train_sibling\": 0}",
+      "status": "PASS",
+      "note": "overlap is asymmetric: it touches the normal class only, which is the structure that would bias optimistically"
+    },
+    {
+      "check_id": "M07",
+      "area": "parameter count",
+      "method": "hand arithmetic and torch enumeration, independently",
+      "expected": "40789724",
+      "observed": "hand=40789724, torch=40789724",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "check_id": "M08",
+      "area": "early stopping",
+      "method": "recomputed argmin and patience arithmetic from the loss curves",
+      "expected": "exactly 3 non-improving epochs after the best, then stop",
+      "observed": "consistent=True",
+      "status": "PASS",
+      "note": "best_epoch is 0-indexed in the JSON; the report quotes the 1-indexed epoch"
+    },
+    {
+      "check_id": "M09",
+      "area": "checkpoint linkage",
+      "method": "re-hashed both .pth files; compared evaluate vs training records",
+      "expected": "evaluator scored exactly the trained checkpoints",
+      "observed": "match=True",
+      "status": "PASS",
+      "note": "checkpoints are 163 MB each and are not committed"
+    },
+    {
+      "check_id": "M10",
+      "area": "metric re-derivability",
+      "method": "searched every persisted artifact for per-window or per-segment anomaly scores",
+      "expected": "per-segment scores available for independent AUC recomputation",
+      "observed": "absent - only aggregate AUCs were persisted",
+      "status": "GAP",
+      "note": "audit section 10 could not be executed as written; the six headline AUCs are not re-derivable from artifacts without re-running inference, which this audit forbids"
+    },
+    {
+      "check_id": "M11",
+      "area": "tolerance freeze",
+      "method": "read the config out of the freeze commit and diffed against HEAD",
+      "expected": "tolerance committed before first score, unchanged since",
+      "observed": "committed 16:02:38, first score 17:00:15, diff empty",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "check_id": "M12",
+      "area": "upstream identity",
+      "method": "git blob SHA-1 + byte size against the live GitHub tree API",
+      "expected": "4/4 files match the pinned commit",
+      "observed": "4/4 match",
+      "status": "PASS",
+      "note": "Phase-2 SHA-256 values reproduce exactly from the CRLF form; provenance-only, content identical"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MODERATE",
+      "area": "auditability",
+      "finding": "Per-window and per-segment anomaly scores were never persisted. stage_evaluate builds the grouped score table in memory and returns only aggregate AUCs.",
+      "consequence": "The six headline AUCs cannot be independently re-derived from any committed artifact without re-running model inference. Audit section 10 was not executable as specified.",
+      "recommendation": "Persist the per-segment score table (segment_id, labels, 7 score columns) alongside evaluate_*.json. This is a write of already-computed values and needs no re-scoring and no new test look.",
+      "blocks_acceptance": false
+    },
+    {
+      "id": "F2",
+      "severity": "MINOR",
+      "area": "test-look discipline",
+      "finding": "No test asserts the number of Protocol-A test looks (exactly two, one per machine).",
+      "consequence": "A third undisclosed Protocol-A entry could be appended without failing the suite.",
+      "recommendation": "Assert exactly one Protocol-A look per machine and two in total.",
+      "blocks_acceptance": false
+    },
+    {
+      "id": "F3",
+      "severity": "MINOR",
+      "area": "reporting",
+      "finding": "'differences are of the size expected from a nondeterministic training run' rests on a single run per machine, and the run was on CPU where the cited cuDNN nondeterminism does not apply.",
+      "consequence": "Overstates empirical support for an a-priori-plausible argument.",
+      "recommendation": "Adopt the weaker wording and attribute the gap to the execution environment difference rather than to nondeterminism within this run.",
+      "blocks_acceptance": false
+    },
+    {
+      "id": "F4",
+      "severity": "MINOR",
+      "area": "reporting",
+      "finding": "'feature construction' in section 9 describes a pipeline Protocol A does not use.",
+      "consequence": "Implies the 98-feature Phase-3.1 representation was validated. It was not.",
+      "recommendation": "Use 'input construction / preprocessing'.",
+      "blocks_acceptance": false
+    },
+    {
+      "id": "F5",
+      "severity": "MINOR",
+      "area": "reporting",
+      "finding": "'makes MechaSight's own results comparable to the literature' generalises a Protocol-A result to Protocol-B work.",
+      "consequence": "Overstates transfer across two pipelines that share almost nothing.",
+      "recommendation": "Narrow the claim to the Protocol-A path and the project's dataset handling.",
+      "blocks_acceptance": false
+    },
+    {
+      "id": "F6",
+      "severity": "MINOR",
+      "area": "provenance",
+      "finding": "The Protocol-A config file is not hash-declared in artifact_manifest.json; provenance rests on git plus the embedded config_identity.",
+      "consequence": "Weaker than the treatment given to every other artifact.",
+      "recommendation": "Add the config's SHA-256 to the manifest.",
+      "blocks_acceptance": false
+    },
+    {
+      "id": "F7",
+      "severity": "MINOR",
+      "area": "provenance",
+      "finding": "The two 163 MB checkpoints are hashed but not committed (correctly, given size).",
+      "consequence": "Results are re-verifiable only on this machine; if the files are lost the reproduction cannot be re-scored without retraining.",
+      "recommendation": "State the local-only status in the report, or archive the checkpoints.",
+      "blocks_acceptance": false
+    },
+    {
+      "id": "F8",
+      "severity": "MINOR",
+      "area": "documentation",
+      "finding": "best_epoch is 0-indexed in training JSON; the report quotes 1-indexed epochs.",
+      "consequence": "A reader comparing the two sees an apparent off-by-one.",
+      "recommendation": "Note the indexing in the training record.",
+      "blocks_acceptance": false
+    },
+    {
+      "id": "F9",
+      "severity": "MINOR",
+      "area": "pre-existing",
+      "finding": "tests/test_phase321_reporting_correction.py line 88 uses 'assert corrected.precision is not 0.0', a float identity comparison that emits a SyntaxWarning and does not test what it appears to.",
+      "consequence": "Pre-existing Phase-3.2.1 wart, unrelated to Phase 3.3, but now sits in a file Phase 3.3 modified.",
+      "recommendation": "Change to '!= 0.0' in a future reporting-correction pass.",
+      "blocks_acceptance": false
+    }
+  ],
+  "observations": [
+    "The upstream validation split is window-level, so 1838 of 1839 RoboticArm segments appear in both training and validation. This is faithful to upstream and makes the validation loss optimistic, so early stopping is not clean model selection. Because of the best-state aliasing the only consequence for the reported metric is which epoch training stopped at.",
+    "The RoboticArm overlap is asymmetric: it touches the normal class only (212/232 normal test segments have a training sibling; 0/232 anomaly segments do). That asymmetry is precisely the structure that would produce optimistic bias, which strengthens the hedged claim without licensing a magnitude.",
+    "Every BrushlessMotor segment is its own parent (1593 parents for 1593 segments), so no sibling structure exists there and 0 crossing parents is structurally guaranteed, not incidental.",
+    "The string 'official_baseline_reproduction' names both a Phase-2 preprocessing profile and the Phase-3.3 ledger protocol value. No functional impact, but it is a collision when grepping.",
+    "The strict-tie AUC rule is immaterial on this data: reconstruction MSE scores are continuous, so exact ties are effectively impossible and the estimator coincides with sklearn."
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "the published IMAD-DS official baseline reproduces",
+      "verdict": "SUPPORTED",
+      "basis": "all six comparisons NEAR_EXACT, worst 0.33 of a pre-frozen 0.5 band; tolerance committed 58 minutes before the first score and unchanged since",
+      "action": "none"
+    },
+    {
+      "id": "C2",
+      "claim": "the differences are of the size expected from a nondeterministic training run",
+      "verdict": "TOO STRONG",
+      "basis": "one run per machine, so no variance was measured; and the reproduction ran on CPU, where the cited cuDNN nondeterminism does not apply. The dominant driver of the gap is a different execution environment (device, backend, torch version) interacting with patience-3 stopping, not nondeterminism within this run",
+      "action": "reword to 'consistent with plausible run-to-run variation under the upstream nondeterministic implementation'"
+    },
+    {
+      "id": "C3",
+      "claim": "this makes MechaSight's own results comparable to the literature",
+      "verdict": "TOO STRONG",
+      "basis": "what was validated is the Protocol-A path only. Protocol B uses different preprocessing, a different representation (98 engineered features), different models and a parent-disjoint split. None of that is exercised here",
+      "action": "narrow to: establishes a comparability anchor for Protocol-A-style numbers, and validates this project's dataset handling and official-split evaluation"
+    },
+    {
+      "id": "C4",
+      "claim": "recording overlap creates a credible mechanism for optimistic bias; the magnitude is to be measured",
+      "verdict": "SUPPORTED",
+      "basis": "independently recomputed: 62/101 parents cross the split and the overlap is asymmetric - 212/232 normal test segments have a training sibling versus 0/232 anomaly. Correctly hedged; no magnitude asserted",
+      "action": "none"
+    },
+    {
+      "id": "C5",
+      "claim": "Protocol A minus Protocol B is not a leakage estimate",
+      "verdict": "SUPPORTED",
+      "basis": "scanned every Phase-3.3 artifact; no such arithmetic and no forbidden phrasing appears. The two protocols differ in split, preprocessing, representation and model family simultaneously",
+      "action": "none"
+    },
+    {
+      "id": "C6",
+      "claim": "CPU use is authorised by upstream",
+      "verdict": "SUPPORTED WITH CAVEAT",
+      "basis": "the upstream notebook comment explicitly instructs adapting the device. That authorises the substitution but does not make it a bitwise-equivalent execution environment, and the report should not be read as claiming it does",
+      "action": "keep, and state the substitution/equivalence distinction explicitly"
+    },
+    {
+      "id": "C7",
+      "claim": "no unresolved discrepancy",
+      "verdict": "SUPPORTED WITH CAVEAT",
+      "basis": "true of the seven logged reproduction discrepancies, each verified. But the per-segment scores were never persisted, so the headline metrics are not independently re-derivable from artifacts - an open auditability gap",
+      "action": "record the score-persistence gap as an unresolved item"
+    },
+    {
+      "id": "C8",
+      "claim": "BrushlessMotor 58.98 is benchmark discrimination on the released cohort, not mechanical-fault sensitivity",
+      "verdict": "SUPPORTED",
+      "basis": "the confound disclosure is carried in the report, the config, and every one of the 42 primary_auc.csv rows via scientific_limitation_id",
+      "action": "none"
+    },
+    {
+      "id": "C9",
+      "claim": "the upstream best-checkpoint aliasing means the final epoch was scored",
+      "verdict": "SUPPORTED",
+      "basis": "PyTorch aliasing verified empirically on a toy model: state_dict returns live references, later optimizer steps mutate them, BatchNorm running stats included. The reproduction deliberately performs no restore",
+      "action": "none"
+    },
+    {
+      "id": "C10",
+      "claim": "the project's data path, windowing, feature construction, model and scoring are consistent with the published work",
+      "verdict": "TOO STRONG",
+      "basis": "Protocol A uses per-window standardised raw multi-sensor input, not the Phase-3.1 98-feature representation. 'feature construction' implies the engineered feature pipeline was validated; it was not",
+      "action": "replace 'feature construction' with 'input construction / preprocessing'"
+    }
+  ],
+  "ledger": {
+    "total_entries": 30,
+    "protocol_b_entries": 28,
+    "protocol_a_entries": 2,
+    "original_prefix_sha256": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+    "original_prefix_sha256_expected": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+    "original_prefix_unchanged": true,
+    "first_28_all_protocol_b": true,
+    "append_only_across_git_history": true,
+    "git_diff_at_results_commit": "2 insertions, 0 deletions",
+    "ledger_api_supports_only": [
+      "append",
+      "append_many_atomic",
+      "read"
+    ],
+    "ledger_api_first_committed": "4c0be89 (Phase 3.0) - append-only predates Phase 3.3",
+    "protocol_a_entries_detail": [
+      {
+        "machine": "RoboticArm",
+        "experiment_id": "p33a-1cdb02c0d81c21288e58",
+        "git_sha": "4ce1faf5894578f330226d80cd194dfb44ff0cba",
+        "timestamp_utc": "2026-09-08T11:29:26.289247+00:00",
+        "test_cohort_hash": "83cd11956f8ee94907bcf366605259d4986acca8ff69a5bceb3874ee6a7a8efa",
+        "cohort_hash_recomputed_match": true
+      },
+      {
+        "machine": "BrushlessMotor",
+        "experiment_id": "p33a-65b53c5046de90d1f1a5",
+        "git_sha": "4ce1faf5894578f330226d80cd194dfb44ff0cba",
+        "timestamp_utc": "2026-09-08T11:29:26.289247+00:00",
+        "test_cohort_hash": "1322f463b6158bfc75c9cbb62ffe3c6883e19d063f02fb80600aee678ca04f32",
+        "cohort_hash_recomputed_match": true
+      }
+    ],
+    "one_look_per_machine": true,
+    "authorisation_precedes_scoring": {
+      "authorisation_utc": "2026-09-08T11:29:26Z",
+      "BrushlessMotor_scored_local": "2026-09-08 17:00:15 +0530",
+      "RoboticArm_scored_local": "2026-09-08 20:31:31 +0530",
+      "evaluator_committed_local": "2026-09-08 16:30:06 +0530",
+      "ordering_valid": true
+    },
+    "adversarial_tests_against_the_new_invariant": {
+      "byte_edit_in_original_entry": "REJECTED",
+      "reorder_two_original_entries": "REJECTED",
+      "delete_an_original_entry": "REJECTED",
+      "delete_then_reappend_copy": "REJECTED",
+      "tampered_prefix_plus_valid_protocol_a_append": "REJECTED",
+      "protocol_a_entry_moved_into_first_28": "REJECTED",
+      "legitimate_future_append": "ACCEPTED (intended)"
+    },
+    "verdict": "CORRECT SEMANTIC GENERALIZATION",
+    "gap": "no test pins the number of Protocol-A looks; a third undisclosed Protocol-A entry would not fail the suite"
+  },
+  "architecture": {
+    "derived_from": "upstream model.py build_encoder/build_decoder at the pinned commit",
+    "layer_dims": [
+      2048,
+      2048,
+      2048,
+      16
+    ],
+    "window_lengths": {
+      "imp23absu_mic": 1600,
+      "ism330dhcx_acc": 706,
+      "ism330dhcx_gyro": 706
+    },
+    "channels": {
+      "imp23absu_mic": 1,
+      "ism330dhcx_acc": 3,
+      "ism330dhcx_gyro": 3
+    },
+    "per_sensor_input_dims": {
+      "imp23absu_mic": 1600,
+      "ism330dhcx_acc": 2118,
+      "ism330dhcx_gyro": 2118
+    },
+    "input_dim": 5836,
+    "input_dim_expected": 5836,
+    "encoder": [
+      "Linear(5836,2048)",
+      "BatchNorm1d(2048)",
+      "ReLU",
+      "Linear(2048,2048)",
+      "BatchNorm1d(2048)",
+      "ReLU",
+      "Linear(2048,2048)",
+      "BatchNorm1d(2048)",
+      "ReLU",
+      "Linear(2048,16)"
+    ],
+    "decoder": [
+      "Linear(16,2048)",
+      "BatchNorm1d(2048)",
+      "ReLU",
+      "Linear(2048,2048)",
+      "BatchNorm1d(2048)",
+      "ReLU",
+      "Linear(2048,2048)",
+      "BatchNorm1d(2048)",
+      "ReLU",
+      "Linear(2048,5836)"
+    ],
+    "bottleneck_has_no_batchnorm_or_relu": true,
+    "output_layer_has_no_batchnorm_or_relu": true,
+    "parameters_hand_computed": 40789724,
+    "parameters_torch_enumerated": 40789724,
+    "parameters_claimed": 40789724,
+    "parameter_count_agrees": true,
+    "batchnorm_trainable_params_included": "3 x 2 x 2048 per half (weight and bias); running_mean/running_var are buffers, not trainable",
+    "docs_research_definition_5_9_omits_batchnorm": true,
+    "aliasing": {
+      "upstream_line": "best_model_state = self.state_dict()  # no deepcopy",
+      "pytorch_semantics_verified_empirically": true,
+      "state_dict_returns_live_tensor_references": true,
+      "later_optimizer_steps_mutate_the_saved_state": true,
+      "batchnorm_running_stats_also_mutated": true,
+      "consequence": "load_state_dict(best_model_state) restores the FINAL epoch, not the best-validation epoch",
+      "reproduction_preserved_it": true,
+      "models_actually_scored": {
+        "RoboticArm": "epoch 36",
+        "BrushlessMotor": "epoch 26"
+      },
+      "best_validation_epochs_not_scored": {
+        "RoboticArm": "epoch 33",
+        "BrushlessMotor": "epoch 23"
+      },
+      "interpretation_correct": true,
+      "verification_basis": "code path plus PyTorch semantics; the best-validation weights were never persisted, so this cannot be confirmed by artifact comparison"
+    }
+  },
+  "protocol_b_integrity": {
+    "phase32_artifacts": "155/155 unchanged",
+    "phase3_2_1_present": true,
+    "protocol_b_ledger_entries": 28,
+    "original_prefix_sha256_unchanged": true,
+    "split_v3_sha256": "68e5406d63e96cf5ee418ae58808f5c3e7790889ba1b8497420642d1f0d8409e",
+    "reporting_policy_sha256": "a1f695d31a6042619bad3e4fa9103a62b32c41a699c54ce7d9ae35ce36b7da2c",
+    "models_thresholds_or_scores_changed": false
+  },
+  "next_gate_recommendation": {
+    "recommended": "controlled RoboticArm leakage-magnitude experiment",
+    "endorsed": true,
+    "rationale": "the overlap is now quantified and shown to be asymmetric on the normal class, which makes the bias mechanism concrete while leaving its magnitude the largest unresolved scientific question in the project",
+    "requirement": "must hold model, preprocessing and representation constant and vary only the parent grouping, otherwise it repeats the confound it is meant to resolve",
+    "designed_or_implemented_here": false
+  }
+}

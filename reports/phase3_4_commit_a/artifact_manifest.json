@@ -1,0 +1,31 @@
+{
+  "checkpoints_created": 0,
+  "config_identity": "p34d-exec-e5470b025229f59a06f4c772",
+  "execution_environment_id": "p34c-env-b7a5de2af4c1d9614e49",
+  "expected_initialization_sha256": "d889e90224988ac27bceba086f695ac5d7f8f34ca1e2ad1debc16c6f61384d55",
+  "files": {
+    ".gitattributes": "a707a04aea9deee013ee128978062a3e6ba330c78811ac9847edf837e22fe894",
+    "configs/phase3/roboticarm_focal_toggle_execution_v2.json": "e061e4a890795975b1e54e60ce42ccff0a3f40ff86297bfcfd879ef59dcb4637",
+    "docs/phase34_commit_a_execution_freeze.md": "5c622f144d6680ea1bad9e37c40c0b25112e71855b7ead70c8a7ad559cbb50b0",
+    "reports/phase3_4c_freeze/score_schema.json": "dd4692088739848b2c25af2881e51eb49c49ee61b2b8887090d67d8b36173aa0",
+    "reports/phase3_4d_release_gate/final_arm_memberships.csv": "6dbeb4aec6ec3f6c9c32f11edc5af9b9803b0c9f24b9215814c114a0eb076e57",
+    "reports/phase3_4d_release_gate/planned_experiments_v3.csv": "ae7559b14b3db8a6175a527a8af299b79e22c369802d7a260745f0faf166d5b8",
+    "scripts/run_focal_toggle_experiment.py": "294b572289c1c6ec627a2d24d09fc79436f5701a58c36f2a527593e860ee9e4a",
+    "src/experiment/focal_concordance.py": "154ce1b80d9c0edaf94ab9c0ad624c71e5c33904a24b209a03998b527dfc5f7d",
+    "src/experiment/focal_toggle_execution.py": "21ed4b906cb8f45a27f910e0f68240cc41449fd434e1c332b912af41e648ee99",
+    "src/experiment/provenance.py": "f9531c37321172559096d487ac13dce1b4508ce070821f8416a68030144bc6ad",
+    "tests/test_phase34_commit_a.py": "ff41caab3be1d13838374f6aefceefd53b437bfb492b7cb3e5293526e77aaff9"
+  },
+  "generated_utc": "2026-09-11T09:19:48.079226+00:00",
+  "hash_form": "canonical: SHA-256 over LF-normalised bytes for text artifacts (equals the git blob hash on any platform); raw bytes for binary. Forward fix for Phase 3.4E finding A6.",
+  "inference_run": false,
+  "ledger_after": 30,
+  "ledger_before": 30,
+  "ledger_entries_appended": 0,
+  "model_trained": false,
+  "planned_test_looks": 10,
+  "planned_training_runs": 10,
+  "schema_version": "phase3.4-commit-a-manifest-v1",
+  "stage": "COMMIT_A",
+  "test_score_computed": false
+}

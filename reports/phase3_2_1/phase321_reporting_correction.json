@@ -1,0 +1,198 @@
+{
+  "audit_reference": "docs/phase32_independent_audit.md",
+  "average_precision_prevalence_context": {
+    "at_or_below_prevalence": [
+      {
+        "anomaly_prevalence": 0.8529411764705882,
+        "ap_minus_prevalence": -0.0316234743754423,
+        "average_precision": 0.8213177020951459,
+        "domain": "target",
+        "machine": "RoboticArm",
+        "model_family": "statistical_reference",
+        "regime": "S"
+      },
+      {
+        "anomaly_prevalence": 0.8529411764705882,
+        "ap_minus_prevalence": -0.0273371698361167,
+        "average_precision": 0.8256040066344714,
+        "domain": "target",
+        "machine": "RoboticArm",
+        "model_family": "one_class_svm",
+        "regime": "S"
+      },
+      {
+        "anomaly_prevalence": 0.8529411764705882,
+        "ap_minus_prevalence": -0.0282745433249814,
+        "average_precision": 0.8246666331456067,
+        "domain": "target",
+        "machine": "RoboticArm",
+        "model_family": "statistical_reference",
+        "regime": "T"
+      },
+      {
+        "anomaly_prevalence": 0.5,
+        "ap_minus_prevalence": -0.1026813951695453,
+        "average_precision": 0.3973186048304546,
+        "domain": "target",
+        "machine": "BrushlessMotor",
+        "model_family": "isolation_forest",
+        "regime": "T"
+      }
+    ],
+    "family_slice_rows_at_or_below_prevalence": 4,
+    "not_a_chance_adjusted_metric": true,
+    "prevalence_by_slice": {
+      "BrushlessMotor|source": 0.5,
+      "BrushlessMotor|target": 0.5,
+      "RoboticArm|source": 0.3515151515151515,
+      "RoboticArm|target": 0.8529411764705882
+    },
+    "slice_rows_annotated": 80,
+    "status": "CONTEXT_ONLY"
+  },
+  "brushless_motor_confound": {
+    "forbidden_wording": "pure mechanical-fault detection performance",
+    "limitation_id": "brushless_motor_acquisition_time_class_confound_v1",
+    "permitted_wording": "benchmark anomaly-discrimination performance on the released cohort",
+    "rows_carrying_limitation": 20
+  },
+  "cluster_disclosure": {
+    "brushless_motor_one_segment_per_recording": true,
+    "must_not_present_466_as_independent_observations": true,
+    "robotic_arm_blocked_siblings": 96,
+    "robotic_arm_common_evaluation_parent_recordings": 33,
+    "robotic_arm_common_evaluation_segments": 466,
+    "robotic_arm_healthy_target_parent_recordings": 6,
+    "robotic_arm_healthy_target_segments": 20,
+    "robotic_arm_source_validation_parent_recordings": 6,
+    "robotic_arm_source_validation_segments": 186,
+    "robotic_arm_target_adaptation_parents": 18,
+    "robotic_arm_target_adaptation_segments": 27
+  },
+  "corrected_artifacts": [
+    "correction_manifest.json",
+    "domain_slice_metrics_with_prevalence.csv",
+    "healthy_target_false_positives_context.csv",
+    "isolation_forest_family_threshold_metrics_corrected.csv",
+    "phase321_reporting_correction.md",
+    "primary_baselines_corrected.csv",
+    "threshold_metrics_corrected_individual.csv"
+  ],
+  "dataset_representation": {
+    "mechasight_performs_adc": false,
+    "microphone_columns": [
+      "Time",
+      "MIC [Waveform]"
+    ],
+    "microphone_distributed_as_audio_container": false,
+    "microphone_physical_unit": "UNKNOWN",
+    "reading_parquet_is": "software deserialisation of already-digital numerical data",
+    "release_contents": "per-sensor Parquet signal files plus metadata CSV files"
+  },
+  "f1_correction": {
+    "affected_experiment_ids": [
+      "p3-4bad66197b1b5b39bc0e1ce8",
+      "p3-4df2732b72997882e300c7ee",
+      "p3-61da2e22429837caf51172a3",
+      "p3-b2c1eb73ec1f836d95401be0",
+      "p3-b7df07b4435147ce84abb2fb",
+      "p3-d2e84d3ccdbb25446ed3b5c2",
+      "p3-d523942f6e3b110247ccd97a",
+      "p3-e0cb98b1d50e1b760ad00c33",
+      "p3-efee4a25a307b9556f1ef9e1",
+      "p3-f2e82658337725d643461f5a"
+    ],
+    "affected_scope": "RoboticArm isolation_forest, all five seeds in both regimes",
+    "corrected_value": 0.0,
+    "corrected_values_column": "phase321_count_identity_f1",
+    "equivalent_to_harmonic_where_defined": true,
+    "family_rows_corrected_from_null": 2,
+    "individual_rows_corrected_from_null": 10,
+    "max_abs_diff_vs_original_where_both_defined": 1.11e-16,
+    "null_mechanism_a_precision_undefined": 9,
+    "null_mechanism_b_precision_plus_recall_zero": 1,
+    "original_values_retained_column": "original_phase32_f1",
+    "previously_defined_rows_unchanged": 18,
+    "rule": "2*TP / (2*TP + FP + FN) when 2*TP + FP + FN > 0, else undefined"
+  },
+  "generated_utc": "2026-09-08T09:40:57.967110+00:00",
+  "healthy_target": {
+    "context_added": [
+      "segment count",
+      "independent parent/recording count",
+      "explicit uncertainty warning"
+    ],
+    "new_confidence_interval_methodology": false,
+    "reason": "not part of the frozen Phase-3.1.1 reporting policy",
+    "robotic_arm_ocsvm_direction": {
+      "S_flagged_of_20": 12,
+      "T_flagged_of_20": 6,
+      "independent_parent_recordings": 6,
+      "magnitude_precise": false
+    },
+    "values_unchanged": true
+  },
+  "immutability": {
+    "adaptation_membership_changed": false,
+    "features_windowing_normalization_changed": false,
+    "frozen_parent_policy_sha256": "a1f695d31a6042619bad3e4fa9103a62b32c41a699c54ce7d9ae35ce36b7da2c",
+    "frozen_split_manifest_sha256": "68e5406d63e96cf5ee418ae58808f5c3e7790889ba1b8497420642d1f0d8409e",
+    "hyperparameter_changed": false,
+    "model_refit": false,
+    "model_rescored": false,
+    "model_trained": false,
+    "new_experiment_id_minted": false,
+    "new_test_look": false,
+    "phase32_artifacts_overwritten": false,
+    "phase32_manifest_files_verified": 155,
+    "phase32_manifest_mismatches": 0,
+    "seed_selected": false,
+    "split_membership_changed": false,
+    "test_look_ledger_entries_after": 28,
+    "test_look_ledger_entries_before": 28,
+    "test_look_ledger_sha256": "db4bde80099a870ae90686fa463400f02f93434fc11dfce6d8c20f2eac0b0db0",
+    "threshold_changed": false
+  },
+  "nature_of_change": "presentation only",
+  "parent_reporting_policy_id": "p311-reporting-5e76ab7dabd5689c7b0ced68",
+  "precision_convention": {
+    "family_rows_with_undefined_precision": 2,
+    "family_rule": "no imputation invented; undefined if any seed is undefined",
+    "family_transparency": {
+      "RoboticArm|S|isolation_forest": "0 of 5 seeds defined",
+      "RoboticArm|T|isolation_forest": "1 of 5 seeds defined"
+    },
+    "individual_rows_with_undefined_precision": 9,
+    "never_replaced_by_zero": true,
+    "undefined_label": "undefined - no positive predictions"
+  },
+  "reporting_correction_id": "p321-correction-75e1479967f120aff5047360",
+  "reporting_correction_policy": "configs/phase3/phase321_reporting_correction_policy_v1.json",
+  "reporting_correction_policy_sha256": "aef18074a0555b219c2907cd46182f27809c39b048997f045f691a22a8414ba6",
+  "representation_wording": {
+    "actual": "raw sensor streams -> 100 ms windows -> 98 engineered features per window -> median of EACH FEATURE across the segment -> one 98-dimensional segment vector -> train-only feature z-score -> classical model -> one segment anomaly score",
+    "historical_config_left_unchanged": "configs/evaluation/protocol_b_few_shot_adaptation_v3.json",
+    "is_not": "window anomaly score -> median score"
+  },
+  "schema_version": "phase3.2.1-reporting-correction-v1",
+  "scientific_results_head": "a576c9df8000dd1c0a5ad6fd73845f97facf98b2",
+  "sensor_terminology": {
+    "numeric_signal_channels": 7,
+    "physical_sensor_devices": 2,
+    "preferred_wording": "three sensing modalities from two physical sensor devices, providing seven numeric signal channels",
+    "sensing_modalities": 3
+  },
+  "test_batch_id": "p32-test-batch-8f7d48324fd10df97ae29100",
+  "threshold_transfer_annotation": {
+    "fpr_zero_must_not_be_called_specificity": true,
+    "individual_rows_with_no_positive_predictions": 9,
+    "replacement_threshold_proposed": false,
+    "required_wording": "No positive alarms were generated at the frozen operating point; therefore zero false positives coexist with zero fault detections.",
+    "threshold_unchanged": true
+  },
+  "verification": {
+    "correction_code_imports_no_model_module": true,
+    "full_test_suite": "see commit",
+    "guard_function": "src.experiment.reporting_correction.assert_no_model_dependency"
+  }
+}

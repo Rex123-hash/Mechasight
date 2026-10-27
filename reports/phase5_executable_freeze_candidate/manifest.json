@@ -1,0 +1,85 @@
+{
+  "authorization_issued": false,
+  "coverage": {
+    "l1_families": {
+      "dense_autoencoder": 20,
+      "mahalanobis_shrinkage": 4
+    },
+    "l1_new_units_real_frozen_model": 24,
+    "l1_new_units_stub": 0,
+    "l2_derived_from_real_phase4_validation_scores": 208,
+    "labels": "SYNTHETIC fake labels (development validation has no faults)",
+    "reused_l1_comparators_real_phase3_validation_scores_analysis_only": 28,
+    "synthetic_stub_demo_units": 232
+  },
+  "executor_source_identity": "fa021550496b1dfb75fa5ae60f965dd10200e6882a91d59fabdc8036098022f5",
+  "files": {
+    "development_sources.json": "b3c513b383a42021bf9c336dcd991eee4c7b05af2bccbf8b11c82cee4fd47757",
+    "focused_tests.xml": "08b815575fc9f4a1b4a5d1f1562fc58ac67812ab45346de28fc1a0f7855fe77a",
+    "integration_evidence.json": "afa9ade7416cae8fec0b4a0a43de5bd34e1bc6e00934366ed1f2eb6bf146b8aa",
+    "regression_tests.xml": "f5ba6e9625cb5ce262ace27ef4839d43429c7c26afd7ccb16f44906b3b766be2",
+    "synthetic_evidence.json": "81de99471c805c9fefec0efef5dfc7c4348fc42426f0d2ecd393712c8ad64121"
+  },
+  "generated_from_head": "4016dbb1c8ea07d71051c7f77957b1c774ac128d",
+  "independently_approved": false,
+  "interfaces": {
+    "inference_adapter": "phase5-frozen-l1-inference-adapter-v1",
+    "input_schema": "phase5-dev-frozen-v1",
+    "window_index_columns": [
+      "machine",
+      "regime",
+      "segment_id",
+      "parent_recording",
+      "domain",
+      "window_index",
+      "window_start_s",
+      "window_end_s",
+      "row"
+    ],
+    "window_index_schema": "phase5-label-free-window-index-v1"
+  },
+  "original_scientific_registry_sha256": "489c6fd6653648f7f686d4537aa221f0b253bdd7ffe60e6e430ea2b7810691cc",
+  "proposed_real_looks": 232,
+  "real_execution_enabled": false,
+  "real_ledger_rows": 196,
+  "restrictions": [
+    "SYNTHETIC/development temporary sandboxes only; no real scope, token or protected input",
+    "Read capabilities are issued and verified only by the owning executor; caller-built Access is refused",
+    "Projected parquet columns and numeric HDF5 only; label-bearing cache provenance is never deserialized",
+    "Label-free window index implemented and verified on development caches; protected index construction DISABLED",
+    "Frozen L1 inference adapter verified on permitted source-validation inputs only",
+    "JSONL ledger adapter verified on a temporary copy only; the real ledger is never an executor backend",
+    "Interrupted writes resolve only via the audited incident action; interrupted analysis needs a human incident",
+    "Retries add separately accounted looks: 196 -> 428 holds only for an uninterrupted evaluation"
+  ],
+  "review_status": "UNREVIEWED: becomes trusted only when an independent review names the commit holding this manifest",
+  "sources": {
+    "docs/phase5_5b_synthetic_executor.md": "a178cdd3bedbf1818799344e1aa9a4f7d1a64be0837aec8b41cd937724f36ef4",
+    "docs/phase5_5c_executor_hardening.md": "dbff6edd20c88ef369c47c80fc6ae922ba4d2d95fb54a40900ebd4ea19b8c72d",
+    "docs/phase5_5d_security_corrections.md": "3a9cf32113ae74a433670e10c5b2aa8bd51eaa684caed08b59befcd75126a3cb",
+    "docs/phase5_5e_admission_race_fix.md": "108e65c25bb99b3a94290b4ca143ebe1e05d637c9df6630838d0a5ddd51320cb",
+    "docs/phase5_5f_integration.md": "908085d832989e2215aad7b6ba8e0b9ce1d9895a371b2743ad210d15a058a909",
+    "docs/phase5_5g_integration_corrections.md": "857b010a3e36360e4e5187fc295bb4166c149b9ba4bf2903a099dbfc3a3c6dba",
+    "scripts/run_phase5_fixture_executor.py": "7a1440f48d84ba33362a9fa4b959121eaf14dcaa95cc90368b017b65b5171a29",
+    "src/experiment/phase5_analysis.py": "05c435f33e21642c3a584eb8fa89f76982d02df0afc6833b4a45d44714dc1109",
+    "src/experiment/phase5_dev_fixture.py": "528fd08eb40482a2c07ddd2eb0d4bffaded4a264676b3566bbdd63b2a98c8c85",
+    "src/experiment/phase5_execution.py": "a1474b7695afa8b72c659526a7daaa212fcd52dff57dbeb68013e05cdc502fd9",
+    "src/experiment/phase5_fixture.py": "1970a1c6fbfdff3e2b2b9a392532e5e50db53d26ee9c8b64b38b4ac21993b1e6",
+    "src/experiment/phase5_inference.py": "d1a7492c31f744294d49e963c8331b063efcfa09c07148ad15b014382089210c",
+    "src/experiment/phase5_inputs.py": "aaa1bf43739827aa6996a454d9905e4620e0b2f547a6ba88cf3337a30da35fe2",
+    "src/experiment/phase5_ledger.py": "b61ac1599bf2614c7645ccbb8de3d887759d13ddf2a66f545321f8ad5001c0b9",
+    "src/experiment/phase5_window_index.py": "1b8430b29f57b3c7d8ac550427ea4e0ec770a7bf20bcd872228e3299d5a944f0",
+    "tests/_recovery_race_worker.py": "fb06c224e91eff3d01433d7778773b1857687fd64b586cc351959bd4ed4613f3",
+    "tests/test_phase5_executor.py": "386ca7c463e803abc305d3af2138e224d43e89afcab96b40bf5f452e82716800",
+    "tests/test_phase5_freeze_candidate.py": "53b79cd7fbadb4f00b54f92e08c380ce8bc7f32ddd60eb3300537f975547d1f5",
+    "tests/test_phase5_integration.py": "fae76a3c990546f287b3cf6dcd762d39b62ec918e6ab4250716089ef5ff8b56d",
+    "tests/test_phase5_integration_corrections.py": "5557e75fc2dd5aa6c76d8b8a7b93c2465789d1ff100e8788a0c64bcd63105e50",
+    "tests/test_phase5_protected_read_guard.py": "13f2b1b70decabd7f7f18a4ec1744de5afdf75e0cf11cbb171efef14c77869ae",
+    "tests/test_phase5_synthetic_statistics.py": "d2d53be5b3ba0a0bd9b9b1fbc6ca1cab868471057eb4955c3c6b8b3d9d524c67"
+  },
+  "stage": "5.5G",
+  "status": "CANDIDATE — NOT AUTHORIZED FOR REAL PROTECTED EVALUATION.",
+  "tracked_tree_clean_at_generation": false,
+  "trusted_package_commit": "d7ea8ac3022acd755a847b77118375fb719ef6e3",
+  "trusted_package_manifest_sha256": "7f3ae36e42b1ffee66e83915fa7c5138817b842f4cc7be3ecee911c0094c4bab"
+}

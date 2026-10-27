@@ -1,0 +1,36 @@
+{
+  "schema_version": "phase3.1-primary-preprocessing-v1",
+  "status": "PRIMARY_PRE_REGISTERED_CONFIGURATION",
+  "protocol": "mechasight_experimental_protocol",
+  "regimes": ["S", "T"],
+  "machines": ["RoboticArm", "BrushlessMotor"],
+  "window_length_s": 0.1,
+  "stride_s": 0.1,
+  "window_boundary": "half_open",
+  "window_feature_normalization": "none",
+  "startup_corrections": {
+    "gyro_warmup_s": 0.035,
+    "BrushlessMotor_initial_accelerometer_samples_dropped": 1,
+    "RoboticArm_initial_accelerometer_samples_dropped": 0
+  },
+  "window_feature_families": ["time", "frequency"],
+  "training_sample_unit": "one frozen segment",
+  "segment_aggregation": "median independently for every engineered feature",
+  "model_input_normalization": {
+    "method": "feature-wise population z-score",
+    "fit_population": "complete authorized normal training cohort for the machine and regime only",
+    "epsilon": 0.00001,
+    "validation_statistics_used": false,
+    "test_statistics_used": false
+  },
+  "score_aggregation": "not applicable because models score one vector per segment",
+  "selection_basis": "fixed prospectively for consistency with the accepted Phase-2 pipeline, robustness of medians, and feasible classical-model computation; no validation or common-test score informed this choice",
+  "source_validation_use": "q90 threshold calibration and descriptive score summaries only",
+  "common_test_use": "forbidden in Phase 3.1",
+  "sensitivity_alternatives_not_run": [
+    "alternative window lengths or strides",
+    "window-level estimator fitting",
+    "alternative segment aggregators",
+    "alternative training-only feature scalers"
+  ]
+}

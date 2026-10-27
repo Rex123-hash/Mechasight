@@ -1,0 +1,250 @@
+{
+  "schema_version": "phase3.4A-design-v1",
+  "generated_utc": "2026-09-08T15:59:37.712530+00:00",
+  "config_identity": "p34a-ra-overlap-13dbc49b2b983d72e957a320",
+  "design_status": "PREEXECUTION_DESIGN_ONLY",
+  "model_trained": false,
+  "test_score_computed": false,
+  "inference_run": false,
+  "scientific_classification": "POST-TEST CONTROLLED SENSITIVITY ANALYSIS",
+  "classification_note": "This design was created after Phase-3.3 Protocol-A performance was observed. The overlap risk was known earlier, but the design is post-test. It is not untouched confirmatory evidence, not preregistered-before-all-results evidence, not independent validation, and not causal proof of leakage inflation.",
+  "research_question": "Under the official RoboticArm preprocessing, architecture, hyperparameters and fixed official test cohort, how much does measured anomaly-discrimination performance change when training examples from the same physical parent recordings as test examples are excluded?",
+  "design_verdict": "YELLOW",
+  "verdict_reason": "A genuinely matched contrast is constructible - 214 segments, 14 parents and 12 strata match exactly across arms - so the comparison is not hopeless. But three residual confounds are structural and cannot be designed away: the disjoint arm has exactly one possible membership, its 14 parents are systematically shorter recordings, and both arms must exclude 13 of 25 strata including every target-domain training segment.",
+  "feasibility": {
+    "parent recordings (union)": 101,
+    "parents appearing in official train": 76,
+    "parents appearing in official test": 87,
+    "parents crossing the official split": 62,
+    "train-only parents (disjoint pool)": 14,
+    "test-only parents": 25,
+    "official train segments": 1839,
+    "official train windows": 136086,
+    "train segments from crossing parents": 1625,
+    "train windows from crossing parents": 120250,
+    "train segments from train-only parents": 214,
+    "train windows from train-only parents": 15836,
+    "segments removed by full parent-disjointness": 1625,
+    "windows removed by full parent-disjointness": 120250,
+    "percent of training removed by full disjointness": 88.36,
+    "windows per train segment (constant)": 74,
+    "official test segments": 464,
+    "official test windows": 34336,
+    "normal test segments": 232,
+    "anomaly test segments": 232,
+    "normal test segments with a training sibling": 212,
+    "anomaly test segments with a normal-training sibling": 0,
+    "metadata strata in official training": 25,
+    "metadata strata reachable by the disjoint pool": 12,
+    "metadata strata unreachable without a crossing parent": 13,
+    "maximum matched arm size (segments)": 214,
+    "maximum matched arm size (windows)": 15836,
+    "median segments per train-only parent": 8.5,
+    "median segments per crossing parent": 33.0
+  },
+  "arm_construction": {
+    "disjoint_arm": {
+      "membership": "FIXED - all 214 train-only segments from all 14 train-only parents; the pool is exhausted, so no alternative membership exists",
+      "segments": 214,
+      "windows": 15836,
+      "parents": 14
+    },
+    "overlap_arm": {
+      "membership": "5 pre-declared replicates",
+      "rule": "draw 14 crossing parents uniformly without replacement under numpy default_rng(20260908); reject the draw unless those parents can supply the disjoint arm's exact per-stratum segment counts; then draw the required number of segments per stratum from the candidates sorted by (parent, segment_id)",
+      "segments_per_replicate": 214,
+      "windows_per_replicate": 15836,
+      "parents_per_replicate": 14
+    },
+    "matching_verification": [
+      {
+        "replicate": 1,
+        "segments": 214,
+        "windows": 15836,
+        "parents": 14,
+        "segments_match_disjoint": true,
+        "windows_match_disjoint": true,
+        "parents_match_disjoint": true,
+        "strata_counts_exactly_match": true
+      },
+      {
+        "replicate": 2,
+        "segments": 214,
+        "windows": 15836,
+        "parents": 14,
+        "segments_match_disjoint": true,
+        "windows_match_disjoint": true,
+        "parents_match_disjoint": true,
+        "strata_counts_exactly_match": true
+      },
+      {
+        "replicate": 3,
+        "segments": 214,
+        "windows": 15836,
+        "parents": 14,
+        "segments_match_disjoint": true,
+        "windows_match_disjoint": true,
+        "parents_match_disjoint": true,
+        "strata_counts_exactly_match": true
+      },
+      {
+        "replicate": 4,
+        "segments": 214,
+        "windows": 15836,
+        "parents": 14,
+        "segments_match_disjoint": true,
+        "windows_match_disjoint": true,
+        "parents_match_disjoint": true,
+        "strata_counts_exactly_match": true
+      },
+      {
+        "replicate": 5,
+        "segments": 214,
+        "windows": 15836,
+        "parents": 14,
+        "segments_match_disjoint": true,
+        "windows_match_disjoint": true,
+        "parents_match_disjoint": true,
+        "strata_counts_exactly_match": true
+      }
+    ],
+    "exact_window_matching_note": "every RoboticArm training segment contains exactly 74 windows, so matching segment counts matches window counts exactly with no approximation"
+  },
+  "seeds": {
+    "training_seeds": [
+      1995,
+      20260908,
+      31415
+    ],
+    "selection_seed": 20260908,
+    "policy": "all seeds declared before execution; applied identically to both arms; no seed may be chosen, discarded or reweighted on the basis of any observed performance",
+    "runs": {
+      "disjoint": 3,
+      "overlap": 15,
+      "total": 18
+    }
+  },
+  "primary_estimand": {
+    "name": "overlap-associated AUC difference under the controlled matched design",
+    "definition": "delta_AUROC = mean over (replicate, seed) of AUROC_overlap - mean over seed of AUROC_disjoint, on the fixed official 464-segment RoboticArm test cohort, using the upstream strict pairwise AUC with segment-median aggregation",
+    "forbidden_name": "true leakage inflation",
+    "sign_interpretation": "a positive delta means the overlap-containing training arm yielded a higher measured AUC under this controlled design"
+  },
+  "secondary_estimands": [
+    "delta source AUROC",
+    "delta target AUROC",
+    "difference in the normal-test segment score distribution",
+    "difference in the anomaly-test segment score distribution",
+    "descriptive only: normal test segments with a training sibling versus without - observational, because parent identity and operating conditions differ; must never be used as the primary causal estimate"
+  ],
+  "uncertainty": {
+    "procedure": "class-stratified parent-cluster bootstrap over the fixed official test cohort",
+    "rules": [
+      "identical parent bootstrap draws applied across all arms",
+      "paired contrasts computed within each bootstrap draw",
+      "all sibling segments of a parent move together",
+      "windows are never resampled; the evaluation unit is the segment score and the resampling unit is the parent recording",
+      "training-set and seed variation reported separately from test-cohort resampling variation, never pooled into a single interval that implies more independent replication than exists"
+    ],
+    "asymmetry_disclosure": "membership variability is estimable for the overlap arm only. The disjoint arm has exactly one possible membership, so its spread reflects seed variation alone."
+  },
+  "validation_split_policy": {
+    "decision": "retain the upstream window-level stratified validation split identically in every arm",
+    "reason": "changing it would alter more than parent train/test overlap and would break comparability with the Phase-3.3 anchor",
+    "limitation": "windows from one parent therefore appear in both training and validation within every arm, so validation loss is optimistic and early stopping is not clean model selection - identically in both arms",
+    "secondary_variant": "a parent-disjoint validation variant may be proposed later as a separate sensitivity experiment; it must not be folded into the primary contrast"
+  },
+  "frozen_components": {
+    "dataset": "IMAD-DS Zenodo 10.5281/zenodo.12665499, same release as Phase 3.3",
+    "test_cohort": "official RoboticArm test cohort, 464 segments, 34336 windows, cohort hash 83cd11956f8ee94907bcf366605259d4986acca8ff69a5bceb3874ee6a7a8efa",
+    "preprocessing": "exact Protocol-A implementation: 16000/7063/7063 Hz, 100 ms windows, right-inclusive slicing, zero pad/truncate, 35 ms gyroscope warm-up, upstream std_window normalisation",
+    "representation": "raw standardised multi-sensor windows, 5836-dimensional flattened input",
+    "model": "official fully connected autoencoder [2048,2048,2048,16] with BatchNorm1d in every hidden block, mirrored decoder, 40,789,724 parameters, upstream best-checkpoint aliasing reproduced",
+    "training": "Adam, lr 1e-4, MSE, batch 1024, num_epochs 1000, patience 3, valid_size 0.1, train loader shuffle True, validation shuffle False",
+    "scoring": "reconstruction error, same sensor combination, segment-median aggregation, upstream strict pairwise AUC with exact ties scoring zero",
+    "reporting": [
+      "overall",
+      "source",
+      "target"
+    ],
+    "prohibited": "no Protocol-B model, feature, split or threshold may enter this experiment"
+  },
+  "device_policy": {
+    "requirement": "one environment frozen before execution and identical across every arm",
+    "must_record": [
+      "torch version",
+      "device",
+      "backend",
+      "deterministic-algorithm policy",
+      "seeds"
+    ],
+    "prohibition": "a CPU arm must never be compared against a CUDA arm",
+    "default_if_unresolved": "CPU, matching the Phase-3.3 environment (torch 2.14.0+cpu)",
+    "estimated_cost_per_run_minutes_cpu": 26,
+    "estimated_total_hours_cpu": 7.8,
+    "note": "each arm trains on 15836 windows, 11.6 percent of the official 136086, so a run costs roughly 11.6 percent of the 3 h 44 m official RoboticArm training"
+  },
+  "score_persistence_requirement": {
+    "binding": true,
+    "reason": "Phase 3.3 could not be independently re-audited because per-segment scores were never written; that must not recur",
+    "must_persist_per_test_segment": [
+      "experiment_id",
+      "machine",
+      "arm",
+      "replicate",
+      "seed",
+      "segment_id",
+      "parent_id",
+      "split_label",
+      "anomaly_label",
+      "domain_shift_op",
+      "domain_shift_env",
+      "overlap_status",
+      "total_loss",
+      "every primary anomaly-score column",
+      "score_provenance",
+      "checkpoint_identity"
+    ],
+    "timing": "written before aggregate metrics are finalised, atomically with the evaluation output"
+  },
+  "ledger_policy": {
+    "new_protocol": "roboticarm_parent_overlap_sensitivity_v1",
+    "must_not_reuse": "official_baseline_reproduction",
+    "rule": "a ledger entry is appended before each first test look under the new protocol",
+    "existing_entries_untouched": 30,
+    "entries_appended_in_this_phase": 0
+  },
+  "claim_boundary": {
+    "permitted": [
+      "Under the frozen official-baseline model and preprocessing and the matched training design, parent-overlap presence was associated with a delta X difference in measured RoboticArm AUROC.",
+      "Removing same-parent training siblings changed measured performance by delta X under this controlled sensitivity design."
+    ],
+    "forbidden": [
+      "the published paper is invalid",
+      "the published AUC is inflated by exactly X",
+      "X is the general real-world leakage penalty",
+      "X applies to BrushlessMotor",
+      "X applies to other model families",
+      "this is causal proof of leakage inflation"
+    ],
+    "mandatory_qualifier": "both arms train on 11.6 percent of the official training volume and on a source-domain-only, 12-stratum restricted subset, so delta describes this restricted regime and not the official baseline's training conditions"
+  },
+  "stopping_and_failure_policy": {
+    "if_an_arm_fails_to_train": "record the failure, do not substitute a different seed or membership, and report the arm as incomplete",
+    "no_post_hoc_changes": "arm memberships, seeds, estimands and the uncertainty procedure are frozen by this config and may not be altered after any score is observed",
+    "if_results_are_null": "a delta near zero is a publishable result and must be reported with the same prominence as a large delta"
+  },
+  "experimental_units": {
+    "training_observation": "100 ms window",
+    "segment": "released segment (exactly 74 windows for RoboticArm training)",
+    "physical_cluster": "original continuous parent recording",
+    "evaluation_unit": "segment score",
+    "independence_and_resampling_unit": "parent recording"
+  },
+  "residual_confounds": [
+    "the disjoint arm has exactly one possible membership because its 14-parent pool is exhausted, so overlap status is confounded with the identity of those particular parents",
+    "train-only parents are systematically shorter recordings (median 8.5 segments per parent versus 33.0 for crossing parents), so they may differ in recording character",
+    "both arms exclude 13 of the 25 official training strata, including every Normal_Target_Train segment, weights 20/25/30/35 and backgrounds B/E/G",
+    "neither arm reproduces the official baseline's training distribution, so the contrast does not estimate the effect on the published result"
+  ]
+}

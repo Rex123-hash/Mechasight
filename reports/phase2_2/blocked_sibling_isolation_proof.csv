@@ -1,0 +1,3 @@
+machine,blocked_sibling_segments,blocked_in_s_train,blocked_in_s_validation,blocked_in_s_test,blocked_in_t_train,blocked_in_t_validation,blocked_in_t_test,v2_v3_test_symmetric_difference,s_t_test_symmetric_difference
+BrushlessMotor,0,0,0,0,0,0,0,0,0
+RoboticArm,96,0,0,0,0,0,0,0,0

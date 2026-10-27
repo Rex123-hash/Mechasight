@@ -1,0 +1,128 @@
+{
+  "status": "PASS",
+  "split_version": "protocol_b_few_shot_adaptation_v3",
+  "preprocessing_version": "phase2.2-v3",
+  "seed": 1995,
+  "supersedes": "reports/phase2_1/protocol_b_common_test_v2.csv for the primary S-vs-T adaptation-budget definition only",
+  "historical_v1_preserved": true,
+  "historical_v2_preserved": true,
+  "correction": "Phase 2.1 solved unequal S/T test cohorts by making the whole parent closure the Regime-T training pool. Phase 2.2 separates 'target examples actually consumed' from 'same-parent siblings blocked to prevent leakage'. Parent independence requires siblings to leave evaluation; it does not require them to become training data.",
+  "primary_scientific_question": "Does access to the released few-shot target-normal training allocation improve anomaly detection under domain shift?",
+  "secondary_regime_documented_not_run": {
+    "name": "T-parent-complete",
+    "definition": "adaptation on all 123 normal RA segments of the 18 adaptation parents",
+    "authorised_now": false
+  },
+  "adaptation_budget": [
+    {
+      "machine": "BrushlessMotor",
+      "target_adaptation_observed": 18,
+      "target_adaptation_parent_groups": 18,
+      "target_adaptation_blocked_siblings": 0,
+      "target_adaptation_parent_closure": 18,
+      "blocked_sibling_parent_groups": 0,
+      "blocked_parents_subset_of_adaptation_parents": true
+    },
+    {
+      "machine": "RoboticArm",
+      "target_adaptation_observed": 27,
+      "target_adaptation_parent_groups": 18,
+      "target_adaptation_blocked_siblings": 96,
+      "target_adaptation_parent_closure": 123,
+      "blocked_sibling_parent_groups": 18,
+      "blocked_parents_subset_of_adaptation_parents": true
+    }
+  ],
+  "protocol_role_counts": [
+    {
+      "machine": "BrushlessMotor",
+      "regime": "S",
+      "source_training_parents": 1137,
+      "source_training_segments": 1137,
+      "source_validation_parents": 126,
+      "source_validation_segments": 126,
+      "target_adaptation_parents": 18,
+      "target_adaptation_segments": 18,
+      "adaptation_sibling_blocked_parents": 0,
+      "adaptation_sibling_blocked_segments": 0,
+      "common_evaluation_parents": 312,
+      "common_evaluation_segments": 312,
+      "train_parents": 1137,
+      "train_segments": 1137
+    },
+    {
+      "machine": "BrushlessMotor",
+      "regime": "T",
+      "source_training_parents": 1137,
+      "source_training_segments": 1137,
+      "source_validation_parents": 126,
+      "source_validation_segments": 126,
+      "target_adaptation_parents": 18,
+      "target_adaptation_segments": 18,
+      "adaptation_sibling_blocked_parents": 0,
+      "adaptation_sibling_blocked_segments": 0,
+      "common_evaluation_parents": 312,
+      "common_evaluation_segments": 312,
+      "train_parents": 1155,
+      "train_segments": 1155
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "S",
+      "source_training_parents": 44,
+      "source_training_segments": 1528,
+      "source_validation_parents": 6,
+      "source_validation_segments": 186,
+      "target_adaptation_parents": 18,
+      "target_adaptation_segments": 27,
+      "adaptation_sibling_blocked_parents": 18,
+      "adaptation_sibling_blocked_segments": 96,
+      "common_evaluation_parents": 33,
+      "common_evaluation_segments": 466,
+      "train_parents": 44,
+      "train_segments": 1528
+    },
+    {
+      "machine": "RoboticArm",
+      "regime": "T",
+      "source_training_parents": 44,
+      "source_training_segments": 1528,
+      "source_validation_parents": 6,
+      "source_validation_segments": 186,
+      "target_adaptation_parents": 18,
+      "target_adaptation_segments": 27,
+      "adaptation_sibling_blocked_parents": 18,
+      "adaptation_sibling_blocked_segments": 96,
+      "common_evaluation_parents": 33,
+      "common_evaluation_segments": 466,
+      "train_parents": 62,
+      "train_segments": 1555
+    }
+  ],
+  "blocked_sibling_isolation": [
+    {
+      "machine": "BrushlessMotor",
+      "blocked_sibling_segments": 0,
+      "blocked_in_s_train": 0,
+      "blocked_in_s_validation": 0,
+      "blocked_in_s_test": 0,
+      "blocked_in_t_train": 0,
+      "blocked_in_t_validation": 0,
+      "blocked_in_t_test": 0,
+      "v2_v3_test_symmetric_difference": 0,
+      "s_t_test_symmetric_difference": 0
+    },
+    {
+      "machine": "RoboticArm",
+      "blocked_sibling_segments": 96,
+      "blocked_in_s_train": 0,
+      "blocked_in_s_validation": 0,
+      "blocked_in_s_test": 0,
+      "blocked_in_t_train": 0,
+      "blocked_in_t_validation": 0,
+      "blocked_in_t_test": 0,
+      "v2_v3_test_symmetric_difference": 0,
+      "s_t_test_symmetric_difference": 0
+    }
+  ]
+}

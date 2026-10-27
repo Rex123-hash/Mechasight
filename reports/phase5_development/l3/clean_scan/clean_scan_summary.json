@@ -1,0 +1,233 @@
+{
+  "accepted": true,
+  "by_split_t": {
+    "BrushlessMotor|train": 1155,
+    "BrushlessMotor|validation": 126,
+    "RoboticArm|train": 1555,
+    "RoboticArm|validation": 186
+  },
+  "completion": "COMPLETE",
+  "distribution": [
+    {
+      "channel": "A_x [g]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.00028200000000033754,
+      "longest_run_s_median": 0.00014100000000016877,
+      "machine": "BrushlessMotor",
+      "segments": 1281,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "acc",
+      "stream_duration_s_min": 5.199859999999999
+    },
+    {
+      "channel": "A_y [g]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.00028200000000033754,
+      "longest_run_s_median": 0.00014100000000016877,
+      "machine": "BrushlessMotor",
+      "segments": 1281,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "acc",
+      "stream_duration_s_min": 5.199859999999999
+    },
+    {
+      "channel": "A_z [g]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.00028200000000033754,
+      "longest_run_s_median": 0.00014100000000016877,
+      "machine": "BrushlessMotor",
+      "segments": 1281,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "acc",
+      "stream_duration_s_min": 5.199859999999999
+    },
+    {
+      "channel": "G_x [mdps]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0008440000000000669,
+      "longest_run_s_median": 0.00042199999999997795,
+      "machine": "BrushlessMotor",
+      "segments": 1281,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "gyro",
+      "stream_duration_s_min": 5.199859999999999
+    },
+    {
+      "channel": "G_y [mdps]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0008440000000000669,
+      "longest_run_s_median": 0.00042199999999992244,
+      "machine": "BrushlessMotor",
+      "segments": 1281,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "gyro",
+      "stream_duration_s_min": 5.199859999999999
+    },
+    {
+      "channel": "G_z [mdps]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0008439999999998449,
+      "longest_run_s_median": 0.0004220000000000057,
+      "machine": "BrushlessMotor",
+      "segments": 1281,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "gyro",
+      "stream_duration_s_min": 5.199859999999999
+    },
+    {
+      "channel": "MIC [Waveform]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0,
+      "longest_run_s_median": 0.0,
+      "machine": "BrushlessMotor",
+      "segments": 1281,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "mic",
+      "stream_duration_s_min": 5.198929
+    },
+    {
+      "channel": "A_x [g]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.000849000000016531,
+      "longest_run_s_median": 0.0004250000000070031,
+      "machine": "RoboticArm",
+      "segments": 1741,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "acc",
+      "stream_duration_s_min": 7.499858000000003
+    },
+    {
+      "channel": "A_y [g]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0008490000000023201,
+      "longest_run_s_median": 0.0004250000000070031,
+      "machine": "RoboticArm",
+      "segments": 1741,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "acc",
+      "stream_duration_s_min": 7.499858000000003
+    },
+    {
+      "channel": "A_z [g]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0007080000000030395,
+      "longest_run_s_median": 0.0004250000000070031,
+      "machine": "RoboticArm",
+      "segments": 1741,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "acc",
+      "stream_duration_s_min": 7.499858000000003
+    },
+    {
+      "channel": "G_x [mdps]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.004105999999978849,
+      "longest_run_s_median": 0.0014150000000014984,
+      "machine": "RoboticArm",
+      "segments": 1741,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "gyro",
+      "stream_duration_s_min": 7.499858000000003
+    },
+    {
+      "channel": "G_y [mdps]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0026900000000011914,
+      "longest_run_s_median": 0.0005670000000179698,
+      "machine": "RoboticArm",
+      "segments": 1741,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "gyro",
+      "stream_duration_s_min": 7.499858000000003
+    },
+    {
+      "channel": "G_z [mdps]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0011329999999958318,
+      "longest_run_s_median": 0.0005669999999895481,
+      "machine": "RoboticArm",
+      "segments": 1741,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "gyro",
+      "stream_duration_s_min": 7.499858000000003
+    },
+    {
+      "channel": "MIC [Waveform]",
+      "flatline_fraction_max": 0.0,
+      "flatline_fraction_median": 0.0,
+      "flatline_fraction_p99": 0.0,
+      "longest_run_s_max": 0.0,
+      "longest_run_s_median": 0.0,
+      "machine": "RoboticArm",
+      "segments": 1741,
+      "segments_with_any_qualifying_run": 0,
+      "sensor": "mic",
+      "stream_duration_s_min": 7.499928000000011
+    }
+  ],
+  "elapsed_s": 170.76884350000182,
+  "files": {
+    "segment_channels.csv": "c80a2ff8a0061c30203fe195a3d5b480286d2bfba99c6c658a784b66824da3d2",
+    "training_channel_stats.csv": "a20fa1b3d9e2dd8380b8943c0913601107122c3d290418cc0c36a05114260418"
+  },
+  "finished_utc": "2026-10-25T15:03:46.029923+00:00",
+  "gate_version": "phase5-integrity-gate-v2",
+  "identity": {
+    "code_git_sha": "77d9cc5299bbf6c5abe01f9131ed2afda6e80271",
+    "corruption_version": "phase5-l3-corruptions-v1",
+    "design_config": "configs\\phase5\\fusion_design_v2.json",
+    "design_config_sha256": "2e33299d3c0347ebdc13392d149b248b8ec175f2bea5b2049e5bb2fa996a759a",
+    "gate_version": "phase5-integrity-gate-v2",
+    "l2_records_sha256": "c3778e9e42750ee20aa3009a1ebe82a9dce9c4808c81059be48c5131edd1faad",
+    "l3_source_hash": "cc0cfc48054ac4c77ce07717675a083792eb42e9163071044bec0e6a98490649",
+    "official": true,
+    "preprocessing_configs_canonical_sha256": {
+      "S": "bb934f9d4d970e3c283fdc038202fd5e86e2fe251d9cf81873babcf467572406",
+      "T": "56dac950944f52686785db6267d2b2c52b081c9cb44b7b4750a03cdeb946ddb9"
+    },
+    "runner_version": "phase5-l3-runner-v1",
+    "split_manifest_canonical_sha256": "dedddce2d24abf24d9d498a247fcc7517d1002a143849baf664511db4decc47e",
+    "torch_threads": "4",
+    "tracked_tree_clean": true
+  },
+  "ledger_rows_before_after": [
+    196,
+    196
+  ],
+  "low_margin_sensors": [],
+  "segment_channels": 21154,
+  "segments": {
+    "BrushlessMotor": 1281,
+    "RoboticArm": 1741
+  },
+  "started_utc": "2026-10-25T15:00:53.648046+00:00",
+  "test_evaluated": false,
+  "trigger_rows": [],
+  "triggers": 0
+}

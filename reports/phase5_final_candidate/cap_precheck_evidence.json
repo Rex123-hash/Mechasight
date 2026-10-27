@@ -1,0 +1,30 @@
+{
+  "after": {
+    "authorizations": 2,
+    "exposures": 2,
+    "reads": 0,
+    "reservations": 2,
+    "rows": 660,
+    "sha256": "a6b5c06cec68964660202641d07ead48f14f008d1415ab35092e6a7b694e64fd"
+  },
+  "before": {
+    "authorizations": 2,
+    "exposures": 2,
+    "reads": 0,
+    "reservations": 2,
+    "rows": 660,
+    "sha256": "a6b5c06cec68964660202641d07ead48f14f008d1415ab35092e6a7b694e64fd"
+  },
+  "budget": {
+    "baseline_rows": 196,
+    "max_additional_looks": 464,
+    "max_total_rows": 660
+  },
+  "cap_semantics": "maximum TOTAL ledger length 660 (= 428 + 232, proposal H4, not authorized) = 464 looks above the 196 baseline",
+  "counterexample": "ledger at 660 rows, recovery batch of 232 pending looks",
+  "previous_behaviour": "appended to 892 rows before validate_batches refused reads",
+  "refusal": "look budget exceeded before any mutation: 660 existing + 232 pending - 196 baseline = 696 > 464 additional looks (max total 660); incident review and new authorization required",
+  "rejected_batch_authorization_published": false,
+  "rejected_batch_state": "REFUSED_PRE_EXPOSURE",
+  "scope": "SYNTHETIC temporary JSONL ledger; stub predictor; no real data"
+}

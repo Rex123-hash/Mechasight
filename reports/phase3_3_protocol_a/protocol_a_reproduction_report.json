@@ -1,0 +1,386 @@
+{
+  "brushless_motor_limitation": {
+    "applies_to_protocol_a": true,
+    "forbidden": "pure mechanical-fault sensitivity",
+    "limitation_id": "brushless_motor_acquisition_time_class_confound_v1",
+    "permitted": "published/reproduced benchmark discrimination on the released BrushlessMotor cohort"
+  },
+  "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+  "discrepancy_log": [
+    {
+      "affects_results": false,
+      "id": "upstream_provenance_hash_form",
+      "investigation": "re-fetched at the pinned commit; git blob SHA-1 matched the tree byte for byte; recorded hashes reproduce exactly from the CRLF-converted bytes",
+      "justification": "restoring upstream fidelity (identity verification)",
+      "observation": "Phase-2 recorded SHA-256 values did not match the raw upstream bytes",
+      "resolution": "Phase-2 hashes were computed after Windows line-ending conversion; content identical",
+      "resolved": true,
+      "stage": "1. dataset / file identity"
+    },
+    {
+      "affects_results": true,
+      "id": "architecture_batchnorm_omitted",
+      "investigation": "upstream model.py inserts BatchNorm1d in every hidden encoder and decoder block",
+      "justification": "restoring upstream fidelity",
+      "observation": "docs/research_definition.md 5.9 records the autoencoder without BatchNorm1d",
+      "resolution": "reproduction uses the actual upstream architecture including BatchNorm1d",
+      "resolved": true,
+      "stage": "9. model architecture"
+    },
+    {
+      "affects_results": true,
+      "id": "training_schedule_unrecorded",
+      "investigation": "read from baseline.ipynb and model.py at the pinned commit",
+      "justification": "restoring upstream fidelity",
+      "observation": "num_epochs, patience, shuffle and checkpoint semantics were absent from the repository",
+      "resolution": "num_epochs 1000, patience 3, shuffle train-only, best-state aliasing reproduced",
+      "resolved": true,
+      "stage": "11. training schedule"
+    },
+    {
+      "affects_results": true,
+      "id": "best_model_state_aliasing",
+      "investigation": "confirmed by reading model.py fit()",
+      "justification": "restoring upstream fidelity (correcting it would change results)",
+      "observation": "upstream stores state_dict() references, so the restored model is the final epoch",
+      "resolution": "reproduced deliberately; not corrected",
+      "resolved": true,
+      "stage": "11. training schedule"
+    },
+    {
+      "affects_results": false,
+      "id": "device_environment_parameter",
+      "investigation": "the upstream notebook comment explicitly instructs adapting the device per machine",
+      "justification": "restoring upstream fidelity",
+      "observation": "upstream PARAMS sets device 'cuda'",
+      "resolution": "device recorded with the result; upstream authorises the choice",
+      "resolved": true,
+      "stage": "12. stochastic seed behaviour"
+    },
+    {
+      "affects_results": true,
+      "id": "upstream_not_deterministic",
+      "investigation": "no use_deterministic_algorithms or cudnn.deterministic anywhere in the pinned source",
+      "justification": "restoring upstream fidelity",
+      "observation": "upstream seeds torch and sklearn but does not disable cuDNN nondeterminism",
+      "resolution": "faithful mode keeps upstream nondeterminism; no optional deterministic mode was run",
+      "resolved": true,
+      "stage": "12. stochastic seed behaviour"
+    },
+    {
+      "affects_results": false,
+      "id": "buffered_hdf5_writes",
+      "investigation": "buffered block writes produce identical stored arrays",
+      "justification": "performance only; no behavioural change",
+      "observation": "upstream resizes the HDF5 dataset once per window",
+      "resolution": "buffered writes used for throughput only",
+      "resolved": true,
+      "stage": "3. preprocessing"
+    }
+  ],
+  "evaluation": {
+    "BrushlessMotor": {
+      "auc": {
+        "f_imp23absu_mic": {
+          "all": 0.535379684418146,
+          "source": 0.594017094017094,
+          "target": 0.47518080210387903
+        },
+        "f_ism330dhcx_acc": {
+          "all": 0.6729125575279421,
+          "source": 0.7705456936226167,
+          "target": 0.5641025641025641
+        },
+        "f_ism330dhcx_gyro": {
+          "all": 0.571827744904668,
+          "source": 0.6834319526627219,
+          "target": 0.551939513477975
+        },
+        "s_imp23absu_mic": {
+          "all": 0.4917406311637081,
+          "source": 0.5266272189349113,
+          "target": 0.42965154503616043
+        },
+        "s_ism330dhcx_acc": {
+          "all": 0.6619000657462196,
+          "source": 0.789447731755424,
+          "target": 0.51232741617357
+        },
+        "s_ism330dhcx_gyro": {
+          "all": 0.5752383300460223,
+          "source": 0.6847468770545694,
+          "target": 0.5644312952005259
+        },
+        "total_loss": {
+          "all": 0.5898257725180802,
+          "source": 0.7373438527284681,
+          "target": 0.5570348454963839
+        }
+      },
+      "checkpoint_sha256": "70f1da7d0ea837f339790d9ff88da7615f3fc818c0dd5c50736d69fd65351248",
+      "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+      "machine": "BrushlessMotor",
+      "score_columns": [
+        "total_loss",
+        "f_imp23absu_mic",
+        "s_imp23absu_mic",
+        "f_ism330dhcx_acc",
+        "s_ism330dhcx_acc",
+        "f_ism330dhcx_gyro",
+        "s_ism330dhcx_gyro"
+      ],
+      "segments_scored": 312,
+      "windows_scored": 15912
+    },
+    "RoboticArm": {
+      "auc": {
+        "f_imp23absu_mic": {
+          "all": 0.6706673602853745,
+          "source": 0.7361771700356718,
+          "target": 0.638153983353151
+        },
+        "f_ism330dhcx_acc": {
+          "all": 0.909464179548157,
+          "source": 0.9870689655172413,
+          "target": 0.9450802615933412
+        },
+        "f_ism330dhcx_gyro": {
+          "all": 0.8760590071343638,
+          "source": 0.9322235434007135,
+          "target": 0.9317776456599287
+        },
+        "s_imp23absu_mic": {
+          "all": 0.5182074910820452,
+          "source": 0.5306183115338883,
+          "target": 0.5082491082045184
+        },
+        "s_ism330dhcx_acc": {
+          "all": 0.8830075802615933,
+          "source": 0.982832936979786,
+          "target": 0.829667063020214
+        },
+        "s_ism330dhcx_gyro": {
+          "all": 0.4909891498216409,
+          "source": 0.5052764565992865,
+          "target": 0.4777794292508918
+        },
+        "total_loss": {
+          "all": 0.9150750594530321,
+          "source": 0.9314060642092746,
+          "target": 0.9081450653983353
+        }
+      },
+      "checkpoint_sha256": "67062daf7134d5dbc59fc120570e5c2aba46b39446ab6b553dd6e16a87553964",
+      "config_identity": "p33-protocol-a-87fdd8c09d374556a8ff6ad0",
+      "machine": "RoboticArm",
+      "score_columns": [
+        "total_loss",
+        "f_imp23absu_mic",
+        "s_imp23absu_mic",
+        "f_ism330dhcx_acc",
+        "s_ism330dhcx_acc",
+        "f_ism330dhcx_gyro",
+        "s_ism330dhcx_gyro"
+      ],
+      "segments_scored": 464,
+      "windows_scored": 34336
+    }
+  },
+  "generated_utc": "2026-09-08T15:03:18.274282+00:00",
+  "head": "4ce1faf5894578f330226d80cd194dfb44ff0cba",
+  "overall_classification": {
+    "BrushlessMotor": "NEAR_EXACT",
+    "RoboticArm": "NEAR_EXACT"
+  },
+  "primary_auc_percent": {
+    "BrushlessMotor": {
+      "all": 58.98,
+      "source": 73.73,
+      "target": 55.7
+    },
+    "RoboticArm": {
+      "all": 91.51,
+      "source": 93.14,
+      "target": 90.81
+    }
+  },
+  "protocol": "official_baseline_reproduction",
+  "protocol_b_integrity": {
+    "ledger_protocol_b_entries": 28,
+    "phase32_artifacts_verified": 155,
+    "protocol_b_models_or_thresholds_changed": false,
+    "split_v3_sha256": "68e5406d63e96cf5ee418ae58808f5c3e7790889ba1b8497420642d1f0d8409e"
+  },
+  "published_comparison": [
+    {
+      "absolute_difference": -0.11,
+      "absolute_error": 0.11,
+      "classification": "NEAR_EXACT",
+      "machine": "RoboticArm",
+      "published_auc_percent": 91.62,
+      "published_is_reference_not_target": true,
+      "reproduced_auc_percent": 91.51,
+      "slice": "all",
+      "slice_label": "Overall (S+T)",
+      "tolerance_frozen_before_results": true,
+      "tolerance_material": 2.0,
+      "tolerance_near_exact": 0.5
+    },
+    {
+      "absolute_difference": -0.14,
+      "absolute_error": 0.14,
+      "classification": "NEAR_EXACT",
+      "machine": "RoboticArm",
+      "published_auc_percent": 93.28,
+      "published_is_reference_not_target": true,
+      "reproduced_auc_percent": 93.14,
+      "slice": "source",
+      "slice_label": "Source",
+      "tolerance_frozen_before_results": true,
+      "tolerance_material": 2.0,
+      "tolerance_near_exact": 0.5
+    },
+    {
+      "absolute_difference": 0.33,
+      "absolute_error": 0.33,
+      "classification": "NEAR_EXACT",
+      "machine": "RoboticArm",
+      "published_auc_percent": 90.48,
+      "published_is_reference_not_target": true,
+      "reproduced_auc_percent": 90.81,
+      "slice": "target",
+      "slice_label": "Target",
+      "tolerance_frozen_before_results": true,
+      "tolerance_material": 2.0,
+      "tolerance_near_exact": 0.5
+    },
+    {
+      "absolute_difference": 0.03,
+      "absolute_error": 0.03,
+      "classification": "NEAR_EXACT",
+      "machine": "BrushlessMotor",
+      "published_auc_percent": 58.95,
+      "published_is_reference_not_target": true,
+      "reproduced_auc_percent": 58.98,
+      "slice": "all",
+      "slice_label": "Overall (S+T)",
+      "tolerance_frozen_before_results": true,
+      "tolerance_material": 2.0,
+      "tolerance_near_exact": 0.5
+    },
+    {
+      "absolute_difference": 0.1,
+      "absolute_error": 0.1,
+      "classification": "NEAR_EXACT",
+      "machine": "BrushlessMotor",
+      "published_auc_percent": 73.63,
+      "published_is_reference_not_target": true,
+      "reproduced_auc_percent": 73.73,
+      "slice": "source",
+      "slice_label": "Source",
+      "tolerance_frozen_before_results": true,
+      "tolerance_material": 2.0,
+      "tolerance_near_exact": 0.5
+    },
+    {
+      "absolute_difference": 0.11,
+      "absolute_error": 0.11,
+      "classification": "NEAR_EXACT",
+      "machine": "BrushlessMotor",
+      "published_auc_percent": 55.59,
+      "published_is_reference_not_target": true,
+      "reproduced_auc_percent": 55.7,
+      "slice": "target",
+      "slice_label": "Target",
+      "tolerance_frozen_before_results": true,
+      "tolerance_material": 2.0,
+      "tolerance_near_exact": 0.5
+    }
+  ],
+  "published_reference": {
+    "BrushlessMotor": {
+      "all": 58.95,
+      "source": 73.63,
+      "target": 55.59
+    },
+    "RoboticArm": {
+      "all": 91.62,
+      "source": 93.28,
+      "target": 90.48
+    }
+  },
+  "purpose": "historical comparability anchor; Protocol B remains the primary benchmark",
+  "regime": "T",
+  "reproduction_tolerance": {
+    "classification": {
+      "CLOSE": "absolute error > 0.5 and <= 2.0 AUC points",
+      "EXACT": "absolute error 0.00 AUC points",
+      "MATERIAL_DEVIATION": "absolute error > 2.0 AUC points",
+      "NEAR_EXACT": "absolute error <= 0.5 AUC points"
+    },
+    "frozen_before_any_own_test_result_was_computed": true,
+    "justification": "Upstream seeds torch and the sklearn split but does not disable cuDNN nondeterminism, and its early stopping (patience 3) means a single epoch's difference changes the final weights. Run-to-run variation of a fraction of an AUC point is therefore expected even from the authors' own code, so bitwise equality is not a reasonable criterion. 0.5 points is adopted as the near-exact band and 2.0 points as the material-deviation boundary. Both were fixed before any MechaSight Protocol-A test score was computed.",
+    "material_threshold_auc_points": 2.0,
+    "near_exact_threshold_auc_points": 0.5
+  },
+  "robotic_arm_overlap_disclosure": {
+    "anomaly_test_segments_with_normal_training_sibling": 0,
+    "forbidden_language": "the official AUC is inflated",
+    "normal_test_segments_total": 232,
+    "normal_test_segments_with_training_sibling": 212,
+    "parent_recordings": 101,
+    "parents_crossing_official_split": 62,
+    "permitted_language": "recording overlap creates a credible mechanism for optimistic bias; the magnitude is to be measured",
+    "reason": "Protocol A exists to reproduce the released evaluation; making it parent-disjoint would defeat its purpose.",
+    "retained_deliberately": true,
+    "segments_affected_by_crossing_parents": 1837
+  },
+  "schema_version": "phase3.3-protocol-a-reproduction-v1",
+  "scope_limits": {
+    "leakage_magnitude_claim_made": false,
+    "protocol_a_minus_protocol_b_interpreted_as_leakage": false,
+    "reason": "Protocol A and Protocol B differ in split, preprocessing, model family and representation simultaneously, so their difference does not isolate the effect of parent-recording overlap. A controlled experiment holding model and preprocessing constant while varying only the grouping is required, and is not performed here."
+  },
+  "training": {
+    "BrushlessMotor": {
+      "best_epoch": 22,
+      "best_valid_loss": 0.8151427847998483,
+      "checkpoint": "data/interim/protocol_a/BrushlessMotor/protocol_a_baseline_seed1995.pth",
+      "checkpoint_semantics": "upstream: state_dict() reference, so the restored weights are the last epoch's, not the best-validation epoch's",
+      "checkpoint_sha256": "70f1da7d0ea837f339790d9ff88da7615f3fc818c0dd5c50736d69fd65351248",
+      "epochs_run": 26,
+      "extra": {
+        "device": "cpu",
+        "input_dim": 5836,
+        "parameters": 40789724,
+        "seconds": 1374.5,
+        "train_windows": 58797,
+        "valid_windows": 6534
+      },
+      "machine": "BrushlessMotor",
+      "stopped_early": true,
+      "torch_version": "2.14.0+cpu"
+    },
+    "RoboticArm": {
+      "best_epoch": 32,
+      "best_valid_loss": 0.5886530705860683,
+      "checkpoint": "data/interim/protocol_a/RoboticArm/protocol_a_baseline_seed1995.pth",
+      "checkpoint_semantics": "upstream: state_dict() reference, so the restored weights are the last epoch's, not the best-validation epoch's",
+      "checkpoint_sha256": "67062daf7134d5dbc59fc120570e5c2aba46b39446ab6b553dd6e16a87553964",
+      "epochs_run": 36,
+      "extra": {
+        "device": "cpu",
+        "input_dim": 5836,
+        "parameters": 40789724,
+        "seconds": 13425.5,
+        "train_windows": 122477,
+        "valid_windows": 13609
+      },
+      "machine": "RoboticArm",
+      "stopped_early": true,
+      "torch_version": "2.14.0+cpu"
+    }
+  },
+  "upstream_commit": "592bcbbed58893dc26bbab3240c5d7a3105a1a7f",
+  "worst_absolute_error_auc_points": 0.33
+}

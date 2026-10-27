@@ -1,0 +1,24 @@
+{
+  "machine": "RoboticArm",
+  "generated_utc": "2026-09-08T10:26:17.528331+00:00",
+  "splits": {
+    "train": {
+      "segments": 1839,
+      "windows": 136086,
+      "skipped": [],
+      "seconds": 272.8,
+      "sha256": "31a0be7653de4ae630f5ea17a78ef181eeecd02835c40a8b8a356b31a71616f3",
+      "bytes": 3238224440,
+      "reused_existing": false
+    },
+    "test": {
+      "segments": 464,
+      "windows": 34336,
+      "skipped": [],
+      "seconds": 60.1,
+      "sha256": "22e351f8f79411322b201fca3e3af2e87d7993b0f11dc4112d3f84771044484c",
+      "bytes": 818549104,
+      "reused_existing": false
+    }
+  }
+}
