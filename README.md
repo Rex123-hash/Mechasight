@@ -5,6 +5,10 @@
 Minor project, Mechanical & Automation Engineering.
 **Team:** Amaan Khan (student researcher), Vikas Sharma (supervisor), Surbhi Upadhyay (co-supervisor).
 
+🌐 **Interactive website: [mechasight.vercel.app](https://mechasight.vercel.app)**. It explains the
+research with real recorded sensor signals, precomputed model scores and a sensor-failure demo. It
+explains the work; it does not run live inference.
+
 > **One-line idea:** a machine that sounds or vibrates *differently* is not necessarily *faulty*.
 > MechaSight asks whether combining a microphone, an accelerometer and a gyroscope helps tell genuine
 > faults apart from harmless changes in load, speed or background noise. It evaluates that question
@@ -151,7 +155,7 @@ tests/        protocol, leakage-prevention, signal-processing and executor tests
 reports/      committed results: dataset audit, splits, model bundles (configs, scores, thresholds),
               historical protected results, development evidence
 docs/         research definition, frozen protocols, stage reports and audits
-defence/      minor-project presentation slides (28 October 2026)
+defence/      minor-project presentation slides (28 October 2026); website: https://mechasight.vercel.app
 data/         empty placeholders; the dataset and model weights are NOT committed (see .gitignore)
 app/, notebooks/   placeholders
 ```
