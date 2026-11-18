@@ -21,10 +21,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.experiment.phase5_execution import (
     CANDIDATE_SOURCES, EXECUTOR_SOURCES, PACKAGE, TRUSTED_COMMIT, TRUSTED_MANIFEST, FrozenPackage, source_identity,
 )
+from src.experiment import phase5_protected as pp
 from src.experiment.phase5_inputs import require
 from src.experiment.provenance import canonical_bytes, canonical_sha256, content_sha256, file_sha256
 
-STAGE = "5.6C-r1 (look-cap ordering correction)"
+STAGE = "5.6C-r6 (simplified protected architecture with an explicit threat model; inactive until human activation)"
 START = "6411322a72145c5fe63280f758379523be9cb3ec"
 STATUS = "FINAL EXECUTABLE FREEZE CANDIDATE — UNREVIEWED; NOT AUTHORIZED FOR REAL PROTECTED EVALUATION."
 OUTPUT = Path("reports/phase5_final_candidate")
@@ -38,22 +39,37 @@ NEW_SOURCES = (
     # 5.6C protected-style adapter, mirror, batch interface, final candidate
     "src/experiment/phase5_mirror_fixture.py", "scripts/run_phase5_mirror.py", "tests/test_phase5_mirror_adapter.py",
     "scripts/verify_phase5_final_candidate.py", "docs/phase5_6c_final_candidate.md",
+    # 5.6C-r2 protected activation candidate (disabled by default) and review record
+    "src/experiment/phase5_protected.py", "scripts/run_phase5_protected.py", "tests/test_phase5_protected_driver.py",
+    "docs/phase5_6c_r2_activation_candidate.md",
+    # 5.6C-r3 activation A1-A6, human-only issuing tool and revised protocol
+    "tests/test_phase5_protected_activation.py", "scripts/issue_phase5_authorization.py",
+    "docs/phase5_6c_r3_activation.md", "docs/phase5_revised_protocol_2026-11.md",
+    # 5.6C-r4 blocker corrections: committed-record authority, grants, reader capabilities, ledger lock
+    "tests/test_phase5_ledger_lock.py", "tests/_ledger_lock_worker.py", "docs/phase5_6c_r4_activation_blockers.md",
+    # 5.6C-r5: sealed single-writer ledger, recovery authority revalidation
+    "scripts/seal_phase5_ledger.py", "docs/phase5_6c_r5_final_blockers.md",
+    # 5.6C-r6: simplified architecture (no grants, one protected process, one writer, independent audit)
+    "src/experiment/phase5_ledger_audit.py", "scripts/verify_phase5_ledger.py", "docs/phase5_protected_architecture.md",
 )
 SOURCES = tuple(sorted(set(CANDIDATE_SOURCES + NEW_SOURCES)))
 EVIDENCE = {"mirror_evidence.json": Path("reports/phase5_6c_mirror/evidence.json"),
-            "count_index_evidence.json": Path("reports/phase5_6b_candidate/evidence.json")}
+            "count_index_evidence.json": Path("reports/phase5_6b_candidate/evidence.json"),
+            "rehearsal_evidence.json": Path("reports/phase5_protected/rehearsal_evidence.json"),
+            "artifact_bindings_proposal.json": Path("reports/phase5_protected/artifact_bindings_proposal.json"),
+            "batch_authorization_template.json": Path("reports/phase5_protected/batch_authorization_template.json")}
 FILES = ("mirror_evidence.json", "count_index_evidence.json", "focused_tests.xml", "regression_tests.xml",
-         "authorization_checklist.json", "cap_precheck_evidence.json", "integrity_report.json")
+         "authorization_checklist.json", "cap_precheck_evidence.json", "integrity_report.json",
+         "rehearsal_evidence.json", "artifact_bindings_proposal.json", "batch_authorization_template.json")
 PROTECTED_STAT_ROOTS = ("data/interim/phase4/spectral/", "data/interim/phase32_common_test/",
                         "reports/phase4_protected/", "reports/phase3_4_results/")
 REGRESSION_SCOPE = {
     "run": ["tests/test_phase5_executor.py", "tests/test_phase5_integration_corrections.py",
-            "tests/test_phase5_integration.py (all except the 4 test_B_ frozen-adapter tests)"],
-    "not_rerun_after_correction": {
-        "tests/test_phase5_integration.py test_B_* (4)": "frozen-adapter score path; unchanged by the ledger correction",
-        "tests/test_phase5_synthetic_statistics.py": "statistics unchanged",
-        "tests/test_phase5_freeze_candidate.py": "scientific freeze metadata unchanged",
-        "development-mirror model run": "score path unchanged; retained evidence from commit 49069ee (24 L1 + 208 L2, max diff 0.0)"},
+            "tests/test_phase5_integration.py (all, including the 4 test_B_ frozen-adapter tests)",
+            "tests/test_phase5_synthetic_statistics.py", "tests/test_phase5_freeze_candidate.py"],
+    "focused_end_to_end": ("tests/test_phase5_protected_activation.py re-runs the full activated chain with real "
+                           "activation checks: 24 frozen L1 (3,744 scores) and 208 L2 (32,448 rows) against the frozen "
+                           "development references, analyse-once, and crash/recovery 428 -> 660 with 892 refused"),
     "never_run": "Phase-3.4 protected-score replay and conftest content snapshot (they read protected score bytes)"}
 
 
@@ -149,8 +165,15 @@ HUMAN_DECISIONS = {
     "H6": "name the independent reviewer and the reviewed implementation SHA the authorization binds",
     "H7": "acknowledge the reversed Phase-4 materialisation order (exposure first, then reads)",
 }
-STILL_DISABLED = ("execute_real_protected", "read_protected_inputs", "build_protected_count_index",
-                  "build_protected_window_index", "append_protected_batch", "PROTECTED input schema")
+STILL_DISABLED = (
+    "every protected entry point until reports/phase5_protected/ACTIVATION.json is committed by a human "
+    "(verified_activation re-derives authority from it and the other committed records on every operation; absent = disabled)",
+    "artifact bindings: proposal only until approved by the principal researcher (content hashes post-exposure, H3)",
+    "authorization record and scoring / analysis / recovery tokens: none issued",
+    "the real ledger is NOT sealed: sealing it read-only (scripts/seal_phase5_ledger.py) is a human activation step; "
+    "protected scope refuses an unsealed real ledger",
+    "legacy disabled stubs kept refusing: execute_real_protected, read_protected_inputs, build_protected_count_index, "
+    "append_protected_batch")
 
 
 def _junit(path):
@@ -194,10 +217,13 @@ def authorization_checklist():
             "required_before_any_protected_read": [
                 "independent review of this candidate at a named commit (not this self-check)",
                 "H1-H7 recorded by a human with the reviewer and reviewed SHA",
-                "protected artifact bindings resolved from approved metadata references (currently UNRESOLVED)",
-                "a committed batch authorization record for 232 looks, ledger 196 -> 428",
+                "protected artifact bindings approved from reports/phase5_protected/artifact_bindings_proposal.json "
+                "(currently PROPOSED_UNAPPROVED; content hashes bound post-exposure under H3)",
+                "a committed batch authorization record for 232 looks, ledger 196 -> 428, completed from "
+                "reports/phase5_protected/batch_authorization_template.json",
                 "a human-issued scoring token; a separate human-issued analysis token",
-                "activation of the disabled entry points in a reviewed change"],
+                "an H6 GREEN independent review (revised protocol) of the exact activation commit",
+                "the human activation record (scripts/issue_phase5_authorization.py, run by the researcher)"],
             "still_disabled": list(STILL_DISABLED),
             "issued_tokens": [], "authorized_looks": 0}
 
@@ -225,6 +251,8 @@ def write_candidate(focused, regression):
     manifest = {"status": STATUS, "stage": STAGE, "starting_checkpoint": START,
                 "real_execution_enabled": False, "independently_approved": False, "authorization_issued": False,
                 "executor_source_identity": source_identity(), "executor_sources": list(EXECUTOR_SOURCES),
+                "protected_executable": {"files": list(pp.PROTECTED_EXECUTABLE),
+                                         "identity": pp.protected_source_identity()},
                 "sources": {p: canonical_sha256(p) for p in SOURCES},
                 "files": {p: canonical_sha256(OUTPUT / p) for p in FILES},
                 "scientific": scientific_bindings(package),
@@ -259,6 +287,9 @@ def verify_candidate(commit):
         require(sha256(git(f"{OUTPUT.as_posix()}/{name}")).hexdigest() == digest == canonical_sha256(OUTPUT / name),
                 f"candidate evidence mismatch: {name}")
     require(manifest["executor_source_identity"] == source_identity(), "executor identity mismatch")
+    require(manifest["protected_executable"] == {"files": list(pp.PROTECTED_EXECUTABLE),
+                                                 "identity": pp.protected_source_identity()},
+            "protected executable identity mismatch")
     package = FrozenPackage.load(PACKAGE)
     require(manifest["scientific"] == scientific_bindings(package), "scientific package bindings changed")
     require(file_sha256(REAL_LEDGER) == REAL_LEDGER_SHA256, "real ledger changed")

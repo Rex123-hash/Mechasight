@@ -291,7 +291,9 @@ DIRECT_READERS = {
     "src/experiment/phase5_dev_fixture.py": 3,
     # 5.6B: registry-bound development/synthetic projections and numeric HDF5;
     # protected interface always refuses, before any content hash or read.
-    "src/experiment/phase5_input_manifest.py": 3,
+    # 5.6C-r3: + the H5 label column projection, reachable only for an authorized protected
+    # manifest under an analysis capability (switch-gated; refused while disabled).
+    "src/experiment/phase5_input_manifest.py": 4,
     "src/experiment/store.py": 1,          # Phase 5.2: guarded ResultStore.read_scores
     "src/fusion/l3.py": 1,                 # Phase 5.4: raw development segments (cohort guard)
     "src/fusion/l3_falsification.py": 1,   # Phase 5.4: clean source of a corrupted development copy
@@ -305,6 +307,9 @@ DIRECT_READERS = {
 AUTHORIZED_SCOPES = {
     "scripts/run_phase32_first_test.py": 1,
     "scripts/run_phase4_protected.py": 2,
+    # 5.6C-r3: Phase-5 protected score-all, analyse-once and recovery. Each opens only after the
+    # switch-gated preflight (approved bindings, authorization record, token) and its exposure.
+    "src/experiment/phase5_protected.py": 3,
 }
 
 

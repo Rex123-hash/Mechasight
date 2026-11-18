@@ -51,3 +51,6 @@ desktop.ini
 # ---- Third-party papers/PDFs (do not redistribute) ----
 docs/papers/
 *.pdf
+
+*.jsonl.lock
+*.jsonl.pending-*

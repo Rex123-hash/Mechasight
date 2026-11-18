@@ -213,15 +213,28 @@ class Executor:
         require(isinstance(sandbox, Sandbox), "fixture sandbox required")
         self.sandbox, self.package, self.fault, self.predictor = sandbox, package, fault, predictor
         self.fixture = sandbox.json("fixture.json")
-        require(self.fixture["scope"] == SYNTHETIC, "real fixture refused")
+        from src.experiment import phase5_protected as pp
+        require(self.fixture["scope"] in {SYNTHETIC, pp.PROTECTED}, "real fixture refused")
+        if self.fixture["scope"] == pp.PROTECTED:
+            # 5.6C-r4: protected scope only under the freshly verified, committed activation chain.
+            chain = pp.verified_activation()
+            require(self.fixture.get("authorization_sha256") == chain["authorization_sha256"],
+                    "protected fixture is bound to another authorization record")
+        self.scope = self.fixture["scope"]
         self._identity = uuid.uuid4().hex
         self._capabilities = {}
+        self._authority = None              # the ProtectedAuthority of the running protected operation only
+        self._protected_hashes = {}         # H3 byte hashes observed by THIS executor after its exposure
         self._historical_policy = historical_policy(package.registry)
         self.inputs = ProjectedInputs(sandbox, self.fixture, self)
         self.units = {u["unit"]: u for u in package.registry["units"]}
         self.operations = {r["experiment_id"]: r for r in package.proposed["planned_units"]}
         require(len(self.operations) == 232, "exact 232-unit plan required")
-        require(self.fixture.get("schema", SYNTHETIC_SCHEMA) in INPUT_SCHEMAS, "unknown fixture input schema")
+        from src.experiment.phase5_inputs import PROTECTED_SCHEMA
+        schemas = INPUT_SCHEMAS | ({PROTECTED_SCHEMA} if self.scope == pp.PROTECTED else set())
+        require(self.fixture.get("schema", SYNTHETIC_SCHEMA) in schemas, "unknown fixture input schema")
+        require((self.scope == pp.PROTECTED) == (self.fixture.get("schema") == PROTECTED_SCHEMA),
+                "protected scope and protected input schema must coincide")
         from src.experiment.phase5_ledger import ledger_backend
         self.ledger = ledger_backend(self)
 
@@ -257,7 +270,8 @@ class Executor:
         return {"kind": "derived_L2_scoring", "implementation": "phase5-l2-frozen-robust-z-mean-v1",
                 "calibration_id": eid, "calibration_sha256": content_sha256(calibration),
                 "subset": calibration["subset"], "source_sha256": canonical_sha256("src/experiment/phase5_execution.py"),
-                "component_origin": ("PERMITTED_PHASE4_SOURCE_VALIDATION" if kind == "frozen_L1_inference"
+                "component_origin": ("SEALED_PHASE4_COMMON_EVALUATION" if self.scope != SYNTHETIC
+                                     else "PERMITTED_PHASE4_SOURCE_VALIDATION" if kind == "frozen_L1_inference"
                                      else "SYNTHETIC_FIXTURE"),
                 "components": {m: {"experiment_id": component,
                     "fixture_table_sha256": self.fixture["files"][self.fixture["historical"][component]],
@@ -284,6 +298,8 @@ class Executor:
             model = "p5l2:" + self.package.registry["calibrations"][eid]["calibration_version"] + ":" + eid
         from src.experiment.provenance import ordered_id_hash
         cohort = ordered_id_hash(tuple(sorted(r["segment_id"] for r in self.fixture["cohorts"][unit["machine"]])))
+        if self.scope != SYNTHETIC:
+            cohort = self.package.proposed["identity"]["cohort_hashes"][unit["machine"]]   # frozen protected cohort
         return {"machine": unit["machine"], "regime": unit["regime"], "model_config_identity": model,
                 "cohort_hash": cohort, "operation": operation["operation"]}
 
@@ -295,7 +311,13 @@ class Executor:
             self.fault(stage, unit)
 
     def _permit(self, permit, action):
-        require(isinstance(permit, FixturePermit), "explicit synthetic authorization required")
+        from src.experiment import phase5_protected as pp
+        self._authority = None
+        if self.scope == pp.PROTECTED:
+            # The caller's ProtectedRequest carries no authority: derive it now, with the full preflight.
+            permit = pp.authorize(self, permit, action)
+        else:
+            require(type(permit) is FixturePermit, "explicit synthetic authorization required")
         require(permit.sandbox_identity == self.sandbox.identity and permit.action == action, "wrong authorization/sandbox")
         require(permit.code_identity == source_identity(), "executor source changed after fixture authorization")
         self.package.verify_memory()
@@ -303,6 +325,19 @@ class Executor:
                 "historical comparator classification differs from the trusted registry")
         require(permit.package_identity == self.package.identity and
                 permit.fixture_hash == file_sha256(self.sandbox.path("fixture.json")), "authorization identity mismatch")
+        if self.scope == pp.PROTECTED:
+            self._authority = permit
+        return permit
+
+    @contextmanager
+    def _authorized(self, permit, action):
+        """One permitted operation. Yields the effective permit; its protected authority and read capabilities end with it."""
+        permit = self._permit(permit, action)
+        try:
+            yield permit
+        finally:
+            self._authority = None
+            self._revoke()
 
     def _write(self, name, value, *, replace=False, table=False):
         # Result tables keep the historical "partial_write" hook; control files
@@ -314,14 +349,14 @@ class Executor:
 
     def _event(self, state, **detail):
         path = self.sandbox.path("attempts.jsonl")
-        record = {"scope": SYNTHETIC, "state": state, "utc": datetime.now(timezone.utc).isoformat(), **detail}
+        record = {"scope": self.scope, "state": state, "utc": datetime.now(timezone.utc).isoformat(), **detail}
         with path.open("ab") as out:
             out.write((canonical_json(record) + "\n").encode())
             out.flush()
             os.fsync(out.fileno())
 
     def _lock_record(self, state="ACTIVE"):
-        return {"scope": SYNTHETIC, "pid": os.getpid(), "process_created": psutil.Process().create_time(),
+        return {"scope": self.scope, "pid": os.getpid(), "process_created": psutil.Process().create_time(),
                 "executor": self._identity, "state": state}
 
     def _exclusive_create(self, name, record, refusal):
@@ -492,7 +527,7 @@ class Executor:
             records = [json.loads(line) for line in self.sandbox.path("attempts.jsonl").read_text(encoding="utf-8").splitlines()]
         except (OSError, ValueError) as exc:
             raise Refused("partial/corrupt attempt log requires incident resolution") from exc
-        require(all(r.get("scope") == SYNTHETIC for r in records), "foreign attempt log")
+        require(all(r.get("scope") == self.scope for r in records), "foreign attempt log")
         return records
 
     def _access(self, batch_id, phase):
@@ -508,7 +543,7 @@ class Executor:
         # batch authorization, ledger append, exposure record or any input read.
         self.ledger.precheck(ledger, attempt_ids)
         self._hook("before_reservation")
-        reservation = {"scope": SYNTHETIC, "batch_id": permit.batch_id, "package": self.package.identity,
+        reservation = {"scope": self.scope, "batch_id": permit.batch_id, "package": self.package.identity,
                        "fixture": permit.fixture_hash, "attempt_ids": attempt_ids, "recovery_from": permit.recovery_from,
                        "code": source_identity(), "ledger_start": len(ledger), "ledger_end": len(ledger) + len(pending)}
         self._write(f"reservations/{permit.batch_id}.json", reservation)
@@ -516,7 +551,7 @@ class Executor:
         ledger = self.ledger.append(permit, pending, attempt_ids, len(ledger))
         self._hook("after_ledger")
         self._write(f"exposures/{permit.batch_id}.json", {
-            "scope": SYNTHETIC, "authorization_sha256": file_sha256(self.sandbox.path(f"reservations/{permit.batch_id}.json")),
+            "scope": self.scope, "authorization_sha256": file_sha256(self.sandbox.path(f"reservations/{permit.batch_id}.json")),
             "ledger_end": len(ledger), "ledger_payload_sha256": self.ledger.prefix_digest(ledger, len(ledger))})
         self._event("EXPOSURE_RECORDED", batch_id=permit.batch_id, units=len(pending))
         self._hook("after_reservation")
@@ -565,12 +600,12 @@ class Executor:
         return self._aligned(result, unit["machine"]), computation
 
     def score_all(self, permit=None):
-        self._permit(permit, "score")
-        require(not self.sandbox.path("state.json").exists(), "batch already attempted; explicit recovery required")
-        with self._lock():
-            state = {"scope": SYNTHETIC, "batch_id": permit.batch_id, "status": "PRE_EXPOSURE", "tables": {}, "failed": []}
-            self._write("state.json", state)
-            return self._execute(permit, state, sorted(self.operations), {eid: eid for eid in self.operations})
+        with self._authorized(permit, "score") as permit:
+            require(not self.sandbox.path("state.json").exists(), "batch already attempted; explicit recovery required")
+            with self._lock():
+                state = {"scope": self.scope, "batch_id": permit.batch_id, "status": "PRE_EXPOSURE", "tables": {}, "failed": []}
+                self._write("state.json", state)
+                return self._execute(permit, state, sorted(self.operations), {eid: eid for eid in self.operations})
 
     def _provenance(self, eid):
         operation = self.operations[eid]
@@ -595,7 +630,7 @@ class Executor:
                 self._hook("before_read", eid)
                 frame, computation = self._score(access, eid)
                 self._hook("after_read", eid)
-                payload = {"scope": SYNTHETIC, "original_experiment_id": eid, "attempt_id": attempt_ids[eid],
+                payload = {"scope": self.scope, "original_experiment_id": eid, "attempt_id": attempt_ids[eid],
                            "unit": self.operations[eid]["unit"], "operation": self.operations[eid]["operation"],
                            "rows": frame.to_dict(orient="records"), "predictor": computation["implementation"],
                            "computation": computation,
@@ -645,7 +680,7 @@ class Executor:
             path = self.sandbox.path(entry["file"])
             require(entry["file"] == f"tables/{eid}.json" and file_sha256(path) == entry["sha256"], "score output hash/path mismatch")
             payload = self.sandbox.json(entry["file"])
-            require(payload["scope"] == SYNTHETIC and payload["original_experiment_id"] == eid
+            require(payload["scope"] == self.scope and payload["original_experiment_id"] == eid
                     and payload["unit"] == self.operations[eid]["unit"] and payload["attempt_id"] == entry["attempt_id"], "persisted identity mismatch")
             require(payload["provenance"] == self._provenance(eid), "persisted scientific provenance changed")
             computation = self._computation(eid)
@@ -664,7 +699,10 @@ class Executor:
         return state
 
     def recover(self, permit=None):
-        self._permit(permit, "recovery")
+        with self._authorized(permit, "recovery") as permit:
+            return self._recover(permit)
+
+    def _recover(self, permit):
         with self._coordinated():
             # Every check and the takeover run while the coordinator is held, so no
             # other recovery or cleaner can act between the owner check and the takeover.
@@ -730,7 +768,7 @@ class Executor:
         # Audited takeover: archive the stale owner, log the authorization, then
         # establish ownership while admission is still held (the lock never disappears).
         self._write(f"recoveries/{permit.batch_id}.old-lock.json", self.sandbox.json("attempt.lock"))
-        self._write(f"recoveries/{permit.batch_id}.json", {"scope": SYNTHETIC, "from": state["batch_id"],
+        self._write(f"recoveries/{permit.batch_id}.json", {"scope": self.scope, "from": state["batch_id"],
                     "pending": pending, "mapping": attempt_ids, "retained": sorted(state["tables"])})
         self._event("RECOVERY_AUTHORIZED", batch_id=permit.batch_id, from_batch=state["batch_id"],
                     pending=len(pending), new_identities=sum(attempt_ids[e] != e for e in pending))
@@ -746,7 +784,10 @@ class Executor:
         next recovery gives it a new ``-r<k>`` identity. Interrupted analysis
         files are never resolved here: they need a human incident decision.
         """
-        self._permit(permit, "incident")
+        with self._authorized(permit, "incident") as permit:
+            return self._resolve(permit)
+
+    def _resolve(self, permit):
         # The whole resolution runs under the admission coordinator: no recovery can
         # create, take over or release an admission between validation and quarantine.
         with self._coordinated():
@@ -783,7 +824,7 @@ class Executor:
                 "interrupted analysis output: human incident resolution required; no automatic action")
         require(not self.sandbox.path("analysis.claim.json").exists(),
                 "analysis already claimed: human incident resolution required")
-        record = {"scope": SYNTHETIC, "batch_id": permit.batch_id, "items": [
+        record = {"scope": self.scope, "batch_id": permit.batch_id, "items": [
             {"path": name, "kind": kind, "sha256": file_sha256(self.sandbox.path(name)),
              "published_target_sha256": (file_sha256(self.sandbox.path(name[:-len(".partial")]))
                                          if kind == "partial" and self.sandbox.path(name[:-len(".partial")]).is_file()
@@ -841,7 +882,10 @@ class Executor:
         return {**base, "classification": state["status"], "next": "none"}
 
     def analyse_once(self, permit=None):
-        self._permit(permit, "analysis")
+        with self._authorized(permit, "analysis") as permit:
+            return self._analyse_once(permit)
+
+    def _analyse_once(self, permit):
         self.verify_complete()
         require(not self.sandbox.path("analysis.claim.json").exists(), "analyse-once already claimed; no implicit retry")
         require(not any(r["state"] == "ANALYSIS_CLAIMED" for r in self._audit_records()),
@@ -849,7 +893,7 @@ class Executor:
         state = self.sandbox.json("state.json")
         require(state["status"] == "SCORED", "analysis requires a completed, not yet analysed batch")
         with self._lock():
-            self._write("analysis.claim.json", {"scope": SYNTHETIC, "batch_id": permit.batch_id,
+            self._write("analysis.claim.json", {"scope": self.scope, "batch_id": permit.batch_id,
                                                "package": self.package.identity, "fixture": permit.fixture_hash})
             # Durable, append-only record of the claim BEFORE any label access.
             self._event("ANALYSIS_CLAIMED", batch_id=state["batch_id"],

@@ -164,7 +164,7 @@ class ProjectedInputs:
         if self.manifest.get("schema") in {MIRROR_SCHEMA, PROTECTED_SCHEMA}:
             from src.experiment.phase5_input_manifest import read_features
             manifest = self._trusted(access, cell, "features")
-            frame = read_features(manifest, classical=True)
+            frame = read_features(manifest, classical=True, capability=self._capability(access))
             require(tuple(frame.columns) == columns, "trusted classical layout differs from the frozen projection")
             return frame
         return self._project(access, self.manifest["cells"][cell]["features"], columns)
@@ -172,18 +172,37 @@ class ProjectedInputs:
     def _trusted(self, access, cell, role):
         """Policy, then the independently rebuilt trusted manifest; the fixture supplies no path."""
         self.__authorize(access, "score")             # durable exposure before any manifest, stat or byte
-        require(self.manifest.get("schema") == MIRROR_SCHEMA,
-                "protected common-evaluation reads are disabled: human authorization H1-H7, review and durable exposure required")
-        from src.experiment.phase5_input_manifest import development_manifest
         machine, regime = cell.split("|")
-        manifest = development_manifest(self.__owner.package, machine=machine, regime=regime)
+        manifest = self._trusted_manifest(machine, regime, access)
         require(manifest.identity == self.manifest["cells"][cell]["input_manifest_identity"],
                 "mirror cell is not bound to the trusted input manifest")
         segments = sorted(r["segment_id"] for r in manifest.snapshot()["segments"])
         require(segments == sorted(r["segment_id"] for r in self.manifest["cohorts"][machine]),
                 "trusted cohort differs from the executor cohort")
+        if "bindings" in self.manifest:
+            # 5.6C-r2: the authorized artifact bindings must agree with the read path (stat + content identity).
+            from src.experiment.phase5_protected import check_cell_binding
+            check_cell_binding(self.sandbox, self.manifest, cell, manifest)
         self.sandbox.events.append(("score", f"trusted:{cell}:{role}"))
         return manifest
+
+    def _capability(self, access):
+        """The executor capability passed to every protected reader (None for the development mirror)."""
+        return (self.__owner, access) if self.manifest.get("schema") == PROTECTED_SCHEMA else None
+
+    def _trusted_manifest(self, machine, regime, access):
+        """Development mirror: the trusted development manifest. Protected: the authorized one (A1)."""
+        schema = self.manifest.get("schema")
+        if schema == PROTECTED_SCHEMA:
+            from src.experiment import phase5_protected as pp
+            from src.experiment.phase5_input_manifest import protected_manifest
+            # Grant, fresh activation chain and durable exposure, before the manifest is even rebuilt.
+            pp.verify_reader_capability((self.__owner, access), "score")
+            return protected_manifest(self.__owner.package, machine=machine, regime=regime)
+        require(schema == MIRROR_SCHEMA,
+                "protected common-evaluation reads are disabled: human authorization H1-H7, review and durable exposure required")
+        from src.experiment.phase5_input_manifest import development_manifest
+        return development_manifest(self.__owner.package, machine=machine, regime=regime)
 
     def windows(self, access, cell):
         entry = self.manifest["cells"][cell]
@@ -221,9 +240,10 @@ class ProjectedInputs:
         from src.experiment.phase5_count_index import build_count_derived_index, inference_index
         from src.experiment.phase5_input_manifest import read_spectral
         manifest = self._trusted(access, cell, "spectral")
-        bundle = build_count_derived_index(manifest)
-        layout, arrays = read_spectral(manifest, values=True)      # modality datasets only; no provenance_json
-        index = inference_index(bundle, manifest)
+        capability = self._capability(access)
+        bundle = build_count_derived_index(manifest, capability=capability)
+        layout, arrays = read_spectral(manifest, values=True, capability=capability)   # modality datasets only
+        index = inference_index(bundle, manifest, capability=capability)
         require(all(layout["modalities"][m]["rows"] == len(index) == len(arrays[m]) for m in ("mic", "acc", "gyro")),
                 "spectral/count-index row mismatch")
         self.sandbox.events.append(("score", f"count-index:{cell}:{bundle.descriptor['content_sha256']}"))
@@ -239,7 +259,20 @@ class ProjectedInputs:
         """
         from src.experiment.phase5_execution import Executor
         phase, name = Executor._historical_artifact(self.__owner, eid)
+        if self.manifest.get("schema") == PROTECTED_SCHEMA:
+            self.__authorize(access, phase)            # policy first; nothing is resolved before it
+            from src.experiment.phase5_protected import read_sealed_comparator
+            frame = read_sealed_comparator(self.__owner, access, eid, phase, expected_sha256=self.manifest["files"][name])
+            self.sandbox.events.append((phase, f"sealed:{eid}"))
+            return frame
         return self._project(access, name, SCORE_COLUMNS, phase)
 
     def labels(self, access, machine):
+        if self.manifest.get("schema") == PROTECTED_SCHEMA:
+            # H5: analysis authority and capability only (gate and claim checked by the executor), never while scoring.
+            self.__authorize(access, "analysis")
+            from src.experiment.phase5_protected import protected_label_frame
+            frame = protected_label_frame(self.__owner, access, machine)
+            self.sandbox.events.append(("analysis", f"labels:{machine}"))
+            return frame
         return self._project(access, self.manifest["labels"][machine], LABEL_COLUMNS, "analysis")

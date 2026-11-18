@@ -1,7 +1,9 @@
-"""SYNTHETIC analyse-once wiring to the unchanged V2 statistical machinery.
+"""Analyse-once wiring to the unchanged V2 statistical machinery.
 
 No reader or protected scope lives here. Only Executor's completed, explicitly
-authorized synthetic analysis stage calls this function.
+authorized analysis stage calls this function: synthetic and rehearsal batches, or
+(after the reviewed activation) the authorized protected batch, whose report then
+carries its scope and authorization identity. The statistics are identical in all cases.
 """
 from __future__ import annotations
 
@@ -105,7 +107,7 @@ def analyse_synthetic(executor, access):
             difference = paired_distribution_difference(a, b, orientation="first_minus_second")
             category = asdict(classify_metric(difference, metric=metric)) if metric != METRICS[-1] else {"category": "SECONDARY_NO_PRACTICAL_MARGIN", "tag": None}
             categories[metric] = category
-            intervals.append({"scope": SYNTHETIC, "cell": list(cell), "contrast": name, "first": first, "second": second,
+            intervals.append({"scope": executor.scope, "cell": list(cell), "contrast": name, "first": first, "second": second,
                               "domain": domain, "nominal": True, **difference, **category})
         if name in {"P1:mic", "P1:acc", "P1:gyro", "P2", "P3:acc+gyro", "P3:mic+gyro", "P3:mic+acc"} and domain == "complete":
             from src.fusion.statistics import MetricCategory
@@ -147,7 +149,9 @@ def analyse_synthetic(executor, access):
             rows = [r for r in primary_rows if r["contrast"].startswith(name) and r["metric"] == metric]
             yardstick[name + ":" + metric] = {"intervals": len(rows), "expected_null_exclusions_approx": .05 * len(rows),
                 "observed_exclusions": sum(r["ci_lower"] is not None and (r["ci_lower"] > 0 or r["ci_upper"] < 0) for r in rows)}
-    return finite_json({"scope": SYNTHETIC, "not_real_performance": True, "replicates": 10_000, "seed": 1995,
+    identity = ({"authorization_sha256": executor.fixture["authorization_sha256"]} if executor.scope != SYNTHETIC else {})
+    return finite_json({"scope": executor.scope, "not_real_performance": executor.scope == SYNTHETIC, **identity,
+                        "replicates": 10_000, "seed": 1995,
                         "draws": {m: d.identity for m, d in draws.items()}, "unit_points": points,
                         "intervals": intervals, "primary_intervals": 420, "primary_contrasts": 140, "joint_categories": joint,
                         "multiplicity": package.contract["contrasts"]["multiplicity"], "null_yardstick": yardstick,

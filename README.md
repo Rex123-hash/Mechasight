@@ -366,8 +366,9 @@ and corrections.
 
 This repository is a curated public snapshot of the MechaSight development repository. Raw data,
 model weights and local working files are excluded. Documentation was lightly edited: wording, and
-the redaction of local paths. The code and documents are from 27 October 2026. This README was
-updated on 18 November 2026 with the final status and results. The protected test data, the
+the redaction of local paths. The source code (`src/`, `scripts/`, `tests/`) was updated on
+18 November 2026 to the final version used for the protected evaluation; the other documents are
+from 27 October 2026. This README was updated on 18 November 2026 with the final status and results. The protected test data, the
 test-look ledger and per-segment results stay private.
 
 Several integrity scripts (for example the frozen-package and candidate verifiers) check files

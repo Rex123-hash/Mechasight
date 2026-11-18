@@ -21,13 +21,13 @@ class CountIndex:
     descriptor: dict
 
 
-def _expand_count_rows(manifest, features, spectral, *, unit=None):
+def _expand_count_rows(manifest, features, spectral, *, unit=None, capability=None):
     """Pure draft calculation, not a reader or an authorization grant.
 
     Even a self-hashed draft must pass validate_count_index against the bound
     artifacts before the public inference projection accepts it.
     """
-    doc = validate_manifest(manifest, unit=unit, for_read=True)
+    doc = validate_manifest(manifest, unit=unit, for_read=True, capability=capability)
     require(isinstance(features, pd.DataFrame) and tuple(features.columns) == COUNT_COLUMNS,
             "count projection has missing/unexpected columns")
     require(not features["segment_id"].duplicated().any(), "duplicated segment")
@@ -71,27 +71,27 @@ def _expand_count_rows(manifest, features, spectral, *, unit=None):
     return CountIndex(index, descriptor)
 
 
-def build_count_derived_index(manifest, *, unit=None):
-    # Manifest scope and unit are checked before any artifact read or content hash.
-    validate_manifest(manifest, unit=unit, for_read=True)
-    features = read_features(manifest, unit=unit)
-    layout, _ = read_spectral(manifest, unit=unit)
-    return _expand_count_rows(manifest, features, layout, unit=unit)
+def build_count_derived_index(manifest, *, unit=None, capability=None):
+    # Manifest scope, unit and (protected) the executor capability are checked before any read or hash.
+    validate_manifest(manifest, unit=unit, for_read=True, capability=capability)
+    features = read_features(manifest, unit=unit, capability=capability)
+    layout, _ = read_spectral(manifest, unit=unit, capability=capability)
+    return _expand_count_rows(manifest, features, layout, unit=unit, capability=capability)
 
 
-def validate_count_index(index, manifest, *, unit=None):
-    validate_manifest(manifest, unit=unit, for_read=True)
+def validate_count_index(index, manifest, *, unit=None, capability=None):
+    validate_manifest(manifest, unit=unit, for_read=True, capability=capability)
     require(type(index) is CountIndex, "count-derived index reference required")
     # Reconstruct from approved artifacts, not caller-supplied counts/hash claims.
-    expected = build_count_derived_index(manifest, unit=unit)
+    expected = build_count_derived_index(manifest, unit=unit, capability=capability)
     require(index.descriptor == expected.descriptor and index.rows.equals(expected.rows),
             "count index hash/offset/order/content mismatch")
     return index
 
 
-def inference_index(index, manifest, *, unit=None):
+def inference_index(index, manifest, *, unit=None, capability=None):
     """The unchanged FrozenL1Adapter needs identities and ordinals, not times."""
-    validate_count_index(index, manifest, unit=unit)
+    validate_count_index(index, manifest, unit=unit, capability=capability)
     return index.rows.loc[:, [*IDENTITY_COLUMNS, "window_index"]].copy()
 
 

@@ -18,7 +18,6 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.experiment import ledger as ledger_module
 from src.experiment import phase5_window_index as wi
 from src.experiment.ledger_history import LedgerHistoryError, verify_ledger_history
 from src.experiment.phase4 import ModelStore
@@ -363,21 +362,47 @@ def test_C_crashes_retries_and_identities_keep_the_history_valid(dev, frozen, st
 
 
 def test_C_interrupted_ledger_write_fails_closed_before_any_read(dev, frozen, monkeypatch):
+    """5.6C-r5: the single writer builds the next ledger in a pending file, so a torn write never reaches the
+    ledger; a ledger torn by anything else still fails closed before any read."""
+    from src.experiment import phase5_ledger as ledger5
     box, executor, _ = dev
-    real_write = os.write
+    path, auth = _ledger(box)
+    before = path.read_bytes()
+    real_open = open
 
-    def torn(fd, data):
-        real_write(fd, data[: len(data) // 2])
-        raise OSError("SYNTHETIC torn ledger append")
+    class Torn:
+        def __init__(self, handle):
+            self.handle = handle
 
-    monkeypatch.setattr(ledger_module.os, "write", torn)
-    with pytest.raises(OSError):
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            self.handle.close()
+            return False
+
+        def write(self, data):
+            self.handle.write(data[: len(data) // 2])
+            self.handle.flush()
+            raise OSError("SYNTHETIC torn ledger append")
+
+    def torn_open(file, mode="r", *args, **kwargs):
+        handle = real_open(file, mode, *args, **kwargs)
+        return Torn(handle) if ledger5.PENDING_TAG in str(file) else handle
+
+    monkeypatch.setattr(ledger5, "open", torn_open, raising=False)
+    with pytest.raises(OSError, match="torn ledger append"):
         executor.score_all(permit(box, frozen))
-    monkeypatch.setattr(ledger_module.os, "write", real_write)
+    monkeypatch.delattr(ledger5, "open")
     assert box.events == []                                             # nothing was read
+    assert path.read_bytes() == before and len(_verify(box).rows) == 196   # the torn bytes never reached the ledger
+    assert not list(path.parent.glob(path.name + ledger5.PENDING_TAG + "*"))
+    state = box.json("state.json")
+    assert not (auth / state["batch_id"] / "batch_authorization.json").exists()   # authorization withdrawn
+    with open(path, "ab") as handle:                                    # a ledger torn outside the single writer
+        handle.write(before.splitlines(keepends=True)[-1][:40])
     with pytest.raises(LedgerHistoryError, match="partial append"):
         _verify(box)
-    state = box.json("state.json")
     with pytest.raises(Refused, match="partial append"):
         executor.recover(permit(box, frozen, "recovery", recovery_from=state["batch_id"]))
     assert REAL_LEDGER.read_bytes().count(b"\n") == 196                 # the real ledger is untouched

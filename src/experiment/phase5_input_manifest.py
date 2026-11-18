@@ -152,6 +152,34 @@ def protected_manifest_template(package, *, machine, regime):
     return _seal(_reference_document(machine, regime, PROTECTED))
 
 
+AUTHORIZED_ACTIVATION = "AUTHORIZED_BATCH"
+LABEL_COLUMNS_PROTECTED = ("segment_id", "parent_recording", "domain", "anomaly_label")
+
+
+def _protected_document(machine, regime):
+    """Frozen protected reference with the approved artifact bindings of the freshly verified chain.
+
+    No approval is cached: the bindings come from ``verified_activation()`` on every call, which
+    refuses (before any protected stat, hash or read) unless the committed human records verify.
+    """
+    from src.experiment import phase5_protected as pp
+    chain = pp.verified_activation()
+    document = _reference_document(machine, regime, PROTECTED)
+    document["activation"] = AUTHORIZED_ACTIVATION
+    artifacts = chain["bindings"]["cells"][f"{machine}|{regime}"]["artifacts"]
+    document["artifacts"] = {role: {"path": a["path"], "sha256": a["sha256"], "stat": dict(a["stat"])}
+                             for role, a in artifacts.items()}
+    document["unresolved"] = []
+    return document
+
+
+def protected_manifest(package, *, machine, regime):
+    """The authorized common-evaluation manifest (A1): metadata only; never built without activation."""
+    package.verify_memory()
+    require(content_sha256(package.registry) == content_sha256(_registry()[0]), "caller registry differs from frozen reference")
+    return _seal(_protected_document(machine, regime))
+
+
 def _synthetic_document(box):
     path = box.path(FIXTURE_NAME)
     _no_alias(path)
@@ -181,7 +209,7 @@ def synthetic_manifest(box):
     return _seal(document, sandbox_root=str(box.root), fixture_identity=file_sha256(box.path(FIXTURE_NAME)))
 
 
-def validate_manifest(manifest, *, unit=None, for_read=False):
+def validate_manifest(manifest, *, unit=None, for_read=False, capability=None, phase="score"):
     require(type(manifest) is InputManifest, "trusted input-manifest reference required")
     require(type(manifest.document) is str and type(manifest.identity) is str, "input-manifest fields malformed")
     require(sha256(manifest.document.encode("utf-8")).hexdigest() == manifest.identity, "manifest hash mismatch")
@@ -189,8 +217,14 @@ def validate_manifest(manifest, *, unit=None, for_read=False):
         document = json.loads(manifest.document)
         scope = document["scope"]
         require(scope in {DEVELOPMENT, SYNTHETIC, PROTECTED}, "unknown input scope")
+        authorized = scope == PROTECTED and document.get("activation") == AUTHORIZED_ACTIVATION
         if for_read:
-            require(scope != PROTECTED, "protected input access is disabled; human authorization and durable exposure required")
+            require(scope != PROTECTED or authorized,
+                    "protected input access is disabled; human authorization and durable exposure required")
+            if authorized:
+                # B3: the running operation's authority, the fresh activation chain and durable exposure come first.
+                from src.experiment import phase5_protected as pp
+                pp.verify_reader_capability(capability, phase)
         if scope == SYNTHETIC:
             require(manifest.sandbox_root and manifest.fixture_identity, "synthetic fixture reference missing")
             box = Sandbox(manifest.sandbox_root)
@@ -198,7 +232,8 @@ def validate_manifest(manifest, *, unit=None, for_read=False):
             require(file_sha256(box.path(FIXTURE_NAME)) == manifest.fixture_identity, "synthetic reference changed")
         else:
             require(manifest.sandbox_root is None and manifest.fixture_identity is None, "foreign input-manifest reference")
-            expected = _reference_document(document["machine"], document["regime"], scope)
+            expected = (_protected_document(document["machine"], document["regime"]) if authorized
+                        else _reference_document(document["machine"], document["regime"], scope))
         require(document == expected, "manifest differs from independently trusted input reference")
         require(unit is None or unit in document["scientific_units"], "unregistered scientific unit for this cell")
         return document
@@ -206,8 +241,8 @@ def validate_manifest(manifest, *, unit=None, for_read=False):
         raise Refused("input manifest or reference is malformed/unavailable") from exc
 
 
-def _checked_path(manifest, role, *, path=None, unit=None):
-    doc = validate_manifest(manifest, unit=unit, for_read=True)
+def _checked_path(manifest, role, *, path=None, unit=None, capability=None, phase="score"):
+    doc = validate_manifest(manifest, unit=unit, for_read=True, capability=capability, phase=phase)
     require(role in FIXTURE_PATHS, "raw, labels and provenance inputs are forbidden")
     base = Path(manifest.sandbox_root) if doc["scope"] == SYNTHETIC else ROOT
     # Bind all paths before hashing either input; no caller can supply a new path.
@@ -223,20 +258,42 @@ def _checked_path(manifest, role, *, path=None, unit=None):
             stat = actual.stat()
             require({"bytes": stat.st_size, "mtime_ns": stat.st_mtime_ns} == expected, "input stat identity changed")
     actual = paths[role]
-    require(file_sha256(actual) == doc["artifacts"][role]["sha256"], "approved artifact content identity mismatch")
+    declared = doc["artifacts"][role]["sha256"]
+    if doc["scope"] == PROTECTED and declared is None:
+        # H3: byte hash (no deserialization) after exposure, kept by the reading executor only;
+        # every later read in its batch must see the same bytes.
+        digest = file_sha256(actual)
+        observed = capability[0]._protected_hashes
+        key = doc["artifacts"][role]["path"]
+        require(observed.setdefault(key, digest) == digest, "protected artifact changed during the batch")
+    else:
+        require(file_sha256(actual) == declared, "approved artifact content identity mismatch")
     return actual, doc
 
 
-def read_features(manifest, *, classical=False, path=None, unit=None):
-    actual, doc = _checked_path(manifest, "features", path=path, unit=unit)
+def read_protected_labels(manifest, *, capability=None):
+    """H5: labels by column projection of the bound common-test feature artifact; analysis phase only.
+
+    Requires the running analysis operation's authority and analysis capability, which exist only after the
+    completion gate and the durable analyse-once claim. No feature or provenance column is read.
+    """
+    actual, doc = _checked_path(manifest, "features", capability=capability, phase="analysis")
+    require(doc["scope"] == PROTECTED, "protected label projection applies to the authorized common-evaluation cohort only")
+    frame = pd.read_parquet(actual, columns=list(LABEL_COLUMNS_PROTECTED))
+    require(list(frame.columns) == list(LABEL_COLUMNS_PROTECTED), "label projection differs from the approved layout")
+    return frame
+
+
+def read_features(manifest, *, classical=False, path=None, unit=None, capability=None):
+    actual, doc = _checked_path(manifest, "features", path=path, unit=unit, capability=capability)
     columns = doc["layouts"]["classical" if classical else "counts"]
     frame = pd.read_parquet(actual, columns=columns)
     require(list(frame.columns) == columns, "feature projection differs from approved layout")
     return frame
 
 
-def read_spectral(manifest, *, values=False, path=None, unit=None):
-    actual, doc = _checked_path(manifest, "spectral", path=path, unit=unit)
+def read_spectral(manifest, *, values=False, path=None, unit=None, capability=None):
+    actual, doc = _checked_path(manifest, "spectral", path=path, unit=unit, capability=capability)
     layout, arrays = {}, {}
     with h5py.File(actual, "r") as handle:
         for key, expected in (("machine", doc["machine"]), ("regime", doc["regime"]),
