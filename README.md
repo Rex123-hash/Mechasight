@@ -2,12 +2,15 @@
 
 **A leakage-aware multi-sensor framework for machine anomaly detection under operating-condition shifts**
 
-Minor project, Mechanical & Automation Engineering.
-**Team:** Amaan Khan (student researcher), Vikas Sharma (supervisor), Surbhi Upadhyay (co-supervisor).
+Minor project, Department of Mechanical & Automation Engineering, Maharaja Agrasen Institute of
+Technology, Delhi (2026–27).
+**Team:** Amaan Khan, Harsh Sharma and Krish Yadav (students); Vikas Sharma (supervisor); Surbhi Upadhyay
+(co-supervisor).
 
 🌐 **Interactive website: [mechasight.vercel.app](https://mechasight.vercel.app)**. It explains the
-research with real recorded sensor signals, precomputed model scores and a sensor-failure demo. It
-explains the work; it does not run live inference.
+project with real recorded sensor signals, a short explainer video and a sensor-failure demo. Its
+**[Proof Lab](https://mechasight.vercel.app/proof-lab)** runs the real frozen model live in your browser
+on real recordings and checks every number against the Python code.
 
 > **One-line idea:** a machine that sounds or vibrates *differently* is not necessarily *faulty*.
 > MechaSight asks whether combining a microphone, an accelerometer and a gyroscope helps tell genuine
@@ -19,12 +22,12 @@ explains the work; it does not run live inference.
 ## Contents
 
 1. [What the project does](#1-what-the-project-does)
-2. [Current status: what is done and what is pending](#2-current-status)
+2. [Current status](#2-current-status)
 3. [Where is the code?](#3-where-is-the-code)
 4. [Repository layout](#4-repository-layout)
 5. [Installation](#5-installation)
 6. [Running the pipeline, step by step](#6-running-the-pipeline-step-by-step)
-7. [Key results so far](#7-key-results-so-far)
+7. [Key results](#7-key-results)
 8. [Evaluation rules (why the results can be trusted)](#8-evaluation-rules)
 9. [Documentation index](#9-documentation-index)
 10. [Limitations](#10-limitations)
@@ -65,8 +68,8 @@ Mahalanobis distance with Ledoit–Wolf shrinkage, and a dense autoencoder on lo
 
 ## 2. Current status
 
-**Multi-Sensor Fusion Development: development complete. Protected fusion evaluation pending
-authorization.**
+**Project complete.** The protected fusion evaluation was authorized and run once, and its results
+are in [section 7](#7-key-results).
 
 | Stage | Status |
 |---|---|
@@ -79,11 +82,8 @@ authorization.**
 | Fusion development: 24 L1 models, 208 L2 calibrations, L3 integrity fallback | ✅ complete; reproduced exactly on development data |
 | L3 synthetic falsification (1,992 corruption runs) | ✅ all 7 pre-registered criteria passed |
 | Protected-evaluation executor (exposure-first, append-only test-look ledger) | ✅ implemented; tested end to end on a development mirror |
-| **Protected evaluation of the fusion arms (232 planned test looks)** | ⏳ **not executed**: awaits independent review and human authorization |
-
-> **No fusion accuracy, improvement or statistical significance is claimed anywhere in this
-> repository.** Exact reproduction of development scores shows the implementation is consistent; it
-> does not measure detection performance.
+| Protected evaluation of the fusion arms (232 test looks) | ✅ complete: authorized, run once, no retry, no missing score |
+| Proof Lab: live in-browser inference with the frozen models | ✅ live on the website; matches the Python code to about 1e-13 |
 
 ## 3. Where is the code?
 
@@ -263,7 +263,7 @@ Compute notes, measured on a laptop CPU (AMD Ryzen 7 7840HS): spectral caches ta
 the 96 classical fits about 10 s, and the 60 single-modality autoencoder trainings about 3 h of wall
 time. Some suites read the dataset and are slow.
 
-## 7. Key results so far
+## 7. Key results
 
 **Protocol A, the published baseline on the released split, reproduced.** Historical, completed.
 
@@ -289,6 +289,25 @@ time. Some suites read the dataset and are slow.
   slice.
 - On RoboticArm the microphone causes the most false alarms on healthy machines in new
   conditions: a healthy-target false-alarm rate of 0.28–0.92.
+
+**Final protected evaluation of the fusion arms (run once).** Each count below is out of 20
+comparisons: 5 model families × 2 training regimes × 2 machines, with paired 95% bootstrap intervals.
+
+| Finding | Count |
+|---|---:|
+| Score fusion of all three sensors ranked faults better than the microphone alone | 20 / 20 |
+| Score fusion ranked faults worse than the accelerometer alone (never better) | 14 / 20 |
+| Early fusion ranked faults better than score fusion | 15 / 20 |
+| Removing the microphone improved score fusion | 16 / 20 |
+| Removing the accelerometer made score fusion worse | 17 / 20 |
+
+- **The accelerometer is the key sensor.** On RoboticArm (Mahalanobis family, Regime S) it caught
+  162 of 232 faults with 11 false alarms among 234 normal test segments, so 94% of its alarms were
+  correct. Its AUROC was 0.998 under familiar conditions.
+- **A few healthy recordings from the new condition help.** With them (Regime T), the RoboticArm
+  early-fusion AUROC on the shifted slice rose from 0.59 to 0.84.
+- **Fusion did not remove the false alarms caused by operating-condition shift.**
+- These are cohort-level counts. No individual test segment, score or label is published.
 
 **Fusion development (development data only; not performance):**
 - All 24 L1 models and all 208 L2 calibrations reproduce exactly: 3,744 L1 segment scores and
@@ -336,7 +355,7 @@ and corrections.
 
 ## 10. Limitations
 
-- Protected fusion results are **pending**. No fusion performance is claimed.
+- Fusion did not remove the false alarms caused by operating-condition shift.
 - BrushlessMotor has a class/acquisition-time confound.
 - RoboticArm's healthy shifted cohort is small: 20 segments from 6 recordings.
 - The sensor-integrity fallback is validated only on **synthetic** corruptions, not real sensor
@@ -347,7 +366,9 @@ and corrections.
 
 This repository is a curated public snapshot of the MechaSight development repository. Raw data,
 model weights and local working files are excluded. Documentation was lightly edited: wording, and
-the redaction of local paths.
+the redaction of local paths. The code and documents are from 27 October 2026. This README was
+updated on 18 November 2026 with the final status and results. The protected test data, the
+test-look ledger and per-segment results stay private.
 
 Several integrity scripts (for example the frozen-package and candidate verifiers) check files
 against hashes and commit identifiers from the original development history. In this snapshot
